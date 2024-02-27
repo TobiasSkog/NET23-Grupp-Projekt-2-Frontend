@@ -1,9 +1,10 @@
+import Home from "./Pages/Home/Home";
 export default function App() {
 	return (
 		<div>
-			<header></header>
-			<main></main>
-			<footer></footer>
+			<main>
+				<Home />
+			</main>
 		</div>
 	);
 }
