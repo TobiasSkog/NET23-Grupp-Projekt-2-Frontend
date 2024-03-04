@@ -22,7 +22,7 @@ export default function FormModal({
 			let response;
 
 			if (edit) {
-				// If in editing mode, update the existing project
+				// If in editing mode, update existing project
 
 				response = await axios.patch(
 					`http://localhost:3001/pages/projects/${projectId}`,
@@ -31,7 +31,7 @@ export default function FormModal({
 				console.log("Project updated successfully:", response.data);
 			} else {
 				// If not in editing mode, create a new project
-
+				console.log(formInput);
 				response = await axios.post(
 					"http://localhost:3001/pages/projects",
 					formInput
@@ -64,16 +64,6 @@ export default function FormModal({
 		setFormInput({
 			...formInput,
 			[name]: value,
-		});
-	};
-
-	const handleChangeImage = (e) => {
-		const selectedFile = e.target.value;
-		//setFile(selectedFile);
-		//previewFiles(selectedFile);
-		setFormInput({
-			...formInput,
-			image: selectedFile,
 		});
 	};
 

@@ -20,6 +20,7 @@ const Project = () => {
 		hours: "",
 		startDate: "",
 		endDate: "",
+		image: "",
 	});
 
 	const openModal = () => {
@@ -35,7 +36,7 @@ const Project = () => {
 			try {
 				setLoading(true);
 				const response = await axios.get(
-					"http://localhost:3001/databases/projects"
+					"http://localhost:3001/databases/projects?status=Active"
 				);
 
 				setProject(response.data);
@@ -87,7 +88,7 @@ const Project = () => {
 				hours: projectToEdit.hours,
 				startDate: projectToEdit.timespan.start,
 				endDate: projectToEdit.timespan.end,
-				//image: projectToEdit.image,
+				image: projectToEdit.image,
 			});
 		}
 		//console.log(projectId);
@@ -115,7 +116,7 @@ const Project = () => {
 			<div className="show-container container">
 				{loading && (
 					<>
-						<Spinner animation="border" variant="primary" />{" "}
+						<Spinner animation="border" variant="primary" />
 						<h4 className="mt-2">Loading...</h4>
 					</>
 				)}
@@ -129,7 +130,11 @@ const Project = () => {
 								md={6}
 								lg={3}>
 								<Card bg="dark" text="light" className="show-card">
-									<Card.Img variant="top" src={item.image} />
+									<Card.Img
+										variant="top"
+										src={item.image}
+										style={{ height: "142px" }}
+									/>
 									<Card.Body>
 										<Card.Title>{item.name}</Card.Title>
 										<Card.Text>
