@@ -1,38 +1,11 @@
-// import { useEffect, useState } from "react";
+import LoginButton from "../../Components/LoginButton/LoginButton";
 
 export default function Home() {
-	return <div>You have authenticated</div>;
+	return (
+		<section>
+			<h1>Welcome to Caffeine and Insomnia's Project Management Tool</h1>
+
+			<LoginButton />
+		</section>
+	);
 }
-
-// export default function Home() {
-// 	const [dbs, setdbs] = useState([]);
-
-// 	// When you open the app, this doesn't do anything, but after you sign into Notion, you'll be redirected back with a code at which point we call our backend.
-// 	useEffect(() => {
-// 		const params = new URL(window.document.location).searchParams;
-// 		const code = params.get("code");
-// 		if (!code) return;
-// 		fetch(`http://localhost:3001/login/${code}`).then(async (resp) => {
-// 			setdbs(await resp.json());
-// 		});
-// 	}, []);
-
-// 	return (
-// 		<div>
-// 			<a style={{ display: "block" }} href={authenticationURL}>
-// 				Connect to Notion
-// 			</a>
-// 			{dbs.map((db) => (
-// 				<div
-// 					style={{
-// 						display: "inline-flex",
-// 						whiteSpace: "pre",
-// 						border: "1px solid black",
-// 						marginBottom: 10,
-// 					}}>
-// 					{JSON.stringify(db, null, 2)}
-// 				</div>
-// 			))}
-// 		</div>
-// 	);
-// }

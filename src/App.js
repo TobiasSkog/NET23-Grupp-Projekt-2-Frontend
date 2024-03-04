@@ -1,18 +1,22 @@
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { AuthProvider } from "./Components/Auth/AuthProvider";
+import { LoadingProvider } from "./Components/Loading/LoadingProvider";
 import Home from "./Pages/Home/Home";
-import OAuthButton from "./Components/OAuthButton/OAuthButton";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import User from "./Pages/User/User";
+import LoginOAuth from "./Pages/Login/LoginOAuth";
 
 export default function App() {
 	return (
-		<BrowserRouter>
-			<div>
-				<main>
+		<Router>
+			<LoadingProvider>
+				<AuthProvider>
 					<Routes>
-						<Route path="/" element={<OAuthButton />} />
-						<Route path="/success" element={<Home />} />
+						<Route path="/" element={<Home />} />
+						<Route path="/login/auth" element={<LoginOAuth />} />
+						<Route path="/user" element={<User />} />
 					</Routes>
-				</main>
-			</div>
-		</BrowserRouter>
+				</AuthProvider>
+			</LoadingProvider>
+		</Router>
 	);
 }
