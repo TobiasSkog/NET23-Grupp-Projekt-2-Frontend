@@ -11,6 +11,7 @@ export const AuthProvider = ({ children }) => {
 	const loginIntegrated = (email, userRole, loginType) => {
 		setUser({ email, userRole, loginType });
 	};
+
 	const logout = () => {
 		setUser(null);
 	};
