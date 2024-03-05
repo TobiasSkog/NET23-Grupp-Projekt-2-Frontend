@@ -1,43 +1,67 @@
 import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useAuth } from "../../Components/Auth/AuthProvider";
-import { useLoading } from "../../Components/Loading/LoadingProvider";
 
 export default function Login() {
 	const location = useLocation();
 	const { search } = location;
 	const navigate = useNavigate();
 	const { loginOAuth, user } = useAuth();
-	const { loading, isPageLoading } = useLoading();
+
 	useEffect(() => {
+		const queryDatabaseForUser = async (authData) => {
+			try {
+				const validUser = await axios.post(
+					"http://localhost:3001/databases/login/confirmUser",
+					{ userEmail: authData.email }
+				);
+				if (validUser.data.isValidUser) {
+					const userData = {
+						...authData,
+						userRole: validUser.data.userRole,
+						target:
+							validUser.data.userRole === "Admin"
+								? "/admin"
+								: validUser.data.userRole === "User"
+								? "/user"
+								: "/",
+					};
+
+					loginOAuth(userData, "OAuth");
+
+					if (userData.target) {
+						navigate(userData.target);
+					} else {
+						navigate("/");
+					}
+				}
+			} catch (error) {
+				console.error("Error querying database for user:", error.message);
+			}
+		};
+
 		const oAuthLoginHandling = async () => {
 			const searchParams = new URLSearchParams(search);
 			const code = searchParams.get("code");
 			try {
-				if (code && !isPageLoading) {
-					loading(true);
-
+				if (code) {
 					const response = await axios.get(
 						`http://localhost:3001/login/auth/callback?code=${code}`
 					);
-
-					console.log("RESPONSE:", response);
-					loginOAuth(response.data, "OAuth");
+					if (response.status === 200) {
+						queryDatabaseForUser(response.data);
+					} else {
+						navigate("/");
+					}
 				}
 			} catch (error) {
 				console.error("Error:", error);
-			} finally {
-				loading(false);
-				if (user) {
-					navigate(user.target);
-				} else {
-					navigate("/");
-				}
 			}
 		};
-		if (!user && !isPageLoading) {
+		console.log(1);
+		if (!user) {
 			oAuthLoginHandling();
 		}
-	}, []);
+	}, [user, loginOAuth, navigate, search]);
 }
