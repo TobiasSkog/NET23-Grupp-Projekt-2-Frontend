@@ -6,6 +6,8 @@ export const AuthProvider = ({ children }) => {
 	const [user, setUser] = useState(null);
 
 	const loginOAuth = (userData, loginType) => {
+		console.log("LOGIN OAUTH CONTEXT");
+		console.log("userData:", userData, "loginType:", loginType);
 		setUser({ userData, loginType });
 	};
 	const loginIntegrated = (email, userRole, loginType) => {
