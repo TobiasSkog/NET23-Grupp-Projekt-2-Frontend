@@ -6,7 +6,8 @@ import Row from "react-bootstrap/Row";
 import axios from "axios";
 import FormModal from "./FormModal";
 import Spinner from "react-bootstrap/Spinner";
-import { AuthContext } from "../../Components/Auth/AuthProvider";
+import { useAuth } from "../../Components/Auth/AuthProvider";
+import { useNavigate } from "react-router-dom";
 
 const Project = () => {
 	const [project, setProject] = useState([]);
@@ -24,8 +25,10 @@ const Project = () => {
 		image: "",
 	});
 
-	const { user } = useContext(AuthContext);
+	const { user } = useAuth();
 	const userRole = user ? user.userRole : null;
+	const navigate = useNavigate();
+	console.log(userRole);
 
 	const openModal = () => {
 		setModalOpen(true);
@@ -108,6 +111,7 @@ const Project = () => {
 			name: name,
 			id: idNr,
 		};
+		console.log(project.name, project.id);
 
 		navigate(`/timereport`, { state: project });
 	};
@@ -167,7 +171,7 @@ const Project = () => {
 												{item.timespan.start} - {item.timespan.end}
 											</span>
 										</Card.Text>
-										{userRole === "User" && (
+										{userRole === "user" && (
 											<Button className="btn btn-primary m-2">
 												Report Time
 											</Button>

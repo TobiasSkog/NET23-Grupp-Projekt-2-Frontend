@@ -7,8 +7,6 @@ import LoginOAuth from "./Pages/Login/LoginOAuth";
 import NavComponent from "./Components/Navbar/NavComponent";
 import Project from "./Pages/Projects/Project";
 
-//import Project from "./Components/Projects/Project";
-
 export default function App() {
 	return (
 		<>
