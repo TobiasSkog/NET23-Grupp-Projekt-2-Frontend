@@ -4,13 +4,11 @@ import { LoadingProvider } from "./Components/Loading/LoadingProvider";
 import Home from "./Pages/Home/Home";
 import User from "./Pages/User/User";
 import LoginOAuth from "./Pages/Login/LoginOAuth";
-import NavComponent from "./Components/Navbar/NavComponent";
 import Project from "./Pages/Projects/Project";
 
 export default function App() {
 	return (
 		<>
-			<NavComponent />
 			<Router>
 				<LoadingProvider>
 					<AuthProvider>
