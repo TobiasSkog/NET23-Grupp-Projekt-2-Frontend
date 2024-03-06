@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
@@ -6,6 +6,7 @@ import Row from "react-bootstrap/Row";
 import axios from "axios";
 import FormModal from "./FormModal";
 import Spinner from "react-bootstrap/Spinner";
+import { AuthContext } from "../../Components/Auth/AuthProvider";
 
 const Project = () => {
 	const [project, setProject] = useState([]);
@@ -22,6 +23,9 @@ const Project = () => {
 		endDate: "",
 		image: "",
 	});
+
+	const { user } = useContext(AuthContext);
+	const userRole = user ? user.userRole : null;
 
 	const openModal = () => {
 		setModalOpen(true);
@@ -91,11 +95,21 @@ const Project = () => {
 				image: projectToEdit.image,
 			});
 		}
-		//console.log(projectId);
-		//console.log(projectToEdit);
+
 		closeModal();
 		setEdit(true);
-		openModal(); // Open the modal for editing
+		openModal();
+	};
+
+	const handleClick = (idNr, name) => {
+		//passing ProjectId & projectName to path:/timereport where we can use use id to fetch report
+		//and use name to display inside component
+		const project = {
+			name: name,
+			id: idNr,
+		};
+
+		navigate(`/timereport`, { state: project });
 	};
 
 	return (
@@ -153,15 +167,28 @@ const Project = () => {
 												{item.timespan.start} - {item.timespan.end}
 											</span>
 										</Card.Text>
-										<Button className="btn btn-primary m-2">Time Report</Button>
-										<Button
-											className="btn btn-danger m-2"
-											onClick={() => {
-												handleEdit(item.id);
-												setProjectId(item.id);
-											}}>
-											Edit
-										</Button>
+										{userRole === "User" && (
+											<Button className="btn btn-primary m-2">
+												Report Time
+											</Button>
+										)}
+
+										{userRole === "Admin" && (
+											<>
+												<Button onClick={() => handleClick(item.id, item.name)}>
+													See Timereports
+												</Button>
+
+												<Button
+													className="btn btn-danger m-2"
+													onClick={() => {
+														handleEdit(item.id);
+														setProjectId(item.id);
+													}}>
+													Edit
+												</Button>
+											</>
+										)}
 									</Card.Body>
 								</Card>
 							</Col>
