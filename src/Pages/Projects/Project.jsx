@@ -6,7 +6,7 @@ import Row from "react-bootstrap/Row";
 import axios from "axios";
 import FormModal from "./FormModal";
 import Spinner from "react-bootstrap/Spinner";
-import { useAuth } from "../../Components/Auth/AuthProvider";
+//import { useAuth } from "../../Components/Auth/AuthProvider";
 import { useNavigate } from "react-router-dom";
 
 const Project = () => {
@@ -25,8 +25,11 @@ const Project = () => {
 		image: "",
 	});
 
-	const { user } = useAuth();
-	const userRole = user ? user.userRole : null;
+	// const { user } = useAuth();
+	// const userRole = user.userRole;  We need to get userRole here to render right buttons.
+	//will hardcode this for now
+
+	const userRole = "User"; //Temporary!!!!
 	const navigate = useNavigate();
 	console.log(userRole);
 
@@ -171,7 +174,7 @@ const Project = () => {
 												{item.timespan.start} - {item.timespan.end}
 											</span>
 										</Card.Text>
-										{userRole === "user" && (
+										{userRole === "User" && (
 											<Button className="btn btn-primary m-2">
 												Report Time
 											</Button>
@@ -200,9 +203,14 @@ const Project = () => {
 					</Row>
 				</div>
 				<div className="mb-4 mx-3">
-					<Button variants="primary" className="mt-4 mx-3" onClick={openModal}>
-						<i className="bi bi-plus-circle me-2"></i>Add New Project
-					</Button>
+					{userRole === "Admin" && (
+						<Button
+							variants="primary"
+							className="mt-4 mx-3"
+							onClick={openModal}>
+							<i className="bi bi-plus-circle me-2"></i>Add New Project
+						</Button>
+					)}
 
 					<Button
 						variants="primary"
