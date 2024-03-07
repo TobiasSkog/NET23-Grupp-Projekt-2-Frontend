@@ -3,17 +3,7 @@ import Form from "react-bootstrap/Form";
 import axios from "axios";
 import Modal from "react-bootstrap/esm/Modal";
 
-export default function FormModal({
-	formInput,
-	setFormInput,
-	closeModal,
-	modalOpen,
-	updateProjects,
-	edit,
-	setEdit,
-	projectId,
-	setLoading,
-}) {
+export default function FormModal({ formInput, setFormInput, closeModal, modalOpen, updateProjects, edit, setEdit, projectId, setLoading }) {
 	const handleSubmit = async (event) => {
 		event.preventDefault();
 		try {
@@ -24,18 +14,12 @@ export default function FormModal({
 			if (edit) {
 				// If in editing mode, update existing project
 
-				response = await axios.patch(
-					`http://localhost:3001/pages/projects/${projectId}`,
-					formInput
-				);
+				response = await axios.patch(`http://localhost:3001/pages/projects/${projectId}`, formInput);
 				console.log("Project updated successfully:", response.data);
 			} else {
 				// If not in editing mode, create a new project
 				console.log(formInput);
-				response = await axios.post(
-					"http://localhost:3001/pages/projects",
-					formInput
-				);
+				response = await axios.post("http://localhost:3001/pages/projects", formInput);
 				console.log("New project created successfully:", response.data);
 			}
 
@@ -123,25 +107,12 @@ export default function FormModal({
 								onChange={handleInputChange}
 							/>
 						</Form.Group>
-						<img
-							src={formInput.image}
-							alt=""
-							className="mt-2 mb-2"
-							style={{ width: 150 }}
-						/>
+						<img src={formInput.image} alt="" className="mt-2 mb-2" style={{ width: 150 }} />
 						<Form.Group>
 							<Form.Label htmlFor="image" className="text-light">
 								Image-URL
 							</Form.Label>
-							<Form.Control
-								type="text"
-								id="image"
-								className="mb-3"
-								name="image"
-								value={formInput.image}
-								onChange={handleInputChange}
-								required
-							/>
+							<Form.Control type="text" id="image" className="mb-3" name="image" value={formInput.image} onChange={handleInputChange} required />
 						</Form.Group>
 
 						<Form.Group>
@@ -184,10 +155,7 @@ export default function FormModal({
 							}}>
 							Submit
 						</Button>
-						<Button
-							type="button"
-							className="w-100 btn-secondary"
-							onClick={closeModal}>
+						<Button type="button" className="w-100 btn-secondary" onClick={closeModal}>
 							Cancel
 						</Button>
 					</Form>

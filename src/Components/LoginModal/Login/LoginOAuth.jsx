@@ -37,10 +37,9 @@ export default function LoginOAuth() {
 				if (!databaseUserData.data.isValidUser) {
 					return false;
 				}
-
 				const userData = {
 					id: databaseUserData.data.id,
-					name: response.data.name,
+					name: databaseUserData.data.name,
 					userRole: databaseUserData.data.userRole,
 					target:
 						databaseUserData.data.userRole === "Admin"
