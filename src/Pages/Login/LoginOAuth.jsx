@@ -49,7 +49,6 @@ export default function LoginOAuth() {
 							? "/user"
 							: "/",
 				};
-
 				const amountOfMinutes = 15;
 				const expirationTime = new Date(
 					new Date().getTime() + amountOfMinutes * 60 * 1000

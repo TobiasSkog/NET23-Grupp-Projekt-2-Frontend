@@ -26,6 +26,5 @@ export default function App() {
 				</Routes>
 			</main>
 		</Router>
-
 	);
 }
