@@ -1,43 +1,74 @@
 import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
-import { useEffect } from "react";
-import { useAuth } from "../../Components/Auth/AuthProvider";
-import { useLoading } from "../../Components/Loading/LoadingProvider";
+import { useEffect, useState } from "react";
+import Cookies from "js-cookie";
 
-export default function Login() {
+export default function LoginOAuth() {
+	const [isLoading, setIsLoading] = useState(false);
 	const location = useLocation();
 	const { search } = location;
 	const navigate = useNavigate();
-	const { loginOAuth, user } = useAuth();
-	const { loading, isPageLoading } = useLoading();
+
 	useEffect(() => {
-		const oAuthLoginHandling = async () => {
-			const searchParams = new URLSearchParams(search);
-			const code = searchParams.get("code");
+		const authenticateAndFindUserInDatabase = async () => {
 			try {
-				if (code && !isPageLoading) {
-					loading(true);
+				setIsLoading(true);
+				const searchParams = new URLSearchParams(search);
+				const code = searchParams.get("code");
 
-					const response = await axios.get(
-						`http://localhost:3001/login/auth/callback?code=${code}`
-					);
-
-					console.log("RESPONSE:", response);
-					loginOAuth(response.data, "OAuth");
+				if (!code) {
+					return false;
 				}
+				//notion oath
+				const response = await axios.get(
+					`http://localhost:3001/login/auth/callback?code=${code}`
+				);
+
+				if (response.status !== 200) {
+					console.error("Authentication error:", response.data);
+					return false;
+				}
+				//call backend
+				const databaseUserData = await axios.post(
+					"http://localhost:3001/databases/login/authUser",
+					{ userEmail: response.data.email } //lägga till email/password
+				);
+
+				if (!databaseUserData.data.isValidUser) {
+					return false;
+				}
+
+				//exakt samma, copypasta
+				const userData = {
+					id: databaseUserData.data.id,
+					name: response.data.name,
+					userRole: databaseUserData.data.userRole,
+					target:
+						databaseUserData.data.userRole === "Admin"
+							? "/admin"
+							: databaseUserData.data.userRole === "User"
+							? "/user"
+							: "/",
+				};
+
+				Cookies.set("auth", JSON.stringify(userData));
+				navigate(userData.target);
+				//const expirationTime = new Date(new Date().getTime() + 60000);
+				// Cookies.set("auth", JSON.stringify(userData), {
+				// 	expires: expirationTime,
+				// });
 			} catch (error) {
-				console.error("Error:", error);
+				console.error("Unexpected error during authentication:", error);
 			} finally {
-				loading(false);
-				if (user) {
-					navigate(user.target);
-				} else {
-					navigate("/");
-				}
+				setIsLoading(false);
 			}
 		};
-		if (!user && !isPageLoading) {
-			oAuthLoginHandling();
+
+		const authenticatedUser = authenticateAndFindUserInDatabase();
+		if (!authenticatedUser) {
+			navigate("/");
 		}
 	}, []);
+
+	return <>{isLoading && <div>Loading...</div>}</>;
 }

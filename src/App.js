@@ -14,6 +14,7 @@ export default function App() {
 						<Route path="/" element={<Home />} />
 						<Route path="/login/auth" element={<LoginOAuth />} />
 						<Route path="/user" element={<User />} />
+						<Route path="/admin" element={<User />} />
 					</Routes>
 				</AuthProvider>
 			</LoadingProvider>
