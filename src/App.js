@@ -4,7 +4,6 @@ import { LoadingProvider } from "./Components/Loading/LoadingProvider";
 import Home from "./Pages/Home/Home";
 import User from "./Pages/User/User";
 import LoginOAuth from "./Pages/Login/LoginOAuth";
-import Project from "./Pages/Projects/Project";
 
 export default function App() {
 	return (
@@ -13,8 +12,7 @@ export default function App() {
 				<LoadingProvider>
 					<AuthProvider>
 						<Routes>
-							<Route path="/" element={<Project />} />
-							{/* <Route path="/" element={<Home />} /> */}
+							<Route path="/" element={<Home />} />
 							<Route path="/login/auth" element={<LoginOAuth />} />
 							<Route path="/user" element={<User />} />
 							<Route path="/projects" element={<Project />} />
