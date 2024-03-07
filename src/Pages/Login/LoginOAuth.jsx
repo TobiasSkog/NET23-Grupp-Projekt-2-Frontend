@@ -19,7 +19,7 @@ export default function LoginOAuth() {
 				if (!code) {
 					return false;
 				}
-				//notion oath
+
 				const response = await axios.get(
 					`http://localhost:3001/login/auth/callback?code=${code}`
 				);
@@ -28,17 +28,16 @@ export default function LoginOAuth() {
 					console.error("Authentication error:", response.data);
 					return false;
 				}
-				//call backend
+
 				const databaseUserData = await axios.post(
 					"http://localhost:3001/databases/login/authUser",
-					{ userEmail: response.data.email } //lägga till email/password
+					{ userEmail: response.data.email }
 				);
 
 				if (!databaseUserData.data.isValidUser) {
 					return false;
 				}
 
-				//exakt samma, copypasta
 				const userData = {
 					id: databaseUserData.data.id,
 					name: response.data.name,
@@ -50,13 +49,14 @@ export default function LoginOAuth() {
 							? "/user"
 							: "/",
 				};
-
-				Cookies.set("auth", JSON.stringify(userData));
+				const amountOfMinutes = 15;
+				const expirationTime = new Date(
+					new Date().getTime() + amountOfMinutes * 60 * 1000
+				);
+				Cookies.set("auth", JSON.stringify(userData), {
+					expires: expirationTime,
+				});
 				navigate(userData.target);
-				//const expirationTime = new Date(new Date().getTime() + 60000);
-				// Cookies.set("auth", JSON.stringify(userData), {
-				// 	expires: expirationTime,
-				// });
 			} catch (error) {
 				console.error("Unexpected error during authentication:", error);
 			} finally {
