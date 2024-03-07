@@ -42,6 +42,15 @@ const Project = () => {
 
 	const closeModal = () => {
 		setModalOpen(false);
+		setFormInput({
+			name: "",
+			status: "",
+			color: "",
+			hours: "",
+			startDate: "",
+			endDate: "",
+			image: "",
+		});
 	};
 
 	useEffect(() => {
@@ -92,7 +101,6 @@ const Project = () => {
 			});
 		}
 
-		closeModal();
 		setEdit(true);
 		openModal();
 	};
@@ -104,9 +112,9 @@ const Project = () => {
 			name: name,
 			id: idNr,
 		};
-		console.log(project.name, project.id);
+		//console.log(project.name, project.id);
 
-		navigate(`/timereport`, { state: project });
+		//navigate(`/timereport`, { state: project });
 	};
 
 	const filteredProjects = showAllProjects
@@ -142,7 +150,6 @@ const Project = () => {
 								key={item.id}
 								className="show-col mx-2 mb-2 mx-auto"
 								sm={6}
-								md={6}
 								lg={3}>
 								<Card bg="dark" text="light" className="show-card">
 									<Card.Img
