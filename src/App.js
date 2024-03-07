@@ -13,7 +13,8 @@ export default function App() {
 				<LoadingProvider>
 					<AuthProvider>
 						<Routes>
-							<Route path="/" element={<Home />} />
+							<Route path="/" element={<Project />} />
+							{/* <Route path="/" element={<Home />} /> */}
 							<Route path="/login/auth" element={<LoginOAuth />} />
 							<Route path="/user" element={<User />} />
 							<Route path="/projects" element={<Project />} />

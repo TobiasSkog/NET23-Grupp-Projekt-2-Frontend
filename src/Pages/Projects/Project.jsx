@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
@@ -11,6 +11,7 @@ import { useNavigate } from "react-router-dom";
 
 const Project = () => {
 	const [project, setProject] = useState([]);
+	const [showAllProjects, setShowAllProjects] = useState(false);
 	const [modalOpen, setModalOpen] = useState(false);
 	const [loading, setLoading] = useState(false);
 	const [edit, setEdit] = useState(false);
@@ -29,9 +30,9 @@ const Project = () => {
 	// const userRole = user.userRole;  We need to get userRole here to render right buttons.
 	//will hardcode this for now
 
-	const userRole = "User"; //Temporary!!!!
+	const userRole = "Admin"; //Temporary!!!!
 	const navigate = useNavigate();
-	console.log(userRole);
+	//console.log(userRole);
 
 	const openModal = () => {
 		setModalOpen(true);
@@ -46,7 +47,7 @@ const Project = () => {
 			try {
 				setLoading(true);
 				const response = await axios.get(
-					"http://localhost:3001/databases/projects?status=Active"
+					"http://localhost:3001/databases/projects"
 				);
 
 				setProject(response.data);
@@ -70,19 +71,6 @@ const Project = () => {
 			setProject(response.data);
 		} catch (error) {
 			console.error("There was a problem updating projects:", error);
-		} finally {
-			setLoading(false);
-		}
-	};
-	const getActiveProjects = async () => {
-		try {
-			setLoading(true);
-			const response = await axios.get(
-				"http://localhost:3001/databases/projects?status=Active"
-			);
-			setProject(response.data);
-		} catch (error) {
-			console.error("There was a problem updating active projects:", error);
 		} finally {
 			setLoading(false);
 		}
@@ -119,6 +107,10 @@ const Project = () => {
 		navigate(`/timereport`, { state: project });
 	};
 
+	const filteredProjects = showAllProjects
+		? project
+		: project.filter((project) => project.status === "Active");
+
 	return (
 		<>
 			{modalOpen && (
@@ -143,7 +135,7 @@ const Project = () => {
 				)}
 				<div className="row justify-content-center">
 					<Row>
-						{project.map((item) => (
+						{filteredProjects.map((item) => (
 							<Col
 								key={item.id}
 								className="show-col mx-2 mb-2 mx-auto"
@@ -215,14 +207,16 @@ const Project = () => {
 					<Button
 						variants="primary"
 						className="mt-4 mx-4"
-						onClick={() => updateProjects()}>
-						<i className="bi bi-filter"></i> See All Projects
-					</Button>
-					<Button
-						variants="primary"
-						className="mt-4 mx-4"
-						onClick={() => getActiveProjects()}>
-						<i className="bi bi-filter"></i> See Active Projects
+						onClick={() => setShowAllProjects(!showAllProjects)}>
+						{showAllProjects ? (
+							<>
+								<i className="bi bi-filter"></i> Active Projects
+							</>
+						) : (
+							<>
+								<i className="bi bi-filter"></i> Show All Projects
+							</>
+						)}
 					</Button>
 				</div>
 			</div>
