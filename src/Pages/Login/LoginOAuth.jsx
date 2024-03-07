@@ -1,67 +1,75 @@
 import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useAuth } from "../../Components/Auth/AuthProvider";
+import Cookies from "js-cookie";
 
-export default function Login() {
+export default function LoginOAuth() {
+	const [isLoading, setIsLoading] = useState(false);
 	const location = useLocation();
 	const { search } = location;
 	const navigate = useNavigate();
-	const { loginOAuth, user } = useAuth();
 
 	useEffect(() => {
-		const queryDatabaseForUser = async (authData) => {
+		const authenticateAndFindUserInDatabase = async () => {
 			try {
-				const validUser = await axios.post(
-					"http://localhost:3001/databases/login/confirmUser",
-					{ userEmail: authData.email }
+				setIsLoading(true);
+				const searchParams = new URLSearchParams(search);
+				const code = searchParams.get("code");
+
+				if (!code) {
+					return false;
+				}
+
+				const response = await axios.get(
+					`http://localhost:3001/login/auth/callback?code=${code}`
 				);
-				if (validUser.data.isValidUser) {
-					const userData = {
-						...authData,
-						userRole: validUser.data.userRole,
-						target:
-							validUser.data.userRole === "Admin"
-								? "/admin"
-								: validUser.data.userRole === "User"
-								? "/user"
-								: "/",
-					};
 
-					loginOAuth(userData, "OAuth");
-
-					if (userData.target) {
-						navigate(userData.target);
-					} else {
-						navigate("/");
-					}
+				if (response.status !== 200) {
+					console.error("Authentication error:", response.data);
+					return false;
 				}
+
+				const databaseUserData = await axios.post(
+					"http://localhost:3001/databases/login/authUser",
+					{ userEmail: response.data.email }
+				);
+
+				if (!databaseUserData.data.isValidUser) {
+					return false;
+				}
+
+				const userData = {
+					id: databaseUserData.data.id,
+					name: response.data.name,
+					userRole: databaseUserData.data.userRole,
+					target:
+						databaseUserData.data.userRole === "Admin"
+							? "/admin"
+							: databaseUserData.data.userRole === "User"
+							? "/user"
+							: "/",
+				};
+
+				const amountOfMinutes = 15;
+				const expirationTime = new Date(
+					new Date().getTime() + amountOfMinutes * 60 * 1000
+				);
+				Cookies.set("auth", JSON.stringify(userData), {
+					expires: expirationTime,
+				});
+				navigate(userData.target);
 			} catch (error) {
-				console.error("Error querying database for user:", error.message);
+				console.error("Unexpected error during authentication:", error);
+			} finally {
+				setIsLoading(false);
 			}
 		};
 
-		const oAuthLoginHandling = async () => {
-			const searchParams = new URLSearchParams(search);
-			const code = searchParams.get("code");
-			try {
-				if (code) {
-					const response = await axios.get(
-						`http://localhost:3001/login/auth/callback?code=${code}`
-					);
-					if (response.status === 200) {
-						queryDatabaseForUser(response.data);
-					} else {
-						navigate("/");
-					}
-				}
-			} catch (error) {
-				console.error("Error:", error);
-			}
-		};
-		console.log(1);
-		if (!user) {
-			oAuthLoginHandling();
+		const authenticatedUser = authenticateAndFindUserInDatabase();
+		if (!authenticatedUser) {
+			navigate("/");
 		}
-	}, [user, loginOAuth, navigate, search]);
+	}, []);
+
+	return <>{isLoading && <div>Loading...</div>}</>;
 }
