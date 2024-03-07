@@ -30,7 +30,7 @@ export default function LoginOAuth() {
 				}
 
 				const databaseUserData = await axios.post(
-					"http://localhost:3001/databases/login/authUser",
+					"http://localhost:3001/databases/people/login/authUser",
 					{ userEmail: response.data.email }
 				);
 

@@ -6,8 +6,8 @@ import Row from "react-bootstrap/Row";
 import axios from "axios";
 import FormModal from "./FormModal";
 import Spinner from "react-bootstrap/Spinner";
-//import { useAuth } from "../../Components/Auth/AuthProvider";
 import { useNavigate } from "react-router-dom";
+import Cookies from "js-cookie";
 
 const Project = () => {
 	const [project, setProject] = useState([]);
@@ -26,11 +26,13 @@ const Project = () => {
 		image: "",
 	});
 
-	// const { user } = useAuth();
-	// const userRole = user.userRole;  We need to get userRole here to render right buttons.
-	//will hardcode this for now
+	const isAuthenticated = !!Cookies.get("auth");
+	let user = null;
+	if (isAuthenticated) {
+		user = JSON.parse(Cookies.get("auth"));
+	}
 
-	const userRole = "Admin"; //Temporary!!!!
+	const userRole = user.userRole; //Temporary!!!!
 	const navigate = useNavigate();
 	//console.log(userRole);
 

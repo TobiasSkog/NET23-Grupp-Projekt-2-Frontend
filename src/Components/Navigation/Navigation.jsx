@@ -41,13 +41,7 @@ export default function Navigation({ ...rest }) {
 								<Navbar.Text>{user.name}</Navbar.Text>
 								<Nav.Link onClick={handleLogout}>Logout</Nav.Link>
 							</>
-						) : (
-							<>
-								<Nav.Link href={process.env.REACT_APP_NOTION_AUTH_URL}>
-									(REMOVE ME BEFORE GIT PUSH) Login
-								</Nav.Link>
-							</>
-						)}
+						) : null}
 					</Nav>
 				</Navbar.Collapse>
 			</Container>

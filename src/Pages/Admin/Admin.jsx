@@ -8,8 +8,7 @@ export default function Admin({ ...rest }) {
 		navigate("/");
 		return null;
 	}
-	let userJson = Cookies.get("auth");
-	let user = JSON.parse(userJson);
+	let user = JSON.parse(Cookies.get("auth"));
 	return (
 		<div>
 			<h1>Admin</h1>
