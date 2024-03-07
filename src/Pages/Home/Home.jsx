@@ -9,6 +9,7 @@ export default function Home() {
   const handleShowLogin = () => setShowLogin(true);
   const handleCloseLogin = () => setShowLogin(false);
 	return (
+
     <>
     <Container fluid className="min-vh-100 d-flex align-items-center justify-content-center">
       <Row>
@@ -53,3 +54,4 @@ export default function Home() {
     </>
 );
 };
+
