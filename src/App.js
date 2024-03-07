@@ -10,6 +10,7 @@ export default function App() {
 	//const isAuthenticated = !!Cookies.get("auth");
 
 	return (
+
 		<Router>
 			<header>
 				<Navigation />
@@ -25,5 +26,6 @@ export default function App() {
 				</Routes>
 			</main>
 		</Router>
+
 	);
 }
