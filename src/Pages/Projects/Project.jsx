@@ -32,7 +32,7 @@ const Project = () => {
 		user = JSON.parse(Cookies.get("auth"));
 	}
 
-	const userRole = user.userRole; //Temporary!!!!
+	const userRole = user.userRole;
 	const navigate = useNavigate();
 	//console.log(userRole);
 
@@ -128,7 +128,7 @@ const Project = () => {
 					setLoading={setLoading}
 				/>
 			)}
-			<div className="show-container container">
+			<div className="show-container container mt-4">
 				{loading && (
 					<>
 						<Spinner animation="border" variant="primary" />
@@ -196,7 +196,7 @@ const Project = () => {
 						))}
 					</Row>
 				</div>
-				<div className="mb-4 mx-3">
+				<div className="mb-4">
 					{userRole === "Admin" && (
 						<Button
 							variants="primary"
