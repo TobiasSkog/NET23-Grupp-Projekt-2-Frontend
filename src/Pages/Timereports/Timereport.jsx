@@ -20,25 +20,10 @@ export const Timereport = () => {
 				setLoading(true);
 
 				const response = await axios.get(
-					`http://localhost:5000/databases/timereports/?property=Project&id=${projectId}`
+					`http://localhost:5000/databases/timereports/filter/project?property=Project&id=${projectId}`
 				);
 
-				const responsePeople = await axios.get(
-					`http://localhost:5000/databases/people`
-				);
-
-				//Create a Map of person IDs to names
-				const idNameMap = new Map(
-					responsePeople.data.map((person) => [person.id, person.name])
-				);
-
-				const updatedTimeReports = responseReports.data.map((report) => ({
-					...report,
-					name: idNameMap.get(report.person),
-				}));
-				console.log(response.data);
-				setTimeReports(updatedTimeReports);
-				//setPeople(responsePeople.data);
+				setTimeReports(response.data);
 				console.log(response.data);
 			} catch (error) {
 				console.error("There was a problem with the fetch operation:", error);
