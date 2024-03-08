@@ -5,6 +5,8 @@ import LoginOAuth from "./Components/LoginModal/Login/LoginOAuth";
 import Navigation from "./Components/Navigation/Navigation";
 import Admin from "./Pages/Admin/Admin";
 import Project from "./Pages/Projects/Project";
+import { Timereport } from "./Pages/Timereports/Timereport";
+import TimereportUser from "./Pages/Timereports/TimereportUser";
 //import Cookies from "js-cookie";
 
 export default function App() {
@@ -21,7 +23,8 @@ export default function App() {
 					<Route path="/login/auth" element={<LoginOAuth />} />
 					<Route path="/user" element={<User />} />
 					<Route path="/admin" element={<Admin />} />
-					<Route path="/timereports" element={<User />} />
+					<Route path="/timereports" element={<Timereport />} />
+					<Route path="/timereports/user" element={<TimereportUser />} />
 					<Route path="/projects" element={<Project />} />
 				</Routes>
 			</main>
