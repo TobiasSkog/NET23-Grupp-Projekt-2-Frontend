@@ -12,9 +12,7 @@ export const Timereport = () => {
 	const [people, setPeople] = useState([]);
 
 	const location = useLocation();
-	const { state } = location;
-	const projectId = state.id;
-	const projectName = state.name;
+	location = { state: { projectId: state.id, projectName: state.name } };
 
 	useEffect(() => {
 		const fetchData = async () => {

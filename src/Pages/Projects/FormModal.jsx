@@ -21,6 +21,14 @@ export default function FormModal({
 			setLoading(true);
 			let response;
 
+			if (!formInput.image.trim()) {
+				alert("Image URL is required.");
+				return;
+			} else if (!formInput.status.trim()) {
+				alert("Status is required.");
+				return;
+			}
+
 			if (edit) {
 				// If in editing mode, update existing project
 
