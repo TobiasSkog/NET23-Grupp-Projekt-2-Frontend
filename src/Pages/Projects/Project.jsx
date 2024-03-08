@@ -114,7 +114,7 @@ const Project = () => {
 		};
 		//console.log(project.name, project.id);
 
-		//navigate(`/timereport`, { state: project });
+		navigate(`/timereport`, { state: project });
 	};
 
 	const filteredProjects = showAllProjects
