@@ -55,7 +55,7 @@ export default function TimereportUser() {
 	const handleSortByProject = () => {
 		const sortedReports = [...timeReports];
 		sortedReports.sort((a, b) => {
-			if (sortOrder === "asc") {
+			if (sortOrder === "ascending") {
 				return a.projectName.localeCompare(b.projectName); // ascending
 			} else {
 				return b.projectName.localeCompare(a.projectName); // descending

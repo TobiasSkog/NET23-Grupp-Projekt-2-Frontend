@@ -30,7 +30,7 @@ export const Timereport = () => {
 
 				setTimeReports(response.data);
 				setOriginalTimeReports(response.data);
-				//console.log(response.data);
+				console.log(response.data);
 			} catch (error) {
 				console.error("There was a problem with the fetch operation:", error);
 			} finally {
@@ -52,6 +52,19 @@ export const Timereport = () => {
 		});
 		setTimeReports(sortedReports);
 		setSortOrder(sortOrder === "ascending" ? "descending" : "ascending"); // Toggle sort order
+	};
+
+	const handleSortByName = () => {
+		const sortedReports = [...timeReports];
+		sortedReports.sort((a, b) => {
+			if (sortOrder === "ascending") {
+				return a.name.localeCompare(b.name); // ascending
+			} else {
+				return b.name.localeCompare(a.name); // descending
+			}
+		});
+		setTimeReports(sortedReports);
+		setSortOrder(sortOrder === "ascending" ? "descending" : "ascending");
 	};
 
 	const handleNameClick = (id, name) => {
@@ -84,7 +97,11 @@ export const Timereport = () => {
 								style={{ cursor: "pointer" }}>
 								Date
 							</th>
-							<th>Person</th>
+							<th
+								onClick={() => handleSortByName()}
+								style={{ cursor: "pointer" }}>
+								Person
+							</th>
 							<th>Hours</th>
 							<th>Project</th>
 							<th>Note</th>
