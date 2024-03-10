@@ -63,6 +63,7 @@ export default function Menu({
 							);
 							setPeopleOption(selectedPerson);
 							setSelectedOption("person");
+							setShowProject(false);
 						}}
 						disabled={selectedOption === "project"}>
 						<option value="">--Select Person--</option>

@@ -3,6 +3,7 @@ import axios from "axios";
 import Timereport from "./Timereport";
 import Menu from "./Menu";
 import TimeReportUser from "./TimereportUser";
+import Spinner from "react-bootstrap/esm/Spinner";
 
 export default function TimereportMain() {
 	const [loading, setLoading] = useState(false);
@@ -40,6 +41,12 @@ export default function TimereportMain() {
 
 	return (
 		<>
+			{loading && (
+				<>
+					<Spinner animation="border" variant="primary" />
+					<h4 className="mt-3">Loading...</h4>
+				</>
+			)}
 			{showMenu ? (
 				<Menu
 					project={project}

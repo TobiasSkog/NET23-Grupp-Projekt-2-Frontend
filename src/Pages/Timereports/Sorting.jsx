@@ -9,7 +9,7 @@ export default function Sorting({ originalTimeReports, setTimeReports }) {
 
 		const filteredReports = originalTimeReports.filter((report) => {
 			const reportDate = new Date(report.date);
-			//console.log(reportDate);
+
 			return reportDate >= sevenDaysAgo;
 		});
 		setTimeReports(filteredReports);
@@ -21,7 +21,7 @@ export default function Sorting({ originalTimeReports, setTimeReports }) {
 
 		const filteredReports = originalTimeReports.filter((report) => {
 			const reportDate = new Date(report.date);
-			//console.log(reportDate);
+
 			return reportDate >= thirtyDaysAgo;
 		});
 		setTimeReports(filteredReports);
