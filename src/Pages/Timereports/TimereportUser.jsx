@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Spinner from "react-bootstrap/esm/Spinner";
 import Table from "react-bootstrap/Table";
 import Container from "react-bootstrap/esm/Container";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Sorting from "./Sorting";
 import SearchDate from "./SearchDate";
@@ -17,6 +17,8 @@ export default function TimereportUser({ person }) {
 	const { state } = location;
 	const personId = state?.id || person.id;
 	const name = state?.name || person.name;
+
+	const navigate = useNavigate();
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -66,6 +68,15 @@ export default function TimereportUser({ person }) {
 		setSortOrder(sortOrder === "ascending" ? "descending" : "ascending");
 	};
 
+	const handleNameClick = (id, name) => {
+		const project = {
+			id: id,
+			name: name,
+		};
+		console.log(project);
+		navigate("/timereports/project", { state: project });
+	};
+
 	//Sum all hours to a Total - render in tfoot
 	const totalHours = timeReports.reduce((total, item) => total + item.hours, 0);
 
@@ -112,7 +123,13 @@ export default function TimereportUser({ person }) {
 								<td>{index + 1}</td>
 								<td>{item.date}</td>
 								<td>{item.hours}</td>
-								<td>{item.projectName}</td>
+								<td
+									onClick={() =>
+										handleNameClick(item.project, item.projectName)
+									}
+									style={{ cursor: "pointer" }}>
+									{item.projectName}
+								</td>
 								<td>{item.note}</td>
 								<td>{name}</td>
 							</tr>
