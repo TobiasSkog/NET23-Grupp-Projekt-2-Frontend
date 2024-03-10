@@ -31,7 +31,6 @@ export default function TimereportUser({ person }) {
 
 				setTimeReports(response.data);
 				setOriginalTimeReports(response.data);
-				//console.log(response.data);
 			} catch (error) {
 				console.error("There was a problem with the fetch operation:", error);
 			} finally {
@@ -84,7 +83,7 @@ export default function TimereportUser({ person }) {
 		<section>
 			{loading && (
 				<>
-					<Spinner animation="border" variant="primary" />{" "}
+					<Spinner animation="border" variant="primary" />
 					<h4 className="mt-3">Loading...</h4>
 				</>
 			)}

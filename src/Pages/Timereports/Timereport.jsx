@@ -17,8 +17,7 @@ export default function Timereport({ proj }) {
 	const { state } = location;
 	const projectId = state?.id || proj.id;
 	const projectName = state?.name || proj.name;
-	console.log(projectId);
-	console.log(projectName);
+
 	const navigate = useNavigate();
 
 	useEffect(() => {
@@ -32,7 +31,6 @@ export default function Timereport({ proj }) {
 
 				setTimeReports(response.data);
 				setOriginalTimeReports(response.data);
-				//console.log(response.data);
 			} catch (error) {
 				console.error("There was a problem with the fetch operation:", error);
 			} finally {
