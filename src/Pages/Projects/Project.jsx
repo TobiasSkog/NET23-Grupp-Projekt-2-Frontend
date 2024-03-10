@@ -61,8 +61,12 @@ const Project = () => {
 					"http://localhost:3001/databases/projects"
 				);
 
-				setProject(response.data);
-				//console.log(response.data);
+				// sort so Active will always display first
+				const sorted = response.data.sort((a, b) =>
+					a.status.localeCompare(b.status)
+				);
+				setProject(sorted);
+				console.log(sorted);
 			} catch (error) {
 				console.error("There was a problem with the fetch operation:", error);
 			} finally {
@@ -78,8 +82,13 @@ const Project = () => {
 			const response = await axios.get(
 				"http://localhost:3001/databases/projects"
 			);
-			//console.log(response.data);
-			setProject(response.data);
+
+			// sort so Active will always display first
+			const sorted = response.data.sort((a, b) =>
+				a.status.localeCompare(b.status)
+			);
+
+			setProject(sorted);
 		} catch (error) {
 			console.error("There was a problem updating projects:", error);
 		} finally {
