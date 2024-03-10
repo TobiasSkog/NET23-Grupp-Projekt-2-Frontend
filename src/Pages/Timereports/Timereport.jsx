@@ -7,7 +7,7 @@ import Container from "react-bootstrap/esm/Container";
 import Sorting from "./Sorting";
 import SearchDate from "./SearchDate";
 
-export const Timereport = () => {
+export default function Timereport({ proj }) {
 	const [loading, setLoading] = useState(false);
 	const [timeReports, setTimeReports] = useState([]);
 	const [originalTimeReports, setOriginalTimeReports] = useState([]);
@@ -15,8 +15,8 @@ export const Timereport = () => {
 
 	const location = useLocation();
 	const { state } = location;
-	const projectId = state.id;
-	const projectName = state.name;
+	const projectId = state?.id || proj.id;
+	const projectName = state?.name || proj.name;
 
 	const navigate = useNavigate();
 
@@ -31,7 +31,7 @@ export const Timereport = () => {
 
 				setTimeReports(response.data);
 				setOriginalTimeReports(response.data);
-				console.log(response.data);
+				//console.log(response.data);
 			} catch (error) {
 				console.error("There was a problem with the fetch operation:", error);
 			} finally {
@@ -154,4 +154,4 @@ export const Timereport = () => {
 			/>
 		</section>
 	);
-};
+}

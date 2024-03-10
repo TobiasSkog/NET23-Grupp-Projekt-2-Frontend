@@ -7,7 +7,7 @@ import axios from "axios";
 import Sorting from "./Sorting";
 import SearchDate from "./SearchDate";
 
-export default function TimereportUser() {
+export default function TimereportUser({ person }) {
 	const [loading, setLoading] = useState(false);
 	const [timeReports, setTimeReports] = useState([]);
 	const [originalTimeReports, setOriginalTimeReports] = useState([]);
@@ -15,8 +15,8 @@ export default function TimereportUser() {
 
 	const location = useLocation();
 	const { state } = location;
-	const personId = state.id;
-	const name = state.name;
+	const personId = state?.id || person.id;
+	const name = state?.name || person.name;
 
 	useEffect(() => {
 		const fetchData = async () => {
