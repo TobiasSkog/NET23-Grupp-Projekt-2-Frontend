@@ -9,6 +9,7 @@ import axios from "axios";
 export default function TimereportUser() {
 	const [loading, setLoading] = useState(false);
 	const [timeReports, setTimeReports] = useState([]);
+	const [originalTimeReports, setOriginalTimeReports] = useState([]);
 	const [sortOrder, setSortOrder] = useState("ascending");
 
 	const location = useLocation();
@@ -26,6 +27,7 @@ export default function TimereportUser() {
 				);
 
 				setTimeReports(response.data);
+				setOriginalTimeReports(response.data);
 				//console.log(response.data);
 			} catch (error) {
 				console.error("There was a problem with the fetch operation:", error);
@@ -50,6 +52,47 @@ export default function TimereportUser() {
 		setSortOrder(sortOrder === "ascending" ? "descending" : "ascending"); // Toggle sort order
 	};
 
+	const handleSortByProject = () => {
+		const sortedReports = [...timeReports];
+		sortedReports.sort((a, b) => {
+			if (sortOrder === "asc") {
+				return a.projectName.localeCompare(b.projectName); // ascending
+			} else {
+				return b.projectName.localeCompare(a.projectName); // descending
+			}
+		});
+		setTimeReports(sortedReports);
+		setSortOrder(sortOrder === "ascending" ? "descending" : "ascending");
+	};
+
+	const handleClick7days = () => {
+		const sevenDaysAgo = new Date();
+		sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
+
+		const filteredReports = originalTimeReports.filter((report) => {
+			const reportDate = new Date(report.date);
+			//console.log(reportDate);
+			return reportDate >= sevenDaysAgo;
+		});
+		setTimeReports(filteredReports);
+	};
+
+	const handleClick30days = () => {
+		const thirtyDaysAgo = new Date();
+		thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
+
+		const filteredReports = originalTimeReports.filter((report) => {
+			const reportDate = new Date(report.date);
+
+			return reportDate >= thirtyDaysAgo;
+		});
+		setTimeReports(filteredReports);
+	};
+
+	const handleAllClick = () => {
+		setTimeReports(originalTimeReports);
+	};
+
 	//Sum all hours to a Total - render in tfoot
 	const totalHours = timeReports.reduce((total, item) => total + item.hours, 0);
 
@@ -61,15 +104,23 @@ export default function TimereportUser() {
 					<h4 className="mt-3">Loading...</h4>
 				</>
 			)}
-			<h1 className="text-center mb-5">Timereports for {name}</h1>
+			<h2 className="text-center mb-5">Timereports for {name}</h2>
 			<Container className="table-responsive">
 				<Table className=" table table-dark table-striped table-bordered table-hover">
 					<thead>
 						<tr className="text-center">
 							<th>#</th>
-							<th onClick={() => handleSortByDate()}>Date</th>
+							<th
+								onClick={() => handleSortByDate()}
+								style={{ cursor: "pointer" }}>
+								Date
+							</th>
 							<th>Hours</th>
-							<th>Project</th>
+							<th
+								onClick={() => handleSortByProject()}
+								style={{ cursor: "pointer" }}>
+								Project
+							</th>
 							<th>Note</th>
 							<th>Name</th>
 						</tr>
@@ -103,13 +154,22 @@ export default function TimereportUser() {
 				</Table>
 			</Container>
 			<Container className="">
-				<Button className="mx-2 my-2" style={{ width: "115px" }}>
+				<Button
+					className="mx-2 my-2"
+					style={{ width: "115px" }}
+					onClick={handleClick7days}>
 					Last 7 days
 				</Button>
-				<Button className="mx-2 my-2" style={{ width: "115px" }}>
+				<Button
+					className="mx-2 my-2"
+					style={{ width: "115px" }}
+					onClick={handleClick30days}>
 					Last 30 days
 				</Button>
-				<Button className="mx-2 my-2" style={{ width: "115px" }}>
+				<Button
+					className="mx-2 my-2"
+					style={{ width: "115px" }}
+					onClick={handleAllClick}>
 					Total
 				</Button>
 			</Container>

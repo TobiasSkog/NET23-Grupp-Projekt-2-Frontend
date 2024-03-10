@@ -81,7 +81,7 @@ export const Timereport = () => {
 
 		const filteredReports = originalTimeReports.filter((report) => {
 			const reportDate = new Date(report.date);
-			//console.log(reportDate);
+
 			return reportDate >= thirtyDaysAgo;
 		});
 		setTimeReports(filteredReports);
@@ -107,7 +107,11 @@ export const Timereport = () => {
 					<thead>
 						<tr className="text-center">
 							<th>#</th>
-							<th onClick={() => handleSortByDate()}>Date</th>
+							<th
+								onClick={() => handleSortByDate()}
+								style={{ cursor: "pointer" }}>
+								Date
+							</th>
 							<th>Person</th>
 							<th>Hours</th>
 							<th>Project</th>
