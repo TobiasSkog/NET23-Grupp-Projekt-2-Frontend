@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import Spinner from "react-bootstrap/esm/Spinner";
 import Table from "react-bootstrap/Table";
 import Container from "react-bootstrap/esm/Container";
-import Button from "react-bootstrap/Button";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
+import Sorting from "./Sorting";
 
 export default function TimereportUser() {
 	const [loading, setLoading] = useState(false);
@@ -63,34 +63,6 @@ export default function TimereportUser() {
 		});
 		setTimeReports(sortedReports);
 		setSortOrder(sortOrder === "ascending" ? "descending" : "ascending");
-	};
-
-	const handleClick7days = () => {
-		const sevenDaysAgo = new Date();
-		sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
-
-		const filteredReports = originalTimeReports.filter((report) => {
-			const reportDate = new Date(report.date);
-			//console.log(reportDate);
-			return reportDate >= sevenDaysAgo;
-		});
-		setTimeReports(filteredReports);
-	};
-
-	const handleClick30days = () => {
-		const thirtyDaysAgo = new Date();
-		thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
-
-		const filteredReports = originalTimeReports.filter((report) => {
-			const reportDate = new Date(report.date);
-
-			return reportDate >= thirtyDaysAgo;
-		});
-		setTimeReports(filteredReports);
-	};
-
-	const handleAllClick = () => {
-		setTimeReports(originalTimeReports);
 	};
 
 	//Sum all hours to a Total - render in tfoot
@@ -153,26 +125,10 @@ export default function TimereportUser() {
 					</tfoot>
 				</Table>
 			</Container>
-			<Container className="">
-				<Button
-					className="mx-2 my-2"
-					style={{ width: "115px" }}
-					onClick={handleClick7days}>
-					Last 7 days
-				</Button>
-				<Button
-					className="mx-2 my-2"
-					style={{ width: "115px" }}
-					onClick={handleClick30days}>
-					Last 30 days
-				</Button>
-				<Button
-					className="mx-2 my-2"
-					style={{ width: "115px" }}
-					onClick={handleAllClick}>
-					Total
-				</Button>
-			</Container>
+			<Sorting
+				setTimeReports={setTimeReports}
+				originalTimeReports={originalTimeReports}
+			/>
 		</section>
 	);
 }

@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import Table from "react-bootstrap/Table";
 import Container from "react-bootstrap/esm/Container";
-import Button from "react-bootstrap/Button";
+import Sorting from "./Sorting";
 
 export const Timereport = () => {
 	const [loading, setLoading] = useState(false);
@@ -61,34 +61,6 @@ export const Timereport = () => {
 		};
 		console.log(person);
 		navigate("/timereports/user", { state: person });
-	};
-
-	const handleClick7days = () => {
-		const sevenDaysAgo = new Date();
-		sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
-
-		const filteredReports = originalTimeReports.filter((report) => {
-			const reportDate = new Date(report.date);
-			//console.log(reportDate);
-			return reportDate >= sevenDaysAgo;
-		});
-		setTimeReports(filteredReports);
-	};
-
-	const handleClick30days = () => {
-		const thirtyDaysAgo = new Date();
-		thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
-
-		const filteredReports = originalTimeReports.filter((report) => {
-			const reportDate = new Date(report.date);
-
-			return reportDate >= thirtyDaysAgo;
-		});
-		setTimeReports(filteredReports);
-	};
-
-	const handleAllClick = () => {
-		setTimeReports(originalTimeReports);
 	};
 
 	const totalHours = timeReports.reduce((total, item) => total + item.hours, 0);
@@ -150,26 +122,10 @@ export const Timereport = () => {
 					</tfoot>
 				</Table>
 			</Container>
-			<Container>
-				<Button
-					className="mx-2"
-					style={{ width: "115px" }}
-					onClick={handleClick7days}>
-					Last 7 days
-				</Button>
-				<Button
-					className="mx-2"
-					style={{ width: "115px" }}
-					onClick={handleClick30days}>
-					Last 30 days
-				</Button>
-				<Button
-					className="mx-2"
-					style={{ width: "115px" }}
-					onClick={handleAllClick}>
-					Total
-				</Button>
-			</Container>
+			<Sorting
+				setTimeReports={setTimeReports}
+				originalTimeReports={originalTimeReports}
+			/>
 		</section>
 	);
 };
