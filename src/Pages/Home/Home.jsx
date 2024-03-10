@@ -1,18 +1,27 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import Logo from "../../Assets/img/coffe and insomnia logo.png";
 import LoginModal from "../../Components/LoginModal/LoginModal";
 import { Container, Row, Col, Button } from "react-bootstrap";
 
+import { UserContext } from "../../Components/UserContext/UserContext";
+import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../Components/UserContext/Contexts";
+
 export default function Home() {
 	const [showLogin, setShowLogin] = useState(false);
-
 	const handleShowLogin = () => setShowLogin(true);
 	const handleCloseLogin = () => setShowLogin(false);
+	const navigate = useNavigate();
+	const { user, setUser } = useContext(AuthContext);
+
+	if (user) {
+		navigate("/projects");
+		return <>null</>;
+	}
+
 	return (
 		<>
-			<Container
-				fluid
-				className="min-vh-100 d-flex align-items-center justify-content-center">
+			<Container fluid className="min-vh-100 d-flex align-items-center justify-content-center">
 				<Row>
 					<Col xs={12} className="text-center">
 						{/* Logo */}
@@ -44,11 +53,7 @@ export default function Home() {
 					</Col>
 					<Col xs={12} className="text-center">
 						{/* Login Button */}
-						<Button
-							variant="dark"
-							className="mt-4 mt-md-5"
-							style={{ fontSize: "1rem" }}
-							onClick={handleShowLogin}>
+						<Button variant="dark" className="mt-4 mt-md-5" style={{ fontSize: "1rem" }} onClick={handleShowLogin}>
 							Go To Login
 						</Button>
 					</Col>
@@ -57,18 +62,6 @@ export default function Home() {
 
 			{/* Login Modal */}
 			<LoginModal show={showLogin} handleClose={handleCloseLogin} />
-
-			{/* Footer*/}
-			<div
-				className="text-center"
-				style={{
-					backgroundColor: "white",
-					boxShadow: "0 -5px 5px -5px rgba(0,0,0,0.2)",
-					paddingTop: "20px",
-					paddingBottom: "20px",
-				}}>
-				© 2024 Caffeine & Insomnia. All Rights Reserved.
-			</div>
 		</>
 	);
 }

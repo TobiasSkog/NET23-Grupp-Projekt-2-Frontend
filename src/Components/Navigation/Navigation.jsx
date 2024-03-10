@@ -3,26 +3,24 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
+import { UserContext } from "../UserContext/UserContext";
+import { useContext } from "react";
+import { AuthContext } from "../UserContext/Contexts";
 
 export default function Navigation({ ...rest }) {
-	const isExistingCookie = !!Cookies.get("auth");
-	let user = null;
-	if (isExistingCookie) {
-		user = JSON.parse(Cookies.get("auth"));
-	}
-
+	const { user, setUser } = useContext(AuthContext);
+	//const { user, setUser } = useContext(UserContext);
 	const navigate = useNavigate();
 	const handleLogout = () => {
 		Cookies.remove("auth");
+		setUser(null);
 		navigate("/");
 	};
 
 	return (
 		<Navbar expand="lg" className="bg-body-tertiary">
 			<Container>
-				<Navbar.Brand href={user ? user.target : "/"}>
-					Caffeine & Insomnia
-				</Navbar.Brand>
+				<Navbar.Brand href={user ? "/projects" : "/"}>Caffeine & Insomnia</Navbar.Brand>
 				<Navbar.Toggle aria-controls="basic-navbar-nav" />
 				<Navbar.Collapse className="basic-navbar-nav">
 					<Nav className="me-auto">
