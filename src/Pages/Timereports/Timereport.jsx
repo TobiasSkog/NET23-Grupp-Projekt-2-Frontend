@@ -5,6 +5,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import Table from "react-bootstrap/Table";
 import Container from "react-bootstrap/esm/Container";
 import Sorting from "./Sorting";
+import SearchDate from "./SearchDate";
 
 export const Timereport = () => {
 	const [loading, setLoading] = useState(false);
@@ -86,7 +87,15 @@ export const Timereport = () => {
 					<h4 className="mt-3">Loading...</h4>
 				</>
 			)}
-			<h2 className="text-center mb-5">Timereports for {projectName}</h2>
+			<Container className="d-flex mb-3 ">
+				<SearchDate
+					setTimeReports={setTimeReports}
+					originalTimeReports={originalTimeReports}
+				/>
+				<div className="mt-2 mb-3 w-50 ">
+					<h2 className="text-center mb-5">Timereports - {projectName}</h2>
+				</div>
+			</Container>
 			<Container>
 				<Table className=" table table-dark table-striped table-bordered table-hover">
 					<thead>

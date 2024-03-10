@@ -5,6 +5,7 @@ import Container from "react-bootstrap/esm/Container";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
 import Sorting from "./Sorting";
+import SearchDate from "./SearchDate";
 
 export default function TimereportUser() {
 	const [loading, setLoading] = useState(false);
@@ -76,7 +77,15 @@ export default function TimereportUser() {
 					<h4 className="mt-3">Loading...</h4>
 				</>
 			)}
-			<h2 className="text-center mb-5">Timereports for {name}</h2>
+			<Container className="d-flex mb-3 ">
+				<SearchDate
+					setTimeReports={setTimeReports}
+					originalTimeReports={originalTimeReports}
+				/>
+				<div className="mt-2 mb-3 w-50">
+					<h2 className="text-center mb-5">Timereports - {name}</h2>
+				</div>
+			</Container>
 			<Container className="table-responsive">
 				<Table className=" table table-dark table-striped table-bordered table-hover">
 					<thead>
