@@ -9,6 +9,7 @@ import Button from "react-bootstrap/Button";
 export const Timereport = () => {
 	const [loading, setLoading] = useState(false);
 	const [timeReports, setTimeReports] = useState([]);
+	const [sortOrder, setSortOrder] = useState("ascending");
 
 	const location = useLocation();
 	const { state } = location;
@@ -35,7 +36,21 @@ export const Timereport = () => {
 			}
 		};
 		fetchData();
-	}, []);
+	}, [projectId]);
+
+	// Function to handle sorting by date
+	const handleSortByDate = () => {
+		const sortedReports = [...timeReports];
+		sortedReports.sort((a, b) => {
+			if (sortOrder === "ascending") {
+				return new Date(a.date) - new Date(b.date);
+			} else {
+				return new Date(b.date) - new Date(a.date);
+			}
+		});
+		setTimeReports(sortedReports);
+		setSortOrder(sortOrder === "ascending" ? "descending" : "ascending"); // Toggle sort order
+	};
 
 	const handleNameClick = (id, name) => {
 		const person = {
@@ -56,17 +71,13 @@ export const Timereport = () => {
 					<h4 className="mt-3">Loading...</h4>
 				</>
 			)}
-			<h1 className="text-center mb-5">Timereports for {projectName}</h1>
+			<h2 className="text-center mb-5">Timereports for {projectName}</h2>
 			<Container>
 				<Table className=" table table-dark table-striped table-bordered table-hover">
 					<thead>
 						<tr className="text-center">
 							<th>#</th>
-							<th
-								// onClick={() => handleSortByDate()}
-								style={{ cursor: "pointer" }}>
-								Date
-							</th>
+							<th onClick={() => handleSortByDate()}>Date</th>
 							<th>Person</th>
 							<th>Hours</th>
 							<th>Project</th>
@@ -78,16 +89,10 @@ export const Timereport = () => {
 							<tr key={item.id} className="text-center">
 								<td>{index + 1}</td>
 								<td>{item.date}</td>
-								<td>
-									<a
-										onClick={() => handleNameClick(item.person, item.name)}
-										style={{
-											textDecoration: "none",
-											color: "white",
-											cursor: "pointer",
-										}}>
-										{item.name}
-									</a>
+								<td
+									onClick={() => handleNameClick(item.person, item.name)}
+									style={{ cursor: "pointer" }}>
+									{item.name}
 								</td>
 								<td>{item.hours}</td>
 								<td>{projectName}</td>

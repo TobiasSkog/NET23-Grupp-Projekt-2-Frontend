@@ -9,6 +9,7 @@ import axios from "axios";
 export default function TimereportUser() {
 	const [loading, setLoading] = useState(false);
 	const [timeReports, setTimeReports] = useState([]);
+	const [sortOrder, setSortOrder] = useState("ascending");
 
 	const location = useLocation();
 	const { state } = location;
@@ -33,7 +34,21 @@ export default function TimereportUser() {
 			}
 		};
 		fetchData();
-	}, []);
+	}, [personId]);
+
+	// Function to handle sorting by date
+	const handleSortByDate = () => {
+		const sortedReports = [...timeReports];
+		sortedReports.sort((a, b) => {
+			if (sortOrder === "ascending") {
+				return new Date(a.date) - new Date(b.date);
+			} else {
+				return new Date(b.date) - new Date(a.date);
+			}
+		});
+		setTimeReports(sortedReports);
+		setSortOrder(sortOrder === "ascending" ? "descending" : "ascending"); // Toggle sort order
+	};
 
 	//Sum all hours to a Total - render in tfoot
 	const totalHours = timeReports.reduce((total, item) => total + item.hours, 0);
@@ -52,7 +67,7 @@ export default function TimereportUser() {
 					<thead>
 						<tr className="text-center">
 							<th>#</th>
-							<th>Date</th>
+							<th onClick={() => handleSortByDate()}>Date</th>
 							<th>Hours</th>
 							<th>Project</th>
 							<th>Note</th>
