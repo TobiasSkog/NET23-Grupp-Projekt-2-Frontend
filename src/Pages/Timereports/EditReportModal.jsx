@@ -61,6 +61,9 @@ export default function EditReportModal({
 			if (!formInput.project.trim()) {
 				alert("Project is required.");
 				return;
+			} else if (!formInput.date.trim()) {
+				alert("Date is required.");
+				return;
 			}
 
 			const timereportId = formInput.id;

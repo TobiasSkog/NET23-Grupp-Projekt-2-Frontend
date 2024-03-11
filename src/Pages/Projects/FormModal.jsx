@@ -27,6 +27,12 @@ export default function FormModal({
 			} else if (!formInput.status.trim()) {
 				alert("Status is required.");
 				return;
+			} else if (!formInput.startDate.trim()) {
+				alert("Startdate is required");
+				return;
+			} else if (!formInput.endDate.trim()) {
+				alert("Enddate is required");
+				return;
 			}
 
 			if (edit) {
