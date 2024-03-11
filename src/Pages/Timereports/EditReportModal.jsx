@@ -57,6 +57,12 @@ export default function EditReportModal({
 		try {
 			formInput.hours = parseInt(formInput.hours);
 			setLoading(true);
+
+			if (!formInput.project.trim()) {
+				alert("Project is required.");
+				return;
+			}
+
 			const timereportId = formInput.id;
 
 			const response = await axios.patch(
@@ -66,7 +72,7 @@ export default function EditReportModal({
 			console.log("Project updated successfully:", response.data);
 
 			updateTimereports();
-			console.log("print inside handlesubmit + forminput", formInput);
+
 			setFormInput({
 				date: "",
 				hours: "",
@@ -117,23 +123,20 @@ export default function EditReportModal({
 								onChange={handleInputChange}
 							/>
 						</Form.Group>
-						<label htmlFor="project" className="me-2 mb-2 text-white">
-							Select Project
-						</label>
-						<select
-							className="mb-2"
-							type="text"
+						<Form.Select
+							className="mb-3 fw-semibold"
+							name="project"
 							id="project"
+							aria-label="project"
 							required
 							onChange={(e) => handleSelectChange(e)}>
-							<option value="">--Select Project--</option>;
+							<option value="">--Select Project--</option>
 							{project.map((project) => (
 								<option key={project.id} value={project.id}>
 									{project.name}
 								</option>
 							))}
-							;
-						</select>
+						</Form.Select>
 
 						<Form.Group>
 							<Form.Label htmlFor="note" className="text-light">
