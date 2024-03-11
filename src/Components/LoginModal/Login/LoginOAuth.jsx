@@ -1,9 +1,8 @@
 import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import Cookies from "js-cookie";
 
-export default function LoginOAuth() {
+export default function LoginOAuth({ userLoggedIn }) {
 	const [isLoading, setIsLoading] = useState(false);
 	const location = useLocation();
 	const { search } = location;
@@ -20,19 +19,14 @@ export default function LoginOAuth() {
 					return false;
 				}
 
-				const response = await axios.get(
-					`http://localhost:3001/login/auth/callback?code=${code}`
-				);
+				const response = await axios.get(`http://localhost:3001/login/auth/callback?code=${code}`);
 
 				if (response.status !== 200) {
 					console.error("Authentication error:", response.data);
 					return false;
 				}
 
-				const databaseUserData = await axios.post(
-					"http://localhost:3001/databases/people/login/authUser",
-					{ userEmail: response.data.email }
-				);
+				const databaseUserData = await axios.post("http://localhost:3001/databases/people/login/authUser", { userEmail: response.data.email });
 
 				if (!databaseUserData.data.isValidUser) {
 					return false;
@@ -41,21 +35,11 @@ export default function LoginOAuth() {
 					id: databaseUserData.data.id,
 					name: databaseUserData.data.name,
 					userRole: databaseUserData.data.userRole,
-					target:
-						databaseUserData.data.userRole === "Admin"
-							? "/admin"
-							: databaseUserData.data.userRole === "User"
-							? "/user"
-							: "/",
 				};
-				const amountOfMinutes = 15;
-				const expirationTime = new Date(
-					new Date().getTime() + amountOfMinutes * 60 * 1000
-				);
-				Cookies.set("auth", JSON.stringify(userData), {
-					expires: expirationTime,
-				});
-				navigate(userData.target);
+				//target:	databaseUserData.data.userRole === "Admin" ? "/admin"	: databaseUserData.data.userRole === "User"	? "/user"	: "/",
+
+				userLoggedIn(userData);
+				navigate("/projects");
 			} catch (error) {
 				console.error("Unexpected error during authentication:", error);
 			} finally {
@@ -67,6 +51,7 @@ export default function LoginOAuth() {
 		if (!authenticatedUser) {
 			navigate("/");
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	return <>{isLoading && <div>Loading...</div>}</>;

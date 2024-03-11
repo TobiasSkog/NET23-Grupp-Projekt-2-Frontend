@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
@@ -7,9 +8,8 @@ import axios from "axios";
 import FormModal from "./FormModal";
 import Spinner from "react-bootstrap/Spinner";
 import { useNavigate } from "react-router-dom";
-import Cookies from "js-cookie";
 
-const Project = () => {
+const Project = ({ userSignal }) => {
 	const [project, setProject] = useState([]);
 	const [showAllProjects, setShowAllProjects] = useState(false);
 	const [modalOpen, setModalOpen] = useState(false);
@@ -25,15 +25,10 @@ const Project = () => {
 		endDate: "",
 		image: "",
 	});
-
-	const isAuthenticated = !!Cookies.get("auth");
-	let user = null;
-	if (isAuthenticated) {
-		user = JSON.parse(Cookies.get("auth"));
-	}
-
-	const userRole = user.userRole; //Temporary!!!!
 	const navigate = useNavigate();
+	//console.log(user);
+
+	//const userRole = user.userRole; //Temporary!!!!
 	//console.log(userRole);
 
 	const openModal = () => {
@@ -45,12 +40,12 @@ const Project = () => {
 	};
 
 	useEffect(() => {
+		console.log("Useeffececet");
+
 		const fetchData = async () => {
 			try {
 				setLoading(true);
-				const response = await axios.get(
-					"http://localhost:3001/databases/projects"
-				);
+				const response = await axios.get("http://localhost:3001/databases/projects");
 
 				setProject(response.data);
 				console.log(response.data);
@@ -63,12 +58,15 @@ const Project = () => {
 		fetchData();
 	}, []);
 
+	const user = userSignal.value;
+	if (!user) {
+		navigate("/");
+		return null;
+	}
 	const updateProjects = async () => {
 		try {
 			setLoading(true);
-			const response = await axios.get(
-				"http://localhost:3001/databases/projects"
-			);
+			const response = await axios.get("http://localhost:3001/databases/projects");
 			//console.log(response.data);
 			setProject(response.data);
 		} catch (error) {
@@ -104,15 +102,12 @@ const Project = () => {
 			name: name,
 			id: idNr,
 		};
-		console.log(project.name, project.id);
+		//console.log(project.name, project.id);
 
 		navigate(`/timereport`, { state: project });
 	};
 
-	const filteredProjects = showAllProjects
-		? project
-		: project.filter((project) => project.status === "Active");
-
+	const filteredProjects = showAllProjects ? project : project.filter((project) => project.status === "Active");
 	return (
 		<>
 			{modalOpen && (
@@ -138,24 +133,13 @@ const Project = () => {
 				<div className="row justify-content-center">
 					<Row>
 						{filteredProjects.map((item) => (
-							<Col
-								key={item.id}
-								className="show-col mx-2 mb-2 mx-auto"
-								sm={6}
-								md={6}
-								lg={3}>
+							<Col key={item.id} className="show-col mx-2 mb-2 mx-auto" sm={6} md={6} lg={3}>
 								<Card bg="dark" text="light" className="show-card">
-									<Card.Img
-										variant="top"
-										src={item.image}
-										style={{ height: "142px" }}
-									/>
+									<Card.Img variant="top" src={item.image} style={{ height: "142px" }} />
 									<Card.Body>
 										<Card.Title>{item.name}</Card.Title>
 										<Card.Text>
-											<strong
-												className="badge"
-												style={{ backgroundColor: item.color }}>
+											<strong className="badge" style={{ backgroundColor: item.color }}>
 												{item.status}
 											</strong>
 											<br />
@@ -168,17 +152,11 @@ const Project = () => {
 												{item.timespan.start} - {item.timespan.end}
 											</span>
 										</Card.Text>
-										{userRole === "User" && (
-											<Button className="btn btn-primary m-2">
-												Report Time
-											</Button>
-										)}
+										{user.userRole === "User" && <Button className="btn btn-primary m-2">Report Time</Button>}
 
-										{userRole === "Admin" && (
+										{user.userRole === "Admin" && (
 											<>
-												<Button onClick={() => handleClick(item.id, item.name)}>
-													See Timereports
-												</Button>
+												<Button onClick={() => handleClick(item.id, item.name)}>See Timereports</Button>
 
 												<Button
 													className="btn btn-danger m-2"
@@ -197,19 +175,13 @@ const Project = () => {
 					</Row>
 				</div>
 				<div className="mb-4 mx-3">
-					{userRole === "Admin" && (
-						<Button
-							variants="primary"
-							className="mt-4 mx-3"
-							onClick={openModal}>
+					{user.userRole === "Admin" && (
+						<Button variants="primary" className="mt-4 mx-3" onClick={openModal}>
 							<i className="bi bi-plus-circle me-2"></i>Add New Project
 						</Button>
 					)}
 
-					<Button
-						variants="primary"
-						className="mt-4 mx-4"
-						onClick={() => setShowAllProjects(!showAllProjects)}>
+					<Button variants="primary" className="mt-4 mx-4" onClick={() => setShowAllProjects(!showAllProjects)}>
 						{showAllProjects ? (
 							<>
 								<i className="bi bi-filter"></i> Active Projects
