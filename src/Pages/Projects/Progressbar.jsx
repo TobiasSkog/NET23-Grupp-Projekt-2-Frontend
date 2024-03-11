@@ -5,10 +5,10 @@ export default function Progressbar({ workedHours, totalHours }) {
 		return ((workedHours / totalHours) * 100).toFixed(0);
 	};
 	return (
-		<div className="progress">
+		<div className="progress bg-info">
 			<div
 				id="progress-bar"
-				className="progress-bar"
+				className="progress-bar bg-primary"
 				role="progressbar"
 				style={{ width: calculatePercent() + "%" }}
 				aria-valuenow={calculatePercent()}

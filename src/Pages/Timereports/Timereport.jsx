@@ -6,12 +6,20 @@ import Table from "react-bootstrap/Table";
 import Container from "react-bootstrap/esm/Container";
 import Sorting from "./Sorting";
 import SearchDate from "./SearchDate";
+import EditReportModal from "./EditReportModal";
 
 export default function Timereport({ proj }) {
 	const [loading, setLoading] = useState(false);
 	const [timeReports, setTimeReports] = useState([]);
 	const [originalTimeReports, setOriginalTimeReports] = useState([]);
 	const [sortOrder, setSortOrder] = useState("ascending");
+	const [modalOpen, setModalOpen] = useState(false);
+	const [formInput, setFormInput] = useState({
+		id: "",
+		date: "",
+		hours: "",
+		note: "",
+	});
 
 	const location = useLocation();
 	const { state } = location;
@@ -31,6 +39,7 @@ export default function Timereport({ proj }) {
 
 				setTimeReports(response.data);
 				setOriginalTimeReports(response.data);
+				//console.log(response.data);
 			} catch (error) {
 				console.error("There was a problem with the fetch operation:", error);
 			} finally {
@@ -39,6 +48,35 @@ export default function Timereport({ proj }) {
 		};
 		fetchData();
 	}, [projectId]);
+
+	const openModal = () => {
+		setModalOpen(true);
+	};
+
+	const closeModal = () => {
+		setModalOpen(false);
+		setFormInput({
+			date: "",
+			hours: "",
+			note: "",
+		});
+	};
+
+	const updateTimereports = async () => {
+		try {
+			setLoading(true);
+			const response = await axios.get(
+				`http://localhost:3001/databases/timereports/filter/project?property=Project&id=${projectId}`
+			);
+
+			setTimeReports(response.data);
+			setOriginalTimeReports(response.data);
+		} catch (error) {
+			console.error("There was a problem updating projects:", error);
+		} finally {
+			setLoading(false);
+		}
+	};
 
 	// Function to handle sorting by date
 	const handleSortByDate = () => {
@@ -76,10 +114,37 @@ export default function Timereport({ proj }) {
 		navigate("/timereports/user", { state: person });
 	};
 
+	const handleEdit = (timereportId) => {
+		const timereportToEdit = originalTimeReports.find(
+			(item) => item.id === timereportId
+		);
+		if (timereportToEdit) {
+			setFormInput({
+				id: timereportId,
+				date: timereportToEdit.date,
+				hours: timereportToEdit.hours,
+				note: timereportToEdit.note,
+				project: projectName,
+			});
+		}
+		openModal();
+	};
+
 	const totalHours = timeReports.reduce((total, item) => total + item.hours, 0);
 
 	return (
 		<section>
+			{modalOpen && (
+				<EditReportModal
+					formInput={formInput}
+					setFormInput={setFormInput}
+					closeModal={closeModal}
+					modalOpen={modalOpen}
+					updateTimereports={updateTimereports}
+					setLoading={setLoading}
+					projectName={projectName}
+				/>
+			)}
 			{loading && (
 				<>
 					<Spinner animation="border" variant="primary" />{" "}
@@ -130,7 +195,11 @@ export default function Timereport({ proj }) {
 								<td>{projectName}</td>
 								<td>{item.note}</td>
 								<td>
-									<button className="btn btn-danger btn-sm">Edit</button>
+									<button
+										className="btn btn-danger btn-sm"
+										onClick={() => handleEdit(item.id)}>
+										Edit
+									</button>
 								</td>
 							</tr>
 						))}

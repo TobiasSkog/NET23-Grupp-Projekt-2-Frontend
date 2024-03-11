@@ -15,20 +15,27 @@ export default function ProjectCard({
 			<Card.Img variant="top" src={item.image} style={{ height: "142px" }} />
 			<Card.Body>
 				<Card.Title>{item.name}</Card.Title>
-				<Card.Text>
+				<div>
 					<strong className="badge" style={{ backgroundColor: item.color }}>
 						{item.status}
 					</strong>
-					<p className="my-0">Hours: {item.hours} </p>
-					<p className="my-0">Worked Hours: {item.workedHours}</p>
+					<p className="my-0 mx-0">Hours: {item.hours}</p>
+
+					<p className="my-0 mx-0 ">
+						Worked Hours:
+						<span className="text-primary"> {item.workedHours}</span>
+					</p>
+
 					<Progressbar workedHours={item.workedHours} totalHours={item.hours} />
-					<p className="my-0">Hours Left: {item.hoursLeft} </p>
-					Timespan:
-					<br />
+					<p className="my-0 mx-0 ">
+						Hours Left: <span className="text-info">{item.hoursLeft}</span>
+					</p>
+					<p className="my-0 mx-0">Timespan:</p>
+
 					<span className="show-timespan">
 						{item.timespan.start} - {item.timespan.end}
 					</span>
-				</Card.Text>
+				</div>
 				{userRole === "User" && (
 					<Button className="btn btn-primary m-2">Report Time</Button>
 				)}

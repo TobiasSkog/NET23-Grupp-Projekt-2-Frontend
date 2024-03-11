@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
-
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import axios from "axios";
@@ -116,13 +115,10 @@ const Project = () => {
 	};
 
 	const handleClick = (idNr, name) => {
-		//passing ProjectId & projectName to path:/timereport where we can use use id to fetch report
-		//and use name to display inside component
 		const project = {
 			name: name,
 			id: idNr,
 		};
-		//console.log(project.name, project.id);
 
 		navigate(`/timereports/project`, { state: project });
 	};
