@@ -1,6 +1,7 @@
 import React from "react";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
+import Progressbar from "./Progressbar";
 
 export default function ProjectCard({
 	item,
@@ -18,10 +19,10 @@ export default function ProjectCard({
 					<strong className="badge" style={{ backgroundColor: item.color }}>
 						{item.status}
 					</strong>
-					<br />
-					Hours: {item.hours} <br />
-					Worked Hours: {item.workedHours} <br />
-					Hours Left: {item.hoursLeft} <br />
+					<p className="my-0">Hours: {item.hours} </p>
+					<p className="my-0">Worked Hours: {item.workedHours}</p>
+					<Progressbar workedHours={item.workedHours} totalHours={item.hours} />
+					<p className="my-0">Hours Left: {item.hoursLeft} </p>
 					Timespan:
 					<br />
 					<span className="show-timespan">

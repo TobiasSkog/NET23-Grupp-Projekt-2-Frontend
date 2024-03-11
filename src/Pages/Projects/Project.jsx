@@ -67,7 +67,7 @@ const Project = () => {
 					a.status.localeCompare(b.status)
 				);
 				setProject(sorted);
-				console.log(sorted);
+				//console.log(sorted);
 			} catch (error) {
 				console.error("There was a problem with the fetch operation:", error);
 			} finally {
@@ -155,13 +155,13 @@ const Project = () => {
 				)}
 
 				<Row>
-					{filteredProjects.map((item) =>
-						item.status === "Active" ? (
-							<Col
-								key={item.id}
-								className="show-col mx-2 mb-2 mx-auto"
-								sm={6}
-								lg={3}>
+					{filteredProjects.map((item, index) => (
+						<React.Fragment key={item.id}>
+							{index !== 0 &&
+								item.status !== filteredProjects[index - 1].status && (
+									<hr className="border border-primary border-3 opacity-75"></hr>
+								)}
+							<Col className="show-col mx-2 mb-2 mx-auto" sm={6} lg={3}>
 								<ProjectCard
 									item={item}
 									handleClick={handleClick}
@@ -170,25 +170,8 @@ const Project = () => {
 									setProjectId={setProjectId}
 								/>
 							</Col>
-						) : (
-							<React.Fragment key={item.id + "-inactive"}>
-								<hr className="border border-primary border-3 opacity-75"></hr>
-								<Col
-									key={item.id}
-									className="show-col mx-2 mb-2 mx-auto"
-									sm={6}
-									lg={3}>
-									<ProjectCard
-										item={item}
-										handleClick={handleClick}
-										handleEdit={handleEdit}
-										userRole={userRole}
-										setProjectId={setProjectId}
-									/>
-								</Col>
-							</React.Fragment>
-						)
-					)}
+						</React.Fragment>
+					))}
 				</Row>
 
 				<div className="mb-4">
