@@ -87,12 +87,12 @@ export default function TimereportUser({ person }) {
 					<h4 className="mt-3">Loading...</h4>
 				</>
 			)}
-			<Container className="d-flex mb-3 ">
+			<Container className="d-md-flex mb-3">
 				<SearchDate
 					setTimeReports={setTimeReports}
 					originalTimeReports={originalTimeReports}
 				/>
-				<div className="mt-2 mb-3 w-50">
+				<div className="mt-2 mb-3 col-md-5 col-lg-6">
 					<h2 className="text-center mb-5">Timereports - {name}</h2>
 				</div>
 			</Container>

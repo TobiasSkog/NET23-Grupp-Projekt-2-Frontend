@@ -32,11 +32,11 @@ export default function SearchDate({ setTimeReports, originalTimeReports }) {
 	};
 
 	return (
-		<Container className="mt-2 mb-3 bg-white rounded shadow w-50">
+		<Container className="mt-2 mb-3 bg-white rounded shadow col-md-7 col-lg-6">
 			<Container>
 				<Form.Text className="fw-semibold">Enter searchdate</Form.Text>
 			</Container>
-			<Container className="mt-2 d-flex justify-content-start">
+			<Container className="mt-2 d-md-flex justify-content-start">
 				<Form.Control
 					className="mb-3 me-2"
 					type="date"

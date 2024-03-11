@@ -152,66 +152,64 @@ const Project = () => {
 						<h4 className="mt-2">Loading...</h4>
 					</>
 				)}
-				<div className="row justify-content-center">
-					<Row>
-						{filteredProjects.map((item) => (
-							<Col
-								key={item.id}
-								className="show-col mx-2 mb-2 mx-auto"
-								sm={6}
-								lg={3}>
-								<Card bg="dark" text="light" className="show-card">
-									<Card.Img
-										variant="top"
-										src={item.image}
-										style={{ height: "142px" }}
-									/>
-									<Card.Body>
-										<Card.Title>{item.name}</Card.Title>
-										<Card.Text>
-											<strong
-												className="badge"
-												style={{ backgroundColor: item.color }}>
-												{item.status}
-											</strong>
-											<br />
-											Hours: {item.hours} <br />
-											Worked Hours: {item.workedHours} <br />
-											Hours Left: {item.hoursLeft} <br />
-											Timespan:
-											<br />
-											<span className="show-timespan">
-												{item.timespan.start} - {item.timespan.end}
-											</span>
-										</Card.Text>
-										{userRole === "User" && (
-											<Button className="btn btn-primary m-2">
-												Report Time
+
+				<Row>
+					{filteredProjects.map((item) => (
+						<Col
+							key={item.id}
+							className="show-col mx-2 mb-2 mx-auto"
+							sm={6}
+							lg={3}>
+							<Card bg="dark" text="light" className="show-card">
+								<Card.Img
+									variant="top"
+									src={item.image}
+									style={{ height: "142px" }}
+								/>
+								<Card.Body>
+									<Card.Title>{item.name}</Card.Title>
+									<Card.Text>
+										<strong
+											className="badge"
+											style={{ backgroundColor: item.color }}>
+											{item.status}
+										</strong>
+										<br />
+										Hours: {item.hours} <br />
+										Worked Hours: {item.workedHours} <br />
+										Hours Left: {item.hoursLeft} <br />
+										Timespan:
+										<br />
+										<span className="show-timespan">
+											{item.timespan.start} - {item.timespan.end}
+										</span>
+									</Card.Text>
+									{userRole === "User" && (
+										<Button className="btn btn-primary m-2">Report Time</Button>
+									)}
+
+									{userRole === "Admin" && (
+										<>
+											<Button onClick={() => handleClick(item.id, item.name)}>
+												See Timereports
 											</Button>
-										)}
 
-										{userRole === "Admin" && (
-											<>
-												<Button onClick={() => handleClick(item.id, item.name)}>
-													See Timereports
-												</Button>
+											<Button
+												className="btn btn-danger m-2"
+												onClick={() => {
+													handleEdit(item.id);
+													setProjectId(item.id);
+												}}>
+												Edit
+											</Button>
+										</>
+									)}
+								</Card.Body>
+							</Card>
+						</Col>
+					))}
+				</Row>
 
-												<Button
-													className="btn btn-danger m-2"
-													onClick={() => {
-														handleEdit(item.id);
-														setProjectId(item.id);
-													}}>
-													Edit
-												</Button>
-											</>
-										)}
-									</Card.Body>
-								</Card>
-							</Col>
-						))}
-					</Row>
-				</div>
 				<div className="mb-4">
 					{userRole === "Admin" && (
 						<Button
