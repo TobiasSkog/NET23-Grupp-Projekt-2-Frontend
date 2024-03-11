@@ -113,6 +113,7 @@ export default function Timereport({ proj }) {
 							<th>Hours</th>
 							<th>Project</th>
 							<th>Note</th>
+							<th></th>
 						</tr>
 					</thead>
 					<tbody>
@@ -128,6 +129,9 @@ export default function Timereport({ proj }) {
 								<td>{item.hours}</td>
 								<td>{projectName}</td>
 								<td>{item.note}</td>
+								<td>
+									<button className="btn btn-danger btn-sm">Edit</button>
+								</td>
 							</tr>
 						))}
 					</tbody>
@@ -141,6 +145,7 @@ export default function Timereport({ proj }) {
 							<td className="text-center">
 								<strong>{totalHours}</strong>
 							</td>
+							<td></td>
 							<td></td>
 							<td></td>
 						</tr>
