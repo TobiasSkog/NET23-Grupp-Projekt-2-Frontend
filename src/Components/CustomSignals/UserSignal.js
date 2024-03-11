@@ -1,4 +1,4 @@
-import { effect, signal } from "@preact/signals";
+import { signal } from "@preact/signals";
 import Cookies from "js-cookie";
 import { InXMinutes, InXDays } from "../CustomCookieMethods/CookieMethods";
 import { successfulLogin } from "./SuccessfulLogin";

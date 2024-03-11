@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Route, Routes, useNavigate } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Home from "./Pages/Home/Home";
 import User from "./Pages/User/User";
 import LoginOAuth from "./Components/LoginModal/Login/LoginOAuth";
@@ -7,7 +7,6 @@ import Project from "./Pages/Projects/Project";
 import { userSignal, userLoggedIn, userLoggedOut } from "./Components/CustomSignals/UserSignal";
 
 export default function App() {
-
 	return (
 		<Router>
 			<header>
