@@ -1,12 +1,8 @@
 import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
-import { useEffect, useState, useContext } from "react";
-import Cookies from "js-cookie";
-import { AuthContext } from "../../UserContext/Contexts";
+import { useEffect, useState } from "react";
 
-export default function LoginOAuth() {
-	const { user, setUser } = useContext(AuthContext);
-
+export default function LoginOAuth({ userLoggedIn }) {
 	const [isLoading, setIsLoading] = useState(false);
 	const location = useLocation();
 	const { search } = location;
@@ -41,12 +37,8 @@ export default function LoginOAuth() {
 					userRole: databaseUserData.data.userRole,
 				};
 				//target:	databaseUserData.data.userRole === "Admin" ? "/admin"	: databaseUserData.data.userRole === "User"	? "/user"	: "/",
-				const amountOfMinutes = 15;
-				const expirationTime = new Date(new Date().getTime() + amountOfMinutes * 60 * 1000);
-				Cookies.set("auth", JSON.stringify(userData), {
-					expires: expirationTime,
-				});
-				setUser(userData);
+
+				userLoggedIn(userData);
 				navigate("/projects");
 			} catch (error) {
 				console.error("Unexpected error during authentication:", error);

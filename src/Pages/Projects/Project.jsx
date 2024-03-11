@@ -1,5 +1,5 @@
-import React, { useEffect, useState, useContext } from "react";
-import { UserContext } from "../../Components/UserContext/UserContext";
+import React, { useEffect, useState } from "react";
+
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
@@ -8,11 +8,8 @@ import axios from "axios";
 import FormModal from "./FormModal";
 import Spinner from "react-bootstrap/Spinner";
 import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../../Components/UserContext/Contexts";
-import Cookies from "js-cookie";
 
-const Project = () => {
-	//const { user, setUser } = useContext(AuthContext);
+const Project = ({ userSignal }) => {
 	const [project, setProject] = useState([]);
 	const [showAllProjects, setShowAllProjects] = useState(false);
 	const [modalOpen, setModalOpen] = useState(false);
@@ -30,11 +27,6 @@ const Project = () => {
 	});
 	const navigate = useNavigate();
 	//console.log(user);
-	const isAuthenticated = !!Cookies.get("auth");
-	let user = null;
-	if (isAuthenticated) {
-		user = JSON.parse(Cookies.get("auth"));
-	}
 
 	//const userRole = user.userRole; //Temporary!!!!
 	//console.log(userRole);
@@ -66,6 +58,11 @@ const Project = () => {
 		fetchData();
 	}, []);
 
+	const user = userSignal.value;
+	if (!user) {
+		navigate("/");
+		return null;
+	}
 	const updateProjects = async () => {
 		try {
 			setLoading(true);

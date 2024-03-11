@@ -1,15 +1,12 @@
-import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 
-export default function User({ ...rest }) {
-	const isAuthenticated = !!Cookies.get("auth");
+export default function User({ userSignal, ...rest }) {
 	const navigate = useNavigate();
-	if (!isAuthenticated) {
+	const user = userSignal.value;
+	if (!user) {
 		navigate("/");
 		return null;
 	}
-	let userJson = Cookies.get("auth");
-	let user = JSON.parse(userJson);
 	return (
 		<div>
 			<h1>User</h1>

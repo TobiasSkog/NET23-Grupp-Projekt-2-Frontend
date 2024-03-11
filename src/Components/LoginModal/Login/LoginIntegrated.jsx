@@ -1,14 +1,9 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Cookies from "js-cookie";
 import axios from "axios";
 import { Button, Form } from "react-bootstrap";
-import { UserContext } from "../../UserContext/UserContext";
-import { useContext } from "react";
-import { AuthContext } from "../../UserContext/Contexts";
 
-export default function LoginIntegrated() {
-	const { user, setUser } = useContext(AuthContext);
+export default function LoginIntegrated({ userLoggedIn }) {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const navigate = useNavigate();
@@ -27,12 +22,8 @@ export default function LoginIntegrated() {
 			userRole: databaseUserData.data.userRole,
 		};
 		//target:	databaseUserData.data.userRole === "Admin" ? "/admin"	: databaseUserData.data.userRole === "User"	? "/user"	: "/",
-		const amountOfMinutes = 15;
-		const expirationTime = new Date(new Date().getTime() + amountOfMinutes * 60 * 1000);
-		Cookies.set("auth", JSON.stringify(userData), {
-			expires: expirationTime,
-		});
-		setUser(userData);
+
+		userLoggedIn(userData);
 		navigate("/projects");
 	};
 

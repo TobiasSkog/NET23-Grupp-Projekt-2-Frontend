@@ -1,22 +1,19 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import Logo from "../../Assets/img/coffe and insomnia logo.png";
 import LoginModal from "../../Components/LoginModal/LoginModal";
 import { Container, Row, Col, Button } from "react-bootstrap";
 
-import { UserContext } from "../../Components/UserContext/UserContext";
 import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../../Components/UserContext/Contexts";
 
-export default function Home() {
+export default function Home({ userSignal, userLoggedIn }) {
 	const [showLogin, setShowLogin] = useState(false);
 	const handleShowLogin = () => setShowLogin(true);
 	const handleCloseLogin = () => setShowLogin(false);
 	const navigate = useNavigate();
-	const { user, setUser } = useContext(AuthContext);
-
+	const user = userSignal.value;
 	if (user) {
 		navigate("/projects");
-		return <>null</>;
+		return null;
 	}
 
 	return (
@@ -61,7 +58,7 @@ export default function Home() {
 			</Container>
 
 			{/* Login Modal */}
-			<LoginModal show={showLogin} handleClose={handleCloseLogin} />
+			<LoginModal show={showLogin} handleClose={handleCloseLogin} userLoggedIn={userLoggedIn} />
 		</>
 	);
 }
