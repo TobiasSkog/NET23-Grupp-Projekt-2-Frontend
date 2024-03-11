@@ -19,6 +19,7 @@ export default function Timereport({ proj }) {
 		date: "",
 		hours: "",
 		note: "",
+		project: "",
 	});
 
 	const location = useLocation();
@@ -59,6 +60,7 @@ export default function Timereport({ proj }) {
 			date: "",
 			hours: "",
 			note: "",
+			project: "",
 		});
 	};
 
@@ -124,7 +126,7 @@ export default function Timereport({ proj }) {
 				date: timereportToEdit.date,
 				hours: timereportToEdit.hours,
 				note: timereportToEdit.note,
-				project: projectName,
+				project: "",
 			});
 		}
 		openModal();
@@ -142,12 +144,11 @@ export default function Timereport({ proj }) {
 					modalOpen={modalOpen}
 					updateTimereports={updateTimereports}
 					setLoading={setLoading}
-					projectName={projectName}
 				/>
 			)}
 			{loading && (
 				<>
-					<Spinner animation="border" variant="primary" />{" "}
+					<Spinner animation="border" variant="primary" />
 					<h4 className="mt-3">Loading...</h4>
 				</>
 			)}

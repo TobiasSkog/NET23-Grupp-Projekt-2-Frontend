@@ -3,6 +3,7 @@ import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
 import axios from "axios";
 import Modal from "react-bootstrap/esm/Modal";
+import { useEffect, useState } from "react";
 
 export default function EditReportModal({
 	formInput,
@@ -11,8 +12,28 @@ export default function EditReportModal({
 	modalOpen,
 	updateTimereports,
 	setLoading,
-	timereportName,
 }) {
+	const [project, setProject] = useState([]);
+
+	useEffect(() => {
+		const fetchProjects = async () => {
+			try {
+				setLoading(true);
+				const response = await axios.get(
+					"http://localhost:3001/databases/projects"
+				);
+
+				setProject(response.data);
+			} catch (error) {
+				console.log(error);
+			} finally {
+				setLoading(false);
+			}
+		};
+
+		fetchProjects();
+	}, []);
+
 	const handleInputChange = (event) => {
 		const { name, value } = event.target;
 		setFormInput({
@@ -21,31 +42,41 @@ export default function EditReportModal({
 		});
 	};
 
+	const handleSelectChange = (event) => {
+		const selectedProject = project.find((p) => p.id === event.target.value);
+
+		//console.log(selectedProject.id);
+		setFormInput({
+			...formInput,
+			project: selectedProject.id,
+		});
+	};
+
 	const handleSubmit = async (event) => {
 		event.preventDefault();
 		try {
 			formInput.hours = parseInt(formInput.hours);
 			setLoading(true);
-			let response;
 			const timereportId = formInput.id;
-			console.log(timereportId);
-			response = await axios.patch(
+
+			const response = await axios.patch(
 				`http://localhost:3001/pages/timeReports/${timereportId}`,
 				formInput
 			);
 			console.log("Project updated successfully:", response.data);
 
 			updateTimereports();
-
+			console.log("print inside handlesubmit + forminput", formInput);
 			setFormInput({
 				date: "",
 				hours: "",
 				note: "",
+				project: "",
 			});
 
 			closeModal();
 		} catch (error) {
-			console.log(error);
+			console.log("There was a problem with the fetch operation: ", error);
 		} finally {
 			setLoading(false);
 		}
@@ -86,20 +117,23 @@ export default function EditReportModal({
 								onChange={handleInputChange}
 							/>
 						</Form.Group>
-						{/* <Form.Group>
-							<Form.Label htmlFor="project" className="text-light">
-								Project
-							</Form.Label>
-							<Form.Control
-								type="text"
-								id="project"
-								placeholder="Project"
-								className="mb-3 fw-semibold"
-								name="project"
-								value={formInput.project}
-								onChange={handleInputChange}
-							/>
-						</Form.Group> */}
+						<label htmlFor="project" className="me-2 mb-2 text-white">
+							Select Project
+						</label>
+						<select
+							className="mb-2"
+							type="text"
+							id="project"
+							required
+							onChange={(e) => handleSelectChange(e)}>
+							<option value="">--Select Project--</option>;
+							{project.map((project) => (
+								<option key={project.id} value={project.id}>
+									{project.name}
+								</option>
+							))}
+							;
+						</select>
 
 						<Form.Group>
 							<Form.Label htmlFor="note" className="text-light">
