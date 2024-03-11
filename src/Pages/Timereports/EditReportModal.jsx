@@ -15,6 +15,7 @@ export default function EditReportModal({
 }) {
 	const [project, setProject] = useState([]);
 
+	//Edit timereports component, we fetch projects and show them in selectbox
 	useEffect(() => {
 		const fetchProjects = async () => {
 			try {
@@ -42,6 +43,7 @@ export default function EditReportModal({
 		});
 	};
 
+	//Here we get projectId if we want to edit and change project in the report
 	const handleSelectChange = (event) => {
 		const selectedProject = project.find((p) => p.id === event.target.value);
 
@@ -58,6 +60,7 @@ export default function EditReportModal({
 			formInput.hours = parseInt(formInput.hours);
 			setLoading(true);
 
+			//date and project cant be empty so alert user if empty
 			if (!formInput.project.trim()) {
 				alert("Project is required.");
 				return;

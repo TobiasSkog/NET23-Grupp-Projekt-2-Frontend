@@ -9,6 +9,7 @@ export default function Menu({
 	setShowMenu,
 	setShowProject,
 }) {
+	//Menu component when clicking Timereports in navbar
 	const [selectedOption, setSelectedOption] = useState(null);
 
 	const handleButtonClick = () => {

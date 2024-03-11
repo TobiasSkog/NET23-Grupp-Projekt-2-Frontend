@@ -14,6 +14,7 @@ export default function TimereportMain() {
 	const [projectOption, setProjectOption] = useState(null);
 	const [peopleOption, setPeopleOption] = useState(null);
 
+	//When clicking Timereports in navbar we fetch all projects and all people to fill up the select menu
 	useEffect(() => {
 		const fetch = async () => {
 			try {

@@ -33,11 +33,12 @@ export default function Timereport({ proj }) {
 		const fetchData = async () => {
 			try {
 				setLoading(true);
-
+				//get timereports by filtering on projectId
 				const response = await axios.get(
 					`http://localhost:3001/databases/timereports/filter/project?property=Project&id=${projectId}`
 				);
 
+				//save response 2 times, one will be manipulated in filtering, and one to always have all data
 				setTimeReports(response.data);
 				setOriginalTimeReports(response.data);
 				//console.log(response.data);
@@ -56,14 +57,9 @@ export default function Timereport({ proj }) {
 
 	const closeModal = () => {
 		setModalOpen(false);
-		setFormInput({
-			date: "",
-			hours: "",
-			note: "",
-			project: "",
-		});
 	};
 
+	//After editing we update
 	const updateTimereports = async () => {
 		try {
 			setLoading(true);
@@ -94,6 +90,7 @@ export default function Timereport({ proj }) {
 		setSortOrder(sortOrder === "ascending" ? "descending" : "ascending"); // Toggle sort order
 	};
 
+	//sorting by people/person
 	const handleSortByName = () => {
 		const sortedReports = [...timeReports];
 		sortedReports.sort((a, b) => {
@@ -107,6 +104,7 @@ export default function Timereport({ proj }) {
 		setSortOrder(sortOrder === "ascending" ? "descending" : "ascending");
 	};
 
+	//when we click on a person in the table we pass the name and id to next component
 	const handleNameClick = (id, name) => {
 		const person = {
 			id: id,
@@ -116,6 +114,7 @@ export default function Timereport({ proj }) {
 		navigate("/timereports/user", { state: person });
 	};
 
+	//in edit we find the right timereportId
 	const handleEdit = (timereportId) => {
 		const timereportToEdit = originalTimeReports.find(
 			(item) => item.id === timereportId

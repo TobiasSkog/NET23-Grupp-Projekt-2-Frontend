@@ -54,6 +54,7 @@ export default function TimereportUser({ person }) {
 		setSortOrder(sortOrder === "ascending" ? "descending" : "ascending"); // Toggle sort order
 	};
 
+	//alphabeticly sorting by projectname
 	const handleSortByProject = () => {
 		const sortedReports = [...timeReports];
 		sortedReports.sort((a, b) => {
@@ -67,6 +68,7 @@ export default function TimereportUser({ person }) {
 		setSortOrder(sortOrder === "ascending" ? "descending" : "ascending");
 	};
 
+	//passing projectId and projectName to next component
 	const handleNameClick = (id, name) => {
 		const project = {
 			id: id,

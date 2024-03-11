@@ -3,6 +3,7 @@ import Container from "react-bootstrap/esm/Container";
 import Button from "react-bootstrap/Button";
 
 export default function Sorting({ originalTimeReports, setTimeReports }) {
+	//This component is used to filter timereports by last 7days, 30days & show all
 	const handleClick7days = () => {
 		const sevenDaysAgo = new Date();
 		sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);

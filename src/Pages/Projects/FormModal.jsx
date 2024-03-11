@@ -21,6 +21,7 @@ export default function FormModal({
 			setLoading(true);
 			let response;
 
+			//validation for Edit and create new projects
 			if (!formInput.image.trim()) {
 				alert("Image URL is required.");
 				return;
