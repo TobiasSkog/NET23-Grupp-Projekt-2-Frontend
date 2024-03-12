@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
@@ -12,8 +12,28 @@ export default function EditReportModal({
 	modalOpen,
 	updateTimereports,
 	setLoading,
-	timereportName,
 }) {
+	const [project, setProject] = useState([]);
+
+	useEffect(() => {
+		const fetchProjects = async () => {
+			try {
+				setLoading(true);
+				const response = await axios.get(
+					"http://localhost:3001/databases/projects"
+				);
+
+				setProject(response.data);
+			} catch (error) {
+				console.log(error);
+			} finally {
+				setLoading(false);
+			}
+		};
+
+		fetchProjects();
+	}, []);
+
 	const handleInputChange = (event) => {
 		const { name, value } = event.target;
 		setFormInput({
@@ -22,15 +42,31 @@ export default function EditReportModal({
 		});
 	};
 
+	const handleSelectChange = (event) => {
+		const selectedProject = project.find((p) => p.id === event.target.value);
+
+		//console.log(selectedProject.id);
+		setFormInput({
+			...formInput,
+			project: selectedProject.id,
+		});
+	};
+
 	const handleSubmit = async (event) => {
 		event.preventDefault();
 		try {
 			formInput.hours = parseInt(formInput.hours);
 			setLoading(true);
-			let response;
+			if (!formInput.project.trim()) {
+				alert("Project is required.");
+				return;
+			} else if (!formInput.date.trim()) {
+				alert("Date is required.");
+				return;
+			}
 			const timereportId = formInput.id;
-			console.log(timereportId);
-			response = await axios.patch(
+			//console.log(timereportId);
+			const response = await axios.patch(
 				`http://localhost:3001/pages/timeReports/admin/${timereportId}`,
 				formInput
 			);
@@ -42,6 +78,7 @@ export default function EditReportModal({
 				date: "",
 				hours: "",
 				note: "",
+				project: "",
 			});
 
 			closeModal();
@@ -88,6 +125,20 @@ export default function EditReportModal({
 							/>
 						</Form.Group>
 
+						<Form.Select
+							className="mb-3 fw-semibold"
+							name="project"
+							id="project"
+							aria-label="project"
+							required
+							onChange={(e) => handleSelectChange(e)}>
+							<option value="">--Select Project--</option>;
+							{project.map((project) => (
+								<option key={project.id} value={project.id}>
+									{project.name}
+								</option>
+							))}
+						</Form.Select>
 						<Form.Group>
 							<Form.Label htmlFor="note" className="text-light">
 								Note
