@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Home from "./Pages/Home/Home";
 import User from "./Pages/User/User";
-import TimeReports from "./Pages/TimeReports/TimeReports";
+import TimeReports from "./Pages/Timereports/TimeReports";
 import LoginOAuth from "./Components/LoginModal/Login/LoginOAuth";
 import Navigation from "./Components/Navigation/Navigation";
 import Project from "./Pages/Projects/Project";
@@ -45,7 +45,7 @@ export default function App() {
 					/>
 					<Route
 						path="/timereports/user"
-						element={<Timereports userSignal={userSignal} />}
+						element={<TimeReports userSignal={userSignal} />}
 					/>
 					<Route
 						path="/timereports/project"
