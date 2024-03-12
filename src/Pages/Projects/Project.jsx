@@ -129,7 +129,7 @@ const Project = ({ userSignal }) => {
 			id: idNr,
 		};
 
-		navigate(`/timereports/admin`, { state: project });
+		navigate(`/timereports/project`, { state: project });
 	};
 
 	const filteredProjects = showAllProjects

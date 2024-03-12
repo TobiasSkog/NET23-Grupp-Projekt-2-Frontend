@@ -34,6 +34,7 @@ export default function Timereport({ proj }) {
 			try {
 				setLoading(true);
 				//get timereports by filtering on projectId
+
 				const response = await axios.get(
 					`http://localhost:3001/databases/timereports/filter/project?property=Project&id=${projectId}`
 				);
