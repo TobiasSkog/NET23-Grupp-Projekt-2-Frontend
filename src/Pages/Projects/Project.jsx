@@ -106,7 +106,7 @@ const Project = () => {
 		};
 		console.log(project.name, project.id);
 
-		navigate(`/timereport`, { state: project });
+		navigate(`/timereports`, { state: project });
 	};
 
 	const filteredProjects = showAllProjects
