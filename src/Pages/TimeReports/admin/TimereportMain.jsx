@@ -5,7 +5,7 @@ import Menu from "./Menu";
 import TimeReportUser from "./TimereportUser";
 import Spinner from "react-bootstrap/esm/Spinner";
 
-export default function TimereportMain() {
+export default function TimereportMain({ userSignal }) {
 	const [loading, setLoading] = useState(false);
 	const [project, setProject] = useState([]);
 	const [people, setPeople] = useState([]);
@@ -19,13 +19,9 @@ export default function TimereportMain() {
 		const fetch = async () => {
 			try {
 				setLoading(true);
-				const projectResponse = await axios.get(
-					"http://localhost:3001/databases/projects"
-				);
+				const projectResponse = await axios.get("http://localhost:3001/databases/projects");
 
-				const peopleResponse = await axios.get(
-					"http://localhost:3001/databases/people"
-				);
+				const peopleResponse = await axios.get("http://localhost:3001/databases/people");
 
 				setPeople(peopleResponse.data);
 				setProject(projectResponse.data);

@@ -1,0 +1,26 @@
+// custom variables need to happend BEFORE importing bootstrap
+$primary: #a5b1c2;
+$light: #d1d8e0;
+$dark: #778ca3;
+
+$altprimary: #9c29a8;
+$altlight: #c300ff;
+$altdark: #6700f6;
+
+@import "~bootstrap/scss/_functions";
+@import "~bootstrap/scss/_variables";
+@import "~bootstrap/scss/_mixins";
+
+$custom-theme-colors: (
+	"primary": $primary,
+	"light": $light,
+	"dark": $dark,
+	"altprimary": $altprimary,
+	"altlight": $altlight,
+	"altdark": $altdark,
+);
+
+$theme-colors: map-merge($custom-theme-colors, $theme-colors);
+
+// import bootstrap LAST OF ALL!
+@import "~bootstrap/scss/bootstrap.scss";
