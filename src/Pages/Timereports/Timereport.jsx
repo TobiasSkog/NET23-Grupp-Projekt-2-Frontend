@@ -6,7 +6,7 @@ import Table from "react-bootstrap/Table";
 import Container from "react-bootstrap/esm/Container";
 import Sorting from "./Sorting";
 import SearchDate from "./SearchDate";
-import EditReportModal from "./EditReportModal";
+import EditAdminReportModal from "./EditReportModal";
 
 export default function Timereport({ proj }) {
 	const [loading, setLoading] = useState(false);
@@ -136,7 +136,7 @@ export default function Timereport({ proj }) {
 	return (
 		<section>
 			{modalOpen && (
-				<EditReportModal
+				<EditAdminReportModal
 					formInput={formInput}
 					setFormInput={setFormInput}
 					closeModal={closeModal}
