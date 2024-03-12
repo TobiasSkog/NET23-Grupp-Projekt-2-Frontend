@@ -120,7 +120,7 @@ const Project = () => {
 			id: idNr,
 		};
 
-		navigate(`/timereports/project`, { state: project });
+		navigate(`/timereports/user`, { state: project });
 	};
 
 	const filteredProjects = showAllProjects
