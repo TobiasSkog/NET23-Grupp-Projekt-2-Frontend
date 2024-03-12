@@ -111,7 +111,7 @@ export default function Timereport({ proj }) {
 			name: name,
 		};
 		console.log(person);
-		navigate("/timereports/user", { state: person });
+		navigate("/timereports/admin", { state: person });
 	};
 
 	//in edit we find the right timereportId

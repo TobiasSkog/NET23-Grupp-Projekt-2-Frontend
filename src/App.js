@@ -25,7 +25,7 @@ export default function App() {
 					<Route path="/user" element={<User />} />
 					<Route path="/admin" element={<Admin />} />
 					<Route path="/timereports" element={<TimereportMain />} />
-					<Route path="/timereports/user" element={<TimereportUser />} />
+					<Route path="/timereports/admin" element={<TimereportUser />} />
 					<Route path="/timereports/project" element={<Timereport />} />
 					<Route path="/projects" element={<Project />} />
 				</Routes>
