@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
+import Container from "react-bootstrap/esm/Container";
 
 export default function Menu({
 	project,
@@ -21,17 +23,16 @@ export default function Menu({
 	};
 
 	return (
-		<section className="mt-5">
-			<div className=" container p-3">
-				<form className="form p-2 shadow w-25 rounded bg-dark">
-					<label htmlFor="project" className="me-2 mb-2 text-white">
-						Select Project
-					</label>
-					<select
-						className="mb-2"
-						type="text"
+		<Container className="p-3 mt-5">
+			<Form className="p-2 shadow w-25 rounded bg-dark">
+				<Form.Group>
+					<Form.Select
+						className="mb-2 fw-semibold"
+						name="project"
 						id="project"
+						aria-label="project"
 						required
+						disabled={selectedOption === "person"}
 						onChange={(e) => {
 							const selectedProject = project.find(
 								(p) => p.id === e.target.value
@@ -39,25 +40,24 @@ export default function Menu({
 							setProjectOption(selectedProject);
 							setSelectedOption("project");
 							setShowProject(true);
-						}}
-						disabled={selectedOption === "person"}>
-						<option value="">--Select Project--</option>;
+						}}>
+						<option value="">--Select Project--</option>
 						{project.map((project) => (
 							<option key={project.id} value={project.id}>
 								{project.name}
 							</option>
 						))}
-						;
-					</select>
-					<br></br>
-					<p className="text-white text-center">------or------</p>
-					<label htmlFor="person" className="me-2 mb-2 text-white">
-						Select person
-					</label>
-					<select
-						className="mb-2"
-						type="text"
+					</Form.Select>
+
+					<Form.Text className="text-white ms-2">---OR---</Form.Text>
+
+					<Form.Select
+						className="mb-3 mt-2 fw-semibold"
+						name="person"
 						id="person"
+						aria-label="person"
+						required
+						disabled={selectedOption === "project"}
 						onChange={(e) => {
 							const selectedPerson = people.find(
 								(p) => p.id === e.target.value
@@ -65,24 +65,23 @@ export default function Menu({
 							setPeopleOption(selectedPerson);
 							setSelectedOption("person");
 							setShowProject(false);
-						}}
-						disabled={selectedOption === "project"}>
+						}}>
 						<option value="">--Select Person--</option>
 						{people.map((person) => (
 							<option key={person.id} value={person.id}>
 								{person.name}
 							</option>
 						))}
-					</select>
-					<Button
-						type="button"
-						variant="primary"
-						className="w-100"
-						onClick={handleButtonClick}>
-						View Report
-					</Button>
-				</form>
-			</div>
-		</section>
+					</Form.Select>
+				</Form.Group>
+				<Button
+					type="button"
+					variant="primary"
+					className="w-100"
+					onClick={handleButtonClick}>
+					View Report
+				</Button>
+			</Form>
+		</Container>
 	);
 }

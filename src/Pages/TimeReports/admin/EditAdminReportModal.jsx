@@ -57,6 +57,8 @@ export default function EditReportModal({
 		try {
 			formInput.hours = parseInt(formInput.hours);
 			setLoading(true);
+
+			//validation
 			if (!formInput.project.trim()) {
 				alert("Project is required.");
 				return;

@@ -56,15 +56,6 @@ export default function FormModal({
 
 			updateProjects();
 
-			setFormInput({
-				name: "",
-				status: "",
-				color: "",
-				hours: "",
-				startDate: "",
-				endDate: "",
-				image: "",
-			});
 			closeModal();
 			setEdit(false);
 		} catch (error) {
@@ -140,7 +131,7 @@ export default function FormModal({
 						</Form.Group>
 						<img
 							src={formInput.image}
-							alt=""
+							alt="Preview of image"
 							className="mt-2 mb-2"
 							style={{ width: 150 }}
 						/>

@@ -25,7 +25,36 @@ const Project = ({ userSignal }) => {
 		image: "",
 	});
 
+	useEffect(() => {
+		const fetchData = async () => {
+			try {
+				setLoading(true);
+				const response = await axios.get(
+					"http://localhost:3001/databases/projects"
+				);
+
+				// sort so Active will always display first
+				const sorted = response.data.sort((a, b) =>
+					a.status.localeCompare(b.status)
+				);
+				setProject(sorted);
+				//console.log(sorted);
+			} catch (error) {
+				console.error("There was a problem with the fetch operation:", error);
+			} finally {
+				setLoading(false);
+			}
+		};
+		fetchData();
+	}, []);
+
 	const navigate = useNavigate();
+
+	const user = userSignal.value;
+	if (!user) {
+		navigate("/");
+		return null;
+	}
 
 	const openModal = () => {
 		setModalOpen(true);
@@ -44,39 +73,18 @@ const Project = ({ userSignal }) => {
 		});
 	};
 
-	useEffect(() => {
-		const fetchData = async () => {
-			try {
-				setLoading(true);
-				const response = await axios.get("http://localhost:3001/databases/projects");
-
-				// sort so Active will always display first
-				const sorted = response.data.sort((a, b) => a.status.localeCompare(b.status));
-				setProject(sorted);
-				//console.log(sorted);
-			} catch (error) {
-				console.error("There was a problem with the fetch operation:", error);
-			} finally {
-				setLoading(false);
-			}
-		};
-		fetchData();
-	}, []);
-
-	const user = userSignal.value;
-	if (!user) {
-		navigate("/");
-		return null;
-	}
-
 	const updateProjects = async () => {
 		try {
 			setLoading(true);
 
-			const response = await axios.get("http://localhost:3001/databases/projects");
+			const response = await axios.get(
+				"http://localhost:3001/databases/projects"
+			);
 
 			// sort so Active will always display first
-			const sorted = response.data.sort((a, b) => a.status.localeCompare(b.status));
+			const sorted = response.data.sort((a, b) =>
+				a.status.localeCompare(b.status)
+			);
 
 			setProject(sorted);
 		} catch (error) {
@@ -104,6 +112,7 @@ const Project = ({ userSignal }) => {
 		openModal();
 	};
 
+	//In usermode - when user clicks projectcard
 	const handleUserClick = (idNr, name) => {
 		const project = {
 			id: idNr,
@@ -112,6 +121,7 @@ const Project = ({ userSignal }) => {
 		navigate(`/timereports/user`, { state: project });
 	};
 
+	//in Adminmode when user clicks projectcard
 	const handleClick = (idNr, name) => {
 		const project = {
 			name: name,
@@ -121,7 +131,9 @@ const Project = ({ userSignal }) => {
 		navigate(`/timereports/project`, { state: project });
 	};
 
-	const filteredProjects = showAllProjects ? project : project.filter((project) => project.status === "Active");
+	const filteredProjects = showAllProjects
+		? project
+		: project.filter((project) => project.status === "Active");
 	return (
 		<>
 			{modalOpen && (
@@ -148,7 +160,10 @@ const Project = ({ userSignal }) => {
 				<Row>
 					{filteredProjects.map((item, index) => (
 						<React.Fragment key={item.id}>
-							{index !== 0 && item.status !== filteredProjects[index - 1].status && <hr className="border border-primary border-3 opacity-75"></hr>}
+							{index !== 0 &&
+								item.status !== filteredProjects[index - 1].status && (
+									<hr className="border border-primary border-3 opacity-75"></hr>
+								)}
 							<Col className="show-col mx-2 mb-2 mx-auto" sm={6} lg={3}>
 								<ProjectCard
 									item={item}
@@ -166,15 +181,21 @@ const Project = ({ userSignal }) => {
 			<div className="mb-4">
 				<div className="mb-4 mx-3">
 					{user.userRole === "Admin" && (
-						<Button variants="primary" className="mt-4 mx-3" onClick={openModal}>
+						<Button
+							variants="primary"
+							className="mt-4 mx-3"
+							onClick={openModal}>
 							<i className="bi bi-plus-circle me-2"></i>Add New Project
 						</Button>
 					)}
 
-					<Button variants="primary" className="mt-4 mx-4" onClick={() => setShowAllProjects(!showAllProjects)}>
+					<Button
+						variants="primary"
+						className="mt-4 mx-4"
+						onClick={() => setShowAllProjects(!showAllProjects)}>
 						{showAllProjects ? (
 							<>
-								<i className="bi bi-filter"></i> Active Projects
+								<i className="bi bi-filter"></i> Show Active Projects
 							</>
 						) : (
 							<>
