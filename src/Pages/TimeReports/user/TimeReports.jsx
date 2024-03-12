@@ -5,7 +5,7 @@ import Cookies from "js-cookie";
 import axios from "axios";
 import EditReportModal from "./EditReportModal";
 
-const TimeReports = () => {
+const TimeReports = ({ userSignal}) => {
 	const [showModal, setShowModal] = useState(false);
 	const [projects, setProjects] = useState([]);
 	const [reportData, setReportData] = useState({

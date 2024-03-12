@@ -8,7 +8,7 @@ import Sorting from "./Sorting";
 import SearchDate from "./SearchDate";
 import EditAdminReportModal from "./EditAdminReportModal";
 
-export default function Timereport({ proj }) {
+export default function Timereport({ proj, userSignal }) {
 	const [loading, setLoading] = useState(false);
 	const [timeReports, setTimeReports] = useState([]);
 	const [originalTimeReports, setOriginalTimeReports] = useState([]);

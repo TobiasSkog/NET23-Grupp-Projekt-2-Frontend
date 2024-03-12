@@ -7,7 +7,7 @@ import axios from "axios";
 import Sorting from "./Sorting";
 import SearchDate from "./SearchDate";
 
-export default function TimereportUser({ person }) {
+export default function TimereportUser({ person, userSignal }) {
 	const [loading, setLoading] = useState(false);
 	const [timeReports, setTimeReports] = useState([]);
 	const [originalTimeReports, setOriginalTimeReports] = useState([]);

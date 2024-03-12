@@ -3,14 +3,7 @@ import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import Progressbar from "./Progressbar";
 
-export default function ProjectCard({
-	item,
-	handleEdit,
-	handleClick,
-	userRole,
-	setProjectId,
-	handleUserClick,
-}) {
+export default function ProjectCard({ item, handleEdit, handleClick, userRole, setProjectId, handleUserClick }) {
 	return (
 		<Card bg="dark" text="light" className="show-card">
 			<Card.Img variant="top" src={item.image} style={{ height: "142px" }} />
@@ -38,18 +31,14 @@ export default function ProjectCard({
 					</span>
 				</div>
 				{userRole === "User" && (
-					<Button
-						className="btn btn-primary m-2"
-						onClick={handleUserClick(item.id, item.name)}>
+					<Button className="btn btn-primary m-2" onClick={() => handleUserClick(item.id, item.name)}>
 						Report Time
 					</Button>
 				)}
 
 				{userRole === "Admin" && (
 					<>
-						<Button onClick={() => handleClick(item.id, item.name)}>
-							See Timereports
-						</Button>
+						<Button onClick={() => handleClick(item.id, item.name)}>See Timereports</Button>
 
 						<Button
 							className="btn btn-danger m-2"
