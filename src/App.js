@@ -33,8 +33,8 @@ export default function App() {
 						path="/login/auth"
 						element={<LoginOAuth userLoggedIn={userLoggedIn} />}
 					/>
-					<Route path="/user" element={<User />} />
-					<Route path="/admin" element={<Admin />} />
+					{/* <Route path="/user" element={<User />} />
+					<Route path="/admin" element={<Admin />} /> */}
 					<Route
 						path="/timereports"
 						element={<TimereportMain userSignal={userSignal} />}

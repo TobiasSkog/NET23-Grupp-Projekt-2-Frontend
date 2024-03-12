@@ -9,6 +9,7 @@ export default function ProjectCard({
 	handleClick,
 	userRole,
 	setProjectId,
+	handleUserClick,
 }) {
 	return (
 		<Card bg="dark" text="light" className="show-card">
@@ -37,7 +38,11 @@ export default function ProjectCard({
 					</span>
 				</div>
 				{userRole === "User" && (
-					<Button className="btn btn-primary m-2">Report Time</Button>
+					<Button
+						className="btn btn-primary m-2"
+						onClick={handleUserClick(item.id, item.name)}>
+						Report Time
+					</Button>
 				)}
 
 				{userRole === "Admin" && (

@@ -114,13 +114,22 @@ const Project = ({ userSignal }) => {
 		openModal();
 	};
 
+	const handleUserClick = (idNr, name) => {
+		const project = {
+			id: idNr,
+			name: name,
+		};
+
+		navigate("timereports/user", { state: project });
+	};
+
 	const handleClick = (idNr, name) => {
 		const project = {
 			name: name,
 			id: idNr,
 		};
 
-		navigate(`/timereports/user`, { state: project });
+		navigate(`/timereports/admin`, { state: project });
 	};
 
 	const filteredProjects = showAllProjects
@@ -163,6 +172,7 @@ const Project = ({ userSignal }) => {
 									handleEdit={handleEdit}
 									userRole={userRole}
 									setProjectId={setProjectId}
+									handleUserClick={handleUserClick}
 								/>
 							</Col>
 						</React.Fragment>
