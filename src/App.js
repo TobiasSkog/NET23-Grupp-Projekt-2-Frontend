@@ -23,40 +23,15 @@ export default function App() {
 			</header>
 			<main>
 				<Routes>
-					<Route
-						path="/"
-						element={
-							<Home userSignal={userSignal} userLoggedIn={userLoggedIn} />
-						}
-					/>
-					<Route
-						path="/login/auth"
-						element={<LoginOAuth userLoggedIn={userLoggedIn} />}
-					/>
+					<Route path="/" element={<Home userSignal={userSignal} userLoggedIn={userLoggedIn} />}/>
+					<Route path="/login/auth" element={<LoginOAuth userLoggedIn={userLoggedIn} />}/>
 					<Route path="/user" element={<User />} />
 					<Route path="/admin" element={<Admin />} />
-
-					<Route
-						path="/timereports"
-						element={<TimereportMain userSignal={userSignal} />}
-					/>
-					<Route
-						path="/timereports/admin"
-						element={<TimereportUser userSignal={userSignal} />}
-					/>
-          <Route
-						path="/timereports/user"
-						element={<Timereports userSignal={userSignal} />}
-					/>
-					<Route
-						path="/timereports/project"
-						element={<Timereport userSignal={userSignal} />}
-					/>
-					<Route
-						path="/projects"
-						element={<Project userSignal={userSignal} />}
-					/>
-
+					<Route path="/timereports" element={<TimereportMain userSignal={userSignal} />}/>
+					<Route path="/timereports/admin" element={<TimereportUser userSignal={userSignal} />}/>
+          <Route path="/timereports/user" element={<Timereports userSignal={userSignal} />}/>
+					<Route path="/timereports/project" element={<Timereport userSignal={userSignal} />}/>
+					<Route path="/projects" element={<Project userSignal={userSignal} />}/>
 				</Routes>
 			</main>
 			<footer></footer>
