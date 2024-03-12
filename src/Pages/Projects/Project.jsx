@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
 
 import Button from "react-bootstrap/Button";
-import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import axios from "axios";
 import FormModal from "./FormModal";
 import Spinner from "react-bootstrap/Spinner";
 import { useNavigate } from "react-router-dom";
+import Cookies from "js-cookie";
+import ProjectCard from "./ProjectCard";
+
 
 const Project = ({ userSignal }) => {
 	const [project, setProject] = useState([]);
@@ -25,6 +27,7 @@ const Project = ({ userSignal }) => {
 		endDate: "",
 		image: "",
 	});
+
 	const navigate = useNavigate();
 	//console.log(user);
 
@@ -37,6 +40,15 @@ const Project = ({ userSignal }) => {
 
 	const closeModal = () => {
 		setModalOpen(false);
+		setFormInput({
+			name: "",
+			status: "",
+			color: "",
+			hours: "",
+			startDate: "",
+			endDate: "",
+			image: "",
+		});
 	};
 
 	useEffect(() => {
@@ -47,8 +59,12 @@ const Project = ({ userSignal }) => {
 				setLoading(true);
 				const response = await axios.get("http://localhost:3001/databases/projects");
 
-				setProject(response.data);
-				console.log(response.data);
+				// sort so Active will always display first
+				const sorted = response.data.sort((a, b) =>
+					a.status.localeCompare(b.status)
+				);
+				setProject(sorted);
+				//console.log(sorted);
 			} catch (error) {
 				console.error("There was a problem with the fetch operation:", error);
 			} finally {
@@ -66,9 +82,22 @@ const Project = ({ userSignal }) => {
 	const updateProjects = async () => {
 		try {
 			setLoading(true);
+
+			const response = await axios.get(
+				"http://localhost:3001/databases/projects"
+			);
+
+			// sort so Active will always display first
+			const sorted = response.data.sort((a, b) =>
+				a.status.localeCompare(b.status)
+			);
+
+			setProject(sorted);
+
 			const response = await axios.get("http://localhost:3001/databases/projects");
 			//console.log(response.data);
 			setProject(response.data);
+
 		} catch (error) {
 			console.error("There was a problem updating projects:", error);
 		} finally {
@@ -90,21 +119,21 @@ const Project = ({ userSignal }) => {
 			});
 		}
 
-		closeModal();
 		setEdit(true);
 		openModal();
 	};
 
 	const handleClick = (idNr, name) => {
-		//passing ProjectId & projectName to path:/timereport where we can use use id to fetch report
-		//and use name to display inside component
 		const project = {
 			name: name,
 			id: idNr,
 		};
+
+
 		//console.log(project.name, project.id);
 
-		navigate(`/timereport`, { state: project });
+
+		navigate(`/timereports/project`, { state: project });
 	};
 
 	const filteredProjects = showAllProjects ? project : project.filter((project) => project.status === "Active");
@@ -123,13 +152,42 @@ const Project = ({ userSignal }) => {
 					setLoading={setLoading}
 				/>
 			)}
-			<div className="show-container container">
+			<div className="show-container container mt-4">
 				{loading && (
 					<>
 						<Spinner animation="border" variant="primary" />
 						<h4 className="mt-2">Loading...</h4>
 					</>
 				)}
+
+
+				<Row>
+					{filteredProjects.map((item, index) => (
+						<React.Fragment key={item.id}>
+							{index !== 0 &&
+								item.status !== filteredProjects[index - 1].status && (
+									<hr className="border border-primary border-3 opacity-75"></hr>
+								)}
+							<Col className="show-col mx-2 mb-2 mx-auto" sm={6} lg={3}>
+								<ProjectCard
+									item={item}
+									handleClick={handleClick}
+									handleEdit={handleEdit}
+									userRole={userRole}
+									setProjectId={setProjectId}
+								/>
+							</Col>
+						</React.Fragment>
+					))}
+				</Row>
+
+				<div className="mb-4">
+					{userRole === "Admin" && (
+						<Button
+							variants="primary"
+							className="mt-4 mx-3"
+							onClick={openModal}>
+
 				<div className="row justify-content-center">
 					<Row>
 						{filteredProjects.map((item) => (
@@ -177,6 +235,7 @@ const Project = ({ userSignal }) => {
 				<div className="mb-4 mx-3">
 					{user.userRole === "Admin" && (
 						<Button variants="primary" className="mt-4 mx-3" onClick={openModal}>
+
 							<i className="bi bi-plus-circle me-2"></i>Add New Project
 						</Button>
 					)}
