@@ -130,6 +130,10 @@ const Project = ({ userSignal }) => {
 		};
 
 
+		navigate(`/timereports/user`, { state: project });
+	};
+
+
 		//console.log(project.name, project.id);
 
 

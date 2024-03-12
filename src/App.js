@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Home from "./Pages/Home/Home";
 import User from "./Pages/User/User";
+import TimeReports from "./Pages/TimeReports/TimeReports";
 import LoginOAuth from "./Components/LoginModal/Login/LoginOAuth";
 import Navigation from "./Components/Navigation/Navigation";
 import Project from "./Pages/Projects/Project";
@@ -34,13 +35,18 @@ export default function App() {
 					/>
 					<Route path="/user" element={<User />} />
 					<Route path="/admin" element={<Admin />} />
+
 					<Route
 						path="/timereports"
 						element={<TimereportMain userSignal={userSignal} />}
 					/>
 					<Route
-						path="/timereports/user"
+						path="/timereports/admin"
 						element={<TimereportUser userSignal={userSignal} />}
+					/>
+          <Route
+						path="/timereports/user"
+						element={<Timereports userSignal={userSignal} />}
 					/>
 					<Route
 						path="/timereports/project"
@@ -50,6 +56,7 @@ export default function App() {
 						path="/projects"
 						element={<Project userSignal={userSignal} />}
 					/>
+
 				</Routes>
 			</main>
 			<footer></footer>
