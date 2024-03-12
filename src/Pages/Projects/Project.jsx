@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
@@ -9,7 +10,8 @@ import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import ProjectCard from "./ProjectCard";
 
-const Project = () => {
+
+const Project = ({ userSignal }) => {
 	const [project, setProject] = useState([]);
 	const [showAllProjects, setShowAllProjects] = useState(false);
 	const [modalOpen, setModalOpen] = useState(false);
@@ -26,14 +28,10 @@ const Project = () => {
 		image: "",
 	});
 
-	const isAuthenticated = !!Cookies.get("auth");
-	let user = null;
-	if (isAuthenticated) {
-		user = JSON.parse(Cookies.get("auth"));
-	}
-
-	const userRole = user.userRole;
 	const navigate = useNavigate();
+	//console.log(user);
+
+	//const userRole = user.userRole; //Temporary!!!!
 	//console.log(userRole);
 
 	const openModal = () => {
@@ -54,12 +52,12 @@ const Project = () => {
 	};
 
 	useEffect(() => {
+		console.log("Useeffececet");
+
 		const fetchData = async () => {
 			try {
 				setLoading(true);
-				const response = await axios.get(
-					"http://localhost:3001/databases/projects"
-				);
+				const response = await axios.get("http://localhost:3001/databases/projects");
 
 				// sort so Active will always display first
 				const sorted = response.data.sort((a, b) =>
@@ -76,9 +74,15 @@ const Project = () => {
 		fetchData();
 	}, []);
 
+	const user = userSignal.value;
+	if (!user) {
+		navigate("/");
+		return null;
+	}
 	const updateProjects = async () => {
 		try {
 			setLoading(true);
+
 			const response = await axios.get(
 				"http://localhost:3001/databases/projects"
 			);
@@ -89,6 +93,11 @@ const Project = () => {
 			);
 
 			setProject(sorted);
+
+			const response = await axios.get("http://localhost:3001/databases/projects");
+			//console.log(response.data);
+			setProject(response.data);
+
 		} catch (error) {
 			console.error("There was a problem updating projects:", error);
 		} finally {
@@ -120,13 +129,14 @@ const Project = () => {
 			id: idNr,
 		};
 
+
+		//console.log(project.name, project.id);
+
+
 		navigate(`/timereports/project`, { state: project });
 	};
 
-	const filteredProjects = showAllProjects
-		? project
-		: project.filter((project) => project.status === "Active");
-
+	const filteredProjects = showAllProjects ? project : project.filter((project) => project.status === "Active");
 	return (
 		<>
 			{modalOpen && (
@@ -149,6 +159,7 @@ const Project = () => {
 						<h4 className="mt-2">Loading...</h4>
 					</>
 				)}
+
 
 				<Row>
 					{filteredProjects.map((item, index) => (
@@ -176,14 +187,60 @@ const Project = () => {
 							variants="primary"
 							className="mt-4 mx-3"
 							onClick={openModal}>
+
+				<div className="row justify-content-center">
+					<Row>
+						{filteredProjects.map((item) => (
+							<Col key={item.id} className="show-col mx-2 mb-2 mx-auto" sm={6} md={6} lg={3}>
+								<Card bg="dark" text="light" className="show-card">
+									<Card.Img variant="top" src={item.image} style={{ height: "142px" }} />
+									<Card.Body>
+										<Card.Title>{item.name}</Card.Title>
+										<Card.Text>
+											<strong className="badge" style={{ backgroundColor: item.color }}>
+												{item.status}
+											</strong>
+											<br />
+											Hours: {item.hours} <br />
+											Worked Hours: {item.workedHours} <br />
+											Hours Left: {item.hoursLeft} <br />
+											Timespan:
+											<br />
+											<span className="show-timespan">
+												{item.timespan.start} - {item.timespan.end}
+											</span>
+										</Card.Text>
+										{user.userRole === "User" && <Button className="btn btn-primary m-2">Report Time</Button>}
+
+										{user.userRole === "Admin" && (
+											<>
+												<Button onClick={() => handleClick(item.id, item.name)}>See Timereports</Button>
+
+												<Button
+													className="btn btn-danger m-2"
+													onClick={() => {
+														handleEdit(item.id);
+														setProjectId(item.id);
+													}}>
+													Edit
+												</Button>
+											</>
+										)}
+									</Card.Body>
+								</Card>
+							</Col>
+						))}
+					</Row>
+				</div>
+				<div className="mb-4 mx-3">
+					{user.userRole === "Admin" && (
+						<Button variants="primary" className="mt-4 mx-3" onClick={openModal}>
+
 							<i className="bi bi-plus-circle me-2"></i>Add New Project
 						</Button>
 					)}
 
-					<Button
-						variants="primary"
-						className="mt-4 mx-4"
-						onClick={() => setShowAllProjects(!showAllProjects)}>
+					<Button variants="primary" className="mt-4 mx-4" onClick={() => setShowAllProjects(!showAllProjects)}>
 						{showAllProjects ? (
 							<>
 								<i className="bi bi-filter"></i> Active Projects
