@@ -61,7 +61,7 @@ const TimeReports = () => {
 	const handleUpdateReport = async (updatedReport) => {
 		try {
 			const response = await axios.patch(
-				`http://localhost:3001/pages/timereports/${updatedReport.id}`,
+				`http://localhost:3001/pages/timereports/user/${updatedReport.id}`,
 				updatedReport
 			);
 			console.log("Time report updated:", response.data);
