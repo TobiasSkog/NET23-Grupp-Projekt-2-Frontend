@@ -6,7 +6,7 @@ import Table from "react-bootstrap/Table";
 import Container from "react-bootstrap/esm/Container";
 import Sorting from "./Sorting";
 import SearchDate from "./SearchDate";
-import EditAdminReportModal from "./EditReportModal";
+import EditAdminReportModal from "./EditAdminReportModal";
 
 export default function Timereport({ proj }) {
 	const [loading, setLoading] = useState(false);
