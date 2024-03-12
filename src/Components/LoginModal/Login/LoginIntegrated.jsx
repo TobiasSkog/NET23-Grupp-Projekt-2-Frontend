@@ -24,29 +24,36 @@ export default function LoginIntegrated({ userLoggedIn }) {
 		//target:	databaseUserData.data.userRole === "Admin" ? "/admin"	: databaseUserData.data.userRole === "User"	? "/user"	: "/",
 
 		userLoggedIn(userData);
-		navigate("/projects");
+		navigate(`/projects`);
 	};
 
 	const handleLogin = (e) => {
 		e.preventDefault();
 		const isAuthenticated = authUserDatabase();
 		if (!isAuthenticated) {
-			navigate("/");
+			navigate(`/`);
 		}
 	};
 
 	return (
 		<Form>
-			<Form.Group controlId="loginFormEmail" className="mb-3">
+			<Form.Group controlId="loginFormEmail" className="mb-3 ">
 				<Form.Label>Email</Form.Label>
 
-				<Form.Control type="email" placeholder="Enter your email address" onChange={(e) => setEmail(e.target.value)} required />
+				<Form.Control type="email" className="neu-login" placeholder="Enter your email address" onChange={(e) => setEmail(e.target.value)} required />
 			</Form.Group>
 			<Form.Group controlId="loginFormPassword" className="mb-3">
 				<Form.Label>Password</Form.Label>
-				<Form.Control type="password" placeholder="Enter your password" onChange={(e) => setPassword(e.target.value)} required />
+				<Form.Control
+					type="password"
+					className="neu-login"
+					placeholder="Enter your password"
+					onChange={(e) => setPassword(e.target.value)}
+					required
+				/>
 			</Form.Group>
-			<Button variant="dark" type="submit" className="d-block w-100 mt-3" onClick={handleLogin}>
+			{/* <Button variant="dark" type="submit" className="d-block w-100 mt-3" onClick={handleLogin}> */}
+			<Button type="submit" className="d-block w-100 mt-3 neu-button" onClick={handleLogin}>
 				Login
 			</Button>
 		</Form>

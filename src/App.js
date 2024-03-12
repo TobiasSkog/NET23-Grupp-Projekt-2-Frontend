@@ -1,5 +1,7 @@
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, useNavigate } from "react-router-dom";
 import Home from "./Pages/Home/Home";
+import "./Assets/css/custom.min.css";
+import "./Assets/css/Neumorphism.css";
 //import User from "./Pages/User/User";
 import TimeReports from "./Pages/TimeReports/user/TimeReports";
 import LoginOAuth from "./Components/LoginModal/Login/LoginOAuth";
@@ -10,10 +12,20 @@ import TimereportMain from "./Pages/TimeReports/admin/TimereportMain";
 import TimereportUser from "./Pages/TimeReports/admin/TimereportUser";
 //import Cookies from "js-cookie";
 import { userSignal, userLoggedIn, userLoggedOut } from "./Components/CustomSignals/UserSignal";
+import { useEffect } from "react";
 
 export default function App() {
+	const navigate = useNavigate();
+
+	useEffect(() => {
+		const user = userSignal.value;
+		if (user) {
+			// Redirect to the logged-in route if the user object exists
+			navigate("/projects"); // Replace with your actual logged-in route
+		}
+	}, []);
 	return (
-		<Router>
+		<>
 			<header>
 				<Navigation userSignal={userSignal} userLoggedOut={userLoggedOut} />
 			</header>
@@ -31,6 +43,6 @@ export default function App() {
 				</Routes>
 			</main>
 			<footer></footer>
-		</Router>
+		</>
 	);
 }

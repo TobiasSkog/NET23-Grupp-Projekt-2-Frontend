@@ -65,7 +65,7 @@ const Project = ({ userSignal }) => {
 
 	const user = userSignal.value;
 	if (!user) {
-		navigate("/");
+		navigate(`/`);
 		return null;
 	}
 

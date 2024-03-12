@@ -5,7 +5,7 @@ import Progressbar from "./Progressbar";
 
 export default function ProjectCard({ item, handleEdit, handleClick, userRole, setProjectId, handleUserClick }) {
 	return (
-		<Card bg="dark" text="light" className="show-card">
+		<Card bg="primary" text="dark" className="show-card neu-hard-outer">
 			<Card.Img variant="top" src={item.image} style={{ height: "142px" }} />
 			<Card.Body>
 				<Card.Title>{item.name}</Card.Title>
@@ -17,7 +17,7 @@ export default function ProjectCard({ item, handleEdit, handleClick, userRole, s
 
 					<p className="my-0 mx-0 ">
 						Worked Hours:
-						<span className="text-primary"> {item.workedHours}</span>
+						<span className="text-dark"> {item.workedHours}</span>
 					</p>
 
 					<Progressbar workedHours={item.workedHours} totalHours={item.hours} />

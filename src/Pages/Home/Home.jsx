@@ -12,7 +12,7 @@ export default function Home({ userSignal, userLoggedIn }) {
 	const navigate = useNavigate();
 	const user = userSignal.value;
 	if (user) {
-		navigate("/projects");
+		navigate(`/projects`);
 		return null;
 	}
 
@@ -20,21 +20,9 @@ export default function Home({ userSignal, userLoggedIn }) {
 		<>
 			<Container fluid className="min-vh-100 d-flex align-items-center justify-content-center">
 				<Row>
-					<Col xs={12} className="text-center">
+					<Col xs={12} className="text-center ">
 						{/* Logo */}
-						<img
-							src={Logo}
-							alt="Logo"
-							className="img-fluid"
-							style={{
-								maxWidth: "50%",
-								marginBottom: "70px",
-								borderRadius: "50%",
-								boxShadow: "0 0 10px rgba(0,0,0,0.5)",
-								width: "10rem",
-								height: "auto",
-							}}
-						/>
+						<img src={Logo} alt="Logo" className="img-fluid neu-img" />
 					</Col>
 					<Col xs={12} className="text-center">
 						{/* Company Name */}
@@ -50,7 +38,8 @@ export default function Home({ userSignal, userLoggedIn }) {
 					</Col>
 					<Col xs={12} className="text-center">
 						{/* Login Button */}
-						<Button variant="dark" className="mt-4 mt-md-5" style={{ fontSize: "1rem" }} onClick={handleShowLogin}>
+						{/* <Button variant="dark" className="mt-4 mt-md-5" style={{ fontSize: "1rem" }} onClick={handleShowLogin}> */}
+						<Button className="mt-4 mt-md-5 neu-button" style={{ fontSize: "1rem" }} onClick={handleShowLogin}>
 							Go To Login
 						</Button>
 					</Col>

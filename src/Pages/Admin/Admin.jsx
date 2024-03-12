@@ -5,7 +5,7 @@ export default function Admin({ ...rest }) {
 	const isAuthenticated = !!Cookies.get("auth");
 	const navigate = useNavigate();
 	if (!isAuthenticated) {
-		navigate("/");
+		navigate(`/`);
 		return null;
 	}
 	let user = JSON.parse(Cookies.get("auth"));

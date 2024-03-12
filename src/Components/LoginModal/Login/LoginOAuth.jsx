@@ -39,7 +39,7 @@ export default function LoginOAuth({ userLoggedIn }) {
 				//target:	databaseUserData.data.userRole === "Admin" ? "/admin"	: databaseUserData.data.userRole === "User"	? "/user"	: "/",
 
 				userLoggedIn(userData);
-				navigate("/projects");
+				navigate(`/projects`);
 			} catch (error) {
 				console.error("Unexpected error during authentication:", error);
 			} finally {
@@ -49,7 +49,7 @@ export default function LoginOAuth({ userLoggedIn }) {
 
 		const authenticatedUser = authenticateAndFindUserInDatabase();
 		if (!authenticatedUser) {
-			navigate("/");
+			navigate(`/`);
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);

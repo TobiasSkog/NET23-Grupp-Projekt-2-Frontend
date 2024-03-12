@@ -1,11 +1,13 @@
 // custom variables need to happend BEFORE importing bootstrap
-$primary: #a5b1c2;
-$light: #d1d8e0;
-$dark: #778ca3;
+$primary: #ececec;
+$highlight: #ffffff;
+$shadow: rgba(70, 70, 70, 0.12);
+$textdark: #303030;
+$progress: #8b5c39;
 
-$altprimary: #9c29a8;
-$altlight: #c300ff;
-$altdark: #6700f6;
+$altprimary: #202121;
+$althighlight: #514f4f;
+$altshadow: #111213;
 
 @import "~bootstrap/scss/_functions";
 @import "~bootstrap/scss/_variables";
@@ -13,11 +15,13 @@ $altdark: #6700f6;
 
 $custom-theme-colors: (
 	"primary": $primary,
-	"light": $light,
-	"dark": $dark,
+	"highlight": $highlight,
+	"shadow": $shadow,
+	"textdark": $textdark,
+	"progress": $progress,
 	"altprimary": $altprimary,
-	"altlight": $altlight,
-	"altdark": $altdark,
+	"althighlight": $althighlight,
+	"altshadow": $altshadow,
 );
 
 $theme-colors: map-merge($custom-theme-colors, $theme-colors);

@@ -7,11 +7,11 @@ export default function Navigation({ userSignal, userLoggedOut, ...rest }) {
 	const navigate = useNavigate();
 	const handleLogout = () => {
 		userLoggedOut();
-		navigate("/");
+		navigate(`/`);
 	};
 
 	return (
-		<Navbar expand="lg" className="bg-body-tertiary">
+		<Navbar expand="lg" className="bg-primary neu-nav">
 			<Container>
 				<Navbar.Brand href={user ? "/projects" : "/"}>Caffeine & Insomnia</Navbar.Brand>
 				{user ? (

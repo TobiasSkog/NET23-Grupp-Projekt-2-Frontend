@@ -4,7 +4,7 @@ export default function User({ userSignal, ...rest }) {
 	const navigate = useNavigate();
 	const user = userSignal.value;
 	if (!user) {
-		navigate("/");
+		navigate(`/`);
 		return null;
 	}
 	return (
