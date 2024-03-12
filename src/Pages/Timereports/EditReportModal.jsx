@@ -72,7 +72,7 @@ export default function EditReportModal({
 			const timereportId = formInput.id;
 
 			const response = await axios.patch(
-				`http://localhost:3001/pages/timeReports/${timereportId}`,
+				`http://localhost:3001/pages/timeReports/admin/${timereportId}`,
 				formInput
 			);
 			console.log("Project updated successfully:", response.data);
