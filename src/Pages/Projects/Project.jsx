@@ -109,7 +109,7 @@ const Project = ({ userSignal }) => {
 			id: idNr,
 			name: name,
 		};
-		navigate(`/timereports/user`, { state: project });
+		navigate(`/timereports/user`, { state: { project, selectedProjectId: idNr } });
 	};
 
 	const handleClick = (idNr, name) => {
