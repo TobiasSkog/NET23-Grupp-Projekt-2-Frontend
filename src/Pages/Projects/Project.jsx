@@ -22,7 +22,6 @@ const Project = ({ userSignal }) => {
 		hours: "",
 		startDate: "",
 		endDate: "",
-		image: "",
 	});
 
 	useEffect(() => {
@@ -69,7 +68,6 @@ const Project = ({ userSignal }) => {
 			hours: "",
 			startDate: "",
 			endDate: "",
-			image: "",
 		});
 	};
 
@@ -104,7 +102,6 @@ const Project = ({ userSignal }) => {
 				hours: projectToEdit.hours,
 				startDate: projectToEdit.timespan.start,
 				endDate: projectToEdit.timespan.end,
-				image: projectToEdit.image,
 			});
 		}
 
@@ -185,7 +182,7 @@ const Project = ({ userSignal }) => {
 							variants="primary"
 							className="mt-4 mx-3"
 							onClick={openModal}>
-							<i className="bi bi-plus-circle me-2"></i>Add New Project
+							<i className="bi bi-plus-circle me-2"></i>Add New
 						</Button>
 					)}
 
@@ -195,11 +192,11 @@ const Project = ({ userSignal }) => {
 						onClick={() => setShowAllProjects(!showAllProjects)}>
 						{showAllProjects ? (
 							<>
-								<i className="bi bi-filter"></i> Show Active Projects
+								<i className="bi bi-filter"></i> Show Active
 							</>
 						) : (
 							<>
-								<i className="bi bi-filter"></i> Show All Projects
+								<i className="bi bi-filter"></i> Show All
 							</>
 						)}
 					</Button>
