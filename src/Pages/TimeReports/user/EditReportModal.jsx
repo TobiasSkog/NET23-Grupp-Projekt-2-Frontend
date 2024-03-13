@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Modal, Button, Form } from 'react-bootstrap';
-
+//edit report modal were you go after wanting to edit a timereport
 const EditReportModal = ({
   showModal,
   closeModal,

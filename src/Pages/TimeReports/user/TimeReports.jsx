@@ -131,7 +131,6 @@ const TimeReports = ({ userSignal }) => {
         closeModal={closeEditReportModal}
         selectedReport={selectedReport}
         handleUpdateReport={handleUpdateReport}
-        // additional props and event handlers as needed
       />
     </div>
   );

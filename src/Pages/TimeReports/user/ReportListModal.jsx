@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, Modal, Table } from 'react-bootstrap';
-
+//shwos the user all the reports they have and also a edit button besited them if they wanna edit
 const ReportListModal = ({ showModal, closeModal, reports, onEditReport }) => {
   return (
     <Modal show={showModal} onHide={closeModal}>

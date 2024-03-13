@@ -22,12 +22,11 @@ const ReportModal = ({ showModal, closeModal, projects, reportData, setReportDat
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    // Include the userId and selectedProjectId in the submission data
     const submissionData = {
       ...reportData,
       hours: parseFloat(reportData.hours),
       personId: userId,
-      projectId: selectedProjectId, // Set the selected project ID
+      projectId: selectedProjectId, 
     };
     handleSubmit(submissionData);
   };
