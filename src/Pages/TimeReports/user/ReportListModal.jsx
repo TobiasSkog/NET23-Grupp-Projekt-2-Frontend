@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, Modal, Table } from 'react-bootstrap';
-//shwos the user all the reports they have and also a edit button besited them if they wanna edit
-const ReportListModal = ({ showModal, closeModal, reports, onEditReport }) => {
+
+const ReportListModal = ({ showModal, closeModal, reports, projects, onEditReport }) => {
   return (
     <Modal show={showModal} onHide={closeModal}>
       <Modal.Header closeButton>
@@ -12,22 +12,28 @@ const ReportListModal = ({ showModal, closeModal, reports, onEditReport }) => {
           <thead>
             <tr>
               <th>Date</th>
+              <th>Project</th>
               <th>Hours</th>
               <th>Note</th>
               <th>Actions</th>
             </tr>
           </thead>
           <tbody>
-            {reports.map((report) => (
-              <tr key={report.id}>
-                <td>{report.date}</td>
-                <td>{report.hours}</td>
-                <td>{report.note}</td>
-                <td>
-                  <Button variant="primary" onClick={() => onEditReport(report)}>Edit</Button>
-                </td>
-              </tr>
-            ))}
+            {reports.map((report) => {
+              const project = projects.find(project => project.id === report.projectId);
+              const projectName = projects.find(project => project.id === report.project)?.name || 'Unknown Project';
+              return (
+                <tr key={report.id}>
+                  <td>{report.date}</td>
+                  <td>{projectName}</td>
+                  <td>{report.hours}</td>
+                  <td>{report.note}</td>
+                  <td>
+                    <Button variant="primary" onClick={() => onEditReport(report)}>Edit</Button>
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
         </Table>
       </Modal.Body>

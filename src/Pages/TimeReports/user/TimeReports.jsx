@@ -112,6 +112,7 @@ const TimeReports = ({ userSignal }) => {
         showModal={showReportModal}
         closeModal={closeReportModal}
         projects={projects}
+		reports={timeReports}
         reportData={reportData}
         setReportData={setReportData}
         userId={user.id}
@@ -123,6 +124,7 @@ const TimeReports = ({ userSignal }) => {
         showModal={showReportListModal}
         closeModal={closeReportListModal}
         reports={timeReports}
+		projects={projects}
         onEditReport={handleEditReportSelection}
       />
 
@@ -131,6 +133,7 @@ const TimeReports = ({ userSignal }) => {
         closeModal={closeEditReportModal}
         selectedReport={selectedReport}
         handleUpdateReport={handleUpdateReport}
+		projects={projects}
       />
     </div>
   );
