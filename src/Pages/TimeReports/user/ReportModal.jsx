@@ -26,7 +26,12 @@ const ReportModal = ({ showModal, closeModal, projects, reports, reportData, set
         projectId: mostRecentReport.projectId, // Pre-fill project with the most recent report's project ID
       }));
     }
-  }, []);
+  // Initialize reportData.date with today's date
+  setReportData(prev => ({
+    ...prev,
+    date: new Date().toISOString().slice(0, 10),
+  }));
+}, []);
 
   const getMostRecentReport = () => {
     return reports.sort((a, b) => new Date(b.date) - new Date(a.date))[0];
@@ -104,7 +109,7 @@ const ReportModal = ({ showModal, closeModal, projects, reports, reportData, set
             <Form.Control
               type="date"
               name="date"
-              value={new Date().toISOString().slice(0, 10)} // Set date to the current day
+              value={reportData.date}
               onChange={handleInputChange}
               min={projectTimespan.start}
               max={projectTimespan.end}
