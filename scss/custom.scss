@@ -1,9 +1,17 @@
 // custom variables need to happend BEFORE importing bootstrap
-$primary: #ececec;
+$primary: #e6e7ee;
 $highlight: #ffffff;
-$shadow: rgba(70, 70, 70, 0.12);
+$shadow: #b8b9be;
 $textdark: #303030;
-$progress: #8b5c39;
+$progress: #ffd600;
+$neugreen: #0ff74d;
+$neuorange: #f76400;
+$neuturquoise: #04d3f7;
+$neupurple: #b613f7;
+$popo: #04d3f70e;
+
+
+
 
 $altprimary: #202121;
 $althighlight: #514f4f;
@@ -17,6 +25,10 @@ $custom-theme-colors: (
 	"primary": $primary,
 	"highlight": $highlight,
 	"shadow": $shadow,
+	"neugreen": $neugreen,
+	"neuorange": $neuorange,
+	"neuturquoise": $neuturquoise,
+	"neupurple": $neupurple,
 	"textdark": $textdark,
 	"progress": $progress,
 	"altprimary": $altprimary,

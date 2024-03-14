@@ -4,6 +4,7 @@ import Navbar from "react-bootstrap/Navbar";
 import { useNavigate } from "react-router-dom";
 export default function Navigation({ userSignal, userLoggedOut, ...rest }) {
 	const user = userSignal.value;
+
 	const navigate = useNavigate();
 	const handleLogout = () => {
 		userLoggedOut();
@@ -11,7 +12,7 @@ export default function Navigation({ userSignal, userLoggedOut, ...rest }) {
 	};
 
 	return (
-		<Navbar expand="lg" className="bg-primary neu-nav">
+		<Navbar expand="lg" className="bg-primary mb-3 neu-nav">
 			<Container>
 				<Navbar.Brand href={user ? "/projects" : "/"}>Caffeine & Insomnia</Navbar.Brand>
 				{user ? (
@@ -27,16 +28,15 @@ export default function Navigation({ userSignal, userLoggedOut, ...rest }) {
 						</Navbar.Collapse>
 					</>
 				) : null}
-				<Navbar.Collapse className="justify-content-end">
-					<Nav className="end-auto">
-						{user ? (
-							<>
-								<Navbar.Text>Logged in as: {user.name}</Navbar.Text>
-								<Nav.Link onClick={handleLogout}>Logout</Nav.Link>
-							</>
-						) : null}
-					</Nav>
-				</Navbar.Collapse>
+				{user ? (
+					<Nav.Link className="me-5" onClick={handleLogout}>
+						Logout
+					</Nav.Link>
+				) : null}
+
+				<div className="neu-nav-user-container">
+					<i className={user ? "bi bi-person-circle neu-online-icon" : "bi bi-person-circle neu-offline-icon"} />
+				</div>
 			</Container>
 		</Navbar>
 	);

@@ -6,11 +6,11 @@ export default function LoginOAuthButton() {
 	};
 	return (
 		<>
-			<div className="text-center">
+			<div className="text-center ">
 				<img
 					src={NotionImg}
 					alt="Login Option"
-					className="img-fluid"
+					className="mt-3 neu-img neu-button"
 					style={{ cursor: "pointer", maxWidth: "100px", height: "auto" }}
 					onClick={handleImageClick}
 				/>

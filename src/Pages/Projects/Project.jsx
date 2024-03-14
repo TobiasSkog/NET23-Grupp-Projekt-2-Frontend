@@ -166,19 +166,19 @@ const Project = ({ userSignal }) => {
 			<div className="mb-4">
 				<div className="mb-4 mx-3">
 					{user.userRole === "Admin" && (
-						<Button variants="primary" className="mt-4 mx-3" onClick={openModal}>
-							<i className="bi bi-plus-circle me-2"></i>Add New Project
+						<Button variants="primary" className="mt-4 mx-3 neu-button-s" onClick={openModal}>
+							<i className="bi bi-plus-circle me-2"></i>Add New
 						</Button>
 					)}
 
-					<Button variants="primary" className="mt-4 mx-4" onClick={() => setShowAllProjects(!showAllProjects)}>
+					<Button variants="primary" className="mt-4 mx-4 neu-button-s" onClick={() => setShowAllProjects(!showAllProjects)}>
 						{showAllProjects ? (
 							<>
-								<i className="bi bi-filter"></i> Active Projects
+								<i className="bi bi-filter"></i> Show Active
 							</>
 						) : (
 							<>
-								<i className="bi bi-filter"></i> Show All Projects
+								<i className="bi bi-filter"></i> Show All
 							</>
 						)}
 					</Button>

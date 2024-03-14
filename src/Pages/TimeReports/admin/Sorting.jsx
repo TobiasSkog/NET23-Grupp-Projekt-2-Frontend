@@ -34,22 +34,13 @@ export default function Sorting({ originalTimeReports, setTimeReports }) {
 
 	return (
 		<Container>
-			<Button
-				className="mx-2"
-				style={{ width: "115px" }}
-				onClick={handleClick7days}>
+			<Button className="mx-2 neu-button" style={{ width: "115px" }} onClick={handleClick7days}>
 				Last 7 days
 			</Button>
-			<Button
-				className="mx-2"
-				style={{ width: "115px" }}
-				onClick={handleClick30days}>
+			<Button className="mx-2 neu-button" style={{ width: "115px" }} onClick={handleClick30days}>
 				Last 30 days
 			</Button>
-			<Button
-				className="mx-2"
-				style={{ width: "115px" }}
-				onClick={handleAllClick}>
+			<Button className="mx-2 neu-button" style={{ width: "115px" }} onClick={handleAllClick}>
 				All
 			</Button>
 		</Container>

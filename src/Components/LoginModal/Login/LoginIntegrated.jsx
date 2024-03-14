@@ -39,7 +39,6 @@ export default function LoginIntegrated({ userLoggedIn }) {
 		<Form>
 			<Form.Group controlId="loginFormEmail" className="mb-3 ">
 				<Form.Label>Email</Form.Label>
-
 				<Form.Control type="email" className="neu-login" placeholder="Enter your email address" onChange={(e) => setEmail(e.target.value)} required />
 			</Form.Group>
 			<Form.Group controlId="loginFormPassword" className="mb-3">
