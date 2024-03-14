@@ -115,7 +115,7 @@ const Project = ({ userSignal }) => {
 			id: idNr,
 			name: name,
 		};
-		navigate(`/timereports/user`, { state: project });
+		navigate(`/timereports/user`, { state: { project, selectedProjectId: idNr } });
 	};
 
 	//in Adminmode when user clicks projectcard
