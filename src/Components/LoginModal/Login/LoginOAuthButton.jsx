@@ -1,7 +1,6 @@
 import NotionImg from "../../../Assets/img/Notion-Logo.png";
 export default function LoginOAuthButton() {
 	const handleImageClick = () => {
-		//console.log("Redirecting to:", process.env.REACT_APP_NOTION_AUTH_URL);
 		window.location.href = process.env.REACT_APP_NOTION_AUTH_URL;
 	};
 	return (

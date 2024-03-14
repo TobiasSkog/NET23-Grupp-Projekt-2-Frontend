@@ -11,11 +11,11 @@ export default function Home({ userSignal, userLoggedIn }) {
 	const handleCloseLogin = () => setShowLogin(false);
 	const navigate = useNavigate();
 	const user = userSignal.value;
-	// IMPORT THIS FOR REDIRECTION OF THE USER IF THE USER COOKIE STILL EXISTS IN STORAGE
 	useEffect(() => {
 		if (user) {
 			navigate("/projects");
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	return (

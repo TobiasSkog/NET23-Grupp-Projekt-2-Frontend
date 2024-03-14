@@ -94,6 +94,7 @@ main p {
 /* ------------------------------------------------------- */
 
 .neu-card {
+  z-index: 1;
   border-radius: 12px;
   min-width: 250px;
   border: 2px solid var(--bs-primary);
@@ -152,9 +153,8 @@ main p {
   display: flex;
   border-radius: 0.55rem;
   height: 1.2rem;
-  font-size: 1rem;
   text-align: center;
-  border: 2px solid var(--bs-primary);
+  border: 0.0625rem solid #0000000a;
   overflow: hidden;
   box-shadow:
     inset -3px -3px 7px var(--bs-highlight),
@@ -162,11 +162,14 @@ main p {
 }
 
 .neu-prog-bar {
-  color: var(--bs-primary);
-  height: 1.2rem;
-  font-size: 1rem;
-  border-radius: 15px;
-  
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: var(--bs-highlight);
+  height: 100%;
+  border-radius: 0.55rem;
+  border: 0.0625rem solid var(--bs-shadow);
+  white-space: nowrap;
 }
 
 .neu-card-status {
@@ -174,52 +177,59 @@ main p {
   align-items: center;
   justify-content: end;
   background-color: transparent;
-  margin-bottom: 20px;
+  margin: 5px;
+  font-size: 1.2rem;
+  /* text-shadow:
+    0.0625rem 0.0625rem 0rem var(--bs-shadow),
+    -0.0625rem -0.0625rem 0rem var(--bs-highlight); */
 }
 
 .neu-card-active {
   font-weight: bold;
   border-radius: 8px;
   padding: 2px 8px;
-  border: 2px solid var(--bs-neugreen);
+  /* border: 2px solid var(--bs-neugreen); 
+  var(--bs-neugreen)
+  */
+  color: transparent !important;
   color: var(--bs-neugreen) !important;
-
   box-shadow:
-    3px 3px 2px var(--bs-shadow),
-    -2px -2px 2px var(--bs-highlight);
+    inset 3px 3px 5px var(--bs-shadow),
+    inset -2px -2px 4px var(--bs-highlight);
+
 }
 
 .neu-card-next {
   font-weight: bold;
   border-radius: 8px;
   padding: 2px 8px;
-  border: 2px solid var(--bs-neuturquoise);
+  /* border: 2px solid var(--bs-neuturquoise); */
   color: var(--bs-neuturquoise) !important;
   box-shadow:
-    3px 3px 2px var(--bs-shadow),
-    -2px -2px 2px var(--bs-highlight);
+    inset 3px 3px 5px var(--bs-shadow),
+    inset -2px -2px 4px var(--bs-highlight);
 }
 
 .neu-card-pause {
   font-weight: bolder;
   border-radius: 8px;
   padding: 2px 8px;
-  border: 2px solid var(--bs-neured);
+  /* border: 2px solid var(--bs-neured); */
   color: var(--bs-neured) !important;
   box-shadow:
-    3px 3px 2px var(--bs-shadow),
-    -2px -2px 2px var(--bs-highlight);
+    inset 3px 3px 5px var(--bs-shadow),
+    inset -2px -2px 4px var(--bs-highlight);
 }
 
 .neu-card-done {
   font-weight: bolder;
   border-radius: 8px;
   padding: 2px 8px;
-  border: 2px solid var(--bs-neupurple);
+  /* border: 2px solid var(--bs-neupurple); */
   color: var(--bs-neupurple) !important;
   box-shadow:
-    inset 3px 3px 2px var(--bs-shadow),
-    inset -2px -2px 2px var(--bs-highlight);
+    inset 3px 3px 5px var(--bs-shadow),
+    inset -2px -2px 4px var(--bs-highlight);
 }
 
 .neu-prog-inv {
@@ -269,7 +279,39 @@ main p {
   box-shadow:
     -5px -5px 5px var(--bs-highlight),
     5px 5px 5px var(--bs-shadow);
+
 }
+
+.neu-nav-notification-new-msg {
+  border-radius: 50%;
+  height: 100%;
+  width: 100%;
+  border: 2px solid var(--bs-neuorange);
+  outline: none;
+  box-shadow:
+    -3px -3px 6px var(--bs-highlight),
+    3px 3px 6px var(--bs-shadow);
+}
+
+.neu-nav-notification-new-msg i {
+  height: 100%;
+  width: 100%;
+  color: var(--bs-neuorange);
+  text-shadow: 2px 2px 2px var(--bs-textdark);
+}
+
+.neu-nav-notification-off {
+  height: 100%;
+  width: 100%;
+  border-radius: 50%;
+  border: 2px solid var(--bs-primary);
+  outline: none;
+  box-shadow:
+    inset -3px -3px 6px var(--bs-highlight),
+    inset 3px 3px 6px var(--bs-shadow);
+}
+
+
 
 .neu-nav-user-container {
   display: flex;
@@ -318,13 +360,9 @@ main p {
 
 
 /* ------------------------------------------------------- */
-.navbar-brand {
+/* .navbar-brand {
   color: #303030;
-  text-shadow:
-    -4px -4px 4px var(--bs-highlight),
-    4px 4px 4px var(--bs-shadow);
-  caret-color: #262626;
-}
+} */
 
 /* ------------------------------------------------------- */
 .neu-login {

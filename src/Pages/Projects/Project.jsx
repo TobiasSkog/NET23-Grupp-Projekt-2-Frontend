@@ -30,10 +30,9 @@ const Project = ({ userSignal }) => {
 				setLoading(true);
 				const response = await axios.get("http://localhost:3001/databases/projects");
 
-				// sort so Active will always display first
+				// Sort so Active will always display first
 				const sorted = response.data.sort((a, b) => a.status.localeCompare(b.status));
 				setProject(sorted);
-				//console.log(sorted);
 			} catch (error) {
 				console.error("There was a problem with the fetch operation:", error);
 			} finally {
