@@ -10,7 +10,7 @@ export default function LoginOAuthButton() {
 				<img
 					src={NotionImg}
 					alt="Login Option"
-					className="img-fluid"
+					className="img-fluid neu-button-round"
 					style={{ cursor: "pointer", maxWidth: "100px", height: "auto" }}
 					onClick={handleImageClick}
 				/>

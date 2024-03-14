@@ -19,39 +19,36 @@ export default function Home({ userSignal, userLoggedIn }) {
 	}, []);
 
 	return (
-		<>
-			<Container fluid className="min-vh-100 d-flex align-items-center justify-content-center">
-				<Row>
-					<Col xs={12} className="text-center">
-						{/* Logo */}
-						<img src={Logo} alt="Logo" className="img-fluid neu-img" />
+		<Container fluid className="d-flex align-items-center justify-content-center neu-size-max">
+			<Row>
+				<Col xs={12} className="text-center">
+					<img src={Logo} alt="Logo" className="img-fluid neu-img" />
+				</Col>
+				<Col xs={12} className="text-center  neu-pad-bot-5">
+					{/* Company Name */}
+					<h2
+						style={{
+							fontSize: "2rem",
+							paddingBottom: "0.5rem",
+							borderBottom: "2px solid #000",
+							marginBottom: "20px",
+						}}>
+						Caffeine & Insomnia
+					</h2>
+				</Col>
+
+				{/* Login Button */}
+				{!user && (
+					<Col xs={12} className="text-center justify-content-center align-items-center">
+						<Button className="mt-4 mt-md-5  neu-button-login neu-size-40" onClick={handleShowLogin}>
+							Login
+						</Button>
 					</Col>
-					<Col xs={12} className="text-center">
-						{/* Company Name */}
-						<h2
-							style={{
-								fontSize: "2rem",
-								paddingBottom: "0.5rem",
-								borderBottom: "2px solid #000",
-								marginBottom: "20px",
-							}}>
-							Caffeine & Insomnia
-						</h2>
-					</Col>
-					<Col xs={12} className="text-center">
-						{/* Login Button */}
-						{/* <Button variant="dark" className="mt-4 mt-md-5" style={{ fontSize: "1rem" }} onClick={handleShowLogin}> */}
-						{!user && (
-							<Button className="mt-4 mt-md-5 neu-button" style={{ fontSize: "1rem" }} onClick={handleShowLogin}>
-								Go To Login
-							</Button>
-						)}
-					</Col>
-				</Row>
-			</Container>
+				)}
+			</Row>
 
 			{/* Login Modal */}
 			<LoginModal show={showLogin} handleClose={handleCloseLogin} userLoggedIn={userLoggedIn} />
-		</>
+		</Container>
 	);
 }

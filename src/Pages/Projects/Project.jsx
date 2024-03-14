@@ -28,14 +28,10 @@ const Project = ({ userSignal }) => {
 		const fetchData = async () => {
 			try {
 				setLoading(true);
-				const response = await axios.get(
-					"http://localhost:3001/databases/projects"
-				);
+				const response = await axios.get("http://localhost:3001/databases/projects");
 
 				// sort so Active will always display first
-				const sorted = response.data.sort((a, b) =>
-					a.status.localeCompare(b.status)
-				);
+				const sorted = response.data.sort((a, b) => a.status.localeCompare(b.status));
 				setProject(sorted);
 				//console.log(sorted);
 			} catch (error) {
@@ -75,14 +71,10 @@ const Project = ({ userSignal }) => {
 		try {
 			setLoading(true);
 
-			const response = await axios.get(
-				"http://localhost:3001/databases/projects"
-			);
+			const response = await axios.get("http://localhost:3001/databases/projects");
 
 			// sort so Active will always display first
-			const sorted = response.data.sort((a, b) =>
-				a.status.localeCompare(b.status)
-			);
+			const sorted = response.data.sort((a, b) => a.status.localeCompare(b.status));
 
 			setProject(sorted);
 		} catch (error) {
@@ -128,9 +120,7 @@ const Project = ({ userSignal }) => {
 		navigate(`/timereports/project`, { state: project });
 	};
 
-	const filteredProjects = showAllProjects
-		? project
-		: project.filter((project) => project.status === "Active");
+	const filteredProjects = showAllProjects ? project : project.filter((project) => project.status === "Active");
 	return (
 		<>
 			{modalOpen && (
@@ -157,10 +147,8 @@ const Project = ({ userSignal }) => {
 				<Row>
 					{filteredProjects.map((item, index) => (
 						<React.Fragment key={item.id}>
-							{index !== 0 &&
-								item.status !== filteredProjects[index - 1].status && (
-									<hr className="border border-primary border-3 opacity-75"></hr>
-								)}
+							{/* Border that's being shown IF ALL projects are shown, separates each project by status (Active, Next, Done) */}
+							{index !== 0 && item.status !== filteredProjects[index - 1].status && <hr className="border border-neuorange border-3 opacity-75" />}
 							<Col className="show-col mx-2 mb-2 mx-auto" sm={6} lg={3}>
 								<ProjectCard
 									item={item}
@@ -178,18 +166,12 @@ const Project = ({ userSignal }) => {
 			<div className="mb-4">
 				<div className="mb-4 mx-3">
 					{user.userRole === "Admin" && (
-						<Button
-							variants="primary"
-							className="mt-4 mx-3"
-							onClick={openModal}>
+						<Button variants="primary" className="mt-4 mx-3 neu-button-square" onClick={openModal}>
 							<i className="bi bi-plus-circle me-2"></i>Add New
 						</Button>
 					)}
 
-					<Button
-						variants="primary"
-						className="mt-4 mx-4"
-						onClick={() => setShowAllProjects(!showAllProjects)}>
+					<Button variants="primary" className="mt-4 mx-4 neu-button-square" onClick={() => setShowAllProjects(!showAllProjects)}>
 						{showAllProjects ? (
 							<>
 								<i className="bi bi-filter"></i> Show Active

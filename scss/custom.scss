@@ -3,14 +3,19 @@ $primary: #e6e7ee;
 $highlight: #ffffff;
 $shadow: #b8b9be;
 $textdark: #303030;
-$progress: #ffd600;
+$neuyellow: #ffd600;
 $neugreen: #0ff74d;
 $neuorange: #f76400;
 $neuturquoise: #04d3f7;
 $neupurple: #b613f7;
-$altprimary: #202121;
-$althighlight: #514f4f;
-$altshadow: #111213;
+$neured: #f50f0f;
+
+$neuyellow50: #ffd50080;
+$neugreen50: #0ff74d80;
+$neuorange50: #f7640080;
+$neuturquoise50: #04d3f780;
+$neupurple50: #b613f780;
+$neured50: #f50f0f80;
 
 @import "~bootstrap/scss/_functions";
 @import "~bootstrap/scss/_variables";
@@ -20,15 +25,19 @@ $custom-theme-colors: (
 	"primary": $primary,
 	"highlight": $highlight,
 	"shadow": $shadow,
+	"neuyellow": $neuyellow,
 	"neugreen": $neugreen,
 	"neuorange": $neuorange,
 	"neuturquoise": $neuturquoise,
 	"neupurple": $neupurple,
+	"neured": $neured,
+	"neuyellow-50": $neuyellow50,
+	"neugreen-50": $neugreen50,
+	"neuorange-50": $neuorange50,
+	"neuturquoise-50": $neuturquoise50,
+	"neupurple-50": $neupurple50,
+	"neured-50": $neured50,
 	"textdark": $textdark,
-	"progress": $progress,
-	"altprimary": $altprimary,
-	"althighlight": $althighlight,
-	"altshadow": $altshadow,
 );
 
 $theme-colors: map-merge($custom-theme-colors, $theme-colors);

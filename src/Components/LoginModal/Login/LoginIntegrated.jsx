@@ -52,7 +52,7 @@ export default function LoginIntegrated({ userLoggedIn }) {
 					required
 				/>
 			</Form.Group>
-			<Button type="submit" className="d-block w-100 mt-3 neu-button" onClick={handleLogin}>
+			<Button type="submit" className="d-block w-100 mb-3 neu-button-square" onClick={handleLogin}>
 				Login
 			</Button>
 		</Form>
