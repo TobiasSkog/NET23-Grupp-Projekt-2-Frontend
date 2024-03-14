@@ -1,5 +1,8 @@
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import Home from "./Pages/Home/Home";
+import "./Assets/css/Neumorphism.css";
+import "./Assets/css/custom.min.css";
+
 //import User from "./Pages/User/User";
 import TimeReports from "./Pages/TimeReports/user/TimeReports";
 import LoginOAuth from "./Components/LoginModal/Login/LoginOAuth";
@@ -13,7 +16,7 @@ import { userSignal, userLoggedIn, userLoggedOut } from "./Components/CustomSign
 
 export default function App() {
 	return (
-		<Router>
+		<>
 			<header>
 				<Navigation userSignal={userSignal} userLoggedOut={userLoggedOut} />
 			</header>
@@ -31,6 +34,6 @@ export default function App() {
 				</Routes>
 			</main>
 			<footer></footer>
-		</Router>
+		</>
 	);
 }

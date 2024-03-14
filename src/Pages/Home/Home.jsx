@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Logo from "../../Assets/img/coffe and insomnia logo.png";
 import LoginModal from "../../Components/LoginModal/LoginModal";
 import { Container, Row, Col, Button } from "react-bootstrap";
@@ -11,10 +11,12 @@ export default function Home({ userSignal, userLoggedIn }) {
 	const handleCloseLogin = () => setShowLogin(false);
 	const navigate = useNavigate();
 	const user = userSignal.value;
-	if (user) {
-		navigate("/projects");
-		return null;
-	}
+	// IMPORT THIS FOR REDIRECTION OF THE USER IF THE USER COOKIE STILL EXISTS IN STORAGE
+	useEffect(() => {
+		if (user) {
+			navigate("/projects");
+		}
+	}, []);
 
 	return (
 		<>
@@ -50,9 +52,12 @@ export default function Home({ userSignal, userLoggedIn }) {
 					</Col>
 					<Col xs={12} className="text-center">
 						{/* Login Button */}
-						<Button variant="dark" className="mt-4 mt-md-5" style={{ fontSize: "1rem" }} onClick={handleShowLogin}>
-							Go To Login
-						</Button>
+						{/* <Button variant="dark" className="mt-4 mt-md-5" style={{ fontSize: "1rem" }} onClick={handleShowLogin}> */}
+						{!user && (
+							<Button className="mt-4 mt-md-5 neu-button" style={{ fontSize: "1rem" }} onClick={handleShowLogin}>
+								Go To Login
+							</Button>
+						)}
 					</Col>
 				</Row>
 			</Container>
