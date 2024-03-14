@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Button } from 'react-bootstrap';
+import { Button, Table } from 'react-bootstrap';
 import axios from 'axios';
 import { useLocation, useNavigate } from 'react-router-dom';
 import ReportModal from './ReportModal'; // Modal for adding new reports
@@ -101,12 +101,39 @@ const TimeReports = ({ userSignal }) => {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', paddingTop: '2rem' }}>
-      <Button onClick={openReportModal} style={{ marginBottom: '1rem' }}>
-        Report Time
-      </Button>
-      <Button onClick={openReportListModal}>
-        View/Edit Time Reports
-      </Button>
+
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%', maxWidth: '800px', marginBottom: '1rem' }}>
+        <span style={{ fontSize: '60px' }}>🕒</span> 
+        <h1>Your Time Reports</h1>
+        <Button onClick={openReportModal}>Report Time</Button>
+      </div>
+      
+      <div style={{ width: '100%', maxWidth: '800px' }}>
+        <Table striped bordered hover>
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Project</th>
+              <th>Hours</th>
+              <th>Note</th>
+              <th>Edit</th>
+            </tr>
+          </thead>
+          <tbody>
+            {timeReports.map((report) => (
+              <tr key={report.id}>
+                <td>{report.date}</td>
+                <td>{projects.find(project => project.id === report.project)?.name || 'Unknown Project'}</td>
+                <td>{report.hours}</td>
+                <td>{report.note}</td>
+                <td>
+                  <Button variant="primary" size="sm" onClick={() => handleEditReportSelection(report)}>Edit</Button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </Table>
+      </div>
 
       <ReportModal
         showModal={showReportModal}
@@ -119,15 +146,7 @@ const TimeReports = ({ userSignal }) => {
 		handleSubmit={handleSubmitReport}
         location={location}
       />
-
-      <ReportListModal
-        showModal={showReportListModal}
-        closeModal={closeReportListModal}
-        reports={timeReports}
-		projects={projects}
-        onEditReport={handleEditReportSelection}
-      />
-
+      
       <EditReportModal
         showModal={showEditReportModal}
         closeModal={closeEditReportModal}
