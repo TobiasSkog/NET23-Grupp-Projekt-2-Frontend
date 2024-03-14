@@ -24,19 +24,7 @@ export default function Home({ userSignal, userLoggedIn }) {
 				<Row>
 					<Col xs={12} className="text-center">
 						{/* Logo */}
-						<img
-							src={Logo}
-							alt="Logo"
-							className="img-fluid"
-							style={{
-								maxWidth: "50%",
-								marginBottom: "70px",
-								borderRadius: "50%",
-								boxShadow: "0 0 10px rgba(0,0,0,0.5)",
-								width: "10rem",
-								height: "auto",
-							}}
-						/>
+						<img src={Logo} alt="Logo" className="img-fluid neu-img" />
 					</Col>
 					<Col xs={12} className="text-center">
 						{/* Company Name */}
