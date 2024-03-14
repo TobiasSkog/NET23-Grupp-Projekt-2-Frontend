@@ -30,12 +30,12 @@ export default function Navigation({ userSignal, userLoggedOut, ...rest }) {
 					</>
 				) : null}
 				{user ? (
-          <>
-          <NotifyAdminModal />
-					<Nav.Link className="me-5" onClick={handleLogout}>
-						Logout
-					</Nav.Link>
-         </>
+					<>
+						{user.userRole === "Admin" && <NotifyAdminModal />}
+						<Nav.Link className="me-5" onClick={handleLogout}>
+							Logout
+						</Nav.Link>
+					</>
 				) : null}
 
 				<div className="neu-nav-user-container">
