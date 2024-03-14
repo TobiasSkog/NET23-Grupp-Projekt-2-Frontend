@@ -22,10 +22,7 @@ export default function FormModal({
 			let response;
 
 			//validation for Edit and create new projects
-			if (!formInput.image.trim()) {
-				alert("Image URL is required.");
-				return;
-			} else if (!formInput.status.trim()) {
+			if (!formInput.status.trim()) {
 				alert("Status is required.");
 				return;
 			} else if (!formInput.startDate.trim()) {
@@ -56,15 +53,6 @@ export default function FormModal({
 
 			updateProjects();
 
-			setFormInput({
-				name: "",
-				status: "",
-				color: "",
-				hours: "",
-				startDate: "",
-				endDate: "",
-				image: "",
-			});
 			closeModal();
 			setEdit(false);
 		} catch (error) {
@@ -136,26 +124,6 @@ export default function FormModal({
 								name="hours"
 								value={formInput.hours}
 								onChange={handleInputChange}
-							/>
-						</Form.Group>
-						<img
-							src={formInput.image}
-							alt=""
-							className="mt-2 mb-2"
-							style={{ width: 150 }}
-						/>
-						<Form.Group>
-							<Form.Label htmlFor="image" className="text-light">
-								Image-URL
-							</Form.Label>
-							<Form.Control
-								type="text"
-								id="image"
-								className="mb-3"
-								name="image"
-								value={formInput.image}
-								onChange={handleInputChange}
-								required
 							/>
 						</Form.Group>
 
