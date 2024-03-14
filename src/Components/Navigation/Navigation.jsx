@@ -2,6 +2,8 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { useNavigate } from "react-router-dom";
+import NotifyAdminModal from "./NotifyAdminModal";
+
 export default function Navigation({ userSignal, userLoggedOut, ...rest }) {
 	const user = userSignal.value;
 	const navigate = useNavigate();
@@ -28,9 +30,12 @@ export default function Navigation({ userSignal, userLoggedOut, ...rest }) {
 					</>
 				) : null}
 				{user ? (
+          <>
+          <NotifyAdminModal />
 					<Nav.Link className="me-5" onClick={handleLogout}>
 						Logout
 					</Nav.Link>
+         </>
 				) : null}
 
 				<div className="neu-nav-user-container">
