@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Logo from "../../Assets/img/coffe and insomnia logo.png";
+import Logo from "../../Assets/img/coffe and insomnia logo xs.png";
 import LoginModal from "../../Components/LoginModal/LoginModal";
 import { Container, Row, Col, Button } from "react-bootstrap";
 
