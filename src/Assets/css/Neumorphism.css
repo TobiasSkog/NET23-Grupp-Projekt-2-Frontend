@@ -96,7 +96,6 @@ main p {
 /* ------------------------------*/
 
 .neu-card {
-  z-index: 1;
   border-radius: 12px;
   min-width: 250px;
   border: 2px solid var(--bs-primary);
@@ -383,22 +382,6 @@ main p {
 } */
 
 /* ------------------------------------------------------- */
-.neu-login {
-  background-color: transparent;
-  box-shadow:
-    inset 3px 3px 7px var(--bs-shadow),
-    inset -2px -2px 5px var(--bs-highlight);
-  outline: none;
-  border: 2px solid var(--bs-primary);
-}
-
-.neu-login:focus {
-  background-color: transparent;
-  box-shadow: inset 3px 3px 7px var(--bs-shadow),
-    inset -2px -2px 5px var(--bs-highlight);
-  outline: none;
-  border: 2px solid var(--bs-neupurple);
-}
 
 
 .neu-button-square {
@@ -458,21 +441,38 @@ main p {
     -8px -8px 10px var(--bs-highlight),
     8px 8px 10px var(--bs-shadow);
 } */
+/* ------------------------------*/
+/* -----------MODAL CSS-----------*/
+/* ------------------------------*/
 
-.custom-modal-overlay {
-  background-color: transparent;
-}
-
-.custom-modal-content {
-  background-color: transparent;
-  box-shadow:
-    inset 3px 3px 7px var(--bs-shadow),
-    inset -2px -2px 5px var(--bs-highlight);
-  outline: none;
+.neu-modal-overlay {
+  z-index: 50;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--bs-primary);
+  min-width: fit-content;
+  margin: 0;
+  padding: 0.625rem;
   border: 2px solid var(--bs-primary);
+  outline: none;
+  box-shadow:
+    -8px -8px 10px var(--bs-highlight),
+    8px 8px 10px var(--bs-shadow);
 }
 
-.custom-modal-close-button {
+.neu-modal-close-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+  align-items: center;
+  background-color: transparent;
+}
+
+.neu-modal-close-button {
+  background-color: transparent;
+  width: 25px;
+  height: 25px;
   font-size: 1rem;
   border: 2px solid var(--bs-primary);
   outline: none;
@@ -483,26 +483,106 @@ main p {
     3px 3px 6px var(--bs-shadow);
 }
 
+.neu-modal-close-button:hover {
 
-.custom-modal-close-button:hover {
   border: 2px solid var(--bs-neuturquoise);
   box-shadow:
     inset -3px -3px 7px var(--bs-highlight),
     inset 2px 2px 5px var(--bs-shadow);
 }
 
-.poo {
-  background-color: salmon;
+.neu-modal-title {
+  background-color: transparent;
+  text-align: center;
+}
+
+.neu-modal-title h2 {
+  background-color: transparent;
+}
+
+.neu-modal-divider {
+
+  background-color: var(--bs-neuorange);
+  width: 90%;
+  height: 4px;
+  border-radius: 5px;
+  transform: translate(5%);
+  box-shadow:
+    inset -1px -1px 1px var(--bs-highlight),
+    inset 1px 1px 1px var(--bs-shadow);
+}
+
+.neu-modal-body {
+  background-color: transparent;
+  outline: none;
+}
+
+.neu-modal-body>* {
+  background-color: transparent;
+  outline: none;
 }
 
 
-/* .modal {
+/* ------------------------------*/
+/* -----------FORM CSS-----------*/
+/* ------------------------------*/
+.neu-form-controll {
   background-color: transparent;
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  padding: 0;
-} */
+  box-shadow:
+    inset 3px 3px 7px var(--bs-shadow),
+    inset -2px -2px 5px var(--bs-highlight);
+  outline: none;
+  border: 2px solid var(--bs-primary);
+}
+
+.neu-form-controll:focus {
+  background-color: transparent;
+  box-shadow: inset 3px 3px 7px var(--bs-shadow),
+    inset -2px -2px 5px var(--bs-highlight);
+  outline: none;
+  border: 2px solid var(--bs-neupurple);
+}
+
+.neu-form-select {}
+
+/*     2 Buttons [ ] - [ ]                */
+.neu-form-2b-even {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.neu-form-2b-even Button {
+  width: 48% !important;
+}
+
+/*     3 Buttons [ ] - [ ] -[ ]           */
+
+.neu-form-3b-even {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.neu-form-3b-even Button {
+  width: 30% !important;
+}
+
+/*     4 Buttons [ ] - [ ] - [ ] - [ ]    */
+
+.neu-form-4b-even {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.neu-form-4b-even Button {
+  width: 21% !important;
+}
+
 
 /* ------------------------------------------------------- */
 

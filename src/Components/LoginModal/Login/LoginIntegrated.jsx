@@ -41,13 +41,19 @@ export default function LoginIntegrated({ userLoggedIn, handleClose }) {
 			<Form.Group controlId="loginFormEmail" className="mb-3">
 				<Form.Label>Email</Form.Label>
 
-				<Form.Control type="email" className="neu-login" placeholder="Enter your email address" onChange={(e) => setEmail(e.target.value)} required />
+				<Form.Control
+					type="email"
+					className="neu-form-controll"
+					placeholder="Enter your email address"
+					onChange={(e) => setEmail(e.target.value)}
+					required
+				/>
 			</Form.Group>
 			<Form.Group controlId="loginFormPassword" className="mb-3">
 				<Form.Label>Password</Form.Label>
 				<Form.Control
 					type="password"
-					className="neu-login"
+					className="neu-form-controll"
 					placeholder="Enter your password"
 					onChange={(e) => setPassword(e.target.value)}
 					required

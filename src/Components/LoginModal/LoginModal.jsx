@@ -21,15 +21,10 @@ import CustomModal from "../CustomModal/CustomModal";
 // show={showModal} handleClose={handleCloseModal} userLoggedIn={userLoggedIn}
 export default function LoginModal({ show, handleClose, userLoggedIn }) {
 	return (
-		<CustomModal isOpen={show} onClose={handleClose}>
-			<section className="neu-modal-title">
-				<h2>Login</h2>
-			</section>
-			<section className="neu-modal-body">
-				<LoginIntegrated userLoggedIn={userLoggedIn} handleClose={handleClose} />
-				<div>Or Login Using Your Notion Account:</div>
-				<LoginOAuthButton />
-			</section>
+		<CustomModal show={show} onClose={handleClose} title="Login">
+			<LoginIntegrated userLoggedIn={userLoggedIn} handleClose={handleClose} />
+			<p>Or Login Using Your Notion Account:</p>
+			<LoginOAuthButton />
 		</CustomModal>
 	);
 }
