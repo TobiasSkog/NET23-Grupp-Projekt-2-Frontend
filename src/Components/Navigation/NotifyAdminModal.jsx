@@ -32,11 +32,11 @@ export default function NotifyAdminModal() {
 		<div>
 			{conditionMet ? (
 				<Button className="neu-nav-notification-new-msg" onClick={handleShowModal}>
-					<i class="bi bi-bell-fill" />
+					<i className="bi bi-bell-fill" />
 				</Button>
 			) : (
 				<Button className="neu-nav-notification-off" disabled>
-					<i class="bi bi-bell" />
+					<i className="bi bi-bell" />
 				</Button>
 			)}
 
