@@ -33,69 +33,6 @@ const TimeReports = ({ userSignal }) => {
 		}
 	}, [location.pathname]);
 
-	const fetchProjects = async () => {
-		try {
-			const response = await axios.get("http://localhost:3001/databases/projects");
-			setProjects(response.data || []);
-		} catch (error) {
-			console.error("Failed to fetch projects:", error);
-		}
-	};
-
-	const fetchTimeReports = async () => {
-		try {
-			const response = await axios.get("http://localhost:3001/databases/timereports");
-			const userTimeReports = response.data.filter((report) => report.person === user.id);
-			setTimeReports(userTimeReports);
-		} catch (error) {
-			console.error("Failed to fetch time reports:", error);
-		}
-	};
-
-	const openReportModal = () => setShowReportModal(true);
-	const closeReportModal = () => setShowReportModal(false);
-	const openReportListModal = () => setShowReportListModal(true);
-	const closeReportListModal = () => setShowReportListModal(false);
-
-	const handleEditReportSelection = (report) => {
-		setSelectedReport(report);
-		setShowReportListModal(false);
-		setShowEditReportModal(true);
-	};
-
-	const closeEditReportModal = () => {
-		setShowEditReportModal(false);
-		setSelectedReport(null); // Reset selected report on modal close
-		fetchTimeReports(); // Refetch reports to reflect any updates
-	};
-
-	const handleSubmitReport = async (report) => {
-		try {
-			const response = await axios.post("http://localhost:3001/pages/timereports", report);
-			console.log("Report added:", response.data);
-		} catch (error) {
-			console.error("Failed to add time report:", error);
-		}
-		closeReportModal();
-	};
-
-	const handleUpdateReport = async (updatedReport) => {
-		try {
-			const response = await axios.patch(`http://localhost:3001/pages/timeReports/user/${updatedReport.id}`, {
-				date: updatedReport.date,
-				hours: updatedReport.hours,
-				note: updatedReport.note,
-				personId: updatedReport.person,
-				projectId: updatedReport.project,
-			});
-			console.log("Report updated:", response.data);
-			closeEditReportModal();
-		} catch (error) {
-			console.error("Failed to update report:", error);
-		}
-
-	  }, [location.pathname]);
-
   const fetchProjects = async () => {
     try {
       const response = await axios.get('http://localhost:3001/databases/projects');
@@ -115,7 +52,14 @@ const TimeReports = ({ userSignal }) => {
     }
   };
 
-  const openReportModal = () => setShowReportModal(true);
+  const openReportModal = () => {
+    setShowReportModal(true);
+    
+    console.log("showReportModal state:", showReportModal);
+  };
+  useEffect(() => {
+    console.log("Modal should show:", showReportModal);
+  }, [showReportModal]);
   const closeReportModal = () => setShowReportModal(false);
 
   const handleEditReportSelection = (report) => {
@@ -194,9 +138,7 @@ const TimeReports = ({ userSignal }) => {
         </Table>
       </div>
 
-      <ReportModal
-        showModal={showReportModal}
-        closeModal={closeReportModal}
+      <ReportModal key={showReportModal} showModal={showReportModal} closeModal={closeReportModal} 
         projects={projects}
 		reports={timeReports}
         reportData={reportData}
