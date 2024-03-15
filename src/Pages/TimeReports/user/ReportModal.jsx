@@ -27,12 +27,11 @@ const ReportModal = ({ showModal, closeModal, projects, reports, reportData, set
         projectId: mostRecentReport.projectId, // Pre-fill project with the most recent report's project ID
       }));
     }
-  // Initialize reportData.date with today's date
-  setReportData(prev => ({
-    ...prev,
-    date: new Date().toISOString().slice(0, 10),
-  }));
-}, []);
+    setReportData(prev => ({
+      ...prev,
+      date: new Date().toISOString().slice(0, 10),
+    }));
+  }, []);
 
 
 	const getMostRecentReport = () => {
@@ -71,13 +70,12 @@ const ReportModal = ({ showModal, closeModal, projects, reports, reportData, set
 		handleSubmit(submissionData);
 	};
 
-	const noteSuggestions = ["Completed the task", "Worked on *this* feature ", "Coded this module"];
-
 	const handleNoteInputChange = (e) => {
 		const { value } = e.target;
 		setReportData((prev) => ({ ...prev, note: value }));
 
-
+    console.log("ReportModal: showModal prop is", showModal);
+  };
   return (
     <Modal show={showModal} onHide={closeModal}>
       <Modal.Header closeButton>
@@ -143,7 +141,6 @@ const ReportModal = ({ showModal, closeModal, projects, reports, reportData, set
                 {suggestedHours.map((note, index) => (
                   <li
                     key={index}
-                    onClick={() => handleSuggestionClick(note)}
                   >
                     {note}
                   </li>
@@ -163,7 +160,6 @@ const ReportModal = ({ showModal, closeModal, projects, reports, reportData, set
       </Modal.Body>
     </Modal>
   );
-
 };
 
 export default ReportModal;
