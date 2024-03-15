@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Button, Form } from "react-bootstrap";
 
-export default function LoginIntegrated({ userLoggedIn }) {
+export default function LoginIntegrated({ userLoggedIn, handleClose }) {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const navigate = useNavigate();
@@ -30,6 +30,7 @@ export default function LoginIntegrated({ userLoggedIn }) {
 	const handleLogin = (e) => {
 		e.preventDefault();
 		const isAuthenticated = authUserDatabase();
+		handleClose();
 		if (!isAuthenticated) {
 			navigate("/");
 		}

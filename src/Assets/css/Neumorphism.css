@@ -91,7 +91,9 @@ main p {
     -10px -10px 10px 0px var(--bs-highlight) inset;
 }
 
-/* ------------------------------------------------------- */
+/* ------------------------------*/
+/* -----------CARD CSS-----------*/
+/* ------------------------------*/
 
 .neu-card {
   z-index: 1;
@@ -270,6 +272,7 @@ main p {
 }
 
 .neu-nav {
+  z-index: 1000;
   height: 60px;
   margin: 0;
   padding: 0;
@@ -279,7 +282,12 @@ main p {
   box-shadow:
     -5px -5px 5px var(--bs-highlight),
     5px 5px 5px var(--bs-shadow);
+}
 
+.neu-nav-item {
+  box-shadow:
+    inset -5px -5px 5px var(--bs-highlight),
+    inset 5px 5px 5px var(--bs-shadow);
 }
 
 .neu-nav-notification-new-msg {
@@ -313,7 +321,17 @@ main p {
 
 
 
+.neu-hidden {
+  display: none;
+}
+
+.neu-hidden i {
+  visibility: visible;
+}
+
+
 .neu-nav-user-container {
+  visibility: visible;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -432,14 +450,59 @@ main p {
 
 /* ------------------------------------------------------- */
 
-.modal-content {
+/* .modal-content {
   border: 2px solid var(--bs-primary);
   outline: none;
 
   box-shadow:
     -8px -8px 10px var(--bs-highlight),
     8px 8px 10px var(--bs-shadow);
+} */
+
+.custom-modal-overlay {
+  background-color: transparent;
 }
+
+.custom-modal-content {
+  background-color: transparent;
+  box-shadow:
+    inset 3px 3px 7px var(--bs-shadow),
+    inset -2px -2px 5px var(--bs-highlight);
+  outline: none;
+  border: 2px solid var(--bs-primary);
+}
+
+.custom-modal-close-button {
+  font-size: 1rem;
+  border: 2px solid var(--bs-primary);
+  outline: none;
+  color: var(--bs-textdark);
+  text-decoration: none;
+  box-shadow:
+    -3px -3px 6px var(--bs-highlight),
+    3px 3px 6px var(--bs-shadow);
+}
+
+
+.custom-modal-close-button:hover {
+  border: 2px solid var(--bs-neuturquoise);
+  box-shadow:
+    inset -3px -3px 7px var(--bs-highlight),
+    inset 2px 2px 5px var(--bs-shadow);
+}
+
+.poo {
+  background-color: salmon;
+}
+
+
+/* .modal {
+  background-color: transparent;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+} */
 
 /* ------------------------------------------------------- */
 

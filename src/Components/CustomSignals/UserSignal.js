@@ -21,7 +21,7 @@ function getUser() {
 export function userLoggedIn(userObject, cookieExpirationType, cookieExpirationTimeValue) {
 	if (!userObject) {
 		successfulLogin.value = false;
-		return null;
+		return false;
 	}
 
 	let definedTimeValue;
@@ -64,6 +64,7 @@ export function userLoggedIn(userObject, cookieExpirationType, cookieExpirationT
 
 	successfulLogin.value = true;
 	userSignal.value = userObject;
+	return true;
 }
 
 export function userLoggedOut() {

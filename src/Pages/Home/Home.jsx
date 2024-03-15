@@ -1,14 +1,11 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Logo from "../../Assets/img/coffe and insomnia logo.png";
 import LoginModal from "../../Components/LoginModal/LoginModal";
 import { Container, Row, Col, Button } from "react-bootstrap";
 
 import { useNavigate } from "react-router-dom";
 
-export default function Home({ userSignal, userLoggedIn }) {
-	const [showLogin, setShowLogin] = useState(false);
-	const handleShowLogin = () => setShowLogin(true);
-	const handleCloseLogin = () => setShowLogin(false);
+export default function Home({ userSignal, handleShowModal }) {
 	const navigate = useNavigate();
 	const user = userSignal.value;
 	useEffect(() => {
@@ -38,17 +35,16 @@ export default function Home({ userSignal, userLoggedIn }) {
 				</Col>
 
 				{/* Login Button */}
-				{!user && (
-					<Col xs={12} className="text-center justify-content-center align-items-center">
-						<Button className="mt-4 mt-md-5  neu-button-login neu-size-40" onClick={handleShowLogin}>
-							Login
-						</Button>
-					</Col>
-				)}
+				{/* {!user && ()} */}
+				<Col xs={12} className="text-center justify-content-center align-items-center">
+					<Button className="mt-4 mt-md-5  neu-button-login neu-size-40" onClick={handleShowModal}>
+						Login
+					</Button>
+				</Col>
 			</Row>
 
 			{/* Login Modal */}
-			<LoginModal show={showLogin} handleClose={handleCloseLogin} userLoggedIn={userLoggedIn} />
+			{/* <LoginModal show={showLogin} handleClose={() => setShowLogin(false)} userLoggedIn={userLoggedIn} setShowLogin={setShowLogin} /> */}
 		</Container>
 	);
 }
