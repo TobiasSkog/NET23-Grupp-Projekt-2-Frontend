@@ -116,6 +116,7 @@ export default function FormModal({
 							<option>Active</option>
 							<option>Next up</option>
 							<option>Done</option>
+							<option>Paused</option>
 						</Form.Select>
 						<Form.Group>
 							<Form.Label htmlFor="hours" className="text-light">
