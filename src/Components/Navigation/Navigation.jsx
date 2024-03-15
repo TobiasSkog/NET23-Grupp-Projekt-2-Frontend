@@ -7,7 +7,7 @@ import NotifyAdminModal from "./NotifyAdminModal";
 export default function Navigation({ userSignal, userLoggedOut, ...rest }) {
 	const user = userSignal.value;
 	const navigate = useNavigate();
-	console.log(user);
+	//console.log(user);
 	const handleLogout = () => {
 		userLoggedOut();
 		navigate("/");
@@ -16,7 +16,9 @@ export default function Navigation({ userSignal, userLoggedOut, ...rest }) {
 	return (
 		<Navbar expand="lg" className="neu-nav">
 			<Container>
-				<Navbar.Brand href={user ? "/projects" : "/"}>Caffeine & Insomnia</Navbar.Brand>
+				<Navbar.Brand href={user ? "/projects" : "/"}>
+					Caffeine & Insomnia
+				</Navbar.Brand>
 
 				{user && (
 					<Navbar.Collapse className="basic-navbar-nav">
@@ -45,7 +47,13 @@ export default function Navigation({ userSignal, userLoggedOut, ...rest }) {
 				) : null}
 
 				<section className="neu-nav-user-container">
-					<i className={user ? "bi bi-person-circle neu-online-icon" : "bi bi-person-circle neu-offline-icon"} />
+					<i
+						className={
+							user
+								? "bi bi-person-circle neu-online-icon"
+								: "bi bi-person-circle neu-offline-icon"
+						}
+					/>
 				</section>
 				<Navbar.Toggle aria-controls="basic-navbar-nav" />
 			</Container>

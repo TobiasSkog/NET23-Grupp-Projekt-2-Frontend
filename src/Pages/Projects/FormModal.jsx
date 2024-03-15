@@ -3,7 +3,18 @@ import Form from "react-bootstrap/Form";
 import axios from "axios";
 import Modal from "react-bootstrap/esm/Modal";
 
-export default function FormModal({ formInput, setFormInput, closeModal, modalOpen, updateProjects, edit, setEdit, projectId, setLoading }) {
+export default function FormModal({
+	formInput,
+	setFormInput,
+	closeModal,
+	modalOpen,
+	updateProjects,
+	edit,
+	setEdit,
+	projectId,
+	setLoading,
+	people,
+}) {
 	const handleSubmit = async (event) => {
 		event.preventDefault();
 		try {
@@ -21,17 +32,27 @@ export default function FormModal({ formInput, setFormInput, closeModal, modalOp
 			} else if (!formInput.endDate.trim()) {
 				alert("Enddate is required");
 				return;
+			} else if (!formInput.teamMember.trim()) {
+				alert("You must asign at least 1 team member");
+				return;
 			}
 
 			if (edit) {
 				// If in editing mode, update existing project
 
-				response = await axios.patch(`http://localhost:3001/pages/projects/${projectId}`, formInput);
+				response = await axios.patch(
+					`http://localhost:3001/pages/projects/${projectId}`,
+					formInput
+				);
 				console.log("Project updated successfully:", response.data);
 			} else {
 				// If not in editing mode, create a new project
 				console.log(formInput);
-				response = await axios.post("http://localhost:3001/pages/projects", formInput);
+				response = await axios.post(
+					"http://localhost:3001/pages/projects",
+					formInput
+				);
+				//console.log(formInput);
 				console.log("New project created successfully:", response.data);
 			}
 
@@ -110,6 +131,31 @@ export default function FormModal({ formInput, setFormInput, closeModal, modalOp
 								onChange={handleInputChange}
 							/>
 						</Form.Group>
+						<Form.Select
+							className="mb-2 fw-semibold"
+							name="teamMembers"
+							id="teamMembers"
+							aria-label="teamMembers"
+							multiple
+							value={formInput.teamMember?.split(",")}
+							onChange={(event) => {
+								const selectedOptions = Array.from(
+									event.target.selectedOptions,
+									(option) => option.value
+								);
+								const selectedEmails = selectedOptions.join(",");
+								setFormInput((prevValue) => ({
+									...prevValue,
+									teamMember: selectedEmails,
+								}));
+							}}>
+							<option value="">--Select Team members--</option>
+							{people.map((person) => (
+								<option key={person.id} value={person.email}>
+									{person.name}
+								</option>
+							))}
+						</Form.Select>
 
 						<Form.Group>
 							<Form.Label htmlFor="startDate" className="text-light">
@@ -151,7 +197,10 @@ export default function FormModal({ formInput, setFormInput, closeModal, modalOp
 							}}>
 							Submit
 						</Button>
-						<Button type="button" className="w-100 btn-secondary" onClick={closeModal}>
+						<Button
+							type="button"
+							className="w-100 btn-secondary"
+							onClick={closeModal}>
 							Cancel
 						</Button>
 					</Form>

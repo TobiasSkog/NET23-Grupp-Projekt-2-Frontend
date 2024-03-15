@@ -1,58 +1,58 @@
 * {
-  background-color: var(--bs-primary);
-  color: #303030;
-  padding: 0;
-  margin: 0;
+	background-color: var(--bs-primary);
+	color: #303030;
+	padding: 0;
+	margin: 0;
 }
 
 body,
 #root {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  margin: 0;
-  padding: 0;
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+	margin: 0;
+	padding: 0;
 }
 
 header {
-  height: 60px;
+	height: 60px;
 }
 
 main {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  min-height: calc(100vh - 100px);
-  margin: 0;
-  padding: 0;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	min-height: calc(100vh - 100px);
+	margin: 0;
+	padding: 0;
 }
 
 main p {
-  font-size: 1rem;
-  background-color: transparent;
-  margin: 0;
-  padding: 0;
+	font-size: 1rem;
+	background-color: transparent;
+	margin: 0;
+	padding: 0;
 }
 
 /* ------------------------------------------------------- */
 .card,
 .modal {
-  border: none;
+	border: none;
 }
 
 .modal-header .btn-close {
-  /* color: url("data:image/svg+xml,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 16 16%27 fill=%27%23000%27%3e%3cpath d=%27M.293.293a1 1 0 0 1 1.414 0L8 6.586 14.293.293a1 1 0 1 1 1.414 1.414L9.414 8l6.293 6.293a1 1 0 0 1-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 0 1-1.414-1.414L6.586 8 .293 1.707a1 1 0 0 1 0-1.414z%27/%3e%3c/svg%3e"); */
-  /* background-color: url("data:image/svg+xml,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 16 16%27 fill=%27%23f76400%27%3e%3cpath d=%27M.293.293a1 1 0 0 1 1.414 0L8 6.586 14.293.293a1 1 0 1 1 1.414 1.414L9.414 8l6.293 6.293a1 1 0 0 1-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 0 1-1.414-1.414L6.586 8 .293 1.707a1 1 0 0 1 0-1.414z%27/%3e%3c/svg%3e"); */
-  color: salmon;
-  background-color: salmon;
+	/* color: url("data:image/svg+xml,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 16 16%27 fill=%27%23000%27%3e%3cpath d=%27M.293.293a1 1 0 0 1 1.414 0L8 6.586 14.293.293a1 1 0 1 1 1.414 1.414L9.414 8l6.293 6.293a1 1 0 0 1-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 0 1-1.414-1.414L6.586 8 .293 1.707a1 1 0 0 1 0-1.414z%27/%3e%3c/svg%3e"); */
+	/* background-color: url("data:image/svg+xml,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 16 16%27 fill=%27%23f76400%27%3e%3cpath d=%27M.293.293a1 1 0 0 1 1.414 0L8 6.586 14.293.293a1 1 0 1 1 1.414 1.414L9.414 8l6.293 6.293a1 1 0 0 1-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 0 1-1.414-1.414L6.586 8 .293 1.707a1 1 0 0 1 0-1.414z%27/%3e%3c/svg%3e"); */
+	color: salmon;
+	background-color: salmon;
 }
 
 .neu-home-container {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
 }
 
 /* ------------------------------------------------------- */
@@ -61,303 +61,266 @@ main p {
 /* ------------------------------------------------------- */
 
 .neu-hard-outer {
-  border: 2px solid var(--bs-primary);
-  outline: none;
-  box-shadow:
-    -5px -5px 5px var(--bs-highlight),
-    5px 5px 5px var(--bs-shadow);
+	border: 2px solid var(--bs-primary);
+	outline: none;
+	box-shadow: -5px -5px 5px var(--bs-highlight), 5px 5px 5px var(--bs-shadow);
 }
 
 .neu-hard-inner {
-  border: 2px solid var(--bs-primary);
-  box-shadow:
-    inset 3px 3px 2px var(--bs-shadow),
-    inset -2px -2px 2px var(--bs-highlight);
+	border: 2px solid var(--bs-primary);
+	box-shadow: inset 3px 3px 2px var(--bs-shadow),
+		inset -2px -2px 2px var(--bs-highlight);
 }
 
 .neu-soft-outer {
-  box-shadow:
-    -10px -10px 30px 0px var(--bs-highlight),
-    10px 10px 30px 0px var(--bs-shadow),
-    -10px -10px 10px 0px var(--bs-shadow) inset,
-    10px 10px 10px 0px var(--bs-highlight)
+	box-shadow: -10px -10px 30px 0px var(--bs-highlight),
+		10px 10px 30px 0px var(--bs-shadow),
+		-10px -10px 10px 0px var(--bs-shadow) inset,
+		10px 10px 10px 0px var(--bs-highlight);
 }
 
 .neu-soft-inner {
-  box-shadow:
-    10px 10px 30px 0px var(--bs-highlight),
-    -10px -10px 30px 0px var(--bs-shadow),
-    10px 10px 10px 0px var(--bs-shadow) inset,
-    -10px -10px 10px 0px var(--bs-highlight) inset;
+	box-shadow: 10px 10px 30px 0px var(--bs-highlight),
+		-10px -10px 30px 0px var(--bs-shadow),
+		10px 10px 10px 0px var(--bs-shadow) inset,
+		-10px -10px 10px 0px var(--bs-highlight) inset;
 }
 
 /* ------------------------------------------------------- */
 
 .neu-card {
-  z-index: 1;
-  border-radius: 12px;
-  min-width: 250px;
-  border: 2px solid var(--bs-primary);
-  outline: none;
-  box-shadow:
-    -5px -5px 5px var(--bs-highlight),
-    5px 5px 5px var(--bs-shadow);
+	z-index: 1;
+	border-radius: 12px;
+	min-width: 250px;
+	max-width: 350px;
+	margin-bottom: 1rem;
+	border: 2px solid var(--bs-primary);
+	outline: none;
+	box-shadow: -5px -5px 5px var(--bs-highlight), 5px 5px 5px var(--bs-shadow);
 }
 
 .neu-card-section {
-  border-radius: 8px;
-  border: 2px solid var(--bs-primary);
-  outline: none;
-  padding: 4px 2px;
-  margin-bottom: 20px;
-  box-shadow:
-    -5px -5px 5px var(--bs-highlight),
-    5px 5px 5px var(--bs-shadow);
+	border-radius: 8px;
+	border: 2px solid var(--bs-primary);
+	outline: none;
+	padding: 4px 2px;
+	margin-bottom: 20px;
+	box-shadow: -5px -5px 5px var(--bs-highlight), 5px 5px 5px var(--bs-shadow);
 }
 
 .neu-card-section p {
-  font-size: 1.2rem;
+	font-size: 1.2rem;
 }
 
 .neu-center {
-  text-align: center;
+	text-align: center;
 }
 
 .neu-left {
-  text-align: left;
+	text-align: left;
 }
 
 .neu-right {
-  text-align: right;
+	text-align: right;
 }
 
-
 .neu-card-inset {
-  box-shadow:
-    inset 2px 2px 5px var(--bs-shadow),
-    inset -3px -3px 7px var(--bs-highlight);
+	box-shadow: inset 2px 2px 5px var(--bs-shadow),
+		inset -3px -3px 7px var(--bs-highlight);
 }
 
 .neu-breaker {
-  background-color: var(--bs-neuorange);
-  width: 90%;
-  height: 4px;
-  border-radius: 5px;
-  transform: translate(5%);
-  box-shadow:
-    inset -1px -1px 1px var(--bs-highlight),
-    inset 1px 1px 1px var(--bs-shadow);
+	background-color: var(--bs-neuorange);
+	width: 90%;
+	height: 4px;
+	border-radius: 5px;
+	transform: translate(5%);
+	box-shadow: inset -1px -1px 1px var(--bs-highlight),
+		inset 1px 1px 1px var(--bs-shadow);
 }
 
 .neu-prog {
-  display: flex;
-  border-radius: 0.55rem;
-  height: 1.2rem;
-  text-align: center;
-  border: 0.0625rem solid #0000000a;
-  overflow: hidden;
-  box-shadow:
-    inset -3px -3px 7px var(--bs-highlight),
-    inset 2px 2px 5px var(--bs-shadow);
+	display: flex;
+	border-radius: 0.55rem;
+	height: 1.2rem;
+	text-align: center;
+	border: 0.0625rem solid #0000000a;
+	overflow: hidden;
+	box-shadow: inset -3px -3px 7px var(--bs-highlight),
+		inset 2px 2px 5px var(--bs-shadow);
 }
 
 .neu-prog-bar {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  color: var(--bs-highlight);
-  height: 100%;
-  border-radius: 0.55rem;
-  border: 0.0625rem solid var(--bs-shadow);
-  white-space: nowrap;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	color: var(--bs-highlight);
+	height: 100%;
+	border-radius: 0.55rem;
+	border: 0.0625rem solid var(--bs-shadow);
+	white-space: nowrap;
 }
 
 .neu-card-status {
-  display: flex;
-  align-items: center;
-  justify-content: end;
-  background-color: transparent;
-  margin: 5px;
-  font-size: 1.2rem;
-  /* text-shadow:
+	display: flex;
+	align-items: center;
+	justify-content: end;
+	background-color: transparent;
+	margin: 5px;
+	font-size: 1.2rem;
+	/* text-shadow:
     0.0625rem 0.0625rem 0rem var(--bs-shadow),
     -0.0625rem -0.0625rem 0rem var(--bs-highlight); */
 }
 
 .neu-card-active {
-  font-weight: bold;
-  border-radius: 8px;
-  padding: 2px 8px;
-  /* border: 2px solid var(--bs-neugreen); 
+	font-weight: bold;
+	border-radius: 8px;
+	padding: 2px 8px;
+	/* border: 2px solid var(--bs-neugreen); 
   var(--bs-neugreen)
   */
-  color: transparent !important;
-  color: var(--bs-neugreen) !important;
-  box-shadow:
-    inset 3px 3px 5px var(--bs-shadow),
-    inset -2px -2px 4px var(--bs-highlight);
-
+	color: transparent !important;
+	color: var(--bs-neugreen) !important;
+	box-shadow: inset 3px 3px 5px var(--bs-shadow),
+		inset -2px -2px 4px var(--bs-highlight);
 }
 
 .neu-card-next {
-  font-weight: bold;
-  border-radius: 8px;
-  padding: 2px 8px;
-  /* border: 2px solid var(--bs-neuturquoise); */
-  color: var(--bs-neuturquoise) !important;
-  box-shadow:
-    inset 3px 3px 5px var(--bs-shadow),
-    inset -2px -2px 4px var(--bs-highlight);
+	font-weight: bold;
+	border-radius: 8px;
+	padding: 2px 8px;
+	/* border: 2px solid var(--bs-neuturquoise); */
+	color: var(--bs-neuturquoise) !important;
+	box-shadow: inset 3px 3px 5px var(--bs-shadow),
+		inset -2px -2px 4px var(--bs-highlight);
 }
 
 .neu-card-pause {
-  font-weight: bolder;
-  border-radius: 8px;
-  padding: 2px 8px;
-  /* border: 2px solid var(--bs-neured); */
-  color: var(--bs-neured) !important;
-  box-shadow:
-    inset 3px 3px 5px var(--bs-shadow),
-    inset -2px -2px 4px var(--bs-highlight);
+	font-weight: bolder;
+	border-radius: 8px;
+	padding: 2px 8px;
+	/* border: 2px solid var(--bs-neured); */
+	color: var(--bs-neured) !important;
+	box-shadow: inset 3px 3px 5px var(--bs-shadow),
+		inset -2px -2px 4px var(--bs-highlight);
 }
 
 .neu-card-done {
-  font-weight: bolder;
-  border-radius: 8px;
-  padding: 2px 8px;
-  /* border: 2px solid var(--bs-neupurple); */
-  color: var(--bs-neupurple) !important;
-  box-shadow:
-    inset 3px 3px 5px var(--bs-shadow),
-    inset -2px -2px 4px var(--bs-highlight);
+	font-weight: bolder;
+	border-radius: 8px;
+	padding: 2px 8px;
+	/* border: 2px solid var(--bs-neupurple); */
+	color: var(--bs-neupurple) !important;
+	box-shadow: inset 3px 3px 5px var(--bs-shadow),
+		inset -2px -2px 4px var(--bs-highlight);
 }
 
 .neu-prog-inv {
-  box-shadow:
-    inset 2px 2px 2px var(--bs-highlight),
-    inset -2px -2px 2px var(--bs-shadow);
+	box-shadow: inset 2px 2px 2px var(--bs-highlight),
+		inset -2px -2px 2px var(--bs-shadow);
 }
 
 .neu-img {
-  height: 200px;
-  width: 200px;
-  margin-bottom: 70px;
-  border-radius: 50%;
-  border: 1px solid var(--bs-primary);
+	height: 200px;
+	width: 200px;
+	margin-bottom: 70px;
+	border-radius: 50%;
+	border: 1px solid var(--bs-primary);
 
-  box-shadow:
-    -8px -8px 5px var(--bs-highlight),
-    8px 8px 5px var(--bs-shadow);
+	box-shadow: -8px -8px 5px var(--bs-highlight), 8px 8px 5px var(--bs-shadow);
 }
 
-
-
 .neu-footer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  height: 40px;
-  border: 2px solid var(--bs-primary);
-  border-radius: 12px;
-  outline: none;
-  box-shadow:
-    -5px -5px 5px var(--bs-highlight),
-    5px 5px 5px var(--bs-shadow);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	height: 40px;
+	border: 2px solid var(--bs-primary);
+	border-radius: 12px;
+	outline: none;
+	box-shadow: -5px -5px 5px var(--bs-highlight), 5px 5px 5px var(--bs-shadow);
 }
 
 .neu-nav {
-  height: 60px;
-  margin: 0;
-  padding: 0;
-  border: 2px solid var(--bs-primary);
-  border-radius: 12px;
-  outline: none;
-  box-shadow:
-    -5px -5px 5px var(--bs-highlight),
-    5px 5px 5px var(--bs-shadow);
-
+	height: 60px;
+	margin: 0;
+	padding: 0;
+	border: 2px solid var(--bs-primary);
+	border-radius: 12px;
+	outline: none;
+	box-shadow: -5px -5px 5px var(--bs-highlight), 5px 5px 5px var(--bs-shadow);
 }
 
 .neu-nav-notification-new-msg {
-  border-radius: 50%;
-  height: 100%;
-  width: 100%;
-  border: 2px solid var(--bs-neuorange);
-  outline: none;
-  box-shadow:
-    -3px -3px 6px var(--bs-highlight),
-    3px 3px 6px var(--bs-shadow);
+	border-radius: 50%;
+	height: 100%;
+	width: 100%;
+	border: 2px solid var(--bs-neuorange);
+	outline: none;
+	box-shadow: -3px -3px 6px var(--bs-highlight), 3px 3px 6px var(--bs-shadow);
 }
 
 .neu-nav-notification-new-msg i {
-  height: 100%;
-  width: 100%;
-  color: var(--bs-neuorange);
-  text-shadow: 2px 2px 2px var(--bs-textdark);
+	height: 100%;
+	width: 100%;
+	color: var(--bs-neuorange);
+	text-shadow: 2px 2px 2px var(--bs-textdark);
 }
 
 .neu-nav-notification-off {
-  height: 100%;
-  width: 100%;
-  border-radius: 50%;
-  border: 2px solid var(--bs-primary);
-  outline: none;
-  box-shadow:
-    inset -3px -3px 6px var(--bs-highlight),
-    inset 3px 3px 6px var(--bs-shadow);
+	height: 100%;
+	width: 100%;
+	border-radius: 50%;
+	border: 2px solid var(--bs-primary);
+	outline: none;
+	box-shadow: inset -3px -3px 6px var(--bs-highlight),
+		inset 3px 3px 6px var(--bs-shadow);
 }
-
-
 
 .neu-nav-user-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: row;
-  padding: 0;
-  margin: 0;
-  min-width: 50px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: row;
+	padding: 0;
+	margin: 0;
+	min-width: 50px;
 
-  border-radius: 5px;
-  box-shadow: inset 3px 3px 7px var(--bs-shadow),
-    inset -2px -2px 5px var(--bs-highlight);
+	border-radius: 5px;
+	box-shadow: inset 3px 3px 7px var(--bs-shadow),
+		inset -2px -2px 5px var(--bs-highlight);
 }
 
-
 .neu-online-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transform: scale(1.4) translate(70%);
-  padding: 2px;
-  color: var(--bs-neugreen);
-  background-color: var(--bs-primary);
-  border-radius: 50%;
-  transition: all 1s ease;
-  box-shadow: -2px -2px 4px var(--bs-highlight),
-    2px 2px 4px var(--bs-shadow);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transform: scale(1.4) translate(70%);
+	padding: 2px;
+	color: var(--bs-neugreen);
+	background-color: var(--bs-primary);
+	border-radius: 50%;
+	transition: all 1s ease;
+	box-shadow: -2px -2px 4px var(--bs-highlight), 2px 2px 4px var(--bs-shadow);
 }
 
 .neu-offline-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transform: scale(1.4) translate(-70%);
-  padding: 2px;
-  color: var(--bs-textdark);
-  background-color: var(--bs-primary);
-  border-radius: 50%;
-  transition: all 1s ease-in-out;
-  box-shadow:
-    -2px -2px 4px var(--bs-highlight),
-    2px 2px 4px var(--bs-shadow);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transform: scale(1.4) translate(-70%);
+	padding: 2px;
+	color: var(--bs-textdark);
+	background-color: var(--bs-primary);
+	border-radius: 50%;
+	transition: all 1s ease-in-out;
+	box-shadow: -2px -2px 4px var(--bs-highlight), 2px 2px 4px var(--bs-shadow);
 }
-
-
 
 /* ------------------------------------------------------- */
 /* .navbar-brand {
@@ -366,79 +329,67 @@ main p {
 
 /* ------------------------------------------------------- */
 .neu-login {
-  background-color: transparent;
-  box-shadow:
-    inset 3px 3px 7px var(--bs-shadow),
-    inset -2px -2px 5px var(--bs-highlight);
-  outline: none;
-  border: 2px solid var(--bs-primary);
+	background-color: transparent;
+	box-shadow: inset 3px 3px 7px var(--bs-shadow),
+		inset -2px -2px 5px var(--bs-highlight);
+	outline: none;
+	border: 2px solid var(--bs-primary);
 }
 
 .neu-login:focus {
-  background-color: transparent;
-  box-shadow: inset 3px 3px 7px var(--bs-shadow),
-    inset -2px -2px 5px var(--bs-highlight);
-  outline: none;
-  border: 2px solid var(--bs-neupurple);
+	background-color: transparent;
+	box-shadow: inset 3px 3px 7px var(--bs-shadow),
+		inset -2px -2px 5px var(--bs-highlight);
+	outline: none;
+	border: 2px solid var(--bs-neupurple);
 }
 
-
 .neu-button-square {
-  font-size: 1rem;
-  border: 2px solid var(--bs-primary);
-  outline: none;
-  color: var(--bs-textdark);
-  text-decoration: none;
-  padding: 5px;
-  box-shadow:
-    -3px -3px 6px var(--bs-highlight),
-    3px 3px 6px var(--bs-shadow);
+	font-size: 1rem;
+	border: 2px solid var(--bs-primary);
+	outline: none;
+	color: var(--bs-textdark);
+	text-decoration: none;
+	padding: 5px;
+	box-shadow: -3px -3px 6px var(--bs-highlight), 3px 3px 6px var(--bs-shadow);
 }
 
 .neu-button-round {
-  font-size: 1rem;
-  border-radius: 50%;
-  border: 2px solid var(--bs-primary);
-  outline: none;
-  color: var(--bs-textdark);
-  text-decoration: none;
-  box-shadow:
-    -3px -3px 6px var(--bs-highlight),
-    3px 3px 6px var(--bs-shadow);
+	font-size: 1rem;
+	border-radius: 50%;
+	border: 2px solid var(--bs-primary);
+	outline: none;
+	color: var(--bs-textdark);
+	text-decoration: none;
+	box-shadow: -3px -3px 6px var(--bs-highlight), 3px 3px 6px var(--bs-shadow);
 }
 
 .neu-button-login {
-  font-size: 1rem;
-  border: 2px solid var(--bs-primary);
-  outline: none;
-  color: var(--bs-textdark);
-  text-decoration: none;
-  box-shadow:
-    -3px -3px 6px var(--bs-highlight),
-    3px 3px 6px var(--bs-shadow);
+	font-size: 1rem;
+	border: 2px solid var(--bs-primary);
+	outline: none;
+	color: var(--bs-textdark);
+	text-decoration: none;
+	box-shadow: -3px -3px 6px var(--bs-highlight), 3px 3px 6px var(--bs-shadow);
 }
 
 .neu-button-square:hover,
 .neu-button-round:hover,
 .neu-button-login:hover {
-  border: 2px solid var(--bs-neuturquoise);
-  box-shadow:
-    inset -3px -3px 7px var(--bs-highlight),
-    inset 2px 2px 5px var(--bs-shadow);
+	border: 2px solid var(--bs-neuturquoise);
+	box-shadow: inset -3px -3px 7px var(--bs-highlight),
+		inset 2px 2px 5px var(--bs-shadow);
 }
 
 /* ------------------------------------------------------- */
 
-
 /* ------------------------------------------------------- */
 
 .modal-content {
-  border: 2px solid var(--bs-primary);
-  outline: none;
+	border: 2px solid var(--bs-primary);
+	outline: none;
 
-  box-shadow:
-    -8px -8px 10px var(--bs-highlight),
-    8px 8px 10px var(--bs-shadow);
+	box-shadow: -8px -8px 10px var(--bs-highlight), 8px 8px 10px var(--bs-shadow);
 }
 
 /* ------------------------------------------------------- */
@@ -446,42 +397,40 @@ main p {
 /* ------------------------------------------------------- */
 /* ------------------------------------------------------- */
 .neu-size-full {
-  width: 100% !important;
+	width: 100% !important;
 }
 
 .neu-size-half {
-  width: 48% !important;
+	width: 48% !important;
 }
 
-
-
 .neu-size-100 {
-  width: 100%;
+	width: 100%;
 }
 
 .neu-size-80 {
-  width: 80%;
+	width: 80%;
 }
 
 .neu-size-60 {
-  width: 60%;
+	width: 60%;
 }
 
 .neu-size-40 {
-  width: 40%;
+	width: 40%;
 }
 
 .neu-size-20 {
-  width: 20%;
+	width: 20%;
 }
 
 .neu-size-max {
-  width: 100%;
-  height: 100%;
+	width: 100%;
+	height: 100%;
 }
 
 .neu-pad-bot-5 {
-  padding-bottom: 5%;
+	padding-bottom: 5%;
 }
 
 /* 
