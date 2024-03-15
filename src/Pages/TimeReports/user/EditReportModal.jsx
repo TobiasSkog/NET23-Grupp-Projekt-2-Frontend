@@ -80,11 +80,6 @@ const EditReportModal = ({
           </Button>
         </Form>
       </Modal.Body>
-      <Modal.Footer>
-        <Button variant="secondary" onClick={closeModal}>
-          Close
-        </Button>
-      </Modal.Footer>
     </Modal>
   );
 };
