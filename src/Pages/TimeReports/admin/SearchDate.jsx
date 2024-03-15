@@ -3,14 +3,15 @@ import Container from "react-bootstrap/esm/Container";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 
-export default function SearchDate({ setTimeReports, originalTimeReports }) {
-	const [searchDate, setSearchDate] = useState({
-		startDate: "",
-		endDate: "",
-	});
-
+export default function SearchDate({
+	setTimeReports,
+	originalTimeReports,
+	searchDate,
+	setSearchDate,
+}) {
 	const handleInputChange = (event) => {
 		const { name, value } = event.target;
+		//console.log(name, value);
 		setSearchDate({
 			...searchDate,
 			[name]: value,
@@ -25,10 +26,10 @@ export default function SearchDate({ setTimeReports, originalTimeReports }) {
 			(report) => report.date >= start && report.date <= end
 		);
 		setTimeReports(filteredDate);
-		setSearchDate({
-			startDate: "",
-			endDate: "",
-		});
+		// setSearchDate({
+		// 	startDate: "",
+		// 	endDate: "",
+		// });
 	};
 
 	return (

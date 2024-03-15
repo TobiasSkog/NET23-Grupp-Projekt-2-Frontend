@@ -39,8 +39,6 @@ const Project = ({ userSignal }) => {
 				const sorted = response.data.sort((a, b) =>
 					a.status.localeCompare(b.status)
 				);
-				setProject(sorted);
-				//console.log(sorted);
 
 				// User can only see own projects
 				const ownProjects = sorted.filter((project) =>
@@ -54,6 +52,9 @@ const Project = ({ userSignal }) => {
 				// Set the project state if userRole is user
 				if (user.userRole === "User") {
 					setProject(ownProjects);
+				} else {
+					setProject(sorted);
+					//console.log(sorted);
 				}
 			} catch (error) {
 				console.error("There was a problem with the fetch operation:", error);
@@ -182,7 +183,7 @@ const Project = ({ userSignal }) => {
 								item.status !== filteredProjects[index - 1].status && (
 									<hr className="border border-neuorange border-3 opacity-75" />
 								)}
-							<div className="col w-100 mx-auto" sm={4} md={3} lg={3}>
+							<div className="col w-100 mx-auto">
 								<ProjectCard
 									item={item}
 									handleClick={handleClick}
@@ -190,6 +191,7 @@ const Project = ({ userSignal }) => {
 									userRole={user.userRole}
 									setProjectId={setProjectId}
 									handleUserClick={handleUserClick}
+									project={project}
 								/>
 							</div>
 						</React.Fragment>
