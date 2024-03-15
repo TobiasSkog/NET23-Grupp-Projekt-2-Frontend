@@ -8,7 +8,7 @@ const ReportModal = ({ showModal, closeModal, projects, reports, reportData, set
 	const [projectTimespan, setProjectTimespan] = useState({ start: "", end: "" });
 	const [suggestedHours, setSuggestedHours] = useState([]);
 	const [showSuggestions, setShowSuggestions] = useState(false);
-
+  console.log("Projects Prop in ReportModal:", projects); // At the beginning of the ReportModal component
 	useEffect(() => {
 		if (location.state && location.state.project) {
 			setSelectedProjectId(location.state.project.id);
