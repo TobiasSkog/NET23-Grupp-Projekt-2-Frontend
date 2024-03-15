@@ -190,6 +190,7 @@ const Project = ({ userSignal }) => {
 									userRole={user.userRole}
 									setProjectId={setProjectId}
 									handleUserClick={handleUserClick}
+									project={project}
 								/>
 							</div>
 						</React.Fragment>

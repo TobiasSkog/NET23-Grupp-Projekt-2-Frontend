@@ -7,7 +7,7 @@ import axios from "axios";
 import Sorting from "./Sorting";
 import SearchDate from "./SearchDate";
 
-export default function TimereportUser({ person, userSignal }) {
+export default function TimereportUser({ person }) {
 	const [loading, setLoading] = useState(false);
 	const [timeReports, setTimeReports] = useState([]);
 	const [originalTimeReports, setOriginalTimeReports] = useState([]);
@@ -77,6 +77,24 @@ export default function TimereportUser({ person, userSignal }) {
 		console.log(project);
 		navigate("/timereports/project", { state: project });
 	};
+
+	// const handleInputChange = (event) => {
+	// 	const { name, value } = event.target;
+	// 	setSearchDate({
+	// 		...searchDate,
+	// 		[name]: value,
+	// 	});
+	// };
+
+	// const handleDateSearch = () => {
+	// 	const start = searchDate.startDate;
+	// 	const end = searchDate.endDate;
+
+	// 	const filteredDate = originalTimeReports.filter(
+	// 		(report) => report.date >= start && report.date <= end
+	// 	);
+	// 	setTimeReports(filteredDate);
+	// };
 
 	//Sum all hours to a Total - render in tfoot
 	const totalHours = timeReports.reduce((total, item) => total + item.hours, 0);
