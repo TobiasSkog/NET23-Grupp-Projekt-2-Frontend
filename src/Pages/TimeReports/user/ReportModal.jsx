@@ -1,21 +1,22 @@
-import React, { useState, useEffect } from 'react';
-import { Modal, Form, Button } from 'react-bootstrap';
-import { useLocation } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import { Modal, Form, Button } from "react-bootstrap";
+import { useLocation } from "react-router-dom";
 
 const ReportModal = ({ showModal, closeModal, projects, reports, reportData, setReportData, handleSubmit, userId }) => {
-  const location = useLocation();
-  const [selectedProjectId, setSelectedProjectId] = useState("");
-  const [projectTimespan, setProjectTimespan] = useState({ start: '', end: '' });
-  const [suggestedHours, setSuggestedHours] = useState([]);
-  const [showSuggestions, setShowSuggestions] = useState(false);
+	const location = useLocation();
+	const [selectedProjectId, setSelectedProjectId] = useState("");
+	const [projectTimespan, setProjectTimespan] = useState({ start: "", end: "" });
+	const [suggestedHours, setSuggestedHours] = useState([]);
+	const [showSuggestions, setShowSuggestions] = useState(false);
 
-  useEffect(() => {
-    if (location.state && location.state.project) {
-      setSelectedProjectId(location.state.project.id);
-      const project = projects.find(p => p.id === location.state.project.id);
-      setProjectTimespan(project ? project.timespan : { start: '', end: '' });
-    }
-  }, [location, projects]);
+	useEffect(() => {
+		if (location.state && location.state.project) {
+			setSelectedProjectId(location.state.project.id);
+			const project = projects.find((p) => p.id === location.state.project.id);
+			setProjectTimespan(project ? project.timespan : { start: "", end: "" });
+		}
+	}, [location, projects]);
+
 
   useEffect(() => {
     const mostRecentReport = getMostRecentReport();
@@ -33,55 +34,49 @@ const ReportModal = ({ showModal, closeModal, projects, reports, reportData, set
   }));
 }, []);
 
-  const getMostRecentReport = () => {
-    return reports.sort((a, b) => new Date(b.date) - new Date(a.date))[0];
-  };
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setReportData(prev => ({
-      ...prev,
-      [name]: value,
-    }));
+	const getMostRecentReport = () => {
+		return reports.sort((a, b) => new Date(b.date) - new Date(a.date))[0];
+	};
 
-    if (name === "projectId") {
-        setSelectedProjectId(value);
-        const selectedProject = projects.find(project => project.id === value);
-        if (selectedProject && selectedProject.timespan) {
-            setProjectTimespan(selectedProject.timespan);
-        } else {
-            setProjectTimespan({ start: '', end: '' });
-        }
-    }
-  };
+	const handleInputChange = (e) => {
+		const { name, value } = e.target;
+		console.log("handleIputChange name:", name, "value:", value);
+		setReportData((prev) => ({
+			...prev,
+			[name]: value,
+		}));
 
-  const handleFormSubmit = (e) => {
-    e.preventDefault();
-    const submissionData = {
-      ...reportData,
-      hours: parseFloat(reportData.hours),
-      personId: userId,
-      projectId: selectedProjectId, 
-    };
-    handleSubmit(submissionData);
-  };
+		if (name === "projectId") {
+			setSelectedProjectId(value);
+			const selectedProject = projects.find((project) => project.id === value);
+			if (selectedProject && selectedProject.timespan) {
+				setProjectTimespan(selectedProject.timespan);
+			} else {
+				setProjectTimespan({ start: "", end: "" });
+			}
+		}
+	};
 
-  const noteSuggestions = ["Completed the task", "Worked on *this* feature ", "Coded this module"];
+	const handleFormSubmit = (e) => {
+		e.preventDefault();
+		console.log("FE - handleFormSubmit - reportData:", reportData);
 
-  const handleNoteInputChange = (e) => {
-    const { value } = e.target;
-    setReportData(prev => ({ ...prev, note: value }));
-    
-    const filteredNotes = noteSuggestions.filter(note =>
-      note.toLowerCase().includes(value.toLowerCase())
-    );
-    setSuggestedHours(filteredNotes);
-    setShowSuggestions(true);
-  };
+		const submissionData = {
+			...reportData,
+			hours: parseFloat(reportData.hours),
+			personId: userId,
+			projectId: selectedProjectId,
+		};
+		handleSubmit(submissionData);
+	};
 
-  const handleSuggestionClick = (suggestion) => {
-    setReportData(prev => ({ ...prev, note: suggestion }));
-  };
+	const noteSuggestions = ["Completed the task", "Worked on *this* feature ", "Coded this module"];
+
+	const handleNoteInputChange = (e) => {
+		const { value } = e.target;
+		setReportData((prev) => ({ ...prev, note: value }));
+
 
   return (
     <Modal show={showModal} onHide={closeModal}>
@@ -168,6 +163,7 @@ const ReportModal = ({ showModal, closeModal, projects, reports, reportData, set
       </Modal.Body>
     </Modal>
   );
+
 };
 
 export default ReportModal;

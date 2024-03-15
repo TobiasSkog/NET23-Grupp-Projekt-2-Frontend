@@ -35,8 +35,8 @@ export default function LoginOAuth({ userLoggedIn }) {
 					id: databaseUserData.data.id,
 					name: databaseUserData.data.name,
 					userRole: databaseUserData.data.userRole,
+					email: response.data.email,
 				};
-				//target:	databaseUserData.data.userRole === "Admin" ? "/admin"	: databaseUserData.data.userRole === "User"	? "/user"	: "/",
 
 				userLoggedIn(userData);
 				navigate("/projects");
