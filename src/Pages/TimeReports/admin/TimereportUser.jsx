@@ -78,24 +78,6 @@ export default function TimereportUser({ person }) {
 		navigate("/timereports/project", { state: project });
 	};
 
-	// const handleInputChange = (event) => {
-	// 	const { name, value } = event.target;
-	// 	setSearchDate({
-	// 		...searchDate,
-	// 		[name]: value,
-	// 	});
-	// };
-
-	// const handleDateSearch = () => {
-	// 	const start = searchDate.startDate;
-	// 	const end = searchDate.endDate;
-
-	// 	const filteredDate = originalTimeReports.filter(
-	// 		(report) => report.date >= start && report.date <= end
-	// 	);
-	// 	setTimeReports(filteredDate);
-	// };
-
 	//Sum all hours to a Total - render in tfoot
 	const totalHours = timeReports.reduce((total, item) => total + item.hours, 0);
 

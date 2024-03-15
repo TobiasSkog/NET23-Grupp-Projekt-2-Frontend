@@ -51,7 +51,7 @@ export default function ProjectCard({
 
 				<section className="neu-card-section neu-center">
 					<p>
-						Time: {item.workedHours} h / {item.hours} h{" "}
+						Time: {item.workedHours} h / {item.hours} h
 					</p>
 					<Progressbar
 						currentTime={item.workedHours}
@@ -61,15 +61,13 @@ export default function ProjectCard({
 				</section>
 
 				<section className="d-flex flex-row justify-content-between">
-					{userRole === "User" &&
-						project.status ===
-							"Active"(
-								<Button
-									className="btn neu-button-square m-2 neu-size-full"
-									onClick={() => handleUserClick(item.id, item.name)}>
-									Report Time
-								</Button>
-							)}
+					{userRole === "User" && item.status === "Active" && (
+						<Button
+							className="btn neu-button-square m-2 neu-size-full"
+							onClick={() => handleUserClick(item.id, item.name)}>
+							Report Time
+						</Button>
+					)}
 
 					{userRole === "Admin" && (
 						<>

@@ -11,6 +11,7 @@ export default function SearchDate({ setTimeReports, originalTimeReports }) {
 
 	const handleInputChange = (event) => {
 		const { name, value } = event.target;
+		//console.log(name, value);
 		setSearchDate({
 			...searchDate,
 			[name]: value,
@@ -25,10 +26,10 @@ export default function SearchDate({ setTimeReports, originalTimeReports }) {
 			(report) => report.date >= start && report.date <= end
 		);
 		setTimeReports(filteredDate);
-		setSearchDate({
-			startDate: "",
-			endDate: "",
-		});
+		// setSearchDate({
+		// 	startDate: "",
+		// 	endDate: "",
+		// });
 	};
 
 	return (

@@ -39,8 +39,6 @@ const Project = ({ userSignal }) => {
 				const sorted = response.data.sort((a, b) =>
 					a.status.localeCompare(b.status)
 				);
-				setProject(sorted);
-				//console.log(sorted);
 
 				// User can only see own projects
 				const ownProjects = sorted.filter((project) =>
@@ -54,6 +52,9 @@ const Project = ({ userSignal }) => {
 				// Set the project state if userRole is user
 				if (user.userRole === "User") {
 					setProject(ownProjects);
+				} else {
+					setProject(sorted);
+					//console.log(sorted);
 				}
 			} catch (error) {
 				console.error("There was a problem with the fetch operation:", error);
