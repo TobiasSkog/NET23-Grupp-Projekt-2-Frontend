@@ -3,12 +3,10 @@ import { Button, Table } from 'react-bootstrap';
 import axios from 'axios';
 import { useLocation, useNavigate } from 'react-router-dom';
 import ReportModal from './ReportModal'; // Modal for adding new reports
-import ReportListModal from './ReportListModal'; // Modal for listing reports
 import EditReportModal from './EditReportModal'; // Modal for editing a report
 
 const TimeReports = ({ userSignal }) => {
 	const [showReportModal, setShowReportModal] = useState(false);
-	const [showReportListModal, setShowReportListModal] = useState(false);
 	const [showEditReportModal, setShowEditReportModal] = useState(false);
 	const [projects, setProjects] = useState([]);
 	const [timeReports, setTimeReports] = useState([]);
@@ -55,12 +53,9 @@ const TimeReports = ({ userSignal }) => {
 
   const openReportModal = () => setShowReportModal(true);
   const closeReportModal = () => setShowReportModal(false);
-  const openReportListModal = () => setShowReportListModal(true);
-  const closeReportListModal = () => setShowReportListModal(false);
 
   const handleEditReportSelection = (report) => {
     setSelectedReport(report);
-    setShowReportListModal(false);
     setShowEditReportModal(true);
   };
 
