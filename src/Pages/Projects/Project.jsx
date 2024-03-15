@@ -183,7 +183,7 @@ const Project = ({ userSignal }) => {
 								item.status !== filteredProjects[index - 1].status && (
 									<hr className="border border-neuorange border-3 opacity-75" />
 								)}
-							<div className="col w-100 mx-auto" sm={4} md={3} lg={3}>
+							<div className="col w-100 mx-auto">
 								<ProjectCard
 									item={item}
 									handleClick={handleClick}

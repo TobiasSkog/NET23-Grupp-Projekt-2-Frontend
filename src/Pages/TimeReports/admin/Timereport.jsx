@@ -14,6 +14,7 @@ export default function Timereport({ proj, userSignal }) {
 	const [originalTimeReports, setOriginalTimeReports] = useState([]);
 	const [sortOrder, setSortOrder] = useState("ascending");
 	const [modalOpen, setModalOpen] = useState(false);
+	const [searchDate, setSearchDate] = useState({ startDate: "", endDate: "" });
 	const [formInput, setFormInput] = useState({
 		id: "",
 		date: "",
@@ -156,6 +157,8 @@ export default function Timereport({ proj, userSignal }) {
 				<SearchDate
 					setTimeReports={setTimeReports}
 					originalTimeReports={originalTimeReports}
+					setSearchDate={setSearchDate}
+					searchDate={searchDate}
 				/>
 				<div className="mt-2 mb-3 col-md-5 col-lg-6">
 					<h2 className="text-center mb-5">Timereports - {projectName}</h2>
@@ -225,6 +228,7 @@ export default function Timereport({ proj, userSignal }) {
 			<Sorting
 				setTimeReports={setTimeReports}
 				originalTimeReports={originalTimeReports}
+				setSearchDate={setSearchDate}
 			/>
 		</section>
 	);

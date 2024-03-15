@@ -10,7 +10,6 @@ export default function ProjectCard({
 	userRole,
 	setProjectId,
 	handleUserClick,
-	project,
 }) {
 	return (
 		<Card className="show-card neu-card bg-primary">

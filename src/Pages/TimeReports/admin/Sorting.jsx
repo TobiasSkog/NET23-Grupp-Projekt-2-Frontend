@@ -2,7 +2,11 @@ import React from "react";
 import Container from "react-bootstrap/esm/Container";
 import Button from "react-bootstrap/Button";
 
-export default function Sorting({ originalTimeReports, setTimeReports }) {
+export default function Sorting({
+	originalTimeReports,
+	setTimeReports,
+	setSearchDate,
+}) {
 	//This component is used to filter timereports by last 7days, 30days & show all
 	const handleClick7days = () => {
 		const sevenDaysAgo = new Date();
@@ -14,6 +18,7 @@ export default function Sorting({ originalTimeReports, setTimeReports }) {
 			return reportDate >= sevenDaysAgo;
 		});
 		setTimeReports(filteredReports);
+		setSearchDate({ startDate: "", endDate: "" });
 	};
 
 	const handleClick30days = () => {
@@ -26,10 +31,12 @@ export default function Sorting({ originalTimeReports, setTimeReports }) {
 			return reportDate >= thirtyDaysAgo;
 		});
 		setTimeReports(filteredReports);
+		setSearchDate({ startDate: "", endDate: "" });
 	};
 
 	const handleAllClick = () => {
 		setTimeReports(originalTimeReports);
+		setSearchDate({ startDate: "", endDate: "" });
 	};
 
 	return (

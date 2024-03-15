@@ -12,6 +12,7 @@ export default function TimereportUser({ person }) {
 	const [timeReports, setTimeReports] = useState([]);
 	const [originalTimeReports, setOriginalTimeReports] = useState([]);
 	const [sortOrder, setSortOrder] = useState("ascending");
+	const [searchDate, setSearchDate] = useState({ startDate: "", endDate: "" });
 
 	const location = useLocation();
 	const { state } = location;
@@ -74,7 +75,7 @@ export default function TimereportUser({ person }) {
 			id: id,
 			name: name,
 		};
-		console.log(project);
+
 		navigate("/timereports/project", { state: project });
 	};
 
@@ -93,6 +94,8 @@ export default function TimereportUser({ person }) {
 				<SearchDate
 					setTimeReports={setTimeReports}
 					originalTimeReports={originalTimeReports}
+					setSearchDate={setSearchDate}
+					searchDate={searchDate}
 				/>
 				<div className="mt-2 mb-3 col-md-5 col-lg-6">
 					<h2 className="text-center mb-5">Timereports - {name}</h2>
@@ -155,6 +158,7 @@ export default function TimereportUser({ person }) {
 			<Sorting
 				setTimeReports={setTimeReports}
 				originalTimeReports={originalTimeReports}
+				setSearchDate={setSearchDate}
 			/>
 		</section>
 	);
