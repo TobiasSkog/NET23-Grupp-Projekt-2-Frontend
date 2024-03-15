@@ -24,8 +24,14 @@ const TimeReports = ({ userSignal }) => {
 			return;
 		}
 		fetchProjects();
-		fetchTimeReports();
 	}, [user, navigate]);
+
+  useEffect(() => {
+    // Ensure projects are fetched and set before fetching time reports
+    if (projects.length > 0) {
+      fetchTimeReports();
+    }
+  }, [projects]); // Depend on projects to ensure they're fetched first
 
 	useEffect(() => {
 		if (location.pathname === "/timereports/user") {
@@ -36,7 +42,9 @@ const TimeReports = ({ userSignal }) => {
   const fetchProjects = async () => {
     try {
       const response = await axios.get('http://localhost:3001/databases/projects');
-      setProjects(response.data || []);
+      const activeProjects = response.data.filter(project => project.status.toLowerCase() === "active");
+    setProjects(activeProjects || []);
+    console.log("Active Projects:", activeProjects); // After filtering in fetchProjects
     } catch (error) {
       console.error('Failed to fetch projects:', error);
     }
@@ -44,22 +52,24 @@ const TimeReports = ({ userSignal }) => {
 
   const fetchTimeReports = async () => {
     try {
-      const response = await axios.get('http://localhost:3001/databases/timereports');
-      const userTimeReports = response.data.filter(report => report.person === user.id);
-      setTimeReports(userTimeReports);
+    const response = await axios.get('http://localhost:3001/databases/timereports');
+    const userTimeReports = response.data.filter(report => report.person === user.id);
+
+    // Corrected the property name used to match project IDs from reports to active projects
+    const activeReports = userTimeReports.filter(report =>
+      projects.some(project => project.id === report.project && project.status.toLowerCase() === "active")
+    );
+
+
+    setTimeReports(activeReports);
     } catch (error) {
       console.error('Failed to fetch time reports:', error);
     }
   };
 
-  const openReportModal = () => {
-    setShowReportModal(true);
-    
-    console.log("showReportModal state:", showReportModal);
-  };
-  useEffect(() => {
-    console.log("Modal should show:", showReportModal);
-  }, [showReportModal]);
+  const openReportModal = () => setShowReportModal(true);
+  
+
   const closeReportModal = () => setShowReportModal(false);
 
   const handleEditReportSelection = (report) => {
