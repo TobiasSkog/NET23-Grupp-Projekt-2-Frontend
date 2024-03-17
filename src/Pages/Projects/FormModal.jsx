@@ -92,7 +92,7 @@ export default function FormModal({ formInput, setFormInput, closeModal, modalOp
 					required
 					value={formInput.status}
 					onChange={handleSelectChange}>
-					<option className="">Select Status</option>
+					<option hidden>Select Status</option>
 					<option>Active</option>
 					<option>Next up</option>
 					<option>Done</option>

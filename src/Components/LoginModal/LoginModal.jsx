@@ -21,7 +21,7 @@ import CustomModal from "../CustomModal/CustomModal";
 // show={showModal} handleClose={handleCloseModal} userLoggedIn={userLoggedIn}
 export default function LoginModal({ show, handleClose, userLoggedIn }) {
 	return (
-		<CustomModal show={show} onClose={handleClose} title="Login">
+		<CustomModal show={show} onClose={handleClose} title="Login" divider>
 			<LoginIntegrated userLoggedIn={userLoggedIn} handleClose={handleClose} />
 			<p>Or Login Using Your Notion Account:</p>
 			<LoginOAuthButton />

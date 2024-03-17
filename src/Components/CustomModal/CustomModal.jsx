@@ -1,7 +1,12 @@
 import { useState, useEffect } from "react";
 
-export default function CustomModal({ show, onClose, children, title }) {
+export default function CustomModal({ show, onClose, children, title, divider }) {
 	const [isVisible, setIsVisible] = useState(show);
+	if (divider) {
+		divider = true;
+	} else {
+		divider = false;
+	}
 	useEffect(() => {
 		setIsVisible(show);
 	}, [show]);
@@ -25,7 +30,7 @@ export default function CustomModal({ show, onClose, children, title }) {
 							<div className="neu-modal-title">
 								<h2>{title}</h2>
 							</div>
-							<span className="neu-modal-divider"> </span>
+							{divider && <span className="neu-modal-divider" />}
 						</>
 					)}
 
