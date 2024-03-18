@@ -1,19 +1,29 @@
 import React from "react";
-import { Modal } from "react-bootstrap";
 import LoginIntegrated from "./Login/LoginIntegrated";
 import LoginOAuthButton from "./Login/LoginOAuthButton";
+import CustomModal from "../CustomModal/CustomModal";
 
+// export function LoginModal({ show, handleClose, userLoggedIn, setShowLogin }) {
+// 	return (
+// 		<Modal show={show} onHide={handleClose} dialogClassName="neu-modal" backdrop={false}>
+// 			<Modal.Header closeButton>
+// 				<Modal.Title>Login</Modal.Title>
+// 			</Modal.Header>
+// 			<Modal.Body>
+// 				<LoginIntegrated userLoggedIn={userLoggedIn} setShowLogin={setShowLogin} />
+// 				<div>Or Login Using Your Notion Account:</div>
+// 				<LoginOAuthButton />
+// 			</Modal.Body>
+// 		</Modal>
+// 	);
+// }
+// show={showModal} handleClose={handleCloseModal} userLoggedIn={userLoggedIn}
 export default function LoginModal({ show, handleClose, userLoggedIn }) {
 	return (
-		<Modal show={show} onHide={handleClose} centered>
-			<Modal.Header closeButton closeVariant="">
-				<Modal.Title className="w-100 text-center">Login</Modal.Title>
-			</Modal.Header>
-			<Modal.Body>
-				<LoginIntegrated userLoggedIn={userLoggedIn} />
-				<div className="text-center mb-3">Or Login Using Your Notion Account:</div>
-				<LoginOAuthButton />
-			</Modal.Body>
-		</Modal>
+		<CustomModal show={show} onClose={handleClose} title="Login" divider>
+			<LoginIntegrated userLoggedIn={userLoggedIn} handleClose={handleClose} />
+			<p>Or Login Using Your Notion Account:</p>
+			<LoginOAuthButton />
+		</CustomModal>
 	);
 }

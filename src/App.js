@@ -11,16 +11,21 @@ import TimereportMain from "./Pages/TimeReports/admin/TimereportMain";
 import TimereportUser from "./Pages/TimeReports/admin/TimereportUser";
 import { userSignal, userLoggedIn, userLoggedOut } from "./Components/CustomSignals/UserSignal";
 import Footer from "./Components/Footer/Footer";
+import { useState } from "react";
+import LoginModal from "./Components/LoginModal/LoginModal";
 
 export default function App() {
+	const [showModal, setShowModal] = useState(false);
+	const handleShowModal = () => setShowModal(true);
+	const handleCloseModal = () => setShowModal(false);
 	return (
 		<>
 			<header>
-				<Navigation userSignal={userSignal} userLoggedOut={userLoggedOut} />
+				<Navigation userSignal={userSignal} userLoggedOut={userLoggedOut} handleShowModal={handleShowModal} />
 			</header>
 			<main>
 				<Routes>
-					<Route path="/" element={<Home userSignal={userSignal} userLoggedIn={userLoggedIn} />} />
+					<Route path="/" element={<Home userSignal={userSignal} handleShowModal={handleShowModal} />} />
 					<Route path="/login/auth" element={<LoginOAuth userLoggedIn={userLoggedIn} />} />
 					<Route path="/timereports" element={<TimereportMain userSignal={userSignal} />} />
 					<Route path="/timereports/admin" element={<TimereportUser userSignal={userSignal} />} />
@@ -28,8 +33,9 @@ export default function App() {
 					<Route path="/timereports/project" element={<Timereport userSignal={userSignal} />} />
 					<Route path="/projects" element={<Project userSignal={userSignal} />} />
 				</Routes>
+				<LoginModal show={showModal} handleClose={handleCloseModal} userLoggedIn={userLoggedIn} />
 			</main>
-			<footer>
+			<footer className="neu-footer-root">
 				<Footer />
 			</footer>
 		</>
