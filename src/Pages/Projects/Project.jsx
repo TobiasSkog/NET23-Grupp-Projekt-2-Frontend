@@ -23,7 +23,7 @@ const Project = ({ userSignal }) => {
 		hours: "",
 		startDate: "",
 		endDate: "",
-		teamMember: "",
+		teamMember: [],
 	});
 
 	const navigate = useNavigate();
@@ -40,12 +40,13 @@ const Project = ({ userSignal }) => {
 				const sorted = response.data.sort((a, b) =>
 					a.status.localeCompare(b.status)
 				);
-
-				// User can only see own projects
+				console.log(response.data);
+				// User can only see own projects so we filter to find a match.
 				const ownProjects = sorted.filter((project) =>
-					project.teamMember?.includes(user.email)
+					project.teamMember.includes(user.id)
 				);
 
+				console.log(ownProjects);
 				const peopleResponse = await axios.get(
 					"http://localhost:3001/databases/people"
 				);
@@ -64,6 +65,7 @@ const Project = ({ userSignal }) => {
 			}
 		};
 		fetchData();
+		console.log(user.id);
 	}, []);
 
 	const user = userSignal.value;
@@ -85,7 +87,7 @@ const Project = ({ userSignal }) => {
 			hours: "",
 			startDate: "",
 			endDate: "",
-			teamMember: "",
+			teamMember: [],
 		});
 	};
 

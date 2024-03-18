@@ -84,7 +84,7 @@ export default function TimereportUser({ person }) {
 
 	return (
 		<section className="neu-table-container">
-			<div className="lineitup">
+			<div className="inner-container">
 				{loading && (
 					<>
 						<Spinner animation="border" variant="primary" />

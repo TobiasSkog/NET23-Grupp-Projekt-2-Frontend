@@ -137,7 +137,7 @@ export default function Timereport({ proj, userSignal }) {
 
 	return (
 		<section className="neu-table-container">
-			<div className="lineitup">
+			<div className="inner-container">
 				{modalOpen && (
 					<EditAdminReportModal
 						formInput={formInput}

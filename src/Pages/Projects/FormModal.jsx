@@ -24,16 +24,16 @@ export default function FormModal({
 
 			//validation for Edit and create new projects
 			if (!formInput.status.trim()) {
-				alert("Status is required.");
+				alert("Please set a Status for the project.");
 				return;
 			} else if (!formInput.startDate.trim()) {
-				alert("Startdate is required");
+				alert("Please provide a Startdate for the project.");
 				return;
 			} else if (!formInput.endDate.trim()) {
-				alert("Enddate is required");
+				alert("Please provide an Enddate for the project.");
 				return;
-			} else if (!formInput.teamMember.trim()) {
-				alert("You must asign at least 1 team member");
+			} else if (formInput.teamMember.length === 0) {
+				alert("Please select at least one team member.");
 				return;
 			}
 
@@ -80,6 +80,17 @@ export default function FormModal({
 		setFormInput({
 			...formInput,
 			[name]: value,
+		});
+	};
+
+	const handleTeamMemberSelectChange = (event) => {
+		const selectedIds = Array.from(
+			event.target.selectedOptions,
+			(option) => option.value
+		);
+		setFormInput({
+			...formInput,
+			teamMember: selectedIds,
 		});
 	};
 
@@ -138,21 +149,11 @@ export default function FormModal({
 							id="teamMembers"
 							aria-label="teamMembers"
 							multiple
-							value={formInput.teamMember?.split(",")}
-							onChange={(event) => {
-								const selectedOptions = Array.from(
-									event.target.selectedOptions,
-									(option) => option.value
-								);
-								const selectedEmails = selectedOptions.join(",");
-								setFormInput((prevValue) => ({
-									...prevValue,
-									teamMember: selectedEmails,
-								}));
-							}}>
+							value={formInput.teamMember}
+							onChange={handleTeamMemberSelectChange}>
 							<option value="">--Select Team members--</option>
 							{people.map((person) => (
-								<option key={person.id} value={person.email}>
+								<option key={person.id} value={person.id}>
 									{person.name}
 								</option>
 							))}
