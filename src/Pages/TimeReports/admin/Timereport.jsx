@@ -1,12 +1,10 @@
-import Spinner from "react-bootstrap/Spinner";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import Table from "react-bootstrap/Table";
-import Container from "react-bootstrap/esm/Container";
 import Sorting from "./Sorting";
-import SearchDate from "./SearchDate";
+//import SearchDate from "./SearchDate";
 import EditAdminReportModal from "./EditAdminReportModal";
+import SearchDate from "./SearchDate";
 
 export default function Timereport({ proj, userSignal }) {
 	const [loading, setLoading] = useState(false);
@@ -35,9 +33,7 @@ export default function Timereport({ proj, userSignal }) {
 				setLoading(true);
 				//get timereports by filtering on projectId
 
-				const response = await axios.get(
-					`http://localhost:3001/databases/timereports/filter/project?property=Project&id=${projectId}`
-				);
+				const response = await axios.get(`http://localhost:3001/databases/timereports/filter/project?property=Project&id=${projectId}`);
 
 				//save response 2 times, one will be manipulated in filtering, and one to always have all data
 				setTimeReports(response.data);
@@ -64,9 +60,7 @@ export default function Timereport({ proj, userSignal }) {
 	const updateTimereports = async () => {
 		try {
 			setLoading(true);
-			const response = await axios.get(
-				`http://localhost:3001/databases/timereports/filter/project?property=Project&id=${projectId}`
-			);
+			const response = await axios.get(`http://localhost:3001/databases/timereports/filter/project?property=Project&id=${projectId}`);
 
 			setTimeReports(response.data);
 			setOriginalTimeReports(response.data);
@@ -111,15 +105,12 @@ export default function Timereport({ proj, userSignal }) {
 			id: id,
 			name: name,
 		};
-		console.log(person);
 		navigate("/timereports/admin", { state: person });
 	};
 
 	//in edit we find the right timereportId
 	const handleEdit = (timereportId) => {
-		const timereportToEdit = originalTimeReports.find(
-			(item) => item.id === timereportId
-		);
+		const timereportToEdit = originalTimeReports.find((item) => item.id === timereportId);
 		if (timereportToEdit) {
 			setFormInput({
 				id: timereportId,
@@ -136,96 +127,89 @@ export default function Timereport({ proj, userSignal }) {
 
 	return (
 		<section>
-			{modalOpen && (
-				<EditAdminReportModal
-					formInput={formInput}
-					setFormInput={setFormInput}
-					closeModal={closeModal}
-					modalOpen={modalOpen}
-					updateTimereports={updateTimereports}
-					setLoading={setLoading}
-				/>
-			)}
-			{loading && (
-				<>
-					<Spinner animation="border" variant="primary" />
-					<h4 className="mt-3">Loading...</h4>
-				</>
-			)}
-			<Container className="d-md-flex mb-3">
-				<SearchDate
-					setTimeReports={setTimeReports}
-					originalTimeReports={originalTimeReports}
-				/>
-				<div className="mt-2 mb-3 col-md-5 col-lg-6">
-					<h2 className="text-center mb-5">Timereports - {projectName}</h2>
-				</div>
-			</Container>
-			<Container className="table-responsive">
-				<Table className=" table table-dark table-striped table-bordered table-hover">
-					<thead>
-						<tr className="text-center">
-							<th>#</th>
-							<th
-								onClick={() => handleSortByDate()}
-								style={{ cursor: "pointer" }}>
-								Date
-							</th>
-							<th
-								onClick={() => handleSortByName()}
-								style={{ cursor: "pointer" }}>
-								Person
-							</th>
-							<th>Hours</th>
-							<th>Project</th>
-							<th>Note</th>
-							<th></th>
-						</tr>
-					</thead>
-					<tbody>
-						{timeReports.map((item, index) => (
-							<tr key={item.id} className="text-center">
-								<td>{index + 1}</td>
-								<td>{item.date}</td>
-								<td
-									onClick={() => handleNameClick(item.person, item.name)}
-									style={{ cursor: "pointer" }}>
-									{item.name}
-								</td>
-								<td>{item.hours}</td>
-								<td>{projectName}</td>
-								<td>{item.note}</td>
-								<td>
-									<button
-										className="btn btn-danger btn-sm"
-										onClick={() => handleEdit(item.id)}>
-										Edit
-									</button>
-								</td>
+			<section className="neu-table-container">
+				{modalOpen && (
+					<EditAdminReportModal
+						formInput={formInput}
+						setFormInput={setFormInput}
+						closeModal={closeModal}
+						modalOpen={modalOpen}
+						updateTimereports={updateTimereports}
+						setLoading={setLoading}
+					/>
+				)}
+
+				<section className="neu-search-container">
+					<SearchDate setTimeReports={setTimeReports} originalTimeReports={originalTimeReports} />
+					<div className="mt-2 mb-3 col-md-5 col-lg-6"></div>
+				</section>
+				<h2>Timereports - {projectName}</h2>
+				{loading && (
+					<div class="neu-loading-container">
+						<div class="neu-loading-spinner">
+							<div class="layer layer1"></div>
+							<div class="layer layer2"></div>
+							<div class="layer layer3"></div>
+						</div>
+						<p class="neu-loading-msg">Loading...</p>
+					</div>
+				)}
+
+				{/* kinda cool one!
+        	<div class="shape shape1"></div>
+							<div class="shape shape2"></div>
+							<div class="shape shape3"></div>
+							<div class="shape shape4"></div>
+							<div class="shape shape5"></div>
+							<div class="shape shape6"></div>
+          <p className="neu-loading-msg">Loading...</p>
+					<div class="neu-loading-spinner">
+						<div class="layer layer1" />
+						<div class="layer layer2" />
+						<div class="layer layer3" /> 
+					</div>*/}
+				{!loading && (
+					<table className="neu-table">
+						<thead>
+							<tr>
+								<th>#</th>
+								<th onClick={() => handleSortByDate()} className="neu-table-clickable">
+									Date
+								</th>
+								<th onClick={() => handleSortByName()} className="neu-table-clickable">
+									Person
+								</th>
+								<th>Hours</th>
+								<th>Project</th>
+								<th>Note</th>
+								<th></th>
 							</tr>
-						))}
-					</tbody>
-					<tfoot>
-						<tr>
-							<th scope="row" className="text-center">
-								Sum
-							</th>
-							<td></td>
-							<td></td>
-							<td className="text-center">
-								<strong>{totalHours}</strong>
-							</td>
-							<td></td>
-							<td></td>
-							<td></td>
-						</tr>
-					</tfoot>
-				</Table>
-			</Container>
-			<Sorting
-				setTimeReports={setTimeReports}
-				originalTimeReports={originalTimeReports}
-			/>
+						</thead>
+						<tbody>
+							{timeReports.map((item, index) => (
+								<tr key={item.id}>
+									<td>{index + 1}</td>
+									<td>{item.date}</td>
+									<td onClick={() => handleNameClick(item.person, item.name)} className="neu-table-clickable">
+										{item.name}
+									</td>
+									<td>{item.hours}</td>
+									<td>{projectName}</td>
+									<td>{item.note}</td>
+									<td>
+										<button className="neu-button-square" onClick={() => handleEdit(item.id)}>
+											Edit
+										</button>
+									</td>
+								</tr>
+							))}
+						</tbody>
+					</table>
+				)}
+				<div className="neu-table-filter-button-container">
+					<Sorting setTimeReports={setTimeReports} originalTimeReports={originalTimeReports} />
+				</div>
+			</section>
 		</section>
 	);
 }

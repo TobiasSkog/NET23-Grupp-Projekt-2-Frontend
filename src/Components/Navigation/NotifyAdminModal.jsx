@@ -5,7 +5,7 @@ import socket from "../Socket/SocketService";
 
 export default function NotifyAdminModal() {
 	const [showModal, setShowModal] = useState(false);
-	const [conditionMet, setConditionMet] = useState(false);
+	const [conditionMet, setConditionMet] = useState(true);
 	const [projectData, setProjectData] = useState(null);
 
 	useEffect(() => {

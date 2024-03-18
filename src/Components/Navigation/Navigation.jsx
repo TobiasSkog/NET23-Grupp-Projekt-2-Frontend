@@ -37,16 +37,20 @@ export default function Navigation({ userSignal, userLoggedOut, handleShowModal 
 				</button>
 				<section className="collapse navbar-collapse" id="navbarText">
 					<ul className="navbar-nav me-auto mb-2 mb-lg-0">
-						<li className=" neu-nav-item">
-							<a className="nav-link " href="/projects">
-								Projects
-							</a>
-						</li>
-						<li className=" neu-nav-item">
-							<a className="nav-link" href="/timereports/user">
-								Timereports
-							</a>
-						</li>
+						{user && (
+							<>
+								<li className=" neu-nav-item">
+									<a className="nav-link " href="/projects">
+										Projects
+									</a>
+								</li>
+								<li className=" neu-nav-item">
+									<a className="nav-link" href="/timereports/user">
+										Timereports
+									</a>
+								</li>
+							</>
+						)}
 					</ul>
 				</section>
 				{user ? <>{user.userRole === "Admin" && <NotifyAdminModal />}</> : null}

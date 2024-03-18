@@ -1,7 +1,6 @@
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import axios from "axios";
-import Modal from "react-bootstrap/esm/Modal";
 import CustomModal from "../../Components/CustomModal/CustomModal";
 
 export default function FormModal({ formInput, setFormInput, closeModal, modalOpen, updateProjects, edit, setEdit, projectId, setLoading }) {

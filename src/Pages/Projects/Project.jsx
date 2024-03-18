@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
-import Col from "react-bootstrap/Col";
-import Row from "react-bootstrap/Row";
 import axios from "axios";
 import FormModal from "./FormModal";
 import Spinner from "react-bootstrap/Spinner";
@@ -135,56 +133,47 @@ const Project = ({ userSignal }) => {
 					setLoading={setLoading}
 				/>
 			)}
-			<div className="show-container container mt-4">
-				{loading && (
-					<>
-						<Spinner animation="border" variant="primary" />
-						<h4 className="mt-2">Loading...</h4>
-					</>
+			{loading && (
+				<>
+					<Spinner animation="border" variant="primary" />
+					<h4 className="mt-2">Loading...</h4>
+				</>
+			)}
+
+			<div className="neu-grid">
+				{filteredProjects.map((item, index) => (
+					<React.Fragment key={item.id}>
+						{/* Border that's being shown IF ALL projects are shown, separates each project by status (Active, Next, Done) */}
+						{index !== 0 && item.status !== filteredProjects[index - 1].status && <hr className="border border-neuorange border-3 opacity-75" />}
+
+						<ProjectCard
+							item={item}
+							handleClick={handleClick}
+							handleEdit={handleEdit}
+							userRole={user.userRole}
+							setProjectId={setProjectId}
+							handleUserClick={handleUserClick}
+						/>
+					</React.Fragment>
+				))}
+			</div>
+
+			<div className={`${user.userRole === "Admin" ? "neu-buttons-2b-between" : "neu-buttons-1b"}`}>
+				{user.userRole === "Admin" && (
+					<Button className="neu-button-square " onClick={openModal}>
+						<i className="bi bi-plus-circle" />
+						Add New
+					</Button>
 				)}
 
-				<Row>
-					{filteredProjects.map((item, index) => (
-						<React.Fragment key={item.id}>
-							{/* Border that's being shown IF ALL projects are shown, separates each project by status (Active, Next, Done) */}
-							{index !== 0 && item.status !== filteredProjects[index - 1].status && <hr className="border border-neuorange border-3 opacity-75" />}
-							<Col className="show-col mx-2 mb-2 mx-auto" sm={6} lg={3}>
-								<ProjectCard
-									item={item}
-									handleClick={handleClick}
-									handleEdit={handleEdit}
-									userRole={user.userRole}
-									setProjectId={setProjectId}
-									handleUserClick={handleUserClick}
-								/>
-							</Col>
-						</React.Fragment>
-					))}
-				</Row>
-			</div>
-			<div className="mb-4">
-				<div className="mb-4 mx-3">
-					{user.userRole === "Admin" && (
-						<Button variants="primary" className="mt-4 mx-3 neu-button-square" onClick={openModal}>
-							<i className="bi bi-plus-circle me-2"></i>Add New
-						</Button>
-					)}
-
-					<Button variants="primary" className="mt-4 mx-4 neu-button-square" onClick={() => setShowAllProjects(!showAllProjects)}>
-						{showAllProjects ? (
-							<>
-								<i className="bi bi-filter"></i> Show Active
-							</>
-						) : (
-							<>
-								<i className="bi bi-filter"></i> Show All
-							</>
-						)}
-					</Button>
-				</div>
+				<Button className="neu-button-square" onClick={() => setShowAllProjects(!showAllProjects)}>
+					<i className="bi bi-filter" />
+					{showAllProjects ? "Show Active" : "Show All"}
+				</Button>
 			</div>
 		</>
 	);
 };
 
 export default Project;
+//minmax(20%, 80%)

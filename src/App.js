@@ -21,14 +21,7 @@ export default function App() {
 	return (
 		<>
 			<header>
-				<Navigation
-					userSignal={userSignal}
-					userLoggedOut={userLoggedOut}
-					handleShowModal={handleShowModal}
-					// showModal={showModal}
-					// userLoggedIn={userLoggedIn}
-					// handleCloseModal={handleCloseModal}
-				/>
+				<Navigation userSignal={userSignal} userLoggedOut={userLoggedOut} handleShowModal={handleShowModal} />
 			</header>
 			<main>
 				<Routes>
@@ -42,7 +35,7 @@ export default function App() {
 				</Routes>
 				<LoginModal show={showModal} handleClose={handleCloseModal} userLoggedIn={userLoggedIn} />
 			</main>
-			<footer>
+			<footer className="neu-footer-root">
 				<Footer />
 			</footer>
 		</>

@@ -32,39 +32,37 @@ export default function ProjectCard({ item, handleEdit, handleClick, userRole, s
 					</p>
 					<p>Ends: {item.timespan.end}</p>
 					<Progressbar startDate={item.timespan.start} endDate={item.timespan.end} progressType="date" />
-				</section>
-
-				<section className="neu-card-section neu-center">
+					<br />
 					<p>
 						Time: {item.workedHours} h / {item.hours} h{" "}
 					</p>
 					<Progressbar currentTime={item.workedHours} endTime={item.hours} progressType="time" />
 				</section>
 
-				<section className="d-flex flex-row justify-content-between">
-					{userRole === "User" && (
-						<Button className="btn neu-button-square m-2 neu-size-full" onClick={() => handleUserClick(item.id, item.name)}>
+				{userRole === "User" && (
+					<div className="neu-buttons-1b">
+						<Button className="neu-button-square" onClick={() => handleUserClick(item.id, item.name)}>
 							Report Time
 						</Button>
-					)}
+					</div>
+				)}
 
-					{userRole === "Admin" && (
-						<>
-							<Button className="neu-button-square mt-2 neu-size-half" onClick={() => handleClick(item.id, item.name)}>
-								View Timereports
-							</Button>
+				{userRole === "Admin" && (
+					<div className="neu-buttons-2b-between-uneven">
+						<button className="neu-button-square neu-minw-fit" onClick={() => handleClick(item.id, item.name)}>
+							View Timereports
+						</button>
 
-							<Button
-								className="btn neu-button-square mt-2 neu-size-half"
-								onClick={() => {
-									handleEdit(item.id);
-									setProjectId(item.id);
-								}}>
-								Edit
-							</Button>
-						</>
-					)}
-				</section>
+						<button
+							className="neu-button-square "
+							onClick={() => {
+								handleEdit(item.id);
+								setProjectId(item.id);
+							}}>
+							Edit
+						</button>
+					</div>
+				)}
 			</Card.Body>
 		</Card>
 	);

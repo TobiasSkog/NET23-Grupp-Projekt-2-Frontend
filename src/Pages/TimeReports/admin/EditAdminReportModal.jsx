@@ -32,6 +32,7 @@ export default function EditReportModal({
 		};
 
 		fetchProjects();
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	const handleInputChange = (event) => {

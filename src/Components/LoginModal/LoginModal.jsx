@@ -1,5 +1,4 @@
 import React from "react";
-import Modal from "react-bootstrap/Modal";
 import LoginIntegrated from "./Login/LoginIntegrated";
 import LoginOAuthButton from "./Login/LoginOAuthButton";
 import CustomModal from "../CustomModal/CustomModal";
