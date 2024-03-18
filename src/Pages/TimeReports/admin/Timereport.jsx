@@ -136,100 +136,108 @@ export default function Timereport({ proj, userSignal }) {
 	const totalHours = timeReports.reduce((total, item) => total + item.hours, 0);
 
 	return (
-		<section>
-			{modalOpen && (
-				<EditAdminReportModal
-					formInput={formInput}
-					setFormInput={setFormInput}
-					closeModal={closeModal}
-					modalOpen={modalOpen}
-					updateTimereports={updateTimereports}
-					setLoading={setLoading}
-				/>
-			)}
-			{loading && (
-				<>
-					<Spinner animation="border" variant="primary" />
-					<h4 className="mt-3">Loading...</h4>
-				</>
-			)}
-			<Container className="d-md-flex mb-3">
-				<SearchDate
-					setTimeReports={setTimeReports}
-					originalTimeReports={originalTimeReports}
-					setSearchDate={setSearchDate}
-					searchDate={searchDate}
-				/>
-				<div className="mt-2 mb-3 col-md-5 col-lg-6">
-					<h2 className="text-center mb-5">Timereports - {projectName}</h2>
-				</div>
-			</Container>
-			<Container className="table-responsive">
-				<Table className=" table table-dark table-striped table-bordered table-hover">
-					<thead>
-						<tr className="text-center">
-							<th>#</th>
-							<th
-								onClick={() => handleSortByDate()}
-								style={{ cursor: "pointer" }}>
-								Date
-							</th>
-							<th
-								onClick={() => handleSortByName()}
-								style={{ cursor: "pointer" }}>
-								Person
-							</th>
-							<th>Hours</th>
-							<th>Project</th>
-							<th>Note</th>
-							<th></th>
-						</tr>
-					</thead>
-					<tbody>
-						{timeReports.map((item, index) => (
-							<tr key={item.id} className="text-center">
-								<td>{index + 1}</td>
-								<td>{item.date}</td>
-								<td
-									onClick={() => handleNameClick(item.person, item.name)}
+		<section className="neu-table-container">
+			<div className="lineitup">
+				{modalOpen && (
+					<EditAdminReportModal
+						formInput={formInput}
+						setFormInput={setFormInput}
+						closeModal={closeModal}
+						modalOpen={modalOpen}
+						updateTimereports={updateTimereports}
+						setLoading={setLoading}
+					/>
+				)}
+				{loading && (
+					<>
+						<Spinner animation="border" variant="primary" />
+						<h4 className="mt-3">Loading...</h4>
+					</>
+				)}
+				<Container className="neu-search-container d-flex flex-column flex-md-row align-items-center">
+					<SearchDate
+						setTimeReports={setTimeReports}
+						originalTimeReports={originalTimeReports}
+						setSearchDate={setSearchDate}
+						searchDate={searchDate}
+					/>
+					<div className="col-md-4 col-lg-6">
+						<h2 className="text-center page-title">{projectName}</h2>
+					</div>
+				</Container>
+				<div className="table-responsive">
+					<table className="neu-table">
+						<thead>
+							<tr className="text-center">
+								<th>#</th>
+								<th
+									onClick={() => handleSortByDate()}
 									style={{ cursor: "pointer" }}>
-									{item.name}
-								</td>
-								<td>{item.hours}</td>
-								<td>{projectName}</td>
-								<td>{item.note}</td>
-								<td>
-									<button
-										className="btn btn-danger btn-sm"
-										onClick={() => handleEdit(item.id)}>
-										Edit
-									</button>
-								</td>
+									Date
+								</th>
+								<th
+									onClick={() => handleSortByName()}
+									style={{ cursor: "pointer" }}>
+									Person
+								</th>
+								<th>Hours</th>
+								<th>Project</th>
+								<th>Note</th>
+								<th></th>
 							</tr>
-						))}
-					</tbody>
-					<tfoot>
-						<tr>
-							<th scope="row" className="text-center">
-								Sum
-							</th>
-							<td></td>
-							<td></td>
-							<td className="text-center">
-								<strong>{totalHours}</strong>
-							</td>
-							<td></td>
-							<td></td>
-							<td></td>
-						</tr>
-					</tfoot>
-				</Table>
-			</Container>
-			<Sorting
-				setTimeReports={setTimeReports}
-				originalTimeReports={originalTimeReports}
-				setSearchDate={setSearchDate}
-			/>
+						</thead>
+						<tbody>
+							{timeReports.map((item, index) => (
+								<tr key={item.id} className="text-center">
+									<td>
+										<strong className="tableNumber">{index + 1}</strong>
+									</td>
+									<td className="">{item.date}</td>
+									<td
+										className=""
+										onClick={() => handleNameClick(item.person, item.name)}
+										style={{ cursor: "pointer" }}>
+										{item.name}
+									</td>
+									<td className="">{item.hours}</td>
+									<td className="">{projectName}</td>
+									<td className="">{item.note}</td>
+									<td>
+										<button
+											className="edit-timereport-button"
+											onClick={() => handleEdit(item.id)}>
+											Edit
+										</button>
+									</td>
+								</tr>
+							))}
+						</tbody>
+						<tfoot>
+							<tr>
+								<th scope="row" className="text-center">
+									Sum
+								</th>
+								<td></td>
+								<td></td>
+								<td className="text-center">
+									<strong className="tableNumber">{totalHours}</strong>
+								</td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+						</tfoot>
+					</table>
+				</div>
+
+				<div className="neu-table-filter-button-container d-flex flex-column flex-sm-row justify-content-center">
+					<Sorting
+						setTimeReports={setTimeReports}
+						originalTimeReports={originalTimeReports}
+						setSearchDate={setSearchDate}
+					/>
+				</div>
+			</div>
 		</section>
 	);
 }
