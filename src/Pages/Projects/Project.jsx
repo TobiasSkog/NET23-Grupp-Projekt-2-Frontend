@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 import axios from "axios";
 import FormModal from "./FormModal";
 import Spinner from "react-bootstrap/Spinner";
@@ -22,7 +23,7 @@ const Project = ({ userSignal }) => {
 		hours: "",
 		startDate: "",
 		endDate: "",
-		teamMember: "",
+		teamMember: [],
 	});
 
 	const navigate = useNavigate();
@@ -39,12 +40,13 @@ const Project = ({ userSignal }) => {
 				const sorted = response.data.sort((a, b) =>
 					a.status.localeCompare(b.status)
 				);
-
-				// User can only see own projects
+				console.log(response.data);
+				// User can only see own projects so we filter to find a match.
 				const ownProjects = sorted.filter((project) =>
-					project.teamMember?.includes(user.email)
+					project.teamMember.includes(user.id)
 				);
 
+				console.log(ownProjects);
 				const peopleResponse = await axios.get(
 					"http://localhost:3001/databases/people"
 				);
@@ -63,6 +65,7 @@ const Project = ({ userSignal }) => {
 			}
 		};
 		fetchData();
+		console.log(user.id);
 	}, []);
 
 	const user = userSignal.value;
@@ -84,7 +87,7 @@ const Project = ({ userSignal }) => {
 			hours: "",
 			startDate: "",
 			endDate: "",
-			teamMember: "",
+			teamMember: [],
 		});
 	};
 
@@ -167,7 +170,7 @@ const Project = ({ userSignal }) => {
 					setPeople={setPeople}
 				/>
 			)}
-			<div className="container container mt-4">
+			<div className="container mt-4">
 				{loading && (
 					<>
 						<Spinner animation="border" variant="primary" />
@@ -181,9 +184,9 @@ const Project = ({ userSignal }) => {
 							{/* Border that's being shown IF ALL projects are shown, separates each project by status (Active, Next, Done) */}
 							{index !== 0 &&
 								item.status !== filteredProjects[index - 1].status && (
-									<hr className="border border-neuorange border-3 opacity-75" />
+									<hr className="border border-neupurple border-3 opacity-75" />
 								)}
-							<div className="col w-100 mx-auto">
+							<Col className="col-sm-6 col-md-4 col-xl-3">
 								<ProjectCard
 									item={item}
 									handleClick={handleClick}
@@ -193,7 +196,7 @@ const Project = ({ userSignal }) => {
 									handleUserClick={handleUserClick}
 									project={project}
 								/>
-							</div>
+							</Col>
 						</React.Fragment>
 					))}
 				</Row>

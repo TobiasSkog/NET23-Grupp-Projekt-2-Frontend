@@ -26,20 +26,18 @@ export default function SearchDate({
 			(report) => report.date >= start && report.date <= end
 		);
 		setTimeReports(filteredDate);
-		// setSearchDate({
-		// 	startDate: "",
-		// 	endDate: "",
-		// });
 	};
 
 	return (
-		<Container className="mt-2 mb-3 bg-white rounded shadow col-md-7 col-lg-6">
+		<Container className="mt-2 mb-3 col-md-8 col-lg-6">
 			<Container>
-				<Form.Text className="fw-semibold">Enter searchdate</Form.Text>
+				<Form.Text className="title-text-search-date">
+					Enter searchdate
+				</Form.Text>
 			</Container>
 			<Container className="mt-2 d-md-flex justify-content-start">
 				<Form.Control
-					className="mb-3 me-2"
+					className="mb-3 me-2 neu-form-select"
 					type="date"
 					id="startDate"
 					name="startDate"
@@ -50,7 +48,7 @@ export default function SearchDate({
 				/>
 
 				<Form.Control
-					className="mb-3 me-2"
+					className="mb-3 me-2 neu-form-select"
 					type="date"
 					id="endDate"
 					name="endDate"
@@ -61,13 +59,12 @@ export default function SearchDate({
 					onChange={handleInputChange}
 				/>
 
-				<Button
+				<button
 					type="button"
-					variant="primary"
-					className="mb-3 me-2 ms-auto"
+					className="mb-3 me-2 ms-auto neu-button-square"
 					onClick={handleDateSearch}>
 					Search
-				</Button>
+				</button>
 			</Container>
 		</Container>
 	);

@@ -12,7 +12,7 @@ export default function ProjectCard({
 	handleUserClick,
 }) {
 	return (
-		<Card className="show-card neu-card bg-primary">
+		<Card className="neu-card bg-primary mb-4">
 			<section className="neu-card-status">
 				<span
 					className={`text-textdark 
@@ -46,10 +46,8 @@ export default function ProjectCard({
 						endDate={item.timespan.end}
 						progressType="date"
 					/>
-				</section>
 
-				<section className="neu-card-section neu-center">
-					<p>
+					<p className="mt-2">
 						Time: {item.workedHours} h / {item.hours} h
 					</p>
 					<Progressbar
