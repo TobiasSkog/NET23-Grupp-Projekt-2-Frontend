@@ -32,7 +32,7 @@ export default function ProjectCard({
 			<div className="neu-breaker" />
 			<Card.Body className="d-flex flex-column">
 				<section className="neu-card-section neu-center">
-					<p>
+					<p className="card-text neu-hard-inner">
 						{((deadlineDiff) =>
 							deadlineDiff > 0
 								? `Deadline: ${Math.ceil(deadlineDiff)} days`
@@ -40,14 +40,14 @@ export default function ProjectCard({
 							(new Date(item.timespan.end) - new Date()) / (1000 * 3600 * 24)
 						)}
 					</p>
-					<p>Ends: {item.timespan.end}</p>
+					<p className="card-text neu-hard-inner">Ends: {item.timespan.end}</p>
 					<Progressbar
 						startDate={item.timespan.start}
 						endDate={item.timespan.end}
 						progressType="date"
 					/>
 
-					<p className="mt-2">
+					<p className="mt-2 card-text neu-hard-inner">
 						Time: {item.workedHours} h / {item.hours} h
 					</p>
 					<Progressbar

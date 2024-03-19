@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
 import Spinner from "react-bootstrap/esm/Spinner";
-import Table from "react-bootstrap/Table";
-import Container from "react-bootstrap/esm/Container";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Sorting from "./Sorting";
@@ -91,17 +89,15 @@ export default function TimereportUser({ person }) {
 						<h4 className="mt-3">Loading...</h4>
 					</>
 				)}
-				<Container className="neu-search-container d-flex flex-column flex-md-row align-items-center">
+				<div className="neu-search-container">
 					<SearchDate
 						setTimeReports={setTimeReports}
 						originalTimeReports={originalTimeReports}
 						setSearchDate={setSearchDate}
 						searchDate={searchDate}
 					/>
-					<div className="col-md-4 col-lg-6">
-						<h2 className="text-center page-title">{name}</h2>
-					</div>
-				</Container>
+				</div>
+				<h2 className="text-center page-title mt-2 mb-2">{name}</h2>
 				<div className="table-responsive">
 					<table className="neu-table">
 						<thead>
