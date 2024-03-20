@@ -103,20 +103,28 @@ export default function TimereportUser({ person }) {
 					<table className="neu-table">
 						<thead>
 							<tr className="text-center">
-								<th>#</th>
+								<th>
+									<strong>#</strong>
+								</th>
 								<th
 									onClick={() => handleSortByDate()}
 									style={{ cursor: "pointer" }}>
-									Date
+									<strong>Date</strong>
 								</th>
-								<th>Hours</th>
+								<th>
+									<strong>Hours</strong>
+								</th>
 								<th
 									onClick={() => handleSortByProject()}
 									style={{ cursor: "pointer" }}>
-									Project
+									<strong>Project</strong>
 								</th>
-								<th>Note</th>
-								<th>Name</th>
+								<th>
+									<strong>Note</strong>
+								</th>
+								<th>
+									<strong>Name</strong>
+								</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -142,7 +150,7 @@ export default function TimereportUser({ person }) {
 						<tfoot>
 							<tr>
 								<th scope="row" className="text-center">
-									Sum
+									<strong> Sum</strong>
 								</th>
 								<td></td>
 								<td className="text-center">

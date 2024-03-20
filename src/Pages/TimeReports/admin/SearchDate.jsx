@@ -30,11 +30,11 @@ export default function SearchDate({
 	return (
 		<div>
 			<Container>
-				<Form.Text className="title-text-search-date">
+				<Form.Text className="title-text-search-date ms-3 mb-2">
 					Enter searchdate
 				</Form.Text>
 			</Container>
-			<Container className="mt-2 d-sm-flex justify-content-center">
+			<Container className="d-flex flex-column flex-sm-row justify-content-center align-items-center w-100">
 				<Form.Control
 					className="mb-3 me-2 neu-form-select"
 					type="date"
@@ -58,7 +58,9 @@ export default function SearchDate({
 					onChange={handleInputChange}
 				/>
 
-				<button className="neu-button-square mb-3" onClick={handleDateSearch}>
+				<button
+					className="neu-button-square w-100 ms-2 me-2 mb-2 center"
+					onClick={handleDateSearch}>
 					Search
 				</button>
 			</Container>
