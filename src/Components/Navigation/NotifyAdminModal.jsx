@@ -5,7 +5,7 @@ import CustomModal from "../CustomModal/CustomModal";
 
 export default function NotifyAdminModal() {
 	const [showModal, setShowModal] = useState(false);
-	const [recievedNewNotification, setRecievedNewNotification] = useState(true);
+	const [recievedNewNotification, setRecievedNewNotification] = useState(false);
 	const [projectData, setProjectData] = useState(null);
 
 	useEffect(() => {
