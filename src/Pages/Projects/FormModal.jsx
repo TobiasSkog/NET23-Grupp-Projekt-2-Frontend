@@ -1,20 +1,15 @@
-import Button from "react-bootstrap/Button";
+import { useState, useEffect } from "react";
 import Form from "react-bootstrap/Form";
 import axios from "axios";
-import Modal from "react-bootstrap/esm/Modal";
+import CustomModal from "../../Components/CustomModal/CustomModal";
 
-export default function FormModal({
-	formInput,
-	setFormInput,
-	closeModal,
-	modalOpen,
-	updateProjects,
-	edit,
-	setEdit,
-	projectId,
-	setLoading,
-	people,
-}) {
+export default function FormModal({ formInput, setFormInput, closeModal, modalOpen, updateProjects, edit, setEdit, projectId, setLoading, people }) {
+	const [teamMemberAlreadyInProject, setTeamMemberAlreadyInProject] = useState([]);
+	useEffect(() => {
+		const initialTeamMembers = people.filter((person) => formInput.teamMember.includes(person.id)).map((person) => person.id);
+
+		setTeamMemberAlreadyInProject([{ id: projectId, activeMembers: initialTeamMembers }]);
+	}, [people, formInput.teamMember, projectId]);
 	const handleSubmit = async (event) => {
 		event.preventDefault();
 		try {
@@ -24,34 +19,28 @@ export default function FormModal({
 
 			//validation for Edit and create new projects
 			if (!formInput.status.trim()) {
-				alert("Status is required.");
+				alert("Please set a Status for the project.");
 				return;
 			} else if (!formInput.startDate.trim()) {
-				alert("Startdate is required");
+				alert("Please provide a Startdate for the project.");
 				return;
 			} else if (!formInput.endDate.trim()) {
-				alert("Enddate is required");
+				alert("Please provide an Enddate for the project.");
 				return;
-			} else if (!formInput.teamMember.trim()) {
-				alert("You must asign at least 1 team member");
+			} else if (formInput.teamMember.length === 0) {
+				alert("Please select at least one team member.");
 				return;
 			}
 
 			if (edit) {
 				// If in editing mode, update existing project
 
-				response = await axios.patch(
-					`http://localhost:3001/pages/projects/${projectId}`,
-					formInput
-				);
+				response = await axios.patch(`http://localhost:3001/pages/projects/${projectId}`, formInput);
 				console.log("Project updated successfully:", response.data);
 			} else {
 				// If not in editing mode, create a new project
 				console.log(formInput);
-				response = await axios.post(
-					"http://localhost:3001/pages/projects",
-					formInput
-				);
+				response = await axios.post("http://localhost:3001/pages/projects", formInput);
 				//console.log(formInput);
 				console.log("New project created successfully:", response.data);
 			}
@@ -83,130 +72,135 @@ export default function FormModal({
 		});
 	};
 
+	const handleTeamMemberSelectChange = (event) => {
+		const selectedIds = Array.from(event.target.selectedOptions, (option) => option.value);
+
+		setFormInput({
+			...formInput,
+			teamMember: selectedIds,
+		});
+
+		setTeamMemberAlreadyInProject([
+			{
+				id: projectId,
+				activeMembers: selectedIds,
+			},
+		]);
+	};
+
 	return (
-		<div className="container">
-			<Modal.Dialog>
-				<Modal show={modalOpen} dialogClassName="modal-md">
-					<Form className="bg-dark p-4 rounded">
-						<Form.Group>
-							<Form.Label htmlFor="name" className="text-dark">
-								Name
-							</Form.Label>
-							<Form.Control
-								className="mb-4 fw-semibold"
-								type="text"
-								id="name"
-								name="name"
-								aria-label="name"
-								placeholder="Name"
-								required
-								value={formInput.name}
-								onChange={handleInputChange}
-							/>
-						</Form.Group>
-						<Form.Select
-							className="mb-3 fw-semibold"
-							name="status"
-							id="status"
-							aria-label="status"
-							required
-							value={formInput.status}
-							onChange={handleSelectChange}>
-							<option className="">Select Status</option>
-							<option>Active</option>
-							<option>Next up</option>
-							<option>Done</option>
-							<option>Paused</option>
-						</Form.Select>
-						<Form.Group>
-							<Form.Label htmlFor="hours" className="text-light">
-								Hours
-							</Form.Label>
-							<Form.Control
-								type="text"
-								id="hours"
-								placeholder="Hours"
-								className="mb-3 fw-semibold"
-								name="hours"
-								value={formInput.hours}
-								onChange={handleInputChange}
-							/>
-						</Form.Group>
-						<Form.Select
-							className="mb-2 fw-semibold"
-							name="teamMembers"
-							id="teamMembers"
-							aria-label="teamMembers"
-							multiple
-							value={formInput.teamMember?.split(",")}
-							onChange={(event) => {
-								const selectedOptions = Array.from(
-									event.target.selectedOptions,
-									(option) => option.value
-								);
-								const selectedEmails = selectedOptions.join(",");
-								setFormInput((prevValue) => ({
-									...prevValue,
-									teamMember: selectedEmails,
-								}));
-							}}>
-							<option value="">--Select Team members--</option>
-							{people.map((person) => (
-								<option key={person.id} value={person.email}>
+		<CustomModal show={modalOpen} onClose={closeModal}>
+			<Form className="neu-form">
+				<Form.Group className="neu-form-group">
+					<Form.Label htmlFor="name">Name:</Form.Label>
+					<Form.Control
+						className="neu-form-controll"
+						type="text"
+						id="name"
+						name="name"
+						aria-label="name"
+						placeholder="Name"
+						required
+						value={formInput.name}
+						onChange={handleInputChange}
+					/>
+				</Form.Group>
+				<Form.Group className="neu-form-group">
+					<Form.Label htmlFor="status">Project Status:</Form.Label>
+					<Form.Select
+						className="neu-form-select"
+						name="status"
+						id="status"
+						aria-label="status"
+						required
+						value={formInput.status}
+						onChange={handleSelectChange}>
+						<option hidden>Select Status</option>
+						<option>Active</option>
+						<option>Next up</option>
+						<option>Done</option>
+						<option>Paused</option>
+					</Form.Select>
+				</Form.Group>
+				<Form.Group className="neu-form-group">
+					<Form.Label htmlFor="hours">Hours:</Form.Label>
+					<Form.Control
+						type="text"
+						id="hours"
+						placeholder="Hours"
+						className="neu-form-controll"
+						name="hours"
+						value={formInput.hours}
+						onChange={handleInputChange}
+					/>
+				</Form.Group>
+				<Form.Group className="neu-form-group">
+					<Form.Label htmlFor="teamMembers">Select Team-Members:</Form.Label>
+					<select
+						className="neu-form-select"
+						name="teamMembers"
+						id="teamMembers"
+						aria-label="teamMembers"
+						multiple
+						size={people.length + 1 >= 5 ? 5 : people.length + 1}
+						value={formInput.teamMember}
+						onChange={handleTeamMemberSelectChange}>
+						{people.map((person) => {
+							const isSelected = formInput.teamMember.includes(person.id);
+							const isActiveInProject = teamMemberAlreadyInProject.find((project) => project.id === projectId)?.activeMembers.includes(person.id);
+							teamMemberAlreadyInProject.forEach((proj) => console.log("bur:", proj));
+							const className = `${isSelected ? "neu-selected" : "neu-not-selected"} ${
+								isActiveInProject ? "neu-part-of-project" : "neu-not-part-of-project"
+							}`;
+							return (
+								<option key={person.id} value={person.id} className={className}>
 									{person.name}
 								</option>
-							))}
-						</Form.Select>
-
-						<Form.Group>
-							<Form.Label htmlFor="startDate" className="text-light">
-								Start Date:
-							</Form.Label>
-							<Form.Control
-								className="mb-3"
-								type="date"
-								id="startDate"
-								name="startDate"
-								aria-label="startDate"
-								required
-								value={formInput.startDate}
-								onChange={handleInputChange}
-							/>
-						</Form.Group>
-						<Form.Group>
-							<Form.Label htmlFor="endDate" className="text-light">
-								End Date:
-							</Form.Label>
-							<Form.Control
-								className="mb-5"
-								type="date"
-								id="endDate"
-								name="endDate"
-								aria-label="endDate"
-								required
-								min={formInput.startDate}
-								value={formInput.endDate}
-								onChange={handleInputChange}
-							/>
-						</Form.Group>
-						<Button
-							type="submit"
-							className="w-100 mb-4"
-							onClick={(e) => {
-								handleSubmit(e);
-								closeModal();
-							}}>
-							Submit
-						</Button>
-						<Button
-							type="button"
-							className="w-100 btn-secondary"
-							onClick={closeModal}>
-							Cancel
-						</Button>
-					</Form>
-				</Modal>
-			</Modal.Dialog>
-		</div>
+							);
+						})}
+					</select>
+				</Form.Group>
+				<Form.Group className="neu-form-group">
+					<Form.Label htmlFor="startDate">Start Date:</Form.Label>
+					<Form.Control
+						className="neu-form-controll"
+						type="date"
+						id="startDate"
+						name="startDate"
+						aria-label="startDate"
+						required
+						value={formInput.startDate}
+						onChange={handleInputChange}
+					/>
+				</Form.Group>
+				<Form.Group className="neu-form-group">
+					<Form.Label htmlFor="endDate">End Date:</Form.Label>
+					<Form.Control
+						className="neu-form-controll"
+						type="date"
+						id="endDate"
+						name="endDate"
+						aria-label="endDate"
+						min={formInput.startDate}
+						value={formInput.endDate}
+						onChange={handleInputChange}
+						required
+					/>
+				</Form.Group>
+				<div className="neu-form-2b">
+					<button
+						className="neu-button-square neu-max-400"
+						onClick={(e) => {
+							handleSubmit(e);
+							closeModal();
+						}}>
+						Submit
+					</button>
+					<button className="neu-button-square neu-max-400" onClick={closeModal}>
+						Cancel
+					</button>
+				</div>
+			</Form>
+		</CustomModal>
 	);
 }

@@ -1,87 +1,90 @@
-import React, { useState, useEffect } from 'react';
-import { Modal, Button, Form } from 'react-bootstrap';
+import React, { useState, useEffect } from "react";
+import { Form } from "react-bootstrap";
+import CustomModal from "../../../Components/CustomModal/CustomModal";
 
-const EditReportModal = ({
-  showModal,
-  closeModal,
-  selectedReport,
-  handleUpdateReport,
-  projects,
-}) => {
-  const [updatedReport, setUpdatedReport] = useState(selectedReport || {});
-  const [projectTimespan, setProjectTimespan] = useState({ start: '', end: '' });
+const EditReportModal = ({ showModal, closeModal, selectedReport, handleUpdateReport, projects }) => {
+	const [updatedReport, setUpdatedReport] = useState(selectedReport || {});
+	const [projectTimespan, setProjectTimespan] = useState({ start: "", end: "" });
 
-  useEffect(() => {
-    // Update the state with the selected report
-    setUpdatedReport(selectedReport || {});
-    const project = projects.find(p => p.id === selectedReport?.projectId);
-    if (project && project.timespan) {
-      setProjectTimespan(project.timespan);
-    }
-  }, [selectedReport, projects]);
+	useEffect(() => {
+		// Update the state with the selected report
+		setUpdatedReport(selectedReport || {});
+		const project = projects.find((p) => p.id === selectedReport?.projectId);
+		if (project && project.timespan) {
+			setProjectTimespan(project.timespan);
+		}
+	}, [selectedReport, projects]);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setUpdatedReport(prev => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
+	const handleChange = (e) => {
+		const { name, value } = e.target;
+		setUpdatedReport((prev) => ({
+			...prev,
+			[name]: value,
+		}));
+	};
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    handleUpdateReport(updatedReport);
-    closeModal();
-  };
+	const handleSubmit = (e) => {
+		e.preventDefault();
+		handleUpdateReport(updatedReport);
+		closeModal();
+	};
 
-  return (
-    <Modal show={showModal} onHide={closeModal}>
-      <Modal.Header closeButton>
-        <Modal.Title>Edit Time Report</Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
-        <Form onSubmit={handleSubmit}>
-          <Form.Group controlId="date">
-            <Form.Label>Date</Form.Label>
-            <Form.Control
-              type="date"
-              name="date"
-              value={updatedReport.date || ''}
-              onChange={handleChange}
-              min={projectTimespan.start}
-              max={projectTimespan.end}
-              required
-            />
-          </Form.Group>
-          <Form.Group controlId="hours">
-            <Form.Label>Hours Worked</Form.Label>
-            <Form.Control
-              type="number"
-              name="hours"
-              min="1"
-              step="1"
-              value={updatedReport.hours || ''}
-              onChange={handleChange}
-              required
-            />
-          </Form.Group>
-          <Form.Group controlId="note">
-            <Form.Label>Note/Description</Form.Label>
-            <Form.Control
-              as="textarea"
-              name="note"
-              maxLength="50"
-              value={updatedReport.note || ''}
-              onChange={handleChange}
-            />
-          </Form.Group>
-          <Button variant="primary" type="submit">
-            Update Report
-          </Button>
-        </Form>
-      </Modal.Body>
-    </Modal>
-  );
+	return (
+		<CustomModal show={showModal} onClose={closeModal}>
+			<Form onSubmit={handleSubmit} className="neu-form">
+				<Form.Group className="neu-form-group">
+					<Form.Label htmlFor="startDate">Date:</Form.Label>
+					<Form.Control
+						className="neu-form-controll"
+						type="date"
+						id="startDate"
+						name="startDate"
+						aria-label="startDate"
+						required
+						value={updatedReport.date || ""}
+						onChange={handleChange}
+					/>
+				</Form.Group>
+				<Form.Group className="neu-form-group">
+					<Form.Label htmlFor="hours">Hours:</Form.Label>
+					<Form.Control
+						type="text"
+						id="hours"
+						placeholder="Hours"
+						className="neu-form-controll"
+						name="hours"
+						value={updatedReport.hours || ""}
+						onChange={handleChange}
+					/>
+				</Form.Group>
+				<Form.Group className="neu-form-group">
+					<Form.Label htmlFor="note">Note:</Form.Label>
+					<Form.Control
+						className="neu-form-controll"
+						type="text"
+						id="note"
+						name="note"
+						aria-label="note"
+						placeholder="Note"
+						required
+						value={updatedReport.note || ""}
+						onChange={handleChange}
+					/>
+				</Form.Group>
+				<div className="neu-form-1b">
+					<button
+						type="submit"
+						className="neu-button-square neu-size-100"
+						onClick={(e) => {
+							handleSubmit(e);
+							closeModal();
+						}}>
+						Update Report
+					</button>
+				</div>
+			</Form>
+		</CustomModal>
+	);
 };
 
 export default EditReportModal;

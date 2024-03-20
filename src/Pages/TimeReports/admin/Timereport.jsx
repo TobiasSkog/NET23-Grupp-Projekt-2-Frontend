@@ -8,7 +8,7 @@ import Sorting from "./Sorting";
 import SearchDate from "./SearchDate";
 import EditAdminReportModal from "./EditAdminReportModal";
 
-export default function Timereport({ proj, userSignal }) {
+export default function Timereport({ proj }) {
 	const [loading, setLoading] = useState(false);
 	const [timeReports, setTimeReports] = useState([]);
 	const [originalTimeReports, setOriginalTimeReports] = useState([]);
@@ -36,9 +36,7 @@ export default function Timereport({ proj, userSignal }) {
 				setLoading(true);
 				//get timereports by filtering on projectId
 
-				const response = await axios.get(
-					`http://localhost:3001/databases/timereports/filter/project?property=Project&id=${projectId}`
-				);
+				const response = await axios.get(`http://localhost:3001/databases/timereports/filter/project?property=Project&id=${projectId}`);
 
 				//save response 2 times, one will be manipulated in filtering, and one to always have all data
 				setTimeReports(response.data);
@@ -65,9 +63,7 @@ export default function Timereport({ proj, userSignal }) {
 	const updateTimereports = async () => {
 		try {
 			setLoading(true);
-			const response = await axios.get(
-				`http://localhost:3001/databases/timereports/filter/project?property=Project&id=${projectId}`
-			);
+			const response = await axios.get(`http://localhost:3001/databases/timereports/filter/project?property=Project&id=${projectId}`);
 
 			setTimeReports(response.data);
 			setOriginalTimeReports(response.data);
@@ -118,9 +114,7 @@ export default function Timereport({ proj, userSignal }) {
 
 	//in edit we find the right timereportId
 	const handleEdit = (timereportId) => {
-		const timereportToEdit = originalTimeReports.find(
-			(item) => item.id === timereportId
-		);
+		const timereportToEdit = originalTimeReports.find((item) => item.id === timereportId);
 		if (timereportToEdit) {
 			setFormInput({
 				id: timereportId,
@@ -154,12 +148,7 @@ export default function Timereport({ proj, userSignal }) {
 				</>
 			)}
 			<Container className="d-md-flex mb-3">
-				<SearchDate
-					setTimeReports={setTimeReports}
-					originalTimeReports={originalTimeReports}
-					setSearchDate={setSearchDate}
-					searchDate={searchDate}
-				/>
+				<SearchDate setTimeReports={setTimeReports} originalTimeReports={originalTimeReports} setSearchDate={setSearchDate} searchDate={searchDate} />
 				<div className="mt-2 mb-3 col-md-5 col-lg-6">
 					<h2 className="text-center mb-5">Timereports - {projectName}</h2>
 				</div>
@@ -169,14 +158,10 @@ export default function Timereport({ proj, userSignal }) {
 					<thead>
 						<tr className="text-center">
 							<th>#</th>
-							<th
-								onClick={() => handleSortByDate()}
-								style={{ cursor: "pointer" }}>
+							<th onClick={() => handleSortByDate()} style={{ cursor: "pointer" }}>
 								Date
 							</th>
-							<th
-								onClick={() => handleSortByName()}
-								style={{ cursor: "pointer" }}>
+							<th onClick={() => handleSortByName()} style={{ cursor: "pointer" }}>
 								Person
 							</th>
 							<th>Hours</th>
@@ -190,18 +175,14 @@ export default function Timereport({ proj, userSignal }) {
 							<tr key={item.id} className="text-center">
 								<td>{index + 1}</td>
 								<td>{item.date}</td>
-								<td
-									onClick={() => handleNameClick(item.person, item.name)}
-									style={{ cursor: "pointer" }}>
+								<td onClick={() => handleNameClick(item.person, item.name)} style={{ cursor: "pointer" }}>
 									{item.name}
 								</td>
 								<td>{item.hours}</td>
 								<td>{projectName}</td>
 								<td>{item.note}</td>
 								<td>
-									<button
-										className="btn btn-danger btn-sm"
-										onClick={() => handleEdit(item.id)}>
+									<button className="btn btn-danger btn-sm" onClick={() => handleEdit(item.id)}>
 										Edit
 									</button>
 								</td>
@@ -225,11 +206,7 @@ export default function Timereport({ proj, userSignal }) {
 					</tfoot>
 				</Table>
 			</Container>
-			<Sorting
-				setTimeReports={setTimeReports}
-				originalTimeReports={originalTimeReports}
-				setSearchDate={setSearchDate}
-			/>
+			<Sorting setTimeReports={setTimeReports} originalTimeReports={originalTimeReports} setSearchDate={setSearchDate} />
 		</section>
 	);
 }

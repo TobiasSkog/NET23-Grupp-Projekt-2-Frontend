@@ -1,10 +1,20 @@
 /*------------------------------*/
 /*---BASIC OVERRIDES STYLING ---*/
 /*------------------------------*/
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 * {
-  color: #303030;
-  padding: 0;
   margin: 0;
+  padding: 0;
+  font: inherit;
+}
+
+html {
+  color-scheme: dark light;
 }
 
 body,
@@ -17,45 +27,24 @@ body,
   padding: 0;
 }
 
-header {
-  height: 60px;
-}
 
 main {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin: 1rem;
-  min-height: calc(100vh - 100px - 2rem);
-  padding: 0;
-}
-
-main p {
-  font-size: 1rem;
-  background-color: transparent;
+  flex: 1;
   margin: 0;
-  padding: 0;
+  padding-top: 60px;
+  /* min-height: calc(100vh - 72px); */
+  color: var(--bs-textdark);
+
 }
 
 footer {
   width: 100%;
   z-index: 999;
   height: 40px;
-}
-
-/*----------------------------*/
-/*---------FOOTER CSS---------*/
-/*----------------------------*/
-
-.neu-footer-content {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  margin: 0;
-  padding: 0;
-  height: 100%;
   border: 2px solid var(--bs-primary);
   border-radius: 0.625rem;
   outline: none;
@@ -64,12 +53,24 @@ footer {
     5px 5px 5px var(--bs-shadow);
 }
 
+/*----------------------------*/
+/*---------FOOTER CSS---------*/
+/*----------------------------*/
+.neu-footer-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
 
+}
 
 /*-------------------------*/
 /*---BASIC NEU TEMPLATES---*/
 /*-------------------------*/
-
 .neu-hard-outer {
   border: 2px solid var(--bs-primary);
   outline: none;
@@ -106,19 +107,23 @@ footer {
 /*------------------------------*/
 /*-----------CARD CSS-----------*/
 /*------------------------------*/
-.neu-grid {
+/* .neu-grid {
+} */
+/* .neu-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 1rem;
   width: 100%;
   height: 100%;
   margin-bottom: 1rem;
-}
+} */
 
 .neu-card {
+  background-color: var(--bs-primary);
   border-radius: 0.625rem;
   border: 2px solid var(--bs-primary);
   outline: none;
+  margin-bottom: 1rem;
   box-shadow:
     -5px -5px 5px var(--bs-highlight),
     5px 5px 5px var(--bs-shadow);
@@ -128,7 +133,7 @@ footer {
   border-radius: 0.625rem;
   border: 2px solid var(--bs-primary);
   outline: none;
-  padding: 0.25rem;
+  padding: 0 0.825rem;
   margin-bottom: 1rem;
   box-shadow:
     -5px -5px 5px var(--bs-highlight),
@@ -137,6 +142,16 @@ footer {
 
 .neu-card-section p {
   font-size: 1.2rem;
+  margin-bottom: 0.825rem;
+  border-radius: 0.625rem;
+  border: 2px solid var(--bs-primary);
+  box-shadow:
+    inset 3px 3px 5px var(--bs-shadow),
+    inset -2px -2px 4px var(--bs-highlight);
+}
+
+.neu-card-section p:first-child {
+  margin-top: 0.825rem;
 }
 
 .neu-card-inset {
@@ -158,14 +173,16 @@ footer {
 
 .neu-prog {
   display: flex;
+  margin-bottom: 0.825rem;
   border-radius: 0.55rem;
   height: 1.2rem;
   text-align: center;
-  border: 0.0625rem solid #0000000a;
+  border-radius: 0.55rem;
+  border: 0.0625rem solid var(--bs-primary);
   overflow: hidden;
   box-shadow:
-    inset -3px -3px 7px var(--bs-highlight),
-    inset 2px 2px 5px var(--bs-shadow);
+    -3px -3px 7px var(--bs-highlight),
+    2px 2px 5px var(--bs-shadow);
 }
 
 .neu-prog-bar {
@@ -175,29 +192,23 @@ footer {
   color: var(--bs-highlight);
   height: 100%;
   border-radius: 0.55rem;
-  border: 0.0625rem solid var(--bs-shadow);
   white-space: nowrap;
+
 }
 
 .neu-card-status {
   display: flex;
   align-items: center;
-  justify-content: end;
+  justify-content: flex-end;
   background-color: transparent;
   margin: 5px;
   font-size: 1.2rem;
-  /* text-shadow:
-    0.0625rem 0.0625rem 0rem var(--bs-shadow),
-    -0.0625rem -0.0625rem 0rem var(--bs-highlight); */
 }
 
 .neu-card-active {
   font-weight: bold;
   border-radius: 0.4rem;
   padding: 2px 8px;
-  /* border: 2px solid var(--bs-neugreen); 
-  var(--bs-neugreen)
-  */
   color: transparent !important;
   color: var(--bs-neugreen) !important;
   box-shadow:
@@ -210,7 +221,6 @@ footer {
   font-weight: bold;
   border-radius: 0.4rem;
   padding: 2px 8px;
-  /* border: 2px solid var(--bs-neuturquoise); */
   color: var(--bs-neuturquoise) !important;
   box-shadow:
     inset 3px 3px 5px var(--bs-shadow),
@@ -221,7 +231,6 @@ footer {
   font-weight: bolder;
   border-radius: 0.4rem;
   padding: 2px 8px;
-  /* border: 2px solid var(--bs-neured); */
   color: var(--bs-neured) !important;
   box-shadow:
     inset 3px 3px 5px var(--bs-shadow),
@@ -232,7 +241,6 @@ footer {
   font-weight: bolder;
   border-radius: 0.4rem;
   padding: 2px 8px;
-  /* border: 2px solid var(--bs-neupurple); */
   color: var(--bs-neupurple) !important;
   box-shadow:
     inset 3px 3px 5px var(--bs-shadow),
@@ -257,15 +265,17 @@ footer {
     8px 8px 5px var(--bs-shadow);
 }
 
-
-
 /*--------------------------------*/
 /*---------NAVIGATION CSS---------*/
 /*--------------------------------*/
 .neu-nav {
-  z-index: 1000;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1050;
   height: 60px;
-  margin: 0;
+
   padding: 0;
   border: 2px solid var(--bs-primary);
   border-radius: 0.625rem;
@@ -273,6 +283,7 @@ footer {
   box-shadow:
     -5px -5px 5px var(--bs-highlight),
     5px 5px 5px var(--bs-shadow);
+  background-color: var(--bs-primary);
 }
 
 .neu-nav-item {
@@ -327,7 +338,6 @@ footer {
   padding: 0;
   margin: 0;
   min-width: 50px;
-
   border-radius: 0.625rem;
   box-shadow: inset 3px 3px 7px var(--bs-shadow),
     inset -2px -2px 5px var(--bs-highlight);
@@ -370,18 +380,18 @@ footer {
   position: fixed;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
-
+  translate: -50% -50%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
-  max-width: 500px;
-  min-width: 290px;
+  max-width: 500px !important;
+  min-width: 350px !important;
+  max-height: calc(100vh - 60px - 5.5rem);
   margin: 0;
   padding: 0.625rem;
   border-radius: 0.625rem;
+  color: var(--bs-textdark);
   background-color: var(--bs-primary);
   border: 2px solid var(--bs-primary);
   outline: none;
@@ -390,24 +400,16 @@ footer {
     8px 8px 10px var(--bs-shadow);
 }
 
-.neu-modal-close-container {
-  display: flex;
-  text-align: center;
-  flex-direction: row;
-  justify-content: end;
-  align-items: center;
-  background-color: transparent;
-  width: 100%;
-  height: 100%;
-}
-
 .neu-modal-close-button {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  position: absolute;
+  right: 0px;
+  top: 0;
+  margin: 8px;
+  text-align: center;
   background-color: transparent;
-  width: 25px;
-  height: 25px;
+  color: var(--bs-textdark);
+  height: 28px;
+  width: 28px;
   font-size: 1rem;
   border: 2px solid var(--bs-primary);
   outline: none;
@@ -415,82 +417,328 @@ footer {
 }
 
 .neu-modal-close-button:hover {
+  color: var(--bs-neured) !important;
   border: 2px solid var(--bs-primary);
-  color: var(--bs-neured);
   border-radius: 50%;
   box-shadow:
-    inset -1px -1px 2px var(--bs-highlight),
+    inset -2px -2px 2px var(--bs-highlight),
     inset 2px 2px 3px var(--bs-shadow);
 }
 
 .neu-modal-title {
-  background-color: transparent;
   text-align: center;
+  flex: 1;
+  margin: 0 0.625rem;
+  padding: 0.625rem;
 }
 
-.neu-modal-title h2 {
-  background-color: transparent;
+.neu-modal-title p {
+  font-size: 1.2rem;
+  font-weight: 600;
+  padding: 0;
+  margin: 0;
 }
 
 .neu-modal-divider {
   width: 90%;
-  height: 6px;
+  margin-bottom: 0.625rem;
+  padding: 0;
+  height: 5px;
   border: 2px solid var(--bs-primary);
-  border-radius: 2px;
-  margin: 0.5rem 0;
+  border-radius: 0.1625rem;
   box-shadow:
-    inset 0 0 5px var(--bs-neuorange),
-    inset 2px 2px 2px var(--bs-shadow),
+    inset 2px 2px 2px var(--bs-neuorange),
     inset -2px -2px 2px var(--bs-highlight);
 }
 
 .neu-modal-body {
-  background-color: transparent;
-  outline: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  height: 100%;
 }
 
-.neu-modal-body>* {
-  background-color: transparent;
+.neu-error-border {
+  border: 2px solid var(--bs-neured) !important;
+}
+
+/*---------------------------------------------------*/
+/*-----------MODAL NOTYIFY ADMIN MODAL CSS-----------*/
+/*---------------------------------------------------*/
+.neu-project-link-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0.625rem;
+  width: 100%;
+  height: 100%;
+}
+
+.neu-project-link-content {
   outline: none;
+  width: 100%;
+  height: 100%;
+  margin: 0.625rem;
+  padding: 0.625rem;
+  border: 2px solid var(--bs-primary);
+  border-radius: 0.625rem;
+  box-shadow:
+    inset 3px 3px 7px var(--bs-shadow),
+    inset -2px -2px 5px var(--bs-highlight);
+}
+
+.neu-project-info {
+  width: 100%;
+  height: 100%;
+  text-align: left;
+  text-wrap: pretty;
+  overflow: hidden;
+  outline: none;
+  border: 2px solid var(--bs-primary);
+  border-radius: 0.625rem;
+}
+
+.project-name {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 600;
+  margin-bottom: 0.625rem;
+  padding: 0.625rem;
+  border: 2px solid var(--bs-primary);
+  border-radius: 0.625rem;
+  box-shadow:
+    2px 2px 2px var(--bs-shadow),
+    -2px -2px 2px var(--bs-highlight);
+}
+
+.project-name:hover {
+  border: 2px solid var(--bs-primary);
+  border-radius: 0.625rem;
+  cursor: pointer;
+  box-shadow:
+    inset 2px 2px 2px var(--bs-shadow),
+    inset -2px -2px 2px var(--bs-highlight);
+}
+
+.overage-hours {
+  color: var(--bs-neured);
+  font-weight: 600;
 }
 
 /*----------------------*/
 /*-------FORM CSS-------*/
 /*----------------------*/
-.neu-form-controll {
-  background-color: transparent;
-  box-shadow:
-    inset 3px 3px 7px var(--bs-shadow),
-    inset -2px -2px 5px var(--bs-highlight);
-  outline: none;
-  border: 2px solid var(--bs-primary);
+.neu-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+
 }
 
-.neu-form-controll:focus {
-  background-color: transparent;
-  box-shadow: inset 3px 3px 7px var(--bs-shadow),
-    inset -2px -2px 5px var(--bs-highlight);
-  outline: none;
-  border: 2px solid var(--bs-neupurple);
+.neu-form-group {
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
 }
 
+.neu-form-group label {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 0;
+  padding: 0;
+}
+
+.neu-form-controll,
 .neu-form-select {
-  background-color: transparent;
+  color: var(--bs-textdark) !important;
+
+  text-indent: 0.625rem !important;
+  background-color: transparent !important;
+  border: 2px solid transparent !important;
+  margin: 0.625rem !important;
+  padding: 0.625rem !important;
+  outline: none !important;
+  width: 100% !important;
+  border-radius: 0.625rem !important;
   box-shadow:
     inset 3px 3px 7px var(--bs-shadow),
-    inset -2px -2px 5px var(--bs-highlight);
-  outline: none;
-  border: 2px solid var(--bs-primary);
+    inset -2px -2px 5px var(--bs-highlight) !important;
+
 }
+
+
+
+.neu-selected.neu-part-of-project {
+  color: var(--bs-textdark) !important;
+  background-color: transparent !important;
+  border: 2px solid var(--bs-neupurple) !important;
+  box-shadow:
+    inset 3px 3px 7px var(--bs-shadow),
+    inset -2px -2px 5px var(--bs-highlight) !important;
+}
+
+.neu-not-selected.neu-part-of-project,
+.neu-selected.neu-not-part-of-project {
+  color: var(--bs-textdark) !important;
+  background-color: transparent !important;
+  border: 2px solid var(--bs-neugreen) !important;
+  box-shadow:
+    inset 3px 3px 7px var(--bs-shadow),
+    inset -2px -2px 5px var(--bs-highlight) !important;
+}
+
+.neu-not-selected.neu-not-part-of-project {
+  color: var(--bs-textdark) !important;
+  background-color: transparent !important;
+  border: 2px solid transparent !important;
+}
+
+
+
+
+/* 
+
 
 .neu-form-select:focus {
+  user-select: none;
   background-color: transparent;
+  outline: none;
+  border: 2px solid var(--bs-neupurple);
   box-shadow:
     inset 3px 3px 7px var(--bs-shadow),
     inset -2px -2px 5px var(--bs-highlight);
-  outline: none;
-  border: 2px solid var(--bs-neupurple);
+} */
+
+
+.neu-max-400 {
+  max-width: 400px;
 }
+
+.neu-form-1b,
+.neu-form-2b,
+.neu-form-3b,
+.neu-form-4b {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0.625rem;
+  padding: 0.625rem;
+  width: 100%;
+}
+
+.neu-form-1b button {
+  width: 100%;
+}
+
+.neu-form-2b button {
+  width: 48%;
+}
+
+.neu-form-3b button {
+  width: 30%;
+}
+
+.neu-form-4b button {
+  width: 21%;
+}
+
+/* select option:checked {
+  background-color: transparent;
+  appearance: none;
+  width: 100%;
+
+  border: 1px solid var(--bs-neuorange);
+} */
+
+/* 
+.neu-form:focus-within .neu-form-select:focus-within .neu-selected {
+  background-color: var(--bs-neugreen) !important;
+  color: var(--bs-textdark) !important;
+  font-size: 2rem;
+} */
+
+/* .neu-form:focus-within .neu-form-select:focus-within .neu-selected:checked {
+  appearance: none;
+  width: 100%;
+  border: 1px solid var(--bs-neuorange);
+  background-color: var(--bs-neugreen);
+} */
+
+/* 
+.neu-form-select .neu-selected {
+  background-color: transparent;
+
+} */
+
+/* .neu-selected {
+  border: 1px solid var(--bs-neupurple);
+  box-shadow:
+    inset 3px 3px 7px var(--bs-shadow),
+    inset -2px -2px 5px var(--bs-highlight);
+}
+
+
+.neu-not-selected {
+  background-color: transparent;
+  border: 1px solid var(--bs-primary);
+}
+ */
+
+
+/* .neu-form-select:focus option:checked {
+  background-color: red !important;
+  text-align: center !important;
+} */
+
+/* select:-moz-select-list-box {
+  overflow-inline: auto !important;
+  overflow-block: scroll !important;
+  padding-inline: 5px !important;
+  background-color: transparent !important;
+  color: var(--bs-textdark) !important;
+  vertical-align: text-bottom !important;
+  appearance: none !important;
+  -moz-default-appearance: none !important;
+}
+
+select:-moz-select-list-box {
+  color: var(--bs-textdark) !important;
+} */
+
+/* 
+CUSTOM DIVIDER BETWEEN EACH CHILD, SKIPING LAST CHILD
+.neu-project-link-container p:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  bottom: -0.8rem;
+  margin: 0;
+  padding: 0;
+  left: 1.5%;
+  width: 96%;
+  height: 5px;
+  border: 2px solid var(--bs-primary);
+  border-radius: 0.1625rem;
+
+  box-shadow:
+    inset 2px 2px 2px var(--bs-neuorange),
+    inset -2px -2px 2px var(--bs-highlight);
+} 
+*/
+
+
 
 /*--------------------------------------*/
 /*-------SEARCH (TIME REPORT) CSS-------*/
@@ -581,7 +829,6 @@ table.neu-table td:hover::after {
 }
 
 table.neu-table th {
-
   padding: 7px;
 }
 
@@ -836,6 +1083,14 @@ table.neu-table thead {
     inset 3px 3px 6px var(--bs-shadow);
 }
 
+.neu-buttons-between {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
 /* 1 button [ ] */
 .neu-buttons-1b {
   display: flex;
@@ -843,7 +1098,7 @@ table.neu-table thead {
   align-items: center;
   justify-content: center;
   width: 100%;
-  max-width: 400px;
+  max-width: 300px;
 }
 
 .neu-buttons-1b button {
@@ -858,8 +1113,7 @@ table.neu-table thead {
   justify-content: space-between;
   width: 100%;
   max-width: 400px;
-  padding: 0;
-  margin: 0;
+  padding: 0 12px;
 }
 
 .neu-buttons-2b-between button {
@@ -873,26 +1127,11 @@ table.neu-table thead {
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  max-width: 400px;
-  padding: 0;
-  margin: 0;
 }
 
-.neu-buttons-2b-between-uneven button:first-child {
-  min-width: fit-content;
+.neu-buttons-2b-between-uneven button {
   max-width: 48%;
-  padding-left: 1rem;
-  padding-right: 1rem;
-  margin-right: 1rem;
 }
-
-.neu-buttons-2b-between-uneven button:last-child {
-  width: inherit;
-}
-
-/*
-<strong>Sum: {totalHours}</strong>
-  */
 
 /* 3 Buttons [ ] - [ ] -[ ] */
 
@@ -903,8 +1142,6 @@ table.neu-table thead {
   justify-content: space-between;
   width: 100%;
   max-width: 800px;
-  padding: 0;
-  margin: 0;
 }
 
 .neu-buttons-3b-between button {
@@ -973,6 +1210,10 @@ table.neu-table thead {
 
 .neu-size-80 {
   width: 80% !important;
+}
+
+.neu-size-70 {
+  width: 70% !important;
 }
 
 .neu-size-60 {
