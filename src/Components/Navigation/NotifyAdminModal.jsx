@@ -2,12 +2,13 @@ import React, { useState, useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import socket from "../Socket/SocketService";
 import CustomModal from "../CustomModal/CustomModal";
+import { useNavigate } from "react-router-dom";
 
 export default function NotifyAdminModal() {
 	const [showModal, setShowModal] = useState(false);
 	const [recievedNewNotification, setRecievedNewNotification] = useState(false);
 	const [projectData, setProjectData] = useState(null);
-
+	const navigate = useNavigate();
 	useEffect(() => {
 		socket.on("projectOverdue", (data) => {
 			setProjectData(data);
@@ -19,7 +20,14 @@ export default function NotifyAdminModal() {
 		};
 	}, []);
 
-	const hej = () => {};
+	const handleRedirect = (id, name) => {
+		const project = {
+			id: id,
+			name: name,
+		};
+		handleCloseModal();
+		navigate("/timereports/project", { state: project });
+	};
 
 	const handleShowModal = () => {
 		setShowModal(true);
@@ -52,7 +60,7 @@ export default function NotifyAdminModal() {
 					<div className="neu-project-link-container">
 						{projectData.map((project, index) => (
 							<div className="neu-project-link-content" key={index}>
-								<span className="project-name" onClick={hej}>
+								<span className="project-name" onClick={() => handleRedirect(project.id, project.name)}>
 									{project.name}
 								</span>
 								<div className="neu-project-info">
@@ -70,5 +78,3 @@ export default function NotifyAdminModal() {
 		</div>
 	);
 }
-
-// 	Project: {project.name} <br /> has gone {project.hoursLeft * -1} hours over time.
