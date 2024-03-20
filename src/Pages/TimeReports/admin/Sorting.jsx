@@ -40,25 +40,22 @@ export default function Sorting({
 	};
 
 	return (
-		<Container>
-			<Button
-				className="mx-2"
-				style={{ width: "115px" }}
+		<>
+			<button
+				className="neu-button-square mx-auto me-3 my-2 w-100"
 				onClick={handleClick7days}>
 				Last 7 days
-			</Button>
-			<Button
-				className="mx-2"
-				style={{ width: "115px" }}
+			</button>
+			<button
+				className="neu-button-square me-3 mx-auto my-2 w-100"
 				onClick={handleClick30days}>
 				Last 30 days
-			</Button>
-			<Button
-				className="mx-2"
-				style={{ width: "115px" }}
+			</button>
+			<button
+				className="neu-button-square mx-auto my-2 w-100"
 				onClick={handleAllClick}>
 				All
-			</Button>
-		</Container>
+			</button>
+		</>
 	);
 }

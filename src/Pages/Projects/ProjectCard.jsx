@@ -33,6 +33,7 @@ export default function ProjectCard({ item, handleEdit, handleClick, userRole, s
 					<Progressbar startDate={item.timespan.start} endDate={item.timespan.end} progressType="date" />
 
 					<p>
+
 						Time: {item.workedHours} h / {item.hours} h
 					</p>
 					<Progressbar currentTime={item.workedHours} endTime={item.hours} progressType="time" />

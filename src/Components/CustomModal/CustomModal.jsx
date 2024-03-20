@@ -1,15 +1,18 @@
 import { useState, useEffect, useRef } from "react";
 
 export default function CustomModal({ show, onClose, children, title, divider, alwaysOpen }) {
+
 	const [isVisible, setIsVisible] = useState(show);
 	const modalRef = useRef(null);
 
 	useEffect(() => {
 		setIsVisible(show);
 	}, [show]);
+
 	if (alwaysOpen) {
 		alwaysOpen = true;
 	}
+
 	if (divider) {
 		divider = true;
 	} else {

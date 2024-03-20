@@ -73,13 +73,12 @@ export default function FormModal({ formInput, setFormInput, closeModal, modalOp
 	};
 
 	const handleTeamMemberSelectChange = (event) => {
-		const selectedIds = Array.from(event.target.selectedOptions, (option) => option.value);
 
+		const selectedIds = Array.from(event.target.selectedOptions, (option) => option.value);
 		setFormInput({
 			...formInput,
 			teamMember: selectedIds,
 		});
-
 		setTeamMemberAlreadyInProject([
 			{
 				id: projectId,
@@ -154,6 +153,7 @@ export default function FormModal({ formInput, setFormInput, closeModal, modalOp
 							}`;
 							return (
 								<option key={person.id} value={person.id} className={className}>
+
 									{person.name}
 								</option>
 							);

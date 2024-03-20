@@ -19,14 +19,13 @@ html {
 
 body,
 #root {
-  background-color: var(--bs-primary);
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  margin: 0;
-  padding: 0;
+	background-color: var(--bs-primary);
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+	margin: 0;
+	padding: 0;
 }
-
 
 main {
   display: flex;
@@ -65,43 +64,37 @@ footer {
   padding: 0;
   height: 100%;
   width: 100%;
-
 }
 
 /*-------------------------*/
 /*---BASIC NEU TEMPLATES---*/
 /*-------------------------*/
 .neu-hard-outer {
-  border: 2px solid var(--bs-primary);
-  outline: none;
-  box-shadow:
-    -5px -5px 5px var(--bs-highlight),
-    5px 5px 5px var(--bs-shadow);
-  margin: 0;
-  padding: 0;
+	border: 2px solid var(--bs-primary);
+	outline: none;
+	box-shadow: -5px -5px 5px var(--bs-highlight), 5px 5px 5px var(--bs-shadow);
+	margin: 0;
+	padding: 0;
 }
 
 .neu-hard-inner {
-  border: 2px solid var(--bs-primary);
-  box-shadow:
-    inset 3px 3px 2px var(--bs-shadow),
-    inset -2px -2px 2px var(--bs-highlight);
+	border: 2px solid var(--bs-primary);
+	box-shadow: inset 3px 3px 2px var(--bs-shadow),
+		inset -2px -2px 2px var(--bs-highlight);
 }
 
 .neu-soft-outer {
-  box-shadow:
-    -10px -10px 30px 0px var(--bs-highlight),
-    10px 10px 30px 0px var(--bs-shadow),
-    -10px -10px 10px 0px var(--bs-shadow) inset,
-    10px 10px 10px 0px var(--bs-highlight)
+	box-shadow: -10px -10px 30px 0px var(--bs-highlight),
+		10px 10px 30px 0px var(--bs-shadow),
+		-10px -10px 10px 0px var(--bs-shadow) inset,
+		10px 10px 10px 0px var(--bs-highlight);
 }
 
 .neu-soft-inner {
-  box-shadow:
-    10px 10px 30px 0px var(--bs-highlight),
-    -10px -10px 30px 0px var(--bs-shadow),
-    10px 10px 10px 0px var(--bs-shadow) inset,
-    -10px -10px 10px 0px var(--bs-highlight) inset;
+	box-shadow: 10px 10px 30px 0px var(--bs-highlight),
+		-10px -10px 30px 0px var(--bs-shadow),
+		10px 10px 10px 0px var(--bs-shadow) inset,
+		-10px -10px 10px 0px var(--bs-highlight) inset;
 }
 
 /*------------------------------*/
@@ -127,8 +120,12 @@ footer {
   box-shadow:
     -5px -5px 5px var(--bs-highlight),
     5px 5px 5px var(--bs-shadow);
+
 }
 
+.card-text {
+	margin-bottom: 0.8rem;
+}
 .neu-card-section {
   border-radius: 0.625rem;
   border: 2px solid var(--bs-primary);
@@ -152,23 +149,22 @@ footer {
 
 .neu-card-section p:first-child {
   margin-top: 0.825rem;
+
 }
 
 .neu-card-inset {
-  box-shadow:
-    inset 2px 2px 5px var(--bs-shadow),
-    inset -3px -3px 7px var(--bs-highlight);
+	box-shadow: inset 2px 2px 5px var(--bs-shadow),
+		inset -3px -3px 7px var(--bs-highlight);
 }
 
 .neu-breaker {
-  background-color: var(--bs-neuorange);
-  width: 90%;
-  height: 4px;
-  border-radius: 0.2rem;
-  transform: translate(5%);
-  box-shadow:
-    inset -1px -1px 1px var(--bs-highlight),
-    inset 1px 1px 1px var(--bs-shadow);
+	background-color: var(--bs-neuorange);
+	width: 90%;
+	height: 4px;
+	border-radius: 0.2rem;
+	transform: translate(5%);
+	box-shadow: inset -1px -1px 1px var(--bs-highlight),
+		inset 1px 1px 1px var(--bs-shadow);
 }
 
 .neu-prog {
@@ -214,7 +210,6 @@ footer {
   box-shadow:
     inset 3px 3px 5px var(--bs-shadow),
     inset -2px -2px 4px var(--bs-highlight);
-
 }
 
 .neu-card-next {
@@ -248,21 +243,18 @@ footer {
 }
 
 .neu-prog-inv {
-  box-shadow:
-    inset 2px 2px 2px var(--bs-highlight),
-    inset -2px -2px 2px var(--bs-shadow);
+	box-shadow: inset 2px 2px 2px var(--bs-highlight),
+		inset -2px -2px 2px var(--bs-shadow);
 }
 
 .neu-img {
-  height: 200px;
-  width: 200px;
-  margin-bottom: 70px;
-  border-radius: 50%;
-  border: 1px solid var(--bs-primary);
+	height: 200px;
+	width: 200px;
+	margin-bottom: 70px;
+	border-radius: 50%;
+	border: 1px solid var(--bs-primary);
 
-  box-shadow:
-    -8px -8px 5px var(--bs-highlight),
-    8px 8px 5px var(--bs-shadow);
+	box-shadow: -8px -8px 5px var(--bs-highlight), 8px 8px 5px var(--bs-shadow);
 }
 
 /*--------------------------------*/
@@ -287,46 +279,42 @@ footer {
 }
 
 .neu-nav-item {
-  box-shadow:
-    inset -5px -5px 5px var(--bs-highlight),
-    inset 5px 5px 5px var(--bs-shadow);
+	box-shadow: inset -5px -5px 5px var(--bs-highlight),
+		inset 5px 5px 5px var(--bs-shadow);
 }
 
 .neu-nav-notification-new-msg {
-  border-radius: 50%;
-  height: 100%;
-  width: 100%;
-  border: 2px solid var(--bs-neuorange);
-  outline: none;
-  box-shadow:
-    -3px -3px 6px var(--bs-highlight),
-    3px 3px 6px var(--bs-shadow);
+	border-radius: 50%;
+	height: 100%;
+	width: 100%;
+	border: 2px solid var(--bs-neuorange);
+	outline: none;
+	box-shadow: -3px -3px 6px var(--bs-highlight), 3px 3px 6px var(--bs-shadow);
 }
 
 .neu-nav-notification-new-msg i {
-  height: 100%;
-  width: 100%;
-  color: var(--bs-neuorange);
-  text-shadow: 2px 2px 2px var(--bs-textdark);
+	height: 100%;
+	width: 100%;
+	color: var(--bs-neuorange);
+	text-shadow: 2px 2px 2px var(--bs-textdark);
 }
 
 .neu-nav-notification-off {
-  height: 100%;
-  width: 100%;
-  border-radius: 50%;
-  border: 2px solid var(--bs-primary);
-  outline: none;
-  box-shadow:
-    inset -3px -3px 6px var(--bs-highlight),
-    inset 3px 3px 6px var(--bs-shadow);
+	height: 100%;
+	width: 100%;
+	border-radius: 50%;
+	border: 2px solid var(--bs-primary);
+	outline: none;
+	box-shadow: inset -3px -3px 6px var(--bs-highlight),
+		inset 3px 3px 6px var(--bs-shadow);
 }
 
 .neu-hidden {
-  display: none;
+	display: none;
 }
 
 .neu-hidden i {
-  visibility: visible;
+	visibility: visible;
 }
 
 .neu-nav-user-container {
@@ -344,32 +332,29 @@ footer {
 }
 
 .neu-online-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transform: scale(1.4) translate(70%);
-  padding: 2px;
-  color: var(--bs-neugreen);
-  background-color: var(--bs-primary);
-  border-radius: 50%;
-  transition: all 1s ease;
-  box-shadow: -2px -2px 4px var(--bs-highlight),
-    2px 2px 4px var(--bs-shadow);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transform: scale(1.4) translate(70%);
+	padding: 2px;
+	color: var(--bs-neugreen);
+	background-color: var(--bs-primary);
+	border-radius: 50%;
+	transition: all 1s ease;
+	box-shadow: -2px -2px 4px var(--bs-highlight), 2px 2px 4px var(--bs-shadow);
 }
 
 .neu-offline-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transform: scale(1.4) translate(-70%);
-  padding: 2px;
-  color: var(--bs-textdark);
-  background-color: var(--bs-primary);
-  border-radius: 50%;
-  transition: all 1s ease-in-out;
-  box-shadow:
-    -2px -2px 4px var(--bs-highlight),
-    2px 2px 4px var(--bs-shadow);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transform: scale(1.4) translate(-70%);
+	padding: 2px;
+	color: var(--bs-textdark);
+	background-color: var(--bs-primary);
+	border-radius: 50%;
+	transition: all 1s ease-in-out;
+	box-shadow: -2px -2px 4px var(--bs-highlight), 2px 2px 4px var(--bs-shadow);
 }
 
 /*-------------------------------*/
@@ -563,7 +548,6 @@ footer {
 .neu-form-controll,
 .neu-form-select {
   color: var(--bs-textdark) !important;
-
   text-indent: 0.625rem !important;
   background-color: transparent !important;
   border: 2px solid transparent !important;
@@ -575,10 +559,7 @@ footer {
   box-shadow:
     inset 3px 3px 7px var(--bs-shadow),
     inset -2px -2px 5px var(--bs-highlight) !important;
-
 }
-
-
 
 .neu-selected.neu-part-of-project {
   color: var(--bs-textdark) !important;
@@ -605,13 +586,7 @@ footer {
   border: 2px solid transparent !important;
 }
 
-
-
-
-/* 
-
-
-.neu-form-select:focus {
+/* .neu-form-select:focus {
   user-select: none;
   background-color: transparent;
   outline: none;
@@ -620,7 +595,6 @@ footer {
     inset 3px 3px 7px var(--bs-shadow),
     inset -2px -2px 5px var(--bs-highlight);
 } */
-
 
 .neu-max-400 {
   max-width: 400px;
@@ -690,7 +664,6 @@ footer {
     inset -2px -2px 5px var(--bs-highlight);
 }
 
-
 .neu-not-selected {
   background-color: transparent;
   border: 1px solid var(--bs-primary);
@@ -744,343 +717,321 @@ CUSTOM DIVIDER BETWEEN EACH CHILD, SKIPING LAST CHILD
 /*-------SEARCH (TIME REPORT) CSS-------*/
 /*--------------------------------------*/
 .neu-search-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  border-radius: 0.625rem;
-  padding: 1rem;
-  box-shadow:
-    3px 3px 7px var(--bs-shadow),
-    -2px -2px 5px var(--bs-highlight);
-  width: 100%;
-  height: 100%;
-  border-radius: 0.625rem;
-  overflow: hidden;
-  box-shadow:
-    inset 4px 4px 7px var(--bs-shadow),
-    inset -3px -3px 5px var(--bs-highlight);
+	border-radius: 0.625rem;
+	padding: 1rem;
+	box-shadow: 3px 3px 7px var(--bs-shadow), -2px -2px 5px var(--bs-highlight);
+	width: 100%;
+	height: 50%;
+
+	border-radius: 0.625rem;
+	overflow: hidden;
+	box-shadow: inset 4px 4px 7px var(--bs-shadow),
+		inset -3px -3px 5px var(--bs-highlight);
+}
+
+.title-text-search-date {
+	color: var(--bs-neupurple);
 }
 
 /*-----------------------*/
 /*-------TABLE CSS-------*/
 /*-----------------------*/
+
+.inner-container {
+	width: 70%;
+}
+
+@media (max-width: 1400px) {
+	.inner-container {
+		width: 80%;
+	}
+}
+@media (max-width: 1200px) {
+	.inner-container {
+		width: 90%;
+	}
+}
+@media (max-width: 1000px) {
+	.inner-container {
+		width: 100%;
+	}
+}
+
+.edit-project-button {
+	height: 40px;
+	background-color: var(--bs-primary);
+	border: 2px solid var(--bs-primary);
+	color: var(--bs-textdark);
+	font-size: 0.9rem !important;
+	border-radius: 0.625rem;
+	outline: none;
+	cursor: pointer;
+	padding: 0 5px;
+	box-shadow: -3px -3px 6px var(--bs-highlight), 3px 3px 6px var(--bs-shadow);
+}
+
 .neu-table-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  border-radius: 0.625rem;
-  padding: 1rem;
-  box-shadow:
-    3px 3px 7px var(--bs-shadow),
-    -2px -2px 5px var(--bs-highlight);
+	width: 90%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	border-radius: 0.625rem;
+	padding: 1rem;
+	margin-bottom: 2rem;
+	box-shadow: 3px 3px 7px var(--bs-shadow), -2px -2px 5px var(--bs-highlight);
 }
 
 .neu-table {
-  width: 100%;
-  height: 100%;
-  border-spacing: 0;
-  border-radius: 0.625rem;
-  text-align: center;
-  overflow: hidden;
-  box-shadow:
-    inset 4px 4px 7px var(--bs-shadow),
-    inset -3px -3px 5px var(--bs-highlight);
-  margin-bottom: 1rem;
-
+	width: 100%;
+	height: 100%;
+	font-size: 1.2rem;
+	border-spacing: 0;
+	border-radius: 0.625rem;
+	text-align: center;
+	overflow: hidden;
+	box-shadow: inset 4px 4px 7px var(--bs-shadow),
+		inset -3px -3px 5px var(--bs-highlight);
+	margin-bottom: 1.5rem;
 }
 
-table.neu-table>tbody>tr>td {
-  padding: 10px;
-  font-size: 14px;
-  position: relative;
+table.neu-table > tbody > tr > td {
+	padding: 5px;
+	font-size: 18px;
+	position: relative;
 }
 
-table.neu-table>tbody>tr:hover {
-  box-shadow:
-    0px 4px 7px var(--bs-shadow),
-    0px -3px 7px var(--bs-highlight);
-}
-
-table.neu-table tr td:first-child::before {
-  content: "";
-  position: absolute;
-  padding: 7px;
-  top: 0;
-  left: -5000px;
-  width: 10000px;
-  height: 100%;
-  z-index: -15;
-}
-
-table.neu-table td:hover::after {
-  content: "";
-  position: absolute;
-
-  left: 0;
-  top: -5000px;
-  height: 10000px;
-  width: 100%;
-  z-index: -1;
-  box-shadow:
-    4px 0px 6px var(--bs-shadow),
-    -3px 0px 5px var(--bs-highlight);
+table.neu-table > tbody > tr:hover {
+	box-shadow: 0px 4px 7px var(--bs-shadow), 0px -3px 7px var(--bs-highlight);
 }
 
 table.neu-table th {
-  padding: 7px;
+	padding: 7px;
+	color: var(--bs-neupurple);
+}
+.tableNumber {
+	color: var(--bs-neupurple);
+}
+
+.page-title {
+	color: var(--bs-neuorange);
 }
 
 table.neu-table thead {
-  box-shadow:
-    0px 2px 7px var(--bs-shadow);
+	box-shadow: 0px 2px 7px var(--bs-shadow);
 }
 
 .neu-table-filter-button-container {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0.625rem;
-  width: 100%;
-  height: 100%;
-  border-radius: 0.625rem;
-  box-shadow:
-    inset 4px 4px 7px var(--bs-shadow),
-    inset -3px -3px 5px var(--bs-highlight);
-}
-
-.neu-table-filter-button-container button {
-  width: 30% !important;
+	padding: 0.625rem;
+	width: 100%;
+	height: 80%;
+	border-radius: 0.625rem;
+	box-shadow: inset 4px 4px 7px var(--bs-shadow),
+		inset -3px -3px 5px var(--bs-highlight);
 }
 
 .neu-table-container button {
-  background-color: var(--bs-primary);
-  border: 2px solid var(--bs-primary);
-  color: var(--bs-textdark);
-  font-size: 1rem;
-  border-radius: 0.625rem;
-  outline: none;
-  text-decoration: none;
-  cursor: pointer;
-  padding: 0.325rem;
-  box-shadow:
-    -3px -3px 6px var(--bs-highlight),
-    3px 3px 6px var(--bs-shadow);
+	background-color: var(--bs-primary);
+	border: 2px solid var(--bs-primary);
+	color: var(--bs-textdark);
+	font-size: 1rem;
+	border-radius: 0.625rem;
+	outline: none;
+	text-decoration: none;
+	cursor: pointer;
+	padding: 0.325rem;
+	box-shadow: -3px -3px 6px var(--bs-highlight), 3px 3px 6px var(--bs-shadow);
 }
 
 .neu-table-container button:hover {
-  background-color: var(--bs-primary);
-  border: 2px solid var(--bs-primary);
-  box-shadow:
-    inset -3px -3px 6px var(--bs-highlight),
-    inset 3px 3px 6px var(--bs-shadow);
+	background-color: var(--bs-primary);
+	border: 2px solid var(--bs-primary);
+	box-shadow: inset -3px -3px 6px var(--bs-highlight),
+		inset 3px 3px 6px var(--bs-shadow);
 }
 
 .neu-table-clickable {
-  cursor: pointer;
+	cursor: pointer;
 }
 
 /*-----------------------------*/
 /*---------LOADING CSS---------*/
 /*-----------------------------*/
 .neu-loading-container {
-  background-color: transparent;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  align-items: center;
-  width: 100%;
-  height: calc(100px + 2rem);
-  border-radius: 0.625rem;
-  text-align: center;
-  overflow: hidden;
-  box-shadow:
-    inset 4px 4px 7px var(--bs-shadow),
-    inset -3px -3px 5px var(--bs-highlight);
-  margin-bottom: 1rem;
+	background-color: transparent;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	align-items: center;
+	width: 100%;
+	height: calc(100px + 2rem);
+	border-radius: 0.625rem;
+	text-align: center;
+	overflow: hidden;
+	box-shadow: inset 4px 4px 7px var(--bs-shadow),
+		inset -3px -3px 5px var(--bs-highlight);
+	margin-bottom: 1rem;
 }
 
 .neu-loading-msg {
-  background-color: var(--bs-primary);
+	background-color: var(--bs-primary);
 
-  background-color: transparent;
+	background-color: transparent;
 
-  margin: 1rem;
-  margin-right: 2rem;
-  font-size: 1.5rem;
-  animation: textPulse 3s linear infinite alternate;
+	margin: 1rem;
+	margin-right: 2rem;
+	font-size: 1.5rem;
+	animation: textPulse 3s linear infinite alternate;
 }
 
 @keyframes textPulse {
-  0% {
-    transform: scale(1);
-    opacity: 0;
-  }
+	0% {
+		transform: scale(1);
+		opacity: 0;
+	}
 
-  100% {
-    transform: scale(1.1);
-    opacity: 1;
-  }
+	100% {
+		transform: scale(1.1);
+		opacity: 1;
+	}
 }
 
 .neu-loading-spinner {
-  background-color: var(--bs-primary);
+	background-color: var(--bs-primary);
 
-  position: absolute;
+	position: absolute;
 
-  border-radius: 50%;
-  animation: shadowSwap 2s linear infinite;
+	border-radius: 50%;
+	animation: shadowSwap 2s linear infinite;
 }
 
 .layer {
-  background-color: var(--bs-primary);
+	background-color: var(--bs-primary);
 
-  position: absolute;
-  background-color: transparent;
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  box-shadow:
-    -10px -10px 20px var(--bs-highlight),
-    10px 10px 20px var(--bs-shadow);
+	position: absolute;
+	background-color: transparent;
+	width: 100px;
+	height: 100px;
+	border-radius: 50%;
+	box-shadow: -10px -10px 20px var(--bs-highlight),
+		10px 10px 20px var(--bs-shadow);
 }
 
 .layer1 {
-  background-color: var(--bs-primary);
-  position: absolute;
-  width: 70px;
-  height: 70px;
-  border-radius: 50%;
-  animation: shadowSwap 6s linear infinite alternate;
+	background-color: var(--bs-primary);
+	position: absolute;
+	width: 70px;
+	height: 70px;
+	border-radius: 50%;
+	animation: shadowSwap 6s linear infinite alternate;
 }
 
 .layer2 {
-  background-color: var(--bs-primary);
-  position: absolute;
-  width: 43px;
-  height: 43px;
-  border-radius: 50%;
-  animation: shadowSwap 4s linear infinite alternate-reverse;
+	background-color: var(--bs-primary);
+	position: absolute;
+	width: 43px;
+	height: 43px;
+	border-radius: 50%;
+	animation: shadowSwap 4s linear infinite alternate-reverse;
 }
 
 .layer3 {
-  background-color: var(--bs-primary);
-  position: absolute;
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  animation: shadowSwap 2s linear infinite alternate;
+	background-color: var(--bs-primary);
+	position: absolute;
+	width: 20px;
+	height: 20px;
+	border-radius: 50%;
+	animation: shadowSwap 2s linear infinite alternate;
 }
 
-
 @keyframes rotate {
-  0% {
-    transform: rotate(0deg);
-  }
+	0% {
+		transform: rotate(0deg);
+	}
 
-  100% {
-    transform: rotate(360deg);
-
-  }
+	100% {
+		transform: rotate(360deg);
+	}
 }
 
 @keyframes shadowSwap {
+	0% {
+		opacity: 0.2;
+		transform: translate(230%, -50%) scale(1);
+		box-shadow: 8px 8px 16px var(--bs-shadow),
+			-6px -6px 12px var(--bs-highlight);
+	}
 
-  0% {
-    opacity: 0.2;
-    transform: translate(230%, -50%)scale(1);
-    box-shadow:
-      8px 8px 16px var(--bs-shadow),
-      -6px -6px 12px var(--bs-highlight);
-  }
+	49% {
+		box-shadow: 1px 1px 1px var(--bs-shadow), -1px -1px 1px var(--bs-highlight);
+	}
 
-  49% {
-    box-shadow:
-      1px 1px 1px var(--bs-shadow),
-      -1px -1px 1px var(--bs-highlight);
-  }
+	50% {
+		opacity: 1;
+		transform: translate(-270%, -50%) scale(1.2);
+		box-shadow: 0px 0px 0px var(--bs-shadow), 0px 0px 0px var(--bs-highlight);
+	}
 
-  50% {
-    opacity: 1;
-    transform: translate(-270%, -50%) scale(1.2);
-    box-shadow: 0px 0px 0px var(--bs-shadow),
-      0px 0px 0px var(--bs-highlight);
-  }
+	51% {
+		box-shadow: inset 1px 1px 1px var(--bs-shadow),
+			inset -1px -1px 1px var(--bs-highlight);
+	}
 
-  51% {
-    box-shadow:
-      inset 1px 1px 1px var(--bs-shadow),
-      inset -1px -1px 1px var(--bs-highlight);
-  }
-
-  100% {
-    opacity: 0.2;
-    transform: translate(230%, -50%) scale(1);
-    box-shadow:
-      inset 8px 8px 16px var(--bs-shadow),
-      inset -6px -6px 12px var(--bs-highlight);
-  }
+	100% {
+		opacity: 0.2;
+		transform: translate(230%, -50%) scale(1);
+		box-shadow: inset 8px 8px 16px var(--bs-shadow),
+			inset -6px -6px 12px var(--bs-highlight);
+	}
 }
-
-
-
 
 /*-----------------------------*/
 /*---------BUTTONS CSS---------*/
 /*-----------------------------*/
+
 .neu-button-square {
-  background-color: var(--bs-primary);
-  border: 2px solid var(--bs-primary);
-  color: var(--bs-textdark);
-  font-size: 1rem;
-  border-radius: 0.625rem;
-  outline: none;
-  text-decoration: none;
-  cursor: pointer;
-  padding: 0.325rem;
-  box-shadow:
-    -3px -3px 6px var(--bs-highlight),
-    3px 3px 6px var(--bs-shadow);
+	background-color: var(--bs-primary);
+	border: 2px solid var(--bs-primary);
+	color: var(--bs-textdark);
+	font-size: 1rem;
+	border-radius: 0.625rem;
+	outline: none;
+	text-decoration: none;
+	cursor: pointer;
+	padding: 0.325rem;
+	box-shadow: -3px -3px 6px var(--bs-highlight), 3px 3px 6px var(--bs-shadow);
 }
 
 .neu-button-round {
-  background-color: var(--bs-primary);
-  border: 2px solid var(--bs-primary);
-  color: var(--bs-textdark);
-  font-size: 1rem;
-  border-radius: 50%;
-  cursor: pointer;
-  padding: 0.325rem;
-  outline: none;
-  text-decoration: none;
-  box-shadow:
-    -3px -3px 6px var(--bs-highlight),
-    3px 3px 6px var(--bs-shadow);
+	background-color: var(--bs-primary);
+	border: 2px solid var(--bs-primary);
+	color: var(--bs-textdark);
+	font-size: 1rem;
+	border-radius: 50%;
+	cursor: pointer;
+	padding: 0.325rem;
+	outline: none;
+	text-decoration: none;
+	box-shadow: -3px -3px 6px var(--bs-highlight), 3px 3px 6px var(--bs-shadow);
 }
 
 .neu-button-login {
-  font-size: 1rem;
-  background-color: var(--bs-primary);
-  border: 2px solid var(--bs-primary);
-  color: var(--bs-textdark);
-  cursor: pointer;
-  outline: none;
-  text-decoration: none;
-  box-shadow:
-    -3px -3px 6px var(--bs-highlight),
-    3px 3px 6px var(--bs-shadow);
+	font-size: 1rem;
+	background-color: var(--bs-primary);
+	border: 2px solid var(--bs-primary);
+	color: var(--bs-textdark);
+	cursor: pointer;
+	outline: none;
+	box-shadow: -3px -3px 6px var(--bs-highlight), 3px 3px 6px var(--bs-shadow);
 }
 
 .neu-button-square:hover,
 .neu-button-round:hover,
 .neu-button-login:hover {
-  background-color: var(--bs-primary);
-  border: 2px solid var(--bs-neuturquoise);
-  box-shadow:
-    inset -3px -3px 6px var(--bs-highlight),
-    inset 3px 3px 6px var(--bs-shadow);
+	background-color: var(--bs-primary);
+	border: 2px solid var(--bs-neuturquoise) !important;
+	box-shadow: inset -3px -3px 6px var(--bs-highlight),
+		inset 3px 3px 6px var(--bs-shadow);
 }
 
 .neu-buttons-between {
@@ -1102,7 +1053,7 @@ table.neu-table thead {
 }
 
 .neu-buttons-1b button {
-  width: 100% !important;
+	width: 100% !important;
 }
 
 /* 2 Buttons [ ] - [ ] */
@@ -1117,9 +1068,8 @@ table.neu-table thead {
 }
 
 .neu-buttons-2b-between button {
-  width: 48% !important;
+	width: 48% !important;
 }
-
 
 .neu-buttons-2b-between-uneven {
   display: flex;
@@ -1145,71 +1095,69 @@ table.neu-table thead {
 }
 
 .neu-buttons-3b-between button {
-  width: 30% !important;
+	width: 30% !important;
 }
 
 /* 4 Buttons [ ] - [ ] - [ ] - [ ] */
 
 .neu-buttons-4b-between {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  max-width: 400px;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+	max-width: 400px;
 }
 
 .neu-buttons-4b-between button {
-  width: 21% !important;
+	width: 21% !important;
 }
 
 /*--------------------------------*/
 /*-----STYLING VARIABLES CSS------*/
 /*--------------------------------*/
 .neu-center {
-  text-align: center;
+	text-align: center;
 }
 
 .neu-left {
-  text-align: left;
+	text-align: left;
 }
 
 .neu-right {
-  text-align: right;
+	text-align: right;
 }
 
 .neu-maxw-fit {
-  max-width: fit-content !important;
+	max-width: fit-content !important;
 }
 
 .neu-minw-fit {
-  min-width: fit-content !important;
+	min-width: fit-content !important;
 }
 
 .neu-maxh-fit {
-  max-height: fit-content !important;
+	max-height: fit-content !important;
 }
 
 .neu-minh-fit {
-  min-height: fit-content !important;
+	min-height: fit-content !important;
 }
 
-
-
 .neu-size-full {
-  width: 100% !important;
+	width: 100% !important;
 }
 
 .neu-size-half {
-  width: 48% !important;
+	width: 48% !important;
 }
 
 .neu-size-100 {
-  width: 100% !important;
+	width: 100% !important;
 }
 
 .neu-size-80 {
-  width: 80% !important;
+	width: 80% !important;
 }
 
 .neu-size-70 {
@@ -1217,34 +1165,34 @@ table.neu-table thead {
 }
 
 .neu-size-60 {
-  width: 60% !important;
+	width: 60% !important;
 }
 
 .neu-size-40 {
-  width: 40% !important;
+	width: 40% !important;
 }
 
 .neu-size-30 {
-  width: 30% !important;
+	width: 30% !important;
 }
 
 .neu-size-20 {
-  width: 20% !important;
+	width: 20% !important;
 }
 
 .neu-size-max {
-  width: 100% !important;
-  height: 100% !important;
+	width: 100% !important;
+	height: 100% !important;
 }
 
 .neu-size-2rem {
-  width: 2rem !important;
+	width: 2rem !important;
 }
 
 .neu-size-4rem {
-  width: 4rem !important;
+	width: 4rem !important;
 }
 
 .neu-pad-bot-5 {
-  padding-bottom: 5% !important;
+	padding-bottom: 5% !important;
 }

@@ -3,13 +3,24 @@ import { Form } from "react-bootstrap";
 import { useLocation } from "react-router-dom";
 import CustomModal from "../../../Components/CustomModal/CustomModal";
 
-const ReportModal = ({ showModal, closeModal, projects, reports, reportData, setReportData, handleSubmit, userId }) => {
+const ReportModal = ({
+	showModal,
+	closeModal,
+	projects,
+	reports,
+	reportData,
+	setReportData,
+	handleSubmit,
+	userId,
+}) => {
 	const location = useLocation();
 	const [selectedProjectId, setSelectedProjectId] = useState("");
-	const [projectTimespan, setProjectTimespan] = useState({ start: "", end: "" });
+	const [projectTimespan, setProjectTimespan] = useState({
+		start: "",
+		end: "",
+	});
 	const [suggestedHours, setSuggestedHours] = useState([]);
 	const [showSuggestions, setShowSuggestions] = useState(false);
-	console.log("Projects Prop in ReportModal:", projects); // At the beginning of the ReportModal component
 	useEffect(() => {
 		if (location.state && location.state.project) {
 			setSelectedProjectId(location.state.project.id);
@@ -40,7 +51,7 @@ const ReportModal = ({ showModal, closeModal, projects, reports, reportData, set
 
 	const handleInputChange = (e) => {
 		const { name, value } = e.target;
-		console.log("handleIputChange name:", name, "value:", value);
+		//console.log("handleIputChange name:", name, "value:", value);
 		setReportData((prev) => ({
 			...prev,
 			[name]: value,
@@ -59,7 +70,7 @@ const ReportModal = ({ showModal, closeModal, projects, reports, reportData, set
 
 	const handleFormSubmit = (e) => {
 		e.preventDefault();
-		console.log("FE - handleFormSubmit - reportData:", reportData);
+		//console.log("FE - handleFormSubmit - reportData:", reportData);
 
 		const submissionData = {
 			...reportData,
