@@ -34,7 +34,9 @@ export default function Timereport({ proj }) {
 				setLoading(true);
 				//get timereports by filtering on projectId
 
-				const response = await axios.get(`http://localhost:3001/databases/timereports/filter/project?property=Project&id=${projectId}`);
+				const response = await axios.get(
+					`http://localhost:3001/databases/timereports/filter/project?property=Project&id=${projectId}`
+				);
 
 				//save response 2 times, one will be manipulated in filtering, and one to always have all data
 				setTimeReports(response.data);
@@ -61,7 +63,9 @@ export default function Timereport({ proj }) {
 	const updateTimereports = async () => {
 		try {
 			setLoading(true);
-			const response = await axios.get(`http://localhost:3001/databases/timereports/filter/project?property=Project&id=${projectId}`);
+			const response = await axios.get(
+				`http://localhost:3001/databases/timereports/filter/project?property=Project&id=${projectId}`
+			);
 
 			setTimeReports(response.data);
 			setOriginalTimeReports(response.data);
@@ -112,7 +116,9 @@ export default function Timereport({ proj }) {
 
 	//in edit we find the right timereportId
 	const handleEdit = (timereportId) => {
-		const timereportToEdit = originalTimeReports.find((item) => item.id === timereportId);
+		const timereportToEdit = originalTimeReports.find(
+			(item) => item.id === timereportId
+		);
 		if (timereportToEdit) {
 			setFormInput({
 				id: timereportId,
@@ -159,20 +165,28 @@ export default function Timereport({ proj }) {
 					<table className="neu-table">
 						<thead>
 							<tr className="text-center">
-								<th>#</th>
+								<th>
+									<strong>#</strong>
+								</th>
 								<th
 									onClick={() => handleSortByDate()}
 									style={{ cursor: "pointer" }}>
-									Date
+									<strong> Date</strong>
 								</th>
 								<th
 									onClick={() => handleSortByName()}
 									style={{ cursor: "pointer" }}>
-									Person
+									<strong>Person</strong>
 								</th>
-								<th>Hours</th>
-								<th>Project</th>
-								<th>Note</th>
+								<th>
+									<strong>Hours</strong>
+								</th>
+								<th>
+									<strong>Project</strong>
+								</th>
+								<th>
+									<strong>Note</strong>
+								</th>
 								<th></th>
 							</tr>
 						</thead>
@@ -205,7 +219,7 @@ export default function Timereport({ proj }) {
 						<tfoot>
 							<tr>
 								<th scope="row" className="text-center">
-									Sum
+									<strong> Sum</strong>
 								</th>
 								<td></td>
 								<td></td>

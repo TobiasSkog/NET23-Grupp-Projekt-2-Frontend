@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { Button, Table } from "react-bootstrap";
 import axios from "axios";
 import { useLocation, useNavigate } from "react-router-dom";
 import ReportModal from "./ReportModal"; // Modal for adding new reports
@@ -161,9 +160,9 @@ const TimeReports = ({ userSignal }) => {
 						searchDate={searchDate}
 					/>
 				</div>
-				<div className="d-flex align-items-center justify-content-center text-center page-title mt-2 mb-2">
+				<div className="d-flex flex-row align-items-center justify-content-center text-center page-title mt-2 mb-2">
 					<h2 className="page-title mt-2 mb-2 me-3">{user.name}</h2>
-					<button className="neu-button-square" onClick={openReportModal}>
+					<button className="neu-button-square m-0" onClick={openReportModal}>
 						Report Time
 					</button>
 				</div>
@@ -172,16 +171,26 @@ const TimeReports = ({ userSignal }) => {
 					<table className="neu-table">
 						<thead>
 							<tr className="text-center">
-								<th>#</th>
+								<th>
+									<strong>#</strong>
+								</th>
 								<th
 									onClick={() => handleSortByDate()}
 									style={{ cursor: "pointer" }}>
-									Date
+									<strong>Date</strong>
 								</th>
-								<th>Project</th>
-								<th>Hours</th>
-								<th>Note</th>
-								<th>Edit</th>
+								<th>
+									<strong>Project</strong>
+								</th>
+								<th>
+									<strong>Hours</strong>
+								</th>
+								<th>
+									<strong>Note</strong>
+								</th>
+								<th>
+									<strong>Edit</strong>
+								</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -200,7 +209,6 @@ const TimeReports = ({ userSignal }) => {
 									<td>
 										<button
 											className="edit-timereport-button"
-											size="sm"
 											onClick={() => handleEditReportSelection(report)}>
 											Edit
 										</button>
@@ -211,7 +219,7 @@ const TimeReports = ({ userSignal }) => {
 						<tfoot>
 							<tr>
 								<th scope="row" className="text-center">
-									Sum
+									<strong> Sum</strong>
 								</th>
 								<td></td>
 								<td></td>
