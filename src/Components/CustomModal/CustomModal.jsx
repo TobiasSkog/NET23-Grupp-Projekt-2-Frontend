@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 
 export default function CustomModal({ show, onClose, children, title, divider, alwaysOpen }) {
-
 	const [isVisible, setIsVisible] = useState(show);
 	const modalRef = useRef(null);
 
@@ -50,9 +49,9 @@ export default function CustomModal({ show, onClose, children, title, divider, a
 			{isVisible && (
 				<section className="neu-modal-overlay col-md-6" ref={modalRef}>
 					{!alwaysOpen && (
-						<button className="neu-modal-close-button" onClick={handleClose}>
+						<span className="neu-modal-close-button" onClick={handleClose}>
 							&#x2715;
-						</button>
+						</span>
 					)}
 					{title && (
 						<>
