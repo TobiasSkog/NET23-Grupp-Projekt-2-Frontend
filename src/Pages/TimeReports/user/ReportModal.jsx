@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { Modal, Form, Button } from "react-bootstrap";
+import { Form } from "react-bootstrap";
 import { useLocation } from "react-router-dom";
+import CustomModal from "../../../Components/CustomModal/CustomModal";
 
 const ReportModal = ({
 	showModal,
@@ -20,7 +21,6 @@ const ReportModal = ({
 	});
 	const [suggestedHours, setSuggestedHours] = useState([]);
 	const [showSuggestions, setShowSuggestions] = useState(false);
-	//console.log("Projects Prop in ReportModal:", projects); // At the beginning of the ReportModal component
 	useEffect(() => {
 		if (location.state && location.state.project) {
 			setSelectedProjectId(location.state.project.id);
@@ -42,6 +42,7 @@ const ReportModal = ({
 			...prev,
 			date: new Date().toISOString().slice(0, 10),
 		}));
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	const getMostRecentReport = () => {
@@ -83,89 +84,88 @@ const ReportModal = ({
 	const handleNoteInputChange = (e) => {
 		const { value } = e.target;
 		setReportData((prev) => ({ ...prev, note: value }));
-
-		console.log("ReportModal: showModal prop is", showModal);
 	};
 	return (
-		<Modal show={showModal} onHide={closeModal}>
-			<Modal.Header closeButton>
-				<Modal.Title>Report Time</Modal.Title>
-			</Modal.Header>
-			<Modal.Body>
-				<Form onSubmit={handleFormSubmit}>
-					<Form.Group controlId="projectSelect">
-						<Form.Label>Project</Form.Label>
-						<Form.Select
-							name="projectId"
-							value={selectedProjectId}
-							onChange={handleInputChange}
-							required>
-							<option value="">Select a project</option>
-							{projects.map((project) => (
-								<option key={project.id} value={project.id}>
-									{project.name}
-								</option>
+		<CustomModal show={showModal} onClose={closeModal} title="Time Report" divider>
+			<Form onSubmit={handleFormSubmit} className="neu-form">
+				<Form.Group className="neu-form-group">
+					<Form.Label htmlFor="projectId">Project</Form.Label>
+					<Form.Select
+						className="neu-form-select"
+						type="text"
+						name="projectId"
+						id="projectId"
+						aria-label="projectId"
+						value={selectedProjectId}
+						onChange={handleInputChange}
+						required>
+						<option hidden>Select a project</option>
+						{projects.map((project) => (
+							<option key={project.id} value={project.id}>
+								{project.name}
+							</option>
+						))}
+					</Form.Select>
+				</Form.Group>
+				<Form.Group className="neu-form-group">
+					<Form.Label htmlFor="date">Date</Form.Label>
+					<Form.Control
+						className="neu-form-controll"
+						type="date"
+						name="date"
+						id="date"
+						aria-label="date"
+						value={reportData.date}
+						onChange={handleInputChange}
+						min={projectTimespan.start}
+						max={projectTimespan.end}
+						required
+					/>
+				</Form.Group>
+				<Form.Group className="neu-form-group">
+					<Form.Label>Hours Worked</Form.Label>
+					<Form.Control
+						className="neu-form-controll"
+						type="text"
+						name="hours"
+						min="1"
+						step="1"
+						value={reportData.hours}
+						onChange={handleInputChange}
+						required
+					/>
+					{reportData.hours < 1 && <Form.Text className="text-danger">Hours must be at least 1.</Form.Text>}
+				</Form.Group>
+				<Form.Group className="neu-form-group">
+					<Form.Label>Note/Description</Form.Label>
+					<Form.Control
+						className="neu-form-controll"
+						type="text"
+						as="textarea"
+						id="note"
+						name="note"
+						aria-label="note"
+						placeholder="Note"
+						required
+						value={reportData.note}
+						onChange={handleNoteInputChange}
+						maxLength="50"
+						autoComplete="off"
+					/>
+					{showSuggestions && (
+						<ul>
+							{suggestedHours.map((note, index) => (
+								<li key={index}>{note}</li>
 							))}
-						</Form.Select>
-					</Form.Group>
-					<Form.Group controlId="dateInput">
-						<Form.Label>Date</Form.Label>
-						<Form.Control
-							type="date"
-							name="date"
-							value={reportData.date}
-							onChange={handleInputChange}
-							min={projectTimespan.start}
-							max={projectTimespan.end}
-							required
-						/>
-					</Form.Group>
-					<Form.Group controlId="hoursInput">
-						<Form.Label>Hours Worked</Form.Label>
-						<Form.Control
-							type="number"
-							name="hours"
-							min="1"
-							step="1"
-							value={reportData.hours}
-							onChange={handleInputChange}
-							required
-						/>
-						{reportData.hours < 1 && (
-							<Form.Text className="text-danger">
-								Hours must be at least 1.
-							</Form.Text>
-						)}
-					</Form.Group>
-					<Form.Group controlId="noteInput">
-						<Form.Label>Note/Description</Form.Label>
-						<Form.Control
-							as="textarea"
-							name="note"
-							value={reportData.note}
-							onChange={handleNoteInputChange}
-							maxLength="50"
-							autoComplete="off"
-						/>
-						{showSuggestions && (
-							<ul>
-								{suggestedHours.map((note, index) => (
-									<li key={index}>{note}</li>
-								))}
-							</ul>
-						)}
-						{reportData.note.length > 50 && (
-							<Form.Text className="text-danger">
-								Note cannot exceed 50 characters.
-							</Form.Text>
-						)}
-					</Form.Group>
-					<Button variant="primary" type="submit">
-						Submit
-					</Button>
-				</Form>
-			</Modal.Body>
-		</Modal>
+						</ul>
+					)}
+					{reportData.note.length > 50 && <Form.Text className="text-danger">Note cannot exceed 50 characters.</Form.Text>}
+				</Form.Group>
+				<button type="submit" className="neu-button-square neu-size-100">
+					Submit
+				</button>
+			</Form>
+		</CustomModal>
 	);
 };
 

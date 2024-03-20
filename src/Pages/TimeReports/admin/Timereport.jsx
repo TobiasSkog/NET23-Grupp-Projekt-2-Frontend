@@ -34,9 +34,7 @@ export default function Timereport({ proj }) {
 				setLoading(true);
 				//get timereports by filtering on projectId
 
-				const response = await axios.get(
-					`http://localhost:3001/databases/timereports/filter/project?property=Project&id=${projectId}`
-				);
+				const response = await axios.get(`http://localhost:3001/databases/timereports/filter/project?property=Project&id=${projectId}`);
 
 				//save response 2 times, one will be manipulated in filtering, and one to always have all data
 				setTimeReports(response.data);
@@ -63,9 +61,7 @@ export default function Timereport({ proj }) {
 	const updateTimereports = async () => {
 		try {
 			setLoading(true);
-			const response = await axios.get(
-				`http://localhost:3001/databases/timereports/filter/project?property=Project&id=${projectId}`
-			);
+			const response = await axios.get(`http://localhost:3001/databases/timereports/filter/project?property=Project&id=${projectId}`);
 
 			setTimeReports(response.data);
 			setOriginalTimeReports(response.data);
@@ -116,9 +112,7 @@ export default function Timereport({ proj }) {
 
 	//in edit we find the right timereportId
 	const handleEdit = (timereportId) => {
-		const timereportToEdit = originalTimeReports.find(
-			(item) => item.id === timereportId
-		);
+		const timereportToEdit = originalTimeReports.find((item) => item.id === timereportId);
 		if (timereportToEdit) {
 			setFormInput({
 				id: timereportId,
@@ -225,7 +219,6 @@ export default function Timereport({ proj }) {
 						</tfoot>
 					</table>
 				</div>
-
 				<div className="neu-table-filter-button-container d-flex flex-column flex-sm-row justify-content-center">
 					<Sorting
 						setTimeReports={setTimeReports}

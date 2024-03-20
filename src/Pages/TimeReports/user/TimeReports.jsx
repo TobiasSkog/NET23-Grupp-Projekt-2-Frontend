@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
+import { Button, Table } from "react-bootstrap";
 import axios from "axios";
 import { useLocation, useNavigate } from "react-router-dom";
 import ReportModal from "./ReportModal"; // Modal for adding new reports
@@ -56,7 +57,6 @@ const TimeReports = ({ userSignal }) => {
 				(project) => project.status.toLowerCase() === "active"
 			);
 			setProjects(activeProjects || []);
-
 			//console.log("Active Projects:", activeProjects); // After filtering in fetchProjects
 		} catch (error) {
 			console.error("Failed to fetch projects:", error);
@@ -101,7 +101,6 @@ const TimeReports = ({ userSignal }) => {
 		setTimeReports(sortedReports);
 		setSortOrder(sortOrder === "ascending" ? "descending" : "ascending"); // Toggle sort order
 	};
-
 	const openReportModal = () => setShowReportModal(true);
 
 	const closeReportModal = () => setShowReportModal(false);

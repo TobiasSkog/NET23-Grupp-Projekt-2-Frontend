@@ -1,18 +1,17 @@
 import { useState, useEffect, useRef } from "react";
 
-export default function CustomModal({
-	show,
-	onClose,
-	children,
-	title,
-	divider,
-}) {
+export default function CustomModal({ show, onClose, children, title, divider, alwaysOpen }) {
+
 	const [isVisible, setIsVisible] = useState(show);
 	const modalRef = useRef(null);
 
 	useEffect(() => {
 		setIsVisible(show);
 	}, [show]);
+
+	if (alwaysOpen) {
+		alwaysOpen = true;
+	}
 
 	if (divider) {
 		divider = true;
@@ -26,7 +25,7 @@ export default function CustomModal({
 	};
 
 	useEffect(() => {
-		if (isVisible) {
+		if (isVisible && !alwaysOpen) {
 			document.addEventListener("mousedown", handleClickOutside);
 		} else {
 			document.removeEventListener("mousedown", handleClickOutside);
@@ -38,9 +37,11 @@ export default function CustomModal({
 	}, [isVisible]);
 
 	const handleClose = () => {
-		setIsVisible(false);
-		if (onClose) {
-			onClose();
+		if (!alwaysOpen) {
+			setIsVisible(false);
+			if (onClose) {
+				onClose();
+			}
 		}
 	};
 
@@ -48,11 +49,11 @@ export default function CustomModal({
 		<>
 			{isVisible && (
 				<section className="neu-modal-overlay col-md-6" ref={modalRef}>
-					<div className="neu-modal-close-container">
+					{!alwaysOpen && (
 						<button className="neu-modal-close-button" onClick={handleClose}>
-							&times;
+							&#x2715;
 						</button>
-					</div>
+					)}
 					{title && (
 						<>
 							<div className="neu-modal-title">
