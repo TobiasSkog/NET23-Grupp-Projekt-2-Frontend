@@ -2,13 +2,11 @@ import Spinner from "react-bootstrap/Spinner";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import Table from "react-bootstrap/Table";
-import Container from "react-bootstrap/esm/Container";
 import Sorting from "./Sorting";
 import SearchDate from "./SearchDate";
 import EditAdminReportModal from "./EditAdminReportModal";
 
-export default function Timereport({ proj, userSignal }) {
+export default function Timereport({ proj }) {
 	const [loading, setLoading] = useState(false);
 	const [timeReports, setTimeReports] = useState([]);
 	const [originalTimeReports, setOriginalTimeReports] = useState([]);
@@ -154,17 +152,15 @@ export default function Timereport({ proj, userSignal }) {
 						<h4 className="mt-3">Loading...</h4>
 					</>
 				)}
-				<Container className="neu-search-container d-flex flex-column flex-md-row align-items-center">
+				<div className="neu-search-container">
 					<SearchDate
 						setTimeReports={setTimeReports}
 						originalTimeReports={originalTimeReports}
 						setSearchDate={setSearchDate}
 						searchDate={searchDate}
 					/>
-					<div className="col-md-4 col-lg-6">
-						<h2 className="text-center page-title">{projectName}</h2>
-					</div>
-				</Container>
+				</div>
+				<h2 className="text-center page-title mt-2 mb-2">{projectName}</h2>
 				<div className="table-responsive">
 					<table className="neu-table">
 						<thead>

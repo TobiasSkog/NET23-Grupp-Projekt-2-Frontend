@@ -1,18 +1,26 @@
-import React, { useState, useEffect } from 'react';
-import { Button, Table } from 'react-bootstrap';
-import axios from 'axios';
-import { useLocation, useNavigate } from 'react-router-dom';
-import ReportModal from './ReportModal'; // Modal for adding new reports
-import EditReportModal from './EditReportModal'; // Modal for editing a report
-
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { useLocation, useNavigate } from "react-router-dom";
+import ReportModal from "./ReportModal"; // Modal for adding new reports
+import EditReportModal from "./EditReportModal"; // Modal for editing a report
+import Sorting from "../admin/Sorting";
+import SearchDate from "../admin/SearchDate";
 
 const TimeReports = ({ userSignal }) => {
 	const [showReportModal, setShowReportModal] = useState(false);
 	const [showEditReportModal, setShowEditReportModal] = useState(false);
 	const [projects, setProjects] = useState([]);
 	const [timeReports, setTimeReports] = useState([]);
+	const [originalTimeReports, setOriginalTimeReports] = useState([]);
+	const [searchDate, setSearchDate] = useState({ startDate: "", endDate: "" });
+	const [sortOrder, setSortOrder] = useState("ascending");
 	const [selectedReport, setSelectedReport] = useState(null);
-	const [reportData, setReportData] = useState({ date: "", hours: "", note: "", projectId: "" });
+	const [reportData, setReportData] = useState({
+		date: "",
+		hours: "",
+		note: "",
+		projectId: "",
+	});
 
 	const location = useLocation();
 	const navigate = useNavigate();
@@ -26,12 +34,12 @@ const TimeReports = ({ userSignal }) => {
 		fetchProjects();
 	}, [user, navigate]);
 
-  useEffect(() => {
-    // Ensure projects are fetched and set before fetching time reports
-    if (projects.length > 0) {
-      fetchTimeReports();
-    }
-  }, [projects]); // Depend on projects to ensure they're fetched first
+	useEffect(() => {
+		// Ensure projects are fetched and set before fetching time reports
+		if (projects.length > 0) {
+			fetchTimeReports();
+		}
+	}, [projects]); // Depend on projects to ensure they're fetched first
 
 	useEffect(() => {
 		if (location.pathname === "/timereports/user") {
@@ -39,135 +47,215 @@ const TimeReports = ({ userSignal }) => {
 		}
 	}, [location.pathname]);
 
-  const fetchProjects = async () => {
-    try {
-      const response = await axios.get('http://localhost:3001/databases/projects');
-      const activeProjects = response.data.filter(project => project.status.toLowerCase() === "active");
-    setProjects(activeProjects || []);
-    console.log("Active Projects:", activeProjects); // After filtering in fetchProjects
-    } catch (error) {
-      console.error('Failed to fetch projects:', error);
-    }
-  };
+	const fetchProjects = async () => {
+		try {
+			const response = await axios.get(
+				"http://localhost:3001/databases/projects"
+			);
+			const activeProjects = response.data.filter(
+				(project) => project.status.toLowerCase() === "active"
+			);
+			setProjects(activeProjects || []);
 
-  const fetchTimeReports = async () => {
-    try {
-    const response = await axios.get('http://localhost:3001/databases/timereports');
-    const userTimeReports = response.data.filter(report => report.person === user.id);
+			//console.log("Active Projects:", activeProjects); // After filtering in fetchProjects
+		} catch (error) {
+			console.error("Failed to fetch projects:", error);
+		}
+	};
 
-    // Corrected the property name used to match project IDs from reports to active projects
-    const activeReports = userTimeReports.filter(report =>
-      projects.some(project => project.id === report.project && project.status.toLowerCase() === "active")
-    );
+	const fetchTimeReports = async () => {
+		try {
+			const response = await axios.get(
+				"http://localhost:3001/databases/timereports"
+			);
+			const userTimeReports = response.data.filter(
+				(report) => report.person === user.id
+			);
 
+			// Corrected the property name used to match project IDs from reports to active projects
+			const activeReports = userTimeReports.filter((report) =>
+				projects.some(
+					(project) =>
+						project.id === report.project &&
+						project.status.toLowerCase() === "active"
+				)
+			);
 
-    setTimeReports(activeReports);
-    } catch (error) {
-      console.error('Failed to fetch time reports:', error);
-    }
-  };
+			setTimeReports(activeReports);
+			setOriginalTimeReports(activeReports);
+		} catch (error) {
+			console.error("Failed to fetch time reports:", error);
+		}
+	};
 
-  const openReportModal = () => setShowReportModal(true);
-  
-
-  const closeReportModal = () => setShowReportModal(false);
-
-  const handleEditReportSelection = (report) => {
-    setSelectedReport(report);
-    setShowEditReportModal(true);
-  };
-
-  const closeEditReportModal = () => {
-    setShowEditReportModal(false);
-    setSelectedReport(null); // Reset selected report on modal close
-    fetchTimeReports(); // Refetch reports to reflect any updates
-  };
-
-  const handleSubmitReport = async (report) => {
-    try {
-      const response = await axios.post('http://localhost:3001/pages/timereports', report);
-      console.log('Report added:', response.data);
-    } catch (error) {
-      console.error('Failed to add time report:', error);
-    }
-    closeReportModal();
-  };
-
-  const handleUpdateReport = async (updatedReport) => {
-    try {
-		const response = await axios.patch(
-			`http://localhost:3001/pages/timeReports/user/${updatedReport.id}`,
-			{
-			  date: updatedReport.date,
-			  hours: updatedReport.hours,
-			  note: updatedReport.note,
-			  personId: updatedReport.person,
-			  projectId: updatedReport.project,
+	// Function to handle sorting by date
+	const handleSortByDate = () => {
+		const sortedReports = [...timeReports];
+		sortedReports.sort((a, b) => {
+			if (sortOrder === "ascending") {
+				return new Date(a.date) - new Date(b.date);
+			} else {
+				return new Date(b.date) - new Date(a.date);
 			}
-		  );
-      console.log('Report updated:', response.data);
-      closeEditReportModal();
-    } catch (error) {
-      console.error('Failed to update report:', error);
-    }
-  };
+		});
+		setTimeReports(sortedReports);
+		setSortOrder(sortOrder === "ascending" ? "descending" : "ascending"); // Toggle sort order
+	};
 
-  return (
-    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', paddingTop: '2rem' }}>
+	const openReportModal = () => setShowReportModal(true);
 
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%', maxWidth: '800px', marginBottom: '1rem' }}>
-        <span style={{ fontSize: '60px' }}>🕒</span> 
-        <h1>Your Time Reports</h1>
-        <Button onClick={openReportModal}>Report Time</Button>
-      </div>
-      
-      <div style={{ width: '100%', maxWidth: '800px' }}>
-        <Table striped bordered hover>
-          <thead>
-            <tr>
-              <th>Date</th>
-              <th>Project</th>
-              <th>Hours</th>
-              <th>Note</th>
-              <th>Edit</th>
-            </tr>
-          </thead>
-          <tbody>
-            {timeReports.map((report) => (
-              <tr key={report.id}>
-                <td>{report.date}</td>
-                <td>{projects.find(project => project.id === report.project)?.name || 'Unknown Project'}</td>
-                <td>{report.hours}</td>
-                <td>{report.note}</td>
-                <td>
-                  <Button variant="primary" size="sm" onClick={() => handleEditReportSelection(report)}>Edit</Button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </Table>
-      </div>
+	const closeReportModal = () => setShowReportModal(false);
 
-      <ReportModal key={showReportModal} showModal={showReportModal} closeModal={closeReportModal} 
-        projects={projects}
-		reports={timeReports}
-        reportData={reportData}
-        setReportData={setReportData}
-        userId={user.id}
-		handleSubmit={handleSubmitReport}
-        location={location}
-      />
-      
-      <EditReportModal
-        showModal={showEditReportModal}
-        closeModal={closeEditReportModal}
-        selectedReport={selectedReport}
-        handleUpdateReport={handleUpdateReport}
-		projects={projects}
-      />
-    </div>
-  );
+	const handleEditReportSelection = (report) => {
+		setSelectedReport(report);
+		setShowEditReportModal(true);
+	};
 
+	const closeEditReportModal = () => {
+		setShowEditReportModal(false);
+		setSelectedReport(null); // Reset selected report on modal close
+		fetchTimeReports(); // Refetch reports to reflect any updates
+	};
+
+	const handleSubmitReport = async (report) => {
+		try {
+			const response = await axios.post(
+				"http://localhost:3001/pages/timereports",
+				report
+			);
+			console.log("Report added:", response.data);
+		} catch (error) {
+			console.error("Failed to add time report:", error);
+		}
+		closeReportModal();
+	};
+
+	const handleUpdateReport = async (updatedReport) => {
+		try {
+			const response = await axios.patch(
+				`http://localhost:3001/pages/timeReports/user/${updatedReport.id}`,
+				{
+					date: updatedReport.date,
+					hours: updatedReport.hours,
+					note: updatedReport.note,
+					personId: updatedReport.person,
+					projectId: updatedReport.project,
+				}
+			);
+			console.log("Report updated:", response.data);
+			closeEditReportModal();
+		} catch (error) {
+			console.error("Failed to update report:", error);
+		}
+	};
+
+	const totalHours = timeReports.reduce((total, item) => total + item.hours, 0);
+
+	return (
+		<section className="neu-table-container">
+			<div className="inner-container">
+				<div className="neu-search-container">
+					<SearchDate
+						setTimeReports={setTimeReports}
+						originalTimeReports={originalTimeReports}
+						setSearchDate={setSearchDate}
+						searchDate={searchDate}
+					/>
+				</div>
+				<div className="d-flex align-items-center justify-content-center text-center page-title mt-2 mb-2">
+					<h2 className="page-title mt-2 mb-2 me-3">{user.name}</h2>
+					<button className="neu-button-square" onClick={openReportModal}>
+						Report Time
+					</button>
+				</div>
+
+				<div className="table-responsive">
+					<table className="neu-table">
+						<thead>
+							<tr className="text-center">
+								<th>#</th>
+								<th
+									onClick={() => handleSortByDate()}
+									style={{ cursor: "pointer" }}>
+									Date
+								</th>
+								<th>Project</th>
+								<th>Hours</th>
+								<th>Note</th>
+								<th>Edit</th>
+							</tr>
+						</thead>
+						<tbody>
+							{timeReports.map((report, index) => (
+								<tr key={report.id}>
+									<td>
+										<strong className="tableNumber">{index + 1}</strong>
+									</td>
+									<td>{report.date}</td>
+									<td>
+										{projects.find((project) => project.id === report.project)
+											?.name || "Unknown Project"}
+									</td>
+									<td>{report.hours}</td>
+									<td>{report.note}</td>
+									<td>
+										<button
+											className="edit-timereport-button"
+											size="sm"
+											onClick={() => handleEditReportSelection(report)}>
+											Edit
+										</button>
+									</td>
+								</tr>
+							))}
+						</tbody>
+						<tfoot>
+							<tr>
+								<th scope="row" className="text-center">
+									Sum
+								</th>
+								<td></td>
+								<td></td>
+								<td className="text-center">
+									<strong className="tableNumber">{totalHours}</strong>
+								</td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+						</tfoot>
+					</table>
+				</div>
+				<div className="neu-table-filter-button-container d-flex flex-column flex-sm-row justify-content-center">
+					<Sorting
+						setTimeReports={setTimeReports}
+						originalTimeReports={originalTimeReports}
+						setSearchDate={setSearchDate}
+					/>
+				</div>
+				<ReportModal
+					key={showReportModal}
+					showModal={showReportModal}
+					closeModal={closeReportModal}
+					projects={projects}
+					reports={timeReports}
+					reportData={reportData}
+					setReportData={setReportData}
+					userId={user.id}
+					handleSubmit={handleSubmitReport}
+					location={location}
+				/>
+
+				<EditReportModal
+					showModal={showEditReportModal}
+					closeModal={closeEditReportModal}
+					selectedReport={selectedReport}
+					handleUpdateReport={handleUpdateReport}
+					projects={projects}
+				/>
+			</div>
+		</section>
+	);
 };
 
 export default TimeReports;

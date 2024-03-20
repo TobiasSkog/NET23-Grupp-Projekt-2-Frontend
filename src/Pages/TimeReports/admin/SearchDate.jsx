@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
 import Container from "react-bootstrap/esm/Container";
-import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 
 export default function SearchDate({
@@ -29,13 +28,13 @@ export default function SearchDate({
 	};
 
 	return (
-		<Container className="mt-2 mb-3 col-md-8 col-lg-6">
+		<div>
 			<Container>
 				<Form.Text className="title-text-search-date">
 					Enter searchdate
 				</Form.Text>
 			</Container>
-			<Container className="mt-2 d-md-flex justify-content-start">
+			<Container className="mt-2 d-sm-flex justify-content-center">
 				<Form.Control
 					className="mb-3 me-2 neu-form-select"
 					type="date"
@@ -48,7 +47,7 @@ export default function SearchDate({
 				/>
 
 				<Form.Control
-					className="mb-3 me-2 neu-form-select"
+					className="mb-3 me-4 neu-form-select"
 					type="date"
 					id="endDate"
 					name="endDate"
@@ -59,13 +58,10 @@ export default function SearchDate({
 					onChange={handleInputChange}
 				/>
 
-				<button
-					type="button"
-					className="mb-3 me-2 ms-auto neu-button-square"
-					onClick={handleDateSearch}>
+				<button className="neu-button-square mb-3" onClick={handleDateSearch}>
 					Search
 				</button>
 			</Container>
-		</Container>
+		</div>
 	);
 }

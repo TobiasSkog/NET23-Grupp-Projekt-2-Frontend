@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
 import axios from "axios";
 import FormModal from "./FormModal";
 import Spinner from "react-bootstrap/Spinner";
@@ -186,7 +185,7 @@ const Project = ({ userSignal }) => {
 								item.status !== filteredProjects[index - 1].status && (
 									<hr className="border border-neupurple border-3 opacity-75" />
 								)}
-							<Col className="col-sm-6 col-md-4 col-xl-3">
+							<div className="col-md-6 col-xl-3">
 								<ProjectCard
 									item={item}
 									handleClick={handleClick}
@@ -196,7 +195,7 @@ const Project = ({ userSignal }) => {
 									handleUserClick={handleUserClick}
 									project={project}
 								/>
-							</Col>
+							</div>
 						</React.Fragment>
 					))}
 				</Row>

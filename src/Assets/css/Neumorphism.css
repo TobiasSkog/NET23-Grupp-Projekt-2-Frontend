@@ -97,14 +97,6 @@ footer {
 /*------------------------------*/
 /*-----------CARD CSS-----------*/
 /*------------------------------*/
-/* .neu-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1rem;
-  width: 100%;
-  height: 100%;
-  margin-bottom: 1rem;
-} */
 
 .neu-card {
 	border-radius: 0.625rem;
@@ -113,6 +105,9 @@ footer {
 	box-shadow: -5px -5px 5px var(--bs-highlight), 5px 5px 5px var(--bs-shadow);
 }
 
+.card-text {
+	margin-bottom: 0.8rem;
+}
 .neu-card-section {
 	border-radius: 0.625rem;
 	border: 2px solid var(--bs-primary);
@@ -166,7 +161,7 @@ footer {
 .neu-card-status {
 	display: flex;
 	align-items: center;
-	justify-content: end;
+	justify-content: flex-end;
 	background-color: transparent;
 	margin: 5px;
 	font-size: 1.2rem;
@@ -357,7 +352,7 @@ footer {
 	display: flex;
 	text-align: center;
 	flex-direction: row;
-	justify-content: end;
+	justify-content: flex-end;
 	align-items: center;
 	background-color: transparent;
 	width: 100%;
@@ -453,13 +448,12 @@ footer {
 /*-------SEARCH (TIME REPORT) CSS-------*/
 /*--------------------------------------*/
 .neu-search-container {
-	align-items: center;
 	border-radius: 0.625rem;
 	padding: 1rem;
 	box-shadow: 3px 3px 7px var(--bs-shadow), -2px -2px 5px var(--bs-highlight);
 	width: 100%;
 	height: 50%;
-	margin-bottom: 1.3rem;
+
 	border-radius: 0.625rem;
 	overflow: hidden;
 	box-shadow: inset 4px 4px 7px var(--bs-shadow),
@@ -475,10 +469,40 @@ footer {
 /*-----------------------*/
 
 .inner-container {
-	width: 60%;
+	width: 70%;
 }
+
+@media (max-width: 1400px) {
+	.inner-container {
+		width: 80%;
+	}
+}
+@media (max-width: 1200px) {
+	.inner-container {
+		width: 90%;
+	}
+}
+@media (max-width: 1000px) {
+	.inner-container {
+		width: 100%;
+	}
+}
+
+.edit-project-button {
+	height: 40px;
+	background-color: var(--bs-primary);
+	border: 2px solid var(--bs-primary);
+	color: var(--bs-textdark);
+	font-size: 0.9rem !important;
+	border-radius: 0.625rem;
+	outline: none;
+	cursor: pointer;
+	padding: 0 5px;
+	box-shadow: -3px -3px 6px var(--bs-highlight), 3px 3px 6px var(--bs-shadow);
+}
+
 .neu-table-container {
-	width: 100%;
+	width: 90%;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -504,36 +528,13 @@ footer {
 
 table.neu-table > tbody > tr > td {
 	padding: 5px;
-	font-size: 16px;
+	font-size: 18px;
 	position: relative;
 }
 
 table.neu-table > tbody > tr:hover {
 	box-shadow: 0px 4px 7px var(--bs-shadow), 0px -3px 7px var(--bs-highlight);
 }
-
-/* table.neu-table tr td:first-child::before {
-	content: "";
-	position: absolute;
-	padding: 7px;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	z-index: -15;
-}
-
-table.neu-table td:hover::after {
-	content: "";
-	position: absolute;
-	left: 0;
-	top: 0;
-	height: 100%;
-	width: 100%;
-	z-index: -1;
-	box-shadow: 4px 0px 6px var(--bs-shadow), -3px 0px 5px var(--bs-highlight);
-	
-} */
 
 table.neu-table th {
 	padding: 7px;
@@ -718,18 +719,6 @@ table.neu-table thead {
 /*-----------------------------*/
 /*---------BUTTONS CSS---------*/
 /*-----------------------------*/
-
-.edit-timereport-button {
-	background-color: var(--bs-primary);
-	border: 2px solid var(--bs-primary);
-	color: var(--bs-textdark);
-	font-size: 0.9rem !important;
-	border-radius: 0.625rem;
-	outline: none;
-	cursor: pointer;
-	padding: 0px 10px !important;
-	box-shadow: -3px -3px 6px var(--bs-highlight), 3px 3px 6px var(--bs-shadow);
-}
 
 .neu-button-square {
 	background-color: var(--bs-primary);
