@@ -226,7 +226,7 @@ export default function Timereport({ proj }) {
 					</table>
 				</div>
 
-				<div className="neu-table-filter-button-container d-flex flex-column flex-md-row justify-content-center">
+				<div className="neu-table-filter-button-container d-flex flex-column flex-sm-row justify-content-center">
 					<Sorting
 						setTimeReports={setTimeReports}
 						originalTimeReports={originalTimeReports}

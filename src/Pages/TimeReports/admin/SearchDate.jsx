@@ -34,7 +34,7 @@ export default function SearchDate({
 					Enter searchdate
 				</Form.Text>
 			</Container>
-			<Container className="mt-2 d-lg-flex justify-content-center">
+			<Container className="mt-2 d-sm-flex justify-content-center">
 				<Form.Control
 					className="mb-3 me-2 neu-form-select"
 					type="date"
