@@ -14,7 +14,6 @@ const Project = ({ userSignal }) => {
 	const [loading, setLoading] = useState(false);
 	const [edit, setEdit] = useState(false);
 	const [projectId, setProjectId] = useState("");
-	// const [teamMemberAlreadyInProject, setTeamMemberAlreadyInProject] = useState({project: [{id: "",activeMembers: [],},],});
 	const [formInput, setFormInput] = useState({
 		name: "",
 		status: "",
@@ -103,7 +102,6 @@ const Project = ({ userSignal }) => {
 	const handleEdit = (projectId) => {
 		const projectToEdit = project.find((item) => item.id === projectId);
 		if (projectToEdit) {
-			console.log("Project To Edit:", projectToEdit.teamMember);
 			setFormInput({
 				name: projectToEdit.name,
 				status: projectToEdit.status,

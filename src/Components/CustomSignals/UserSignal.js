@@ -15,13 +15,9 @@ function getUser() {
 	let notificationObject = null;
 
 	if (userObject.userRole === "Admin") {
-		console.log("User is Admin");
 		const isExistingAdminNotificationCookie = !!Cookies.get("adminNotification");
-		console.log("Is there an existing cooke:", isExistingAdminNotificationCookie);
 		if (isExistingAdminNotificationCookie) {
-			console.log("Creating a notification object");
 			notificationObject = JSON.parse(Cookies.get("adminNotification"));
-			console.log("notificationObject:", notificationObject);
 		}
 	}
 
