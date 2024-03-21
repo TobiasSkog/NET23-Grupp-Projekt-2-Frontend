@@ -264,9 +264,9 @@ footer {
 /*--------------------------------*/
 .neu-nav {
   position: fixed;
-  top: 0; /* Align to the top */
-  left: 0; /* Align to the left */
-  right: 0; /* Stretch across the viewport */
+  top: 0; 
+  left: 0; 
+  right: 0; 
   z-index: 1050;
   height: 60px;
   margin: 0;
