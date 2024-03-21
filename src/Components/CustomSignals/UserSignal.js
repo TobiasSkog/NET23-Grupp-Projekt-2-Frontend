@@ -68,6 +68,7 @@ export function userLoggedIn(userObject, cookieExpirationType, cookieExpirationT
 
 export function userLoggedOut() {
 	Cookies.remove("auth");
+	Cookies.remove("adminNotification");
 	userSignal.value = null;
 	successfulLogin.value = false;
 }
