@@ -5,7 +5,7 @@ import Menu from "./Menu";
 import TimeReportUser from "./TimereportUser";
 import Spinner from "react-bootstrap/esm/Spinner";
 
-export default function TimereportMain({ userSignal }) {
+export default function TimereportMain() {
 	const [loading, setLoading] = useState(false);
 	const [project, setProject] = useState([]);
 	const [people, setPeople] = useState([]);

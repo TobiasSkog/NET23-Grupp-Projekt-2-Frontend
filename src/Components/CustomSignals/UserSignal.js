@@ -1,26 +1,36 @@
 import { signal } from "@preact/signals";
 import Cookies from "js-cookie";
 import { InXMinutes, InXDays } from "../CustomCookieMethods/CookieMethods";
-import { successfulLogin } from "./SuccessfulLogin";
 
 export const userSignal = signal(getUser());
+//export const notificationSignal = signal(getUser());
 
 function getUser() {
-	const isExistingCookie = !!Cookies.get("auth");
-
-	if (!isExistingCookie) {
-		successfulLogin.value = false;
+	const isExistingUserCookie = !!Cookies.get("auth");
+	if (!isExistingUserCookie) {
 		return null;
 	}
 
 	const userObject = JSON.parse(Cookies.get("auth"));
-	successfulLogin.value = true;
-	return userObject;
+	let notificationObject = null;
+
+	if (userObject.userRole === "Admin") {
+		console.log("User is Admin");
+		const isExistingAdminNotificationCookie = !!Cookies.get("adminNotification");
+		console.log("Is there an existing cooke:", isExistingAdminNotificationCookie);
+		if (isExistingAdminNotificationCookie) {
+			console.log("Creating a notification object");
+			notificationObject = JSON.parse(Cookies.get("adminNotification"));
+			console.log("notificationObject:", notificationObject);
+		}
+	}
+
+	return { user: userObject, notification: notificationObject };
 }
 
 export function userLoggedIn(userObject, cookieExpirationType, cookieExpirationTimeValue) {
 	if (!userObject) {
-		successfulLogin.value = false;
+		userSignal.value = { user: null, notification: null };
 		return null;
 	}
 
@@ -62,13 +72,33 @@ export function userLoggedIn(userObject, cookieExpirationType, cookieExpirationT
 		expires: definedTimeValue,
 	});
 
-	successfulLogin.value = true;
-	userSignal.value = userObject;
+	let notificationObject = userSignal.value?.notification;
+
+	if (userObject.userRole === "Admin") {
+		const isExistingAdminNotificationCookie = !!Cookies.get("adminNotification");
+		if (isExistingAdminNotificationCookie) {
+			notificationObject = JSON.parse(Cookies.get("adminNotification"));
+		}
+	}
+
+	userSignal.value = { user: userObject, notification: notificationObject };
+	return;
+}
+export function createAdminNotificationData(data) {
+	Cookies.set("adminNotification", JSON.stringify(data), { expires: 0.5 });
+	return JSON.parse(Cookies.get("adminNotification"));
+}
+
+export function updateAdminNotificationData(id, projectData) {
+	const searchAndDestroy = projectData.findIndex((kill) => kill.id === id);
+	if (searchAndDestroy !== -1) {
+		projectData.splice(searchAndDestroy, 1);
+		Cookies.set("adminNotification", JSON.stringify(projectData), { expires: 0.5 });
+	}
 }
 
 export function userLoggedOut() {
 	Cookies.remove("auth");
-	Cookies.remove("adminNotification");
+	//Cookies.remove("adminNotification");
 	userSignal.value = null;
-	successfulLogin.value = false;
 }

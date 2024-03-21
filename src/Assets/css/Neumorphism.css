@@ -263,11 +263,7 @@ footer {
 }
 
 
-.navbar-brand {
-  color: var(--bs-textdark) !important;
-  font-weight: 900;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, .3), -2px -2px 4px rgba(255, 255, 255, 1)
-}
+
 
 .neu-nav-item,
 .logout-link {
@@ -370,10 +366,10 @@ footer {
   justify-content: center;
   flex-direction: row;
   padding: 0;
-  margin: 0;
+  margin: 0 1rem;
   min-width: 50px;
   border-radius: 0.625rem;
-  margin-left: 20px;
+  /* margin-left: 20px; */
   box-shadow:
     inset 3px 3px 7px var(--bs-shadow),
     inset -2px -2px 5px var(--bs-highlight);
@@ -432,12 +428,18 @@ footer {
     top: 50%;
     transform: translateY(-50%);
     text-align: left;
+    font-weight: 900;
+    color: var(--bs-textdark) !important;
+    text-shadow:
+      -2px -2px 4px var(--bs-highlight),
+      2px 2px 4px var(--bs-shadow);
   }
 
   .neu-nav-user-container {
     position: absolute;
     right: 110px;
     top: 50%;
+    margin: 0;
     transform: translateY(-50%);
     display: flex;
     align-items: center;
@@ -445,11 +447,21 @@ footer {
     z-index: 1;
   }
 
+  .neu-online-icon {
+    transform: scale(1.4) translate(20%);
+  }
+
+  .neu-offline-icon {
+    transform: scale(1.4) translate(-100%);
+  }
+
+
+
   .neu-nav-notification-new-msg,
   .neu-nav-notification-off {
     position: absolute;
     top: 50;
-    right: 180px;
+    right: 190px;
     transform: translateY(-50%);
     width: 40px;
     height: 40px;
@@ -682,6 +694,23 @@ footer {
   outline: none;
   border: 2px solid var(--bs-primary);
   border-radius: 0.625rem;
+}
+
+.neu-notification-reminder {
+  outline: none;
+  width: 100%;
+  height: 100%;
+  margin-bottom: 0.625rem;
+  border: 2px solid var(--bs-primary);
+  border-radius: 0.625rem;
+
+}
+
+.neu-notification-reminder p {
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0;
+  padding: 0;
 }
 
 .project-name {

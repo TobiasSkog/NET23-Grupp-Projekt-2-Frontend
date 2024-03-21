@@ -36,13 +36,13 @@ export default function FormModal({ formInput, setFormInput, closeModal, modalOp
 				// If in editing mode, update existing project
 
 				response = await axios.patch(`http://localhost:3001/pages/projects/${projectId}`, formInput);
-				console.log("Project updated successfully:", response.data);
+				//console.log("Project updated successfully:", response.data);
 			} else {
 				// If not in editing mode, create a new project
 				console.log(formInput);
 				response = await axios.post("http://localhost:3001/pages/projects", formInput);
 				//console.log(formInput);
-				console.log("New project created successfully:", response.data);
+				//console.log("New project created successfully:", response.data);
 			}
 
 			updateProjects();

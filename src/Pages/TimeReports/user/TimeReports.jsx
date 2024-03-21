@@ -24,7 +24,8 @@ const TimeReports = ({ userSignal }) => {
 
 	const location = useLocation();
 	const navigate = useNavigate();
-	const user = userSignal.value;
+	const userData = userSignal.value;
+	const user = userData?.user;
 
 	useEffect(() => {
 		if (!user) {
@@ -49,12 +50,8 @@ const TimeReports = ({ userSignal }) => {
 
 	const fetchProjects = async () => {
 		try {
-			const response = await axios.get(
-				"http://localhost:3001/databases/projects"
-			);
-			const activeProjects = response.data.filter(
-				(project) => project.status.toLowerCase() === "active"
-			);
+			const response = await axios.get("http://localhost:3001/databases/projects");
+			const activeProjects = response.data.filter((project) => project.status.toLowerCase() === "active");
 			setProjects(activeProjects || []);
 			//console.log("Active Projects:", activeProjects); // After filtering in fetchProjects
 		} catch (error) {
@@ -64,20 +61,12 @@ const TimeReports = ({ userSignal }) => {
 
 	const fetchTimeReports = async () => {
 		try {
-			const response = await axios.get(
-				"http://localhost:3001/databases/timereports"
-			);
-			const userTimeReports = response.data.filter(
-				(report) => report.person === user.id
-			);
+			const response = await axios.get("http://localhost:3001/databases/timereports");
+			const userTimeReports = response.data.filter((report) => report.person === user.id);
 
 			// Corrected the property name used to match project IDs from reports to active projects
 			const activeReports = userTimeReports.filter((report) =>
-				projects.some(
-					(project) =>
-						project.id === report.project &&
-						project.status.toLowerCase() === "active"
-				)
+				projects.some((project) => project.id === report.project && project.status.toLowerCase() === "active")
 			);
 
 			setTimeReports(activeReports);
@@ -117,10 +106,7 @@ const TimeReports = ({ userSignal }) => {
 
 	const handleSubmitReport = async (report) => {
 		try {
-			const response = await axios.post(
-				"http://localhost:3001/pages/timereports",
-				report
-			);
+			const response = await axios.post("http://localhost:3001/pages/timereports", report);
 			console.log("Report added:", response.data);
 		} catch (error) {
 			console.error("Failed to add time report:", error);
@@ -130,16 +116,13 @@ const TimeReports = ({ userSignal }) => {
 
 	const handleUpdateReport = async (updatedReport) => {
 		try {
-			const response = await axios.patch(
-				`http://localhost:3001/pages/timeReports/user/${updatedReport.id}`,
-				{
-					date: updatedReport.date,
-					hours: updatedReport.hours,
-					note: updatedReport.note,
-					personId: updatedReport.person,
-					projectId: updatedReport.project,
-				}
-			);
+			const response = await axios.patch(`http://localhost:3001/pages/timeReports/user/${updatedReport.id}`, {
+				date: updatedReport.date,
+				hours: updatedReport.hours,
+				note: updatedReport.note,
+				personId: updatedReport.person,
+				projectId: updatedReport.project,
+			});
 			console.log("Report updated:", response.data);
 			closeEditReportModal();
 		} catch (error) {
@@ -174,9 +157,7 @@ const TimeReports = ({ userSignal }) => {
 								<th>
 									<strong>#</strong>
 								</th>
-								<th
-									onClick={() => handleSortByDate()}
-									style={{ cursor: "pointer" }}>
+								<th onClick={() => handleSortByDate()} style={{ cursor: "pointer" }}>
 									<strong>Date</strong>
 								</th>
 								<th>
@@ -200,16 +181,11 @@ const TimeReports = ({ userSignal }) => {
 										<strong className="tableNumber">{index + 1}</strong>
 									</td>
 									<td>{report.date}</td>
-									<td>
-										{projects.find((project) => project.id === report.project)
-											?.name || "Unknown Project"}
-									</td>
+									<td>{projects.find((project) => project.id === report.project)?.name || "Unknown Project"}</td>
 									<td>{report.hours}</td>
 									<td>{report.note}</td>
 									<td>
-										<button
-											className="edit-timereport-button"
-											onClick={() => handleEditReportSelection(report)}>
+										<button className="edit-timereport-button" onClick={() => handleEditReportSelection(report)}>
 											Edit
 										</button>
 									</td>
@@ -234,11 +210,7 @@ const TimeReports = ({ userSignal }) => {
 					</table>
 				</div>
 				<div className="neu-table-filter-button-container d-flex flex-column flex-sm-row justify-content-center">
-					<Sorting
-						setTimeReports={setTimeReports}
-						originalTimeReports={originalTimeReports}
-						setSearchDate={setSearchDate}
-					/>
+					<Sorting setTimeReports={setTimeReports} originalTimeReports={originalTimeReports} setSearchDate={setSearchDate} />
 				</div>
 				<ReportModal
 					key={showReportModal}

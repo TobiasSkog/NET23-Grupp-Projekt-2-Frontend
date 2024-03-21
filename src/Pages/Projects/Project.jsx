@@ -35,7 +35,7 @@ const Project = ({ userSignal }) => {
 
 				// Sort so Active will always display first
 				const sorted = response.data.sort((a, b) => a.status.localeCompare(b.status));
-			
+
 				// User can only see own projects so we filter to find a match.
 				const ownProjects = sorted.filter((project) => project.teamMember.includes(user.id));
 
@@ -60,7 +60,8 @@ const Project = ({ userSignal }) => {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
-	const user = userSignal.value;
+	const userData = userSignal.value;
+	const user = userData?.user;
 	if (!user) {
 		navigate("/");
 		return null;
@@ -165,7 +166,6 @@ const Project = ({ userSignal }) => {
 			)}
 			{/* <div className="neu-grid my-3 neu-size-100"> */}
 			<div className="container my-3">
-
 				{loading && (
 					<>
 						<Spinner animation="border" variant="primary" />
