@@ -2,9 +2,18 @@ import React, { useState, useEffect } from "react";
 import { Form } from "react-bootstrap";
 import CustomModal from "../../../Components/CustomModal/CustomModal";
 
-const EditReportModal = ({ showModal, closeModal, selectedReport, handleUpdateReport, projects }) => {
+const EditReportModal = ({
+	showModal,
+	closeModal,
+	selectedReport,
+	handleUpdateReport,
+	projects,
+}) => {
 	const [updatedReport, setUpdatedReport] = useState(selectedReport || {});
-	const [projectTimespan, setProjectTimespan] = useState({ start: "", end: "" });
+	const [projectTimespan, setProjectTimespan] = useState({
+		start: "",
+		end: "",
+	});
 
 	useEffect(() => {
 		// Update the state with the selected report
@@ -40,6 +49,7 @@ const EditReportModal = ({ showModal, closeModal, selectedReport, handleUpdateRe
 						id="startDate"
 						name="startDate"
 						aria-label="startDate"
+						aria-required="true"
 						required
 						value={updatedReport.date || ""}
 						onChange={handleChange}
@@ -51,6 +61,7 @@ const EditReportModal = ({ showModal, closeModal, selectedReport, handleUpdateRe
 						type="text"
 						id="hours"
 						placeholder="Hours"
+						aria-label="hours"
 						className="neu-form-controll"
 						name="hours"
 						value={updatedReport.hours || ""}
@@ -66,6 +77,7 @@ const EditReportModal = ({ showModal, closeModal, selectedReport, handleUpdateRe
 						name="note"
 						aria-label="note"
 						placeholder="Note"
+						aria-required="true"
 						required
 						value={updatedReport.note || ""}
 						onChange={handleChange}

@@ -30,16 +30,26 @@ const Project = ({ userSignal }) => {
 		const fetchData = async () => {
 			try {
 				setLoading(true);
-				const response = await axios.get("http://localhost:3001/databases/projects");
+				const response = await axios.get(
+					"http://localhost:3001/databases/projects"
+				);
 
 				// Sort so Active will always display first
-				const sorted = response.data.sort((a, b) => a.status.localeCompare(b.status));
+
+				const sorted = response.data.sort((a, b) =>
+					a.status.localeCompare(b.status)
+				);
+
 
 				// User can only see own projects so we filter to find a match.
-				const ownProjects = sorted.filter((project) => project.teamMember.includes(user.id));
+				const ownProjects = sorted.filter((project) =>
+					project.teamMember.includes(user.id)
+				);
 
 				// console.log(ownProjects);
-				const peopleResponse = await axios.get("http://localhost:3001/databases/people");
+				const peopleResponse = await axios.get(
+					"http://localhost:3001/databases/people"
+				);
 
 				setPeople(peopleResponse.data);
 				// Set the project state if userRole is user
@@ -87,10 +97,14 @@ const Project = ({ userSignal }) => {
 		try {
 			setLoading(true);
 
-			const response = await axios.get("http://localhost:3001/databases/projects");
+			const response = await axios.get(
+				"http://localhost:3001/databases/projects"
+			);
 
 			// sort so Active will always display first
-			const sorted = response.data.sort((a, b) => a.status.localeCompare(b.status));
+			const sorted = response.data.sort((a, b) =>
+				a.status.localeCompare(b.status)
+			);
 			setProject(sorted);
 		} catch (error) {
 			console.error("There was a problem updating projects:", error);
@@ -138,7 +152,9 @@ const Project = ({ userSignal }) => {
 		navigate(`/timereports/project`, { state: project });
 	};
 
-	const filteredProjects = showAllProjects ? project : project.filter((project) => project.status === "Active");
+	const filteredProjects = showAllProjects
+		? project
+		: project.filter((project) => project.status === "Active");
 	return (
 		<>
 			{modalOpen && (
@@ -163,7 +179,9 @@ const Project = ({ userSignal }) => {
 				</>
 			)}
 			{/* <div className="neu-grid my-3 neu-size-100"> */}
-			<div className="container my-3">
+
+			<section className="container my-3">
+
 				{loading && (
 					<>
 						<Spinner animation="border" variant="primary" />
@@ -176,7 +194,10 @@ const Project = ({ userSignal }) => {
 						<React.Fragment key={item.id}>
 							{/* Border that's being shown IF ALL projects are shown, separates each project by status (Active, Next, Done) */}
 
-							{index !== 0 && item.status !== filteredProjects[index - 1].status && <hr className="border border-neupurple border-3 opacity-75" />}
+							{index !== 0 &&
+								item.status !== filteredProjects[index - 1].status && (
+									<hr className="border border-neupurple border-3 opacity-75" />
+								)}
 							<div className="col-md-6 col-xl-3">
 								<ProjectCard
 									item={item}
@@ -191,20 +212,31 @@ const Project = ({ userSignal }) => {
 						</React.Fragment>
 					))}
 				</Row>
-			</div>
-			<div className={`mb-4 ${user.userRole === "Admin" ? "neu-buttons-2b-between" : "neu-buttons-1b "}`}>
+			</section>
+			<section
+				className={`mb-4 ${
+					user.userRole === "Admin"
+						? "neu-buttons-2b-between"
+						: "neu-buttons-1b "
+				}`}>
 				{user.userRole === "Admin" && (
-					<button className="neu-button-square" onClick={openModal}>
+					<button
+						className="neu-button-square"
+						role="button"
+						onClick={openModal}>
 						<i className="bi bi-plus-circle me-1" />
 						Add New
 					</button>
 				)}
 
-				<button className="neu-button-square" onClick={() => setShowAllProjects(!showAllProjects)}>
+				<button
+					className="neu-button-square"
+					role="button"
+					onClick={() => setShowAllProjects(!showAllProjects)}>
 					<i className="bi bi-filter me-1" />
 					{showAllProjects ? "Show Active" : "Show All"}
 				</button>
-			</div>
+			</section>
 		</>
 	);
 };
