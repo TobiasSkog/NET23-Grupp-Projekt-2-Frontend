@@ -3,47 +3,36 @@ import Button from "react-bootstrap/Button";
 import socket from "../Socket/SocketService";
 import CustomModal from "../CustomModal/CustomModal";
 import { useNavigate } from "react-router-dom";
-import Cookies from "js-cookie";
+import { createAdminNotificationData, updateAdminNotificationData } from "../CustomSignals/UserSignal";
 
-export default function NotifyAdminModal() {
+export default function NotifyAdminModal({ adminNotificationData }) {
 	const [showModal, setShowModal] = useState(false);
 	const [recievedNewNotification, setRecievedNewNotification] = useState(false);
 	const [projectData, setProjectData] = useState(null);
 	const navigate = useNavigate();
 
 	useEffect(() => {
+		if (adminNotificationData && adminNotificationData.length > 0) {
+			setProjectData(adminNotificationData);
+			setRecievedNewNotification(true);
+		}
+
 		socket.on("projectOverdue", (data) => {
-			bakeMeACookie(data);
+			setProjectData(createAdminNotificationData(data));
 			setRecievedNewNotification(true);
 		});
 		return () => {
 			socket.off("projectOverdue");
 		};
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
-
-	const bakeMeACookie = (data) => {
-		try {
-			Cookies.set("adminNotification", JSON.stringify(data), { expires: 0.5 })
-			setProjectData(JSON.parse(Cookies.get("adminNotification")));
-		} catch (error) {
-			console.error("Cookie bad", error);
-		}
-	};
-
-	const breakTheCookie = (id) => {
-		const searchAndDestroy = projectData.findIndex(kill => kill.id === id);
-		if (searchAndDestroy !== -1) {
-			projectData.splice(searchAndDestroy, 1);
-			bakeMeACookie(projectData)
-		}
-	};
 
 	const handleRedirect = (id, name) => {
 		const project = {
 			id: id,
 			name: name,
 		};
-		breakTheCookie(project.id);
+		updateAdminNotificationData(project.id, projectData);
 		handleCloseModal();
 		navigate("/timereports/project", { state: project });
 	};
@@ -72,8 +61,9 @@ export default function NotifyAdminModal() {
 				<CustomModal
 					show={showModal}
 					onClose={handleCloseModal}
-					title={` ${projectData ? (projectData.length === 1 ? projectData.length + " Project" : projectData.length + " Projects") : ""
-						} needs your attention`}
+					title={` ${
+						projectData ? (projectData.length === 1 ? projectData.length + " Project" : projectData.length + " Projects") : ""
+					} needs your attention`}
 					divider>
 					<div className="neu-project-link-container">
 						{projectData.map((project, index) => (
@@ -85,11 +75,12 @@ export default function NotifyAdminModal() {
 									<p>
 										This project has exceeded the allocated time limit by <span className="overage-hours">{project.hoursLeft * -1} hours</span>.
 									</p>
-
-									<p> Please review the project details and consider taking appropriate action.</p>
 								</div>
 							</div>
 						))}
+					</div>
+					<div className="neu-notification-reminder">
+						<p> Please review the project details.</p>
 					</div>
 				</CustomModal>
 			)}

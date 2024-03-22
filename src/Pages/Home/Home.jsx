@@ -6,7 +6,8 @@ import { useNavigate } from "react-router-dom";
 
 export default function Home({ userSignal, handleShowModal }) {
 	const navigate = useNavigate();
-	const user = userSignal.value;
+	const userData = userSignal.value;
+	const user = userData?.user;
 	useEffect(() => {
 		if (user) {
 			navigate("/projects");

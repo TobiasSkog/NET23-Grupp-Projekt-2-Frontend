@@ -52,6 +52,7 @@ export default function FormModal({
 			if (edit) {
 				// If in editing mode, update existing project
 
+
 				response = await axios.patch(
 					`http://localhost:3001/pages/projects/${projectId}`,
 					formInput
@@ -64,8 +65,9 @@ export default function FormModal({
 					"http://localhost:3001/pages/projects",
 					formInput
 				);
+
 				//console.log(formInput);
-				console.log("New project created successfully:", response.data);
+				//console.log("New project created successfully:", response.data);
 			}
 
 			updateProjects();

@@ -14,7 +14,6 @@ const Project = ({ userSignal }) => {
 	const [loading, setLoading] = useState(false);
 	const [edit, setEdit] = useState(false);
 	const [projectId, setProjectId] = useState("");
-	// const [teamMemberAlreadyInProject, setTeamMemberAlreadyInProject] = useState({project: [{id: "",activeMembers: [],},],});
 	const [formInput, setFormInput] = useState({
 		name: "",
 		status: "",
@@ -36,9 +35,11 @@ const Project = ({ userSignal }) => {
 				);
 
 				// Sort so Active will always display first
+
 				const sorted = response.data.sort((a, b) =>
 					a.status.localeCompare(b.status)
 				);
+
 
 				// User can only see own projects so we filter to find a match.
 				const ownProjects = sorted.filter((project) =>
@@ -68,7 +69,8 @@ const Project = ({ userSignal }) => {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
-	const user = userSignal.value;
+	const userData = userSignal.value;
+	const user = userData?.user;
 	if (!user) {
 		navigate("/");
 		return null;
@@ -114,7 +116,6 @@ const Project = ({ userSignal }) => {
 	const handleEdit = (projectId) => {
 		const projectToEdit = project.find((item) => item.id === projectId);
 		if (projectToEdit) {
-			console.log("Project To Edit:", projectToEdit.teamMember);
 			setFormInput({
 				name: projectToEdit.name,
 				status: projectToEdit.status,
@@ -178,7 +179,9 @@ const Project = ({ userSignal }) => {
 				</>
 			)}
 			{/* <div className="neu-grid my-3 neu-size-100"> */}
+
 			<section className="container my-3">
+
 				{loading && (
 					<>
 						<Spinner animation="border" variant="primary" />

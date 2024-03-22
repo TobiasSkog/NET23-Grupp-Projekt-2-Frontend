@@ -27,10 +27,10 @@ export default function App() {
 				<Routes>
 					<Route path="/" element={<Home userSignal={userSignal} handleShowModal={handleShowModal} />} />
 					<Route path="/login/auth" element={<LoginOAuth userLoggedIn={userLoggedIn} />} />
-					<Route path="/timereports" element={<TimereportMain userSignal={userSignal} />} />
-					<Route path="/timereports/admin" element={<TimereportUser userSignal={userSignal} />} />
+					<Route path="/timereports" element={<TimereportMain />} />
+					<Route path="/timereports/admin" element={<TimereportUser />} />
 					<Route path="/timereports/user" element={<TimeReports userSignal={userSignal} />} />
-					<Route path="/timereports/project" element={<Timereport userSignal={userSignal} />} />
+					<Route path="/timereports/project" element={<Timereport />} />
 					<Route path="/projects" element={<Project userSignal={userSignal} />} />
 				</Routes>
 				<LoginModal show={showModal} handleClose={handleCloseModal} userLoggedIn={userLoggedIn} />
