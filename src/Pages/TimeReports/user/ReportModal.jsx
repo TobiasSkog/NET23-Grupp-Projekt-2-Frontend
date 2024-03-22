@@ -42,7 +42,7 @@ const ReportModal = ({
 			...prev,
 			date: new Date().toISOString().slice(0, 10),
 		}));
-	// eslint-disable-next-line react-hooks/exhaustive-deps
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	const getMostRecentReport = () => {
@@ -86,7 +86,11 @@ const ReportModal = ({
 		setReportData((prev) => ({ ...prev, note: value }));
 	};
 	return (
-		<CustomModal show={showModal} onClose={closeModal} title="Time Report" divider>
+		<CustomModal
+			show={showModal}
+			onClose={closeModal}
+			title="Time Report"
+			divider>
 			<Form onSubmit={handleFormSubmit} className="neu-form">
 				<Form.Group className="neu-form-group">
 					<Form.Label htmlFor="projectId">Project</Form.Label>
@@ -123,21 +127,26 @@ const ReportModal = ({
 					/>
 				</Form.Group>
 				<Form.Group className="neu-form-group">
-					<Form.Label>Hours Worked</Form.Label>
+					<Form.Label htmlFor="hours">Hours Worked</Form.Label>
 					<Form.Control
 						className="neu-form-controll"
 						type="text"
 						name="hours"
+						aria-label="hours"
 						min="1"
 						step="1"
 						value={reportData.hours}
 						onChange={handleInputChange}
 						required
 					/>
-					{reportData.hours < 1 && <Form.Text className="text-danger">Hours must be at least 1.</Form.Text>}
+					{reportData.hours < 1 && (
+						<Form.Text className="text-danger">
+							Hours must be at least 1.
+						</Form.Text>
+					)}
 				</Form.Group>
 				<Form.Group className="neu-form-group">
-					<Form.Label>Note/Description</Form.Label>
+					<Form.Label htmlFor="note">Note/Description</Form.Label>
 					<Form.Control
 						className="neu-form-controll"
 						type="text"
@@ -159,7 +168,11 @@ const ReportModal = ({
 							))}
 						</ul>
 					)}
-					{reportData.note.length > 50 && <Form.Text className="text-danger">Note cannot exceed 50 characters.</Form.Text>}
+					{reportData.note.length > 50 && (
+						<Form.Text className="text-danger">
+							Note cannot exceed 50 characters.
+						</Form.Text>
+					)}
 				</Form.Group>
 				<button type="submit" className="neu-button-square neu-size-100">
 					Submit

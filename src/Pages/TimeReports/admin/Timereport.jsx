@@ -152,16 +152,16 @@ export default function Timereport({ proj }) {
 						<h4 className="mt-3">Loading...</h4>
 					</>
 				)}
-				<div className="neu-search-container">
+				<section className="neu-search-container">
 					<SearchDate
 						setTimeReports={setTimeReports}
 						originalTimeReports={originalTimeReports}
 						setSearchDate={setSearchDate}
 						searchDate={searchDate}
 					/>
-				</div>
+				</section>
 				<h2 className="text-center page-title mt-2 mb-2">{projectName}</h2>
-				<div className="table-responsive">
+				<section className="table-responsive">
 					<table className="neu-table">
 						<thead>
 							<tr className="text-center">
@@ -232,14 +232,14 @@ export default function Timereport({ proj }) {
 							</tr>
 						</tfoot>
 					</table>
-				</div>
-				<div className="neu-table-filter-button-container d-flex flex-column flex-sm-row justify-content-center">
+				</section>
+				<section className="neu-table-filter-button-container d-flex flex-column flex-sm-row justify-content-center">
 					<Sorting
 						setTimeReports={setTimeReports}
 						originalTimeReports={originalTimeReports}
 						setSearchDate={setSearchDate}
 					/>
-				</div>
+				</section>
 			</div>
 		</section>
 	);
