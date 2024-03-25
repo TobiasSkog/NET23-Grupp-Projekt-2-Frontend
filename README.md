@@ -17,7 +17,7 @@ När du har installerat dependencies så kör du kommandot `npm start` i fronten
 
 
 # Länk till backend
-[backend](https://github.com/TobiasSkog/NET23-Grupp-Projekt-2-Backend/edit/main/README.md)
+[backend](https://github.com/TobiasSkog/NET23-Grupp-Projekt-2-Backend)
 
 
 # Scrum board
