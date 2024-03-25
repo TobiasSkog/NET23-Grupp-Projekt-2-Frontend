@@ -1324,6 +1324,18 @@ table.neu-table thead {
 }
 
 /*--------------------------------*/
+/*-----------BORDER CSS-----------*/
+/*--------------------------------*/
+.neu-border {
+  content: "";
+  width: 100%;
+  background-color: var(--bs-neupurple);
+  border: 4px solid var(--bs-neupurple);
+  box-shadow: inset -2px -2px 1px var(--bs-highlight),
+    inset 2px 2px 1px var(--bs-shadow);
+}
+
+/*--------------------------------*/
 /*-----STYLING VARIABLES CSS------*/
 /*--------------------------------*/
 .neu-center {
