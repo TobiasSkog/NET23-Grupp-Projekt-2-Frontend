@@ -29,27 +29,28 @@ Vi tillåter oAuth login för användare med ett Notion konto.
 Vi tillåter även s.k 'vanlig' login med en emailadress och ett lösenord.
 Vi använder bootstrap och custom CSS för att skapa en neumorphic design.
 
-
-
-
 # Färdiga användare för att testa appen
 | Email           | Lösenord |
 | --------------- | -------- |
 | user@email.com  | 123      |
 | admin@email.com | 123      |
 
+# Bilder från appen
+Adminvy Desktop:
+<br>
+![image](https://github.com/TobiasSkog/NET23-Grupp-Projekt-2-Frontend/assets/11568812/40b24461-8462-411f-af35-c020659022a3)
 
-
+Användarvy Mobile:
+<br>
+![image](https://github.com/TobiasSkog/NET23-Grupp-Projekt-2-Frontend/assets/11568812/c66d6e38-b328-4454-9531-3f4453a1a7e5)
 
 # Länk till backend
 [backend](https://github.com/TobiasSkog/NET23-Grupp-Projekt-2-Backend)
-
 
 # Scrum board
 [Länk till scrum board](https://app.asana.com/0/1206658293714394/1206657895637907)
 
 Överblick Scrum board:
-
 ![image](https://github.com/TobiasSkog/NET23-Grupp-Projekt-2-Backend/assets/11568812/d2dae484-1071-4405-8d2f-f7a00b986372)
 
 Task exempel:
