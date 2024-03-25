@@ -53,4 +53,5 @@ Vi använder bootstrap och custom CSS för att skapa en neumorphic design.
 ![image](https://github.com/TobiasSkog/NET23-Grupp-Projekt-2-Backend/assets/11568812/d2dae484-1071-4405-8d2f-f7a00b986372)
 
 Task exempel:
+<br>
 ![image](https://github.com/TobiasSkog/NET23-Grupp-Projekt-2-Frontend/assets/11568812/bfd95ea6-a6de-46bf-8f13-68f5158ae20b)
