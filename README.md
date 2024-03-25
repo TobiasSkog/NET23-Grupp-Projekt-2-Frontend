@@ -49,6 +49,7 @@ Vi använder bootstrap och custom CSS för att skapa en neumorphic design.
 [Länk till scrum board](https://app.asana.com/0/1206658293714394/1206657895637907)
 
 Överblick Scrum board:
+
 ![image](https://github.com/TobiasSkog/NET23-Grupp-Projekt-2-Backend/assets/11568812/d2dae484-1071-4405-8d2f-f7a00b986372)
 
 Task exempel:
