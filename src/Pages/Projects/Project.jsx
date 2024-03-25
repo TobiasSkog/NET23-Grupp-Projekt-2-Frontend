@@ -179,8 +179,7 @@ const Project = ({ userSignal }) => {
 					{filteredProjects.map((item, index) => (
 						<React.Fragment key={item.id}>
 							{/* Border that's being shown IF ALL projects are shown, separates each project by status (Active, Next, Done) */}
-							{index !== 0 && item.status !== filteredProjects[index - 1].status && <hr className="neu-border" />}
-							{/* "border border-neupurple border-3 opacity-75" */}
+							{index !== 0 && item.status !== filteredProjects[index - 1].status && <hr className="border border-neupurple border-3 opacity-75" />}
 							<div className="col-md-6 col-xl-3">
 								<ProjectCard
 									item={item}
