@@ -173,7 +173,7 @@ const Project = ({ userSignal }) => {
 			)}
 			{loading ? (
 				<>
-					<Spinner animation="border" variant="sdark" />
+					<Spinner animation="border" variant="dark" />
 					<h4 className="mt-2">Loading...</h4>
 				</>
 			) : (
