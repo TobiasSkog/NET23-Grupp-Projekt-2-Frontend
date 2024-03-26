@@ -19,14 +19,16 @@ export default function LoginOAuth({ userLoggedIn }) {
 					return false;
 				}
 
-				const response = await axios.get(`http://localhost:3001/login/auth/callback?code=${code}`);
+				// const response = await axios.get(`http://localhost:3001/login/auth/callback?code=${code}`);
+				const response = await axios.get(`http://127.0.0.1:3001/login/auth/callback?code=${code}`);
 
 				if (response.status !== 200) {
 					console.error("Authentication error:", response.data);
 					return false;
 				}
 
-				const databaseUserData = await axios.post("http://localhost:3001/databases/people/login/authUser", { userEmail: response.data.email });
+				// const databaseUserData = await axios.post("http://localhost:3001/databases/people/login/authUser", { userEmail: response.data.email });
+				const databaseUserData = await axios.post("http://127.0.0.1:3001/databases/people/login/authUser", { userEmail: response.data.email });
 
 				if (!databaseUserData.data.isValidUser) {
 					return false;

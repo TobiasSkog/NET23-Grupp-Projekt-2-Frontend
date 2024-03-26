@@ -30,25 +30,20 @@ const Project = ({ userSignal }) => {
 		const fetchData = async () => {
 			try {
 				setLoading(true);
-				const response = await axios.get(
-					"http://localhost:3001/databases/projects"
-				);
+				const response = await axios.get("http://localhost:3001/databases/projects");
+				// const response = await axios.get("http://127.0.0.1:3001/databases/projects");
 
 				// Sort so Active will always display first
 
-				const sorted = response.data.sort((a, b) =>
-					a.status.localeCompare(b.status)
-				);
+
+				const sorted = response.data.sort((a, b) => a.status.localeCompare(b.status));
+
 
 				// User can only see own projects so we filter to find a match.
-				const ownProjects = sorted.filter((project) =>
-					project.teamMember.includes(user.id)
-				);
+				const ownProjects = sorted.filter((project) => project.teamMember.includes(user.id));
 
-				// console.log(ownProjects);
-				const peopleResponse = await axios.get(
-					"http://localhost:3001/databases/people"
-				);
+				const peopleResponse = await axios.get("http://localhost:3001/databases/people");
+				// const peopleResponse = await axios.get("http://127.0.0.1:3001/databases/people");
 
 				setPeople(peopleResponse.data);
 				// Set the project state if userRole is user
@@ -56,7 +51,6 @@ const Project = ({ userSignal }) => {
 					setProject(ownProjects);
 				} else {
 					setProject(sorted);
-					//console.log(sorted);
 				}
 			} catch (error) {
 				console.error("There was a problem with the fetch operation:", error);
@@ -98,12 +92,11 @@ const Project = ({ userSignal }) => {
 
 			const response = await axios.get(
 				"http://localhost:3001/databases/projects"
+				//"http://127.0.0.1:3001/databases/projects"
 			);
 
 			// sort so Active will always display first
-			const sorted = response.data.sort((a, b) =>
-				a.status.localeCompare(b.status)
-			);
+			const sorted = response.data.sort((a, b) => a.status.localeCompare(b.status));
 			setProject(sorted);
 		} catch (error) {
 			console.error("There was a problem updating projects:", error);
@@ -151,9 +144,7 @@ const Project = ({ userSignal }) => {
 		navigate(`/timereports/project`, { state: project });
 	};
 
-	const filteredProjects = showAllProjects
-		? project
-		: project.filter((project) => project.status === "Active");
+	const filteredProjects = showAllProjects ? project : project.filter((project) => project.status === "Active");
 	return (
 		<>
 			{modalOpen && (
@@ -226,6 +217,7 @@ const Project = ({ userSignal }) => {
 					</section>
 				</>
 			)}
+
 		</>
 	);
 };

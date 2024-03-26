@@ -14,6 +14,7 @@ export default function LoginIntegrated({ userLoggedIn, handleClose }) {
 		e.preventDefault();
 		setLoginButtonPressed(true);
 		const databaseUserData = await axios.post("http://localhost:3001/databases/people/login/integratedUser", {
+			// const databaseUserData = await axios.post("http://127.0.0.1:3001/databases/people/login/integratedUser", {
 			userEmail: email,
 			userPassword: password,
 		});
