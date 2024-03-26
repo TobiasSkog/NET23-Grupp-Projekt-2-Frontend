@@ -53,7 +53,6 @@ const TimeReports = ({ userSignal }) => {
 			const response = await axios.get("http://localhost:3001/databases/projects");
 			const activeProjects = response.data.filter((project) => project.status.toLowerCase() === "active");
 			setProjects(activeProjects || []);
-			//console.log("Active Projects:", activeProjects); // After filtering in fetchProjects
 		} catch (error) {
 			console.error("Failed to fetch projects:", error);
 		}
@@ -107,7 +106,6 @@ const TimeReports = ({ userSignal }) => {
 	const handleSubmitReport = async (report) => {
 		try {
 			const response = await axios.post("http://localhost:3001/pages/timereports", report);
-			console.log("Report added:", response.data);
 		} catch (error) {
 			console.error("Failed to add time report:", error);
 		}
@@ -123,7 +121,6 @@ const TimeReports = ({ userSignal }) => {
 				personId: updatedReport.person,
 				projectId: updatedReport.project,
 			});
-			console.log("Report updated:", response.data);
 			closeEditReportModal();
 		} catch (error) {
 			console.error("Failed to update report:", error);

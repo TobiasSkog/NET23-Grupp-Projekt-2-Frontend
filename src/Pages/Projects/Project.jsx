@@ -34,7 +34,6 @@ const Project = ({ userSignal }) => {
 				// const response = await axios.get("http://127.0.0.1:3001/databases/projects");
 
 				// Sort so Active will always display first
-
 				const sorted = response.data.sort((a, b) => a.status.localeCompare(b.status));
 
 				// User can only see own projects so we filter to find a match.
@@ -92,7 +91,6 @@ const Project = ({ userSignal }) => {
 				"http://localhost:3001/databases/projects"
 				//"http://127.0.0.1:3001/databases/projects"
 			);
-
 			// sort so Active will always display first
 			const sorted = response.data.sort((a, b) => a.status.localeCompare(b.status));
 			setProject(sorted);

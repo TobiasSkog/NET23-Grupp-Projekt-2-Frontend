@@ -51,7 +51,6 @@ const ReportModal = ({
 
 	const handleInputChange = (e) => {
 		const { name, value } = e.target;
-		//console.log("handleIputChange name:", name, "value:", value);
 		setReportData((prev) => ({
 			...prev,
 			[name]: value,
@@ -70,8 +69,6 @@ const ReportModal = ({
 
 	const handleFormSubmit = (e) => {
 		e.preventDefault();
-		//console.log("FE - handleFormSubmit - reportData:", reportData);
-
 		const submissionData = {
 			...reportData,
 			hours: parseFloat(reportData.hours),

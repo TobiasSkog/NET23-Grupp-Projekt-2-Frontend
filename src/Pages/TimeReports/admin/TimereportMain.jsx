@@ -25,8 +25,6 @@ export default function TimereportMain() {
 
 				setPeople(peopleResponse.data);
 				setProject(projectResponse.data);
-				//console.log(projectResponse.data);
-				//console.log(peopleResponse.data);
 			} catch (error) {
 				console.error("There was a problem with the fetch operation:", error);
 			} finally {

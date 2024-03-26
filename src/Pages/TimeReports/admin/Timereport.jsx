@@ -41,7 +41,6 @@ export default function Timereport({ proj }) {
 				//save response 2 times, one will be manipulated in filtering, and one to always have all data
 				setTimeReports(response.data);
 				setOriginalTimeReports(response.data);
-				//console.log(response.data);
 			} catch (error) {
 				console.error("There was a problem with the fetch operation:", error);
 			} finally {
@@ -110,7 +109,6 @@ export default function Timereport({ proj }) {
 			id: id,
 			name: name,
 		};
-		console.log(person);
 		navigate("/timereports/admin", { state: person });
 	};
 

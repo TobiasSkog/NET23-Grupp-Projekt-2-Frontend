@@ -3,29 +3,12 @@ import Form from "react-bootstrap/Form";
 import axios from "axios";
 import CustomModal from "../../Components/CustomModal/CustomModal";
 
-export default function FormModal({
-	formInput,
-	setFormInput,
-	closeModal,
-	modalOpen,
-	updateProjects,
-	edit,
-	setEdit,
-	projectId,
-	setLoading,
-	people,
-}) {
-	const [teamMemberAlreadyInProject, setTeamMemberAlreadyInProject] = useState(
-		[]
-	);
+export default function FormModal({ formInput, setFormInput, closeModal, modalOpen, updateProjects, edit, setEdit, projectId, setLoading, people }) {
+	const [teamMemberAlreadyInProject, setTeamMemberAlreadyInProject] = useState([]);
 	useEffect(() => {
-		const initialTeamMembers = people
-			.filter((person) => formInput.teamMember.includes(person.id))
-			.map((person) => person.id);
+		const initialTeamMembers = people.filter((person) => formInput.teamMember.includes(person.id)).map((person) => person.id);
 
-		setTeamMemberAlreadyInProject([
-			{ id: projectId, activeMembers: initialTeamMembers },
-		]);
+		setTeamMemberAlreadyInProject([{ id: projectId, activeMembers: initialTeamMembers }]);
 	}, [people, formInput.teamMember, projectId]);
 	const handleSubmit = async (event) => {
 		event.preventDefault();
@@ -51,23 +34,10 @@ export default function FormModal({
 
 			if (edit) {
 				// If in editing mode, update existing project
-
-
-				response = await axios.patch(
-					`http://localhost:3001/pages/projects/${projectId}`,
-					formInput
-				);
-				console.log("Project updated successfully:", response.data);
+				response = await axios.patch(`http://localhost:3001/pages/projects/${projectId}`, formInput);
 			} else {
 				// If not in editing mode, create a new project
-				console.log(formInput);
-				response = await axios.post(
-					"http://localhost:3001/pages/projects",
-					formInput
-				);
-
-				//console.log(formInput);
-				//console.log("New project created successfully:", response.data);
+				response = await axios.post("http://localhost:3001/pages/projects", formInput);
 			}
 
 			updateProjects();
@@ -98,10 +68,7 @@ export default function FormModal({
 	};
 
 	const handleTeamMemberSelectChange = (event) => {
-		const selectedIds = Array.from(
-			event.target.selectedOptions,
-			(option) => option.value
-		);
+		const selectedIds = Array.from(event.target.selectedOptions, (option) => option.value);
 		setFormInput({
 			...formInput,
 			teamMember: selectedIds,
@@ -177,18 +144,9 @@ export default function FormModal({
 						onChange={handleTeamMemberSelectChange}>
 						{people.map((person) => {
 							const isSelected = formInput.teamMember.includes(person.id);
-							const isActiveInProject = teamMemberAlreadyInProject
-								.find((project) => project.id === projectId)
-								?.activeMembers.includes(person.id);
-							teamMemberAlreadyInProject.forEach((proj) =>
-								console.log("bur:", proj)
-							);
-							const className = `${
-								isSelected ? "neu-selected" : "neu-not-selected"
-							} ${
-								isActiveInProject
-									? "neu-part-of-project"
-									: "neu-not-part-of-project"
+							const isActiveInProject = teamMemberAlreadyInProject.find((project) => project.id === projectId)?.activeMembers.includes(person.id);
+							const className = `${isSelected ? "neu-selected" : "neu-not-selected"} ${
+								isActiveInProject ? "neu-part-of-project" : "neu-not-part-of-project"
 							}`;
 							return (
 								<option key={person.id} value={person.id} className={className}>
@@ -236,9 +194,7 @@ export default function FormModal({
 						}}>
 						Submit
 					</button>
-					<button
-						className="neu-button-square neu-max-400"
-						onClick={closeModal}>
+					<button className="neu-button-square neu-max-400" onClick={closeModal}>
 						Cancel
 					</button>
 				</div>

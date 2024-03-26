@@ -14,14 +14,14 @@ export default function EditReportModal({ formInput, setFormInput, closeModal, m
 
 				setProject(response.data);
 			} catch (error) {
-				console.log(error);
+				console.error(error);
 			} finally {
 				setLoading(false);
 			}
 		};
 
 		fetchProjects();
-	// eslint-disable-next-line react-hooks/exhaustive-deps
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	const handleInputChange = (event) => {
@@ -34,8 +34,6 @@ export default function EditReportModal({ formInput, setFormInput, closeModal, m
 
 	const handleSelectChange = (event) => {
 		const selectedProject = project.find((p) => p.id === event.target.value);
-
-		//console.log(selectedProject.id);
 		setFormInput({
 			...formInput,
 			project: selectedProject.id,
@@ -57,10 +55,7 @@ export default function EditReportModal({ formInput, setFormInput, closeModal, m
 				return;
 			}
 			const timereportId = formInput.id;
-			//console.log(timereportId);
 			const response = await axios.patch(`http://localhost:3001/pages/timeReports/admin/${timereportId}`, formInput);
-			console.log("Project updated successfully:", response.data);
-
 			updateTimereports();
 
 			setFormInput({
@@ -72,7 +67,7 @@ export default function EditReportModal({ formInput, setFormInput, closeModal, m
 
 			closeModal();
 		} catch (error) {
-			console.log(error);
+			console.error(error);
 		} finally {
 			setLoading(false);
 		}

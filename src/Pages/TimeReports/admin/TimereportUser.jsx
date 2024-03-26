@@ -29,7 +29,6 @@ export default function TimereportUser({ person }) {
 				);
 
 				setTimeReports(response.data);
-				//console.log(response.data);
 				setOriginalTimeReports(response.data);
 			} catch (error) {
 				console.error("There was a problem with the fetch operation:", error);

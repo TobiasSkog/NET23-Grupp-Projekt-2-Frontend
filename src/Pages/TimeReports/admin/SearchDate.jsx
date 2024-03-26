@@ -10,7 +10,6 @@ export default function SearchDate({
 }) {
 	const handleInputChange = (event) => {
 		const { name, value } = event.target;
-		//console.log(name, value);
 		setSearchDate({
 			...searchDate,
 			[name]: value,
