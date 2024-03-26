@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Form from "react-bootstrap/Form";
 import axios from "axios";
 import CustomModal from "../../../Components/CustomModal/CustomModal";
@@ -10,7 +10,8 @@ export default function EditReportModal({ formInput, setFormInput, closeModal, m
 		const fetchProjects = async () => {
 			try {
 				setLoading(true);
-				const response = await axios.get("http://localhost:3001/databases/projects");
+				// const response = await axios.get("http://localhost:3001/databases/projects");
+				const response = await axios.get("http://127.0.0.1:3001/databases/projects");
 
 				setProject(response.data);
 			} catch (error) {
@@ -55,7 +56,8 @@ export default function EditReportModal({ formInput, setFormInput, closeModal, m
 				return;
 			}
 			const timereportId = formInput.id;
-			const response = await axios.patch(`http://localhost:3001/pages/timeReports/admin/${timereportId}`, formInput);
+			// const response = await axios.patch(`http://localhost:3001/pages/timeReports/admin/${timereportId}`, formInput);
+			await axios.patch(`http://127.0.0.1:3001/pages/timeReports/admin/${timereportId}`, formInput);
 			updateTimereports();
 
 			setFormInput({

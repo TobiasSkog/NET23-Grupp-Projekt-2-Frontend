@@ -1,18 +1,9 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Form } from "react-bootstrap";
 import { useLocation } from "react-router-dom";
 import CustomModal from "../../../Components/CustomModal/CustomModal";
 
-const ReportModal = ({
-	showModal,
-	closeModal,
-	projects,
-	reports,
-	reportData,
-	setReportData,
-	handleSubmit,
-	userId,
-}) => {
+const ReportModal = ({ showModal, closeModal, projects, reports, reportData, setReportData, handleSubmit, userId }) => {
 	const location = useLocation();
 	const [selectedProjectId, setSelectedProjectId] = useState("");
 	const [projectTimespan, setProjectTimespan] = useState({
@@ -83,11 +74,7 @@ const ReportModal = ({
 		setReportData((prev) => ({ ...prev, note: value }));
 	};
 	return (
-		<CustomModal
-			show={showModal}
-			onClose={closeModal}
-			title="Time Report"
-			divider>
+		<CustomModal show={showModal} onClose={closeModal} title="Time Report" divider>
 			<Form onSubmit={handleFormSubmit} className="neu-form">
 				<Form.Group className="neu-form-group">
 					<Form.Label htmlFor="projectId">Project</Form.Label>
@@ -136,11 +123,7 @@ const ReportModal = ({
 						onChange={handleInputChange}
 						required
 					/>
-					{reportData.hours < 1 && (
-						<Form.Text className="text-danger">
-							Hours must be at least 1.
-						</Form.Text>
-					)}
+					{reportData.hours < 1 && <Form.Text className="text-danger">Hours must be at least 1.</Form.Text>}
 				</Form.Group>
 				<Form.Group className="neu-form-group">
 					<Form.Label htmlFor="note">Note/Description</Form.Label>
@@ -165,11 +148,7 @@ const ReportModal = ({
 							))}
 						</ul>
 					)}
-					{reportData.note.length > 50 && (
-						<Form.Text className="text-danger">
-							Note cannot exceed 50 characters.
-						</Form.Text>
-					)}
+					{reportData.note.length > 50 && <Form.Text className="text-danger">Note cannot exceed 50 characters.</Form.Text>}
 				</Form.Group>
 				<button type="submit" className="neu-button-square neu-size-100">
 					Submit

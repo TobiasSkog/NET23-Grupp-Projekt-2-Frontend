@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Spinner from "react-bootstrap/esm/Spinner";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -24,9 +24,8 @@ export default function TimereportUser({ person }) {
 			try {
 				setLoading(true);
 
-				const response = await axios.get(
-					`http://localhost:3001/databases/timereports/filter/people?property=Person&id=${personId}`
-				);
+				// const response = await axios.get(`http://localhost:3001/databases/timereports/filter/people?property=Person&id=${personId}`);
+				const response = await axios.get(`http://127.0.0.1:3001/databases/timereports/filter/people?property=Person&id=${personId}`);
 
 				setTimeReports(response.data);
 				setOriginalTimeReports(response.data);
@@ -84,10 +83,10 @@ export default function TimereportUser({ person }) {
 		<section className="neu-table-container">
 			<div className="inner-container">
 				{loading ? (
-					<>
+					<div className="neu-loader">
+						<h4 className="me-3">Loading...</h4>
 						<Spinner animation="border" variant="dark" />
-						<h4 className="mt-3">Loading...</h4>
-					</>
+					</div>
 				) : (
 					<>
 						<div className="neu-search-container">
@@ -106,17 +105,13 @@ export default function TimereportUser({ person }) {
 										<th>
 											<strong>#</strong>
 										</th>
-										<th
-											onClick={() => handleSortByDate()}
-											style={{ cursor: "pointer" }}>
+										<th onClick={() => handleSortByDate()} style={{ cursor: "pointer" }}>
 											<strong>Date</strong>
 										</th>
 										<th>
 											<strong>Hours</strong>
 										</th>
-										<th
-											onClick={() => handleSortByProject()}
-											style={{ cursor: "pointer" }}>
+										<th onClick={() => handleSortByProject()} style={{ cursor: "pointer" }}>
 											<strong>Project</strong>
 										</th>
 										<th>
@@ -135,11 +130,7 @@ export default function TimereportUser({ person }) {
 											</td>
 											<td>{item.date}</td>
 											<td>{item.hours}</td>
-											<td
-												onClick={() =>
-													handleNameClick(item.project, item.projectName)
-												}
-												style={{ cursor: "pointer" }}>
+											<td onClick={() => handleNameClick(item.project, item.projectName)} style={{ cursor: "pointer" }}>
 												{item.projectName}
 											</td>
 											<td>{item.note}</td>
@@ -164,11 +155,7 @@ export default function TimereportUser({ person }) {
 							</table>
 						</div>
 						<div className="neu-table-filter-button-container d-flex flex-column flex-sm-row justify-content-center">
-							<Sorting
-								setTimeReports={setTimeReports}
-								originalTimeReports={originalTimeReports}
-								setSearchDate={setSearchDate}
-							/>
+							<Sorting setTimeReports={setTimeReports} originalTimeReports={originalTimeReports} setSearchDate={setSearchDate} />
 						</div>
 					</>
 				)}

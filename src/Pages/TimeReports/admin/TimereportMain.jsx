@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import Timereport from "./Timereport";
 import Menu from "./Menu";
@@ -19,9 +19,11 @@ export default function TimereportMain() {
 		const fetch = async () => {
 			try {
 				setLoading(true);
-				const projectResponse = await axios.get("http://localhost:3001/databases/projects");
+				// const projectResponse = await axios.get("http://localhost:3001/databases/projects");
+				const projectResponse = await axios.get("http://127.0.0.1:3001/databases/projects");
 
-				const peopleResponse = await axios.get("http://localhost:3001/databases/people");
+				// const peopleResponse = await axios.get("http://localhost:3001/databases/people");
+				const peopleResponse = await axios.get("http://127.0.0.1:3001/databases/people");
 
 				setPeople(peopleResponse.data);
 				setProject(projectResponse.data);
@@ -37,10 +39,10 @@ export default function TimereportMain() {
 	return (
 		<>
 			{loading && (
-				<>
+				<div className="neu-loader">
+					<h4 className="me-3">Loading...</h4>
 					<Spinner animation="border" variant="primary" />
-					<h4 className="mt-3">Loading...</h4>
-				</>
+				</div>
 			)}
 			{showMenu ? (
 				<Menu

@@ -15,7 +15,7 @@ export default function FormModal({ formInput, setFormInput, closeModal, modalOp
 		try {
 			formInput.hours = parseInt(formInput.hours);
 			setLoading(true);
-			let response;
+			
 
 			//validation for Edit and create new projects
 			if (!formInput.status.trim()) {
@@ -34,10 +34,12 @@ export default function FormModal({ formInput, setFormInput, closeModal, modalOp
 
 			if (edit) {
 				// If in editing mode, update existing project
-				response = await axios.patch(`http://localhost:3001/pages/projects/${projectId}`, formInput);
+				// response = await axios.patch(`http://localhost:3001/pages/projects/${projectId}`, formInput);
+				await axios.patch(`http://127.0.0.1:3001/pages/projects/${projectId}`, formInput);
 			} else {
 				// If not in editing mode, create a new project
-				response = await axios.post("http://localhost:3001/pages/projects", formInput);
+				// response = await axios.post("http://localhost:3001/pages/projects", formInput);
+				await axios.post("http://127.0.0.1:3001/pages/projects", formInput);
 			}
 
 			updateProjects();

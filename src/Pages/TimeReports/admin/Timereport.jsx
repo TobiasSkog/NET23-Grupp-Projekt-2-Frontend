@@ -1,6 +1,6 @@
 import Spinner from "react-bootstrap/Spinner";
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import Sorting from "./Sorting";
 import SearchDate from "./SearchDate";
@@ -34,9 +34,8 @@ export default function Timereport({ proj }) {
 				setLoading(true);
 				//get timereports by filtering on projectId
 
-				const response = await axios.get(
-					`http://localhost:3001/databases/timereports/filter/project?property=Project&id=${projectId}`
-				);
+				// const response = await axios.get(`http://localhost:3001/databases/timereports/filter/project?property=Project&id=${projectId}`);
+				const response = await axios.get(`http://127.0.0.1:3001/databases/timereports/filter/project?property=Project&id=${projectId}`);
 
 				//save response 2 times, one will be manipulated in filtering, and one to always have all data
 				setTimeReports(response.data);
@@ -62,9 +61,8 @@ export default function Timereport({ proj }) {
 	const updateTimereports = async () => {
 		try {
 			setLoading(true);
-			const response = await axios.get(
-				`http://localhost:3001/databases/timereports/filter/project?property=Project&id=${projectId}`
-			);
+			// const response = await axios.get(`http://localhost:3001/databases/timereports/filter/project?property=Project&id=${projectId}`);
+			const response = await axios.get(`http://127.0.0.1:3001/databases/timereports/filter/project?property=Project&id=${projectId}`);
 
 			setTimeReports(response.data);
 			setOriginalTimeReports(response.data);
@@ -114,9 +112,7 @@ export default function Timereport({ proj }) {
 
 	//in edit we find the right timereportId
 	const handleEdit = (timereportId) => {
-		const timereportToEdit = originalTimeReports.find(
-			(item) => item.id === timereportId
-		);
+		const timereportToEdit = originalTimeReports.find((item) => item.id === timereportId);
 		if (timereportToEdit) {
 			setFormInput({
 				id: timereportId,
@@ -145,10 +141,10 @@ export default function Timereport({ proj }) {
 					/>
 				)}
 				{loading ? (
-					<>
+					<div className="neu-loader">
+						<h4 className="me-3">Loading...</h4>
 						<Spinner animation="border" variant="dark" />
-						<h4 className="mt-3">Loading...</h4>
-					</>
+					</div>
 				) : (
 					<>
 						<section className="neu-search-container">
@@ -167,14 +163,10 @@ export default function Timereport({ proj }) {
 										<th>
 											<strong>#</strong>
 										</th>
-										<th
-											onClick={() => handleSortByDate()}
-											style={{ cursor: "pointer" }}>
+										<th onClick={() => handleSortByDate()} style={{ cursor: "pointer" }}>
 											<strong> Date</strong>
 										</th>
-										<th
-											onClick={() => handleSortByName()}
-											style={{ cursor: "pointer" }}>
+										<th onClick={() => handleSortByName()} style={{ cursor: "pointer" }}>
 											<strong>Person</strong>
 										</th>
 										<th>
@@ -196,19 +188,14 @@ export default function Timereport({ proj }) {
 												<strong className="tableNumber">{index + 1}</strong>
 											</td>
 											<td className="">{item.date}</td>
-											<td
-												className=""
-												onClick={() => handleNameClick(item.person, item.name)}
-												style={{ cursor: "pointer" }}>
+											<td className="" onClick={() => handleNameClick(item.person, item.name)} style={{ cursor: "pointer" }}>
 												{item.name}
 											</td>
 											<td className="">{item.hours}</td>
 											<td className="">{projectName}</td>
 											<td className="">{item.note}</td>
 											<td>
-												<button
-													className="edit-timereport-button"
-													onClick={() => handleEdit(item.id)}>
+												<button className="edit-timereport-button" onClick={() => handleEdit(item.id)}>
 													Edit
 												</button>
 											</td>
@@ -233,11 +220,7 @@ export default function Timereport({ proj }) {
 							</table>
 						</section>
 						<section className="neu-table-filter-button-container d-flex flex-column flex-sm-row justify-content-center">
-							<Sorting
-								setTimeReports={setTimeReports}
-								originalTimeReports={originalTimeReports}
-								setSearchDate={setSearchDate}
-							/>
+							<Sorting setTimeReports={setTimeReports} originalTimeReports={originalTimeReports} setSearchDate={setSearchDate} />
 						</section>
 					</>
 				)}

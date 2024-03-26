@@ -1,12 +1,4 @@
-import React from "react";
-import Container from "react-bootstrap/esm/Container";
-import Button from "react-bootstrap/Button";
-
-export default function Sorting({
-	originalTimeReports,
-	setTimeReports,
-	setSearchDate,
-}) {
+export default function Sorting({ originalTimeReports, setTimeReports, setSearchDate }) {
 	//This component is used to filter timereports by last 7days, 30days & show all
 	const handleClick7days = () => {
 		const sevenDaysAgo = new Date();
@@ -41,19 +33,13 @@ export default function Sorting({
 
 	return (
 		<>
-			<button
-				className="neu-button-square mx-auto me-3 my-2 w-100"
-				onClick={handleClick7days}>
+			<button className="neu-button-square mx-auto me-3 my-2 w-100" onClick={handleClick7days}>
 				Last 7 days
 			</button>
-			<button
-				className="neu-button-square me-3 mx-auto my-2 w-100"
-				onClick={handleClick30days}>
+			<button className="neu-button-square me-3 mx-auto my-2 w-100" onClick={handleClick30days}>
 				Last 30 days
 			</button>
-			<button
-				className="neu-button-square mx-auto my-2 w-100"
-				onClick={handleAllClick}>
+			<button className="neu-button-square mx-auto my-2 w-100" onClick={handleAllClick}>
 				All
 			</button>
 		</>

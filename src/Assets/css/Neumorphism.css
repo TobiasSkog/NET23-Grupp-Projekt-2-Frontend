@@ -63,6 +63,16 @@ footer {
   width: 100%;
 }
 
+/*-----------------------*/
+/*---HOME LANDING PAGE---*/
+/*-----------------------*/
+.neu-home-company-name {
+  font-size: 2rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #000;
+  margin-bottom: 20px;
+}
+
 /*-------------------------*/
 /*---BASIC NEU TEMPLATES---*/
 /*-------------------------*/
@@ -154,6 +164,17 @@ footer {
   height: 4px;
   border-radius: 0.2rem;
   transform: translate(5%);
+  box-shadow: inset -1px -1px 1px var(--bs-highlight),
+    inset 1px 1px 1px var(--bs-shadow);
+}
+
+.neu-breaker-projects {
+  background-color: var(--bs-neupurple);
+  width: 90%;
+  height: 4px;
+  border-radius: 0.2rem;
+  transform: translate(5%);
+  margin: 1rem 0 2rem 0;
   box-shadow: inset -1px -1px 1px var(--bs-highlight),
     inset 1px 1px 1px var(--bs-shadow);
 }
@@ -1067,6 +1088,22 @@ table.neu-table thead {
 /*-----------------------------*/
 /*---------LOADING CSS---------*/
 /*-----------------------------*/
+.neu-loader {
+  background-color: transparent;
+  display: flex;
+  flex-direction: center;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+}
+
+.neu-loader h4 {
+  margin: 0;
+  padding: 0;
+}
+
 .neu-loading-container {
   background-color: transparent;
   display: flex;

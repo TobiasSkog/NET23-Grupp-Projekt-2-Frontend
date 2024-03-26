@@ -1,13 +1,7 @@
-import React from "react";
 import Container from "react-bootstrap/esm/Container";
 import Form from "react-bootstrap/Form";
 
-export default function SearchDate({
-	setTimeReports,
-	originalTimeReports,
-	searchDate,
-	setSearchDate,
-}) {
+export default function SearchDate({ setTimeReports, originalTimeReports, searchDate, setSearchDate }) {
 	const handleInputChange = (event) => {
 		const { name, value } = event.target;
 		setSearchDate({
@@ -20,18 +14,14 @@ export default function SearchDate({
 		const start = searchDate.startDate;
 		const end = searchDate.endDate;
 
-		const filteredDate = originalTimeReports.filter(
-			(report) => report.date >= start && report.date <= end
-		);
+		const filteredDate = originalTimeReports.filter((report) => report.date >= start && report.date <= end);
 		setTimeReports(filteredDate);
 	};
 
 	return (
 		<div>
 			<Container>
-				<Form.Text className="title-text-search-date ms-3 mb-2">
-					Enter searchdate
-				</Form.Text>
+				<Form.Text className="title-text-search-date ms-3 mb-2">Enter searchdate</Form.Text>
 			</Container>
 			<Container className="d-flex flex-column flex-sm-row justify-content-center align-items-center w-100">
 				<Form.Control
@@ -57,9 +47,7 @@ export default function SearchDate({
 					onChange={handleInputChange}
 				/>
 
-				<button
-					className="neu-button-square w-100 ms-2 me-2 mb-2 center"
-					onClick={handleDateSearch}>
+				<button className="neu-button-square w-100 ms-2 me-2 mb-2 center" onClick={handleDateSearch}>
 					Search
 				</button>
 			</Container>

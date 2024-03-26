@@ -1,15 +1,7 @@
-import React from "react";
 import Card from "react-bootstrap/Card";
 import Progressbar from "./Progressbar";
 
-export default function ProjectCard({
-	item,
-	handleEdit,
-	handleClick,
-	userRole,
-	setProjectId,
-	handleUserClick,
-}) {
+export default function ProjectCard({ item, handleEdit, handleClick, userRole, setProjectId, handleUserClick }) {
 	return (
 		<Card className="neu-card">
 			<section className="neu-card-status">
@@ -32,10 +24,7 @@ export default function ProjectCard({
 			<Card.Body className="d-flex flex-column">
 				<section className="neu-card-section neu-center">
 					<p>
-						{((deadlineDiff) =>
-							deadlineDiff > 0
-								? `Deadline: ${Math.ceil(deadlineDiff)} days`
-								: "Deadline passed")(
+						{((deadlineDiff) => (deadlineDiff > 0 ? `Deadline: ${Math.ceil(deadlineDiff)} days` : "Deadline passed"))(
 							(new Date(item.timespan.end) - new Date()) / (1000 * 3600 * 24)
 						)}
 					</p>
@@ -67,9 +56,7 @@ export default function ProjectCard({
 				<section className="neu-size-100 neu-buttons-between">
 					{userRole === "User" && (
 						<>
-							<button
-								className="neu-button-square neu-size-100"
-								onClick={() => handleUserClick(item.id, item.name)}>
+							<button className="neu-button-square neu-size-100" onClick={() => handleUserClick(item.id, item.name)}>
 								Report Time
 							</button>
 						</>
@@ -77,9 +64,7 @@ export default function ProjectCard({
 
 					{userRole === "Admin" && (
 						<>
-							<button
-								className="neu-button-square neu-size-60"
-								onClick={() => handleClick(item.id, item.name)}>
+							<button className="neu-button-square neu-size-60" onClick={() => handleClick(item.id, item.name)}>
 								Timereports
 							</button>
 

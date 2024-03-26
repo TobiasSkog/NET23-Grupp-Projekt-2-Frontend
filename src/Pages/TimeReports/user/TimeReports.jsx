@@ -105,7 +105,8 @@ const TimeReports = ({ userSignal }) => {
 
 	const handleSubmitReport = async (report) => {
 		try {
-			const response = await axios.post("http://localhost:3001/pages/timereports", report);
+			// const response = await axios.post("http://localhost:3001/pages/timereports", report);
+			await axios.post("http://127.0.0.1:3001/pages/timereports", report);
 		} catch (error) {
 			console.error("Failed to add time report:", error);
 		}
@@ -114,7 +115,8 @@ const TimeReports = ({ userSignal }) => {
 
 	const handleUpdateReport = async (updatedReport) => {
 		try {
-			const response = await axios.patch(`http://localhost:3001/pages/timeReports/user/${updatedReport.id}`, {
+			//const response = await axios.patch(`http://localhost:3001/pages/timeReports/user/${updatedReport.id}`, {
+			await axios.patch(`http://127.0.0.1:3001/pages/timeReports/user/${updatedReport.id}`, {
 				date: updatedReport.date,
 				hours: updatedReport.hours,
 				note: updatedReport.note,

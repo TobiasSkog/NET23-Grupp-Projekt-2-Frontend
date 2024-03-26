@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import Logo from "../../Assets/img/coffe and insomnia logo.png";
+import Logo from "../../Assets/img/coffe_and_insomnia_logo_xs.png";
 import { Container, Row, Col, Button } from "react-bootstrap";
 
 import { useNavigate } from "react-router-dom";
@@ -22,13 +22,14 @@ export default function Home({ userSignal, handleShowModal }) {
 					<img src={Logo} alt="Logo" className="img-fluid neu-img" />
 				</Col>
 				<Col xs={12} className="text-center  neu-pad-bot-5">
-					<h2
-						style={{
-							fontSize: "2rem",
-							paddingBottom: "0.5rem",
-							borderBottom: "2px solid #000",
-							marginBottom: "20px",
-						}}>
+					<h2 className="neu-home-company-name"
+						// style={{
+						// 	fontSize: "2rem",
+						// 	paddingBottom: "0.5rem",
+						// 	borderBottom: "2px solid #000",
+						// 	marginBottom: "20px",
+						// }}
+            >
 						Caffeine & Insomnia
 					</h2>
 				</Col>

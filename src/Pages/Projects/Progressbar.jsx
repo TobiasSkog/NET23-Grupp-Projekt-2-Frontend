@@ -1,5 +1,3 @@
-import React from "react";
-
 export default function Progressbar({ currentTime, endTime, startDate, endDate, progressType }) {
 	const calculatePercent = () => {
 		const timeConverter = 1000 * 60 * 60 * 24;

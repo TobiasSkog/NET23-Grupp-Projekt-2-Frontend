@@ -1,14 +1,8 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Form } from "react-bootstrap";
 import CustomModal from "../../../Components/CustomModal/CustomModal";
 
-const EditReportModal = ({
-	showModal,
-	closeModal,
-	selectedReport,
-	handleUpdateReport,
-	projects,
-}) => {
+const EditReportModal = ({ showModal, closeModal, selectedReport, handleUpdateReport, projects }) => {
 	const [updatedReport, setUpdatedReport] = useState(selectedReport || {});
 	const [projectTimespan, setProjectTimespan] = useState({
 		start: "",
