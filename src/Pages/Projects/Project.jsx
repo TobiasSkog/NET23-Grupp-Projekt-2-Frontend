@@ -35,7 +35,9 @@ const Project = ({ userSignal }) => {
 
 				// Sort so Active will always display first
 
+
 				const sorted = response.data.sort((a, b) => a.status.localeCompare(b.status));
+
 
 				// User can only see own projects so we filter to find a match.
 				const ownProjects = sorted.filter((project) => project.teamMember.includes(user.id));
@@ -160,54 +162,62 @@ const Project = ({ userSignal }) => {
 					setPeople={setPeople}
 				/>
 			)}
-			{loading && (
+			{loading ? (
 				<>
-					<Spinner animation="border" variant="primary" />
+					<Spinner animation="border" variant="dark" />
 					<h4 className="mt-2">Loading...</h4>
+				</>
+			) : (
+				<>
+					<section className="container my-3">
+						<Row>
+							{filteredProjects.map((item, index) => (
+								<React.Fragment key={item.id}>
+									{/* Border that's being shown IF ALL projects are shown, separates each project by status (Active, Next, Done) */}
+
+									{index !== 0 &&
+										item.status !== filteredProjects[index - 1].status && (
+											<hr className="border border-neupurple border-3 opacity-75" />
+										)}
+									<div className="col-md-6 col-xl-3">
+										<ProjectCard
+											item={item}
+											handleClick={handleClick}
+											handleEdit={handleEdit}
+											userRole={user.userRole}
+											setProjectId={setProjectId}
+											handleUserClick={handleUserClick}
+											project={project}
+										/>
+									</div>
+								</React.Fragment>
+							))}
+						</Row>
+					</section>
+
+					<section
+						className={`mb-4 ${
+							user.userRole === "Admin"
+								? "neu-buttons-2b-between"
+								: "neu-buttons-1b "
+						}`}>
+						{user.userRole === "Admin" && (
+							<button className="neu-button-square" onClick={openModal}>
+								<i className="bi bi-plus-circle me-1" />
+								Add New
+							</button>
+						)}
+
+						<button
+							className="neu-button-square"
+							onClick={() => setShowAllProjects(!showAllProjects)}>
+							<i className="bi bi-filter me-1" />
+							{showAllProjects ? "Show Active" : "Show All"}
+						</button>
+					</section>
 				</>
 			)}
 
-			<section className="container my-3">
-				{loading && (
-					<>
-						<Spinner animation="border" variant="primary" />
-						<h4 className="mt-2">Loading...</h4>
-					</>
-				)}
-
-				<Row>
-					{filteredProjects.map((item, index) => (
-						<React.Fragment key={item.id}>
-							{/* Border that's being shown IF ALL projects are shown, separates each project by status (Active, Next, Done) */}
-							{index !== 0 && item.status !== filteredProjects[index - 1].status && <hr className="border border-neupurple border-3 opacity-75" />}
-							<div className="col-md-6 col-xl-3">
-								<ProjectCard
-									item={item}
-									handleClick={handleClick}
-									handleEdit={handleEdit}
-									userRole={user.userRole}
-									setProjectId={setProjectId}
-									handleUserClick={handleUserClick}
-									project={project}
-								/>
-							</div>
-						</React.Fragment>
-					))}
-				</Row>
-			</section>
-			<section className={`mb-4 ${user.userRole === "Admin" ? "neu-buttons-2b-between" : "neu-buttons-1b "}`}>
-				{user.userRole === "Admin" && (
-					<button className="neu-button-square" onClick={openModal}>
-						<i className="bi bi-plus-circle me-1" />
-						Add New
-					</button>
-				)}
-
-				<button className="neu-button-square" onClick={() => setShowAllProjects(!showAllProjects)}>
-					<i className="bi bi-filter me-1" />
-					{showAllProjects ? "Show Active" : "Show All"}
-				</button>
-			</section>
 		</>
 	);
 };
